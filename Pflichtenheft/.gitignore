@@ -1,0 +1,8 @@
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+Pflichtenheft.pdf
+*.gz
+*.toc
