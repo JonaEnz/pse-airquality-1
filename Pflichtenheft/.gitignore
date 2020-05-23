@@ -6,3 +6,4 @@
 Pflichtenheft.pdf
 *.gz
 *.toc
+.vscode/
