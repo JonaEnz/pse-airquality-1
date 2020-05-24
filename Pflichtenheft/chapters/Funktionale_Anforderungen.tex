@@ -1,1 +1,58 @@
 \section{Funktionale Anforderungen}
+
+\begin{Kriterien}{FA}
+
+ \item[Unterstützung Mobile Endgeräte]
+   Die Webanwendung ist ohne jegliche Einschränkung auf mobilen Endgeräten nutzbar.  
+
+ \item[Statische Webanwendung]
+   Die Webanwendung erfordert den Server nur um die Anwendung zu übertragen.
+   Sonst müssen keine Anfragen an den Server gestellt werden. (TODO: Eigentlich Abgrenzungkriterium)
+
+ \item[Startseite]
+   Beim Aufrufen von \"/\" wird die Startseite angezeigt.
+   Es wird eine Karte mit allen \glspl{Station} als \glspl{Pin} angezeigt und es kann nach einer Adresse gesucht werden.
+   Bei Klick auf eine Station wird die Detailansicht angezeigt.
+   Ein Klick auf 'Filtern' öffnet ein \gls{Pop-Up} mit Filteroptionen.
+
+ \item[Filterung Karte]
+   Die Karte auf der Startseite lässt sich über Filter anpassen.
+   Es kann ausgewählt werden welche \glspl{Messwert} angezeigt werden.
+   Es werden nur \glspl{Station} angezeigt die entsprechende Daten besitzen.
+   Verschiedene Optionen zur Einfärbung der Karte und \glspl{Station} sind verfügbar.
+
+ \item[Detailansicht]
+   In der Detailansicht werden verschiedene \glspl{Graph} und \glspl{Messwert} angezeigt.
+   Es kann in die Konfigurationsansicht gewechselt werden.
+
+ \item[Konfiguration]
+   Es kann frei eingestellt werden welche Graphen und \glspl{Messwert} in der Detailansicht angezeigt werden.
+   Nach jeder Änderung wird automatisch gespeichert. 
+
+ \item[Historische Entwicklung]
+   Ein Graph der die Entwicklung der \glspl{Messwert} dastellt wird anzeigt.
+   Der Zeitrahmen kann mit einem Schieberegler eingestellt werden.
+ 
+ \item[Veränderung Durchschnitt]
+   Ein Graph der die Veränderung der \glspl{Messwert} dastellt wird anzeigt.
+   Der Zeitrahmen kann mit einem Schieberegler eingestellt werden.
+
+ \item[Jahresvergleich]
+   Ein Graph der den Jahresverlauf der \glspl{Messwert} mit anderen Jahren vergleicht wird angezeigt.
+   Die X-Achse umfasst Januar - Dezember, mehrere Graphen zeigen die Jahrenverläufe an.
+
+ \item[Heute im Vergleich zum letzten Jahr]
+   Ein \gls{Kuchendiagramm} das die Anzahl der Tage im letzten Jahr visualisiert an denen die Messwere gerimgfügig/sehr höher/niedriger waren als heute.
+
+ \item[Weitere Informationen]
+   Wird bei \glspl{Graph} das (i)-Symbol angeklickt öffnet sich ein \gls{Pop-Up} mit einer Erklärung für die angezeigten Werte.
+   Diese Erklärung erläutert wie genau die vorliegenden Werte aus den \glspl{Messwert} bestimmt werden.
+
+ \item[Sprachauswahl]
+   Auf jeder Seite befindet sich eine Flagge welche die aktuell ausgewählte Sprache repräsentiert.
+   Ein Klick darauf wechselt zwischen Deutsch und Englisch.
+
+ \item[Dynamische Anpassung nach Sensor]
+   Da die \glspl{Station} verscheidene \glspl{Messwert} bereitstellen können passt sich die Detailansicht entsprechend an.
+   Es werden immer nur \glspl{Graph} mit verfügbaren \glspl{Messwert} angezeigt.
+\end{Kriterien}
