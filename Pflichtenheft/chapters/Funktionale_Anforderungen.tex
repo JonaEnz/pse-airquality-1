@@ -3,6 +3,8 @@
 \setcounter{counter}{10}
 \begin{Kriterien}{FA}
 
+\subsection{Allgemeine Anforderungen}
+
  \item[Unterstützung Mobile Endgeräte]
    Die Webanwendung ist ohne jegliche Einschränkung auf mobilen Endgeräten nutzbar.  
 
@@ -10,8 +12,10 @@
    Die Webanwendung erfordert den Server nur um die Anwendung zu übertragen.
    Sonst müssen keine Anfragen an den Server gestellt werden. (TODO: Eigentlich Abgrenzungkriterium)
 
+\subsection{Karte}
+
  \item[Startseite]
-   Beim Aufrufen von \"/\" wird die Startseite angezeigt.
+   Bei Aufrufen der Webseite wird die Startseite angezeigt.
    Es wird eine Karte mit allen \glspl{Station} als \glspl{Pin} angezeigt und es kann nach einer Adresse gesucht werden.
    Bei Klick auf eine Station wird die Detailansicht angezeigt.
    Ein Klick auf 'Filtern' öffnet ein \gls{Pop-Up} mit Filteroptionen.
@@ -22,6 +26,26 @@
    Es werden nur \glspl{Station} angezeigt die entsprechende Daten besitzen.
    Verschiedene Optionen zur Einfärbung der Karte und \glspl{Station} sind verfügbar.
 
+ \subsubsection{Filteroptionen}
+
+ \item[Flächenwerte]
+   Zwischen den \glspl{Station} werden Dreiecke aufgespannt die entsprechend der Höhe der Durchschnittswerte gefärbt werden.
+   Dabei überschneiden sich die Dreiecke nicht.
+
+ \item[Veränderung]
+   Die \gls{Station} wird entsprechend der Veränderung über den letzten Monat/Jahr eingefärbt.
+   Die \glspl{Tooltip} zeigen die prozentuale Veränderung an.
+
+ \item[Stadtdurchschnitt]
+  Die Färbung der \glspl{Station} wird anhand des Durchschnitts aller \glspl{Station} der Stadt festgelegt.
+  Die \glspl{Tooltip} zeigen den Wert als prozentuale Über-/Unterschreitung dieses Durschschnitts an. 
+
+ \item[Adresse]
+   Es kann eine Adresse eingegeben werden die auf der Karte eingezeichnet wird.
+   Sie wird wie eine \gls{Station} eingefärbt anhand eines durch benachbarte \glspl{Station} abgeschätzten \glspl{Messwert}.
+
+\subsection{Detailansicht}
+
  \item[Detailansicht]
    In der Detailansicht werden verschiedene \glspl{Graph} und \glspl{Messwert} angezeigt.
    Es kann in die Konfigurationsansicht gewechselt werden.
@@ -29,6 +53,16 @@
  \item[Konfiguration]
    Es kann frei eingestellt werden welche Graphen und \glspl{Messwert} in der Detailansicht angezeigt werden.
    Nach jeder Änderung wird automatisch gespeichert. 
+
+ \item[Dynamische Anpassung nach Sensor]
+   Da die \glspl{Station} verscheidene \glspl{Messwert} bereitstellen können passt sich die Detailansicht entsprechend an.
+   Es werden immer nur \glspl{Graph} mit verfügbaren \glspl{Messwert} angezeigt.
+
+ \item[Messdatenwechsel]
+  Über eine Auswahlbox kann der genutzte \gls{Messwert} für die \glspl{Graph} gewechselt werden.
+  Ist der aktuell ausgewählte \gls{Messwert} nicht für diese \gls{Station} verfügbar wird zu einem verfügbarem \gls{Messwert} gewechselt.
+
+ \subsubsection{Diagramme, Graphen und Werte}
 
  \item[Historische Entwicklung]
    Ein Graph der die Entwicklung der \glspl{Messwert} dastellt wird anzeigt.
@@ -49,10 +83,20 @@
    Wird bei \glspl{Graph} das (i)-Symbol angeklickt öffnet sich ein \gls{Pop-Up} mit einer Erklärung für die angezeigten Werte.
    Diese Erklärung erläutert wie genau die vorliegenden Werte aus den \glspl{Messwert} bestimmt werden.
 
+\subsection{Weitere Anforderungen}
+
  \item[Sprachauswahl]
    Auf jeder Seite befindet sich eine Flagge welche die aktuell ausgewählte Sprache repräsentiert.
    Ein Klick darauf wechselt zwischen Deutsch und Englisch.
 
- \item[Dynamische Anpassung nach Sensor]
-   Da die \glspl{Station} verscheidene \glspl{Messwert} bereitstellen können passt sich die Detailansicht entsprechend an.
-   Es werden immer nur \glspl{Graph} mit verfügbaren \glspl{Messwert} angezeigt.
+ \item[Ladeanzeige]
+  Während im Hintergrund Daten vom \gls{FROST-Server} angefragt werden wird ein Ladesymbol angezeigt.
+  Läuft mehr als eine Anfrage gleichzeitig wird ein Fortschrittsbaalken angezeigt.
+
+ \item[Server nicht erreichbar]
+  Ist der \gls{FROST-Server} nicht erreichbar wird eine Fehlermeldung angezeigt und die Möglichkeit angeboten es erneut zu versuchen.
+
+ \item[Datenschutzerklärung]
+  Auf jeder Seite gibt es einen Link zur Datenschutzerklärung.
+
+\end{Kriterien}
