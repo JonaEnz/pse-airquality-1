@@ -4,30 +4,60 @@ Das erklärte Ziel der Anwendung ist es, ...
 \subsection{Musskriterien}
 \setcounter{counter}{10}
 
-\subsubsection{Frontend}
 \begin{Kriterien}{MK}
 
-	\item Musskriterium 1
+	\item Webanwendung in allen Browser die JavaScript unterstützen
 
-	\item Musskriterium 2
+	\item Angepasste Layouts für Computer und Handy
 	
-	\item ...
+	\item Eine interaktive Karte zeigt alle Messtationen gleichzeitig, in der Karte kann man ein- und auszoomen, und frei seitlich bewegen.
 
-\end{Kriterien}
-
-\subsubsection{Backend}
-\begin{Kriterien}{MK}
-
-	\item Musskriterium 1
-
-	\item Musskriterium 2
+	\item Messtationen haben eine Färbung, wie hoch die Bewertung der Messwerte auf der skala ist
 	
-	\item ...
-
-
+	\item Beim Bewegen des Kursors über eine Messstation, wir ein Pop-up Box angezeigt mit der Straße und mit dem exakten Messwert.
+	
+	\item Der Nutzer kann auswählen welchen Aspekt der Daten er will, durch einen Kasten mit Buttons. 
+	
+	\item Für jede Eigenschaft wird ein Diagramm angezeigt, das die Entwicklung der daten zeigt. Die Zeitspanne ist mit einem Schiebereglelr einstellbar.
+	
+	\item Ein Diagramm die die Veränderung von dem Durchachnitt anzeigt, Dabei ist der Zeitabschnitt mit einem Schieberegler einstellbar.
+	
+	\item Es werden auch zusammengefasste Informationen angegeben: 
+		\begin{itemize}
+		 \item Wie viel Prozent die Messwerte besser/schlechter sind als letztes Jahr.
+        \item Vergleich mit Durchschnitt.
+        \item Der Feinstaubwert war an xxx Tagen größer als heute(mit PieChart)
+		\end{itemize}
+		
+	\item Ein Button führt zur Karte zurück
+ 
 \end{Kriterien}
 
 \newpage
 \subsection{Wunschkriterien}
+\begin{Kriterien}
+
+	\item Wechseln zwischen verschiedenen interaktiven Karten für die verschiedenen Aspekten der Messdaten. Die Karten wrden an einem zusätzlichen Streifen oben ausgewählt.
+	
+	\item Auf der Seite mit den Daten einer bestimmten Messtation wird eine Karte gezeigt, wo der Messstation sich genau befindet. 
+	
+	\item Wenn bestimmte Daten für bestimmte Messstation nicht existiren und sie aber trotzdem ausgewählt werden, kommt eine Fehlermeldung.
+	
+	\item Zusätzliche Informationen über die Zuverlässigkeit des Sensors werden mit einer ausklappbaren Schaltfläche erreichbar.
+	
+	\item Für verschiedenen Sprachen Auswahl ermöglichen (insb. Deutsch und Englisch)
+	
+\end{Kriterien}
 
 \subsection{Abgrenzungskriterien}
+\begin{Kriterien}
+
+	\item Historische Daten werden nicht einzeln angezeigt, nur die Diagramme geben Informationen.
+	
+	\item Die Seite gibt keine ausführliche Erklärung dazu, was  genau Messwerte bedeuten, nur die darus folgernde Luftqualität wird angezeigt. 
+	
+	\item Die Folgen und Ursachen der Feinstaubbelastung werden nicht genannt.
+	
+	\item Bei der Nutzung der Webanwendung werden keine neue Tabs geöffnet. Alles passiert im gleichen Tab.
+	
+\end{Kriterien}
