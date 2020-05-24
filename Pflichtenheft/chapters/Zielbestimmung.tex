@@ -1,34 +1,45 @@
 \section{Zielbestimmung}
-Das erklärte Ziel der Anwendung ist es, ...
+Das erklärte Ziel der Anwendung ist es, Bürgern die Messdaten des SmartAQ-Projekts auf eine ansprechende Weise zugänglich zu machen.
+Zu diesem Zweck wurde eine Befragung der Zielgruppe durchgeführt, auf deren Basis die angezeigten Informationen ausgewählt wurden.
+Es sollen nicht die rohen Messdaten im Mittelpunkt stehen sondern die Daten im verständlichen Kontext dargestellt werden.
+Auch soll die Bedienung intuitiv ohne Eingewöhnungszeit möglich sein.
+Die Anwendung soll die benötigten Daten selbstständig von einem FROST-Server anfragen ohne einen eigenen Server oder Datenbank zu benötigen.
 
 \subsection{Musskriterien}
 \setcounter{counter}{10}
 
 \begin{Kriterien}{MK}
 
-	\item Webanwendung in allen Browser die JavaScript unterstützen
+	\item Webanwendung, lauffähig in allen modernen Browsern die JavaScript unterstützen
 
-	\item Angepasste Layouts für Computer und Handy
+	\item Angepasste Layouts für Computer und \gls{Handy}
 	
-	\item Eine interaktive Karte zeigt alle Messtationen gleichzeitig, in der Karte kann man ein- und auszoomen, und frei seitlich bewegen.
+	\item Es können Anfragen in der Querysprache des \gls{FROST-Server} erzeugt und übertragen werden.
+	
+	\item Die Antworten des \gls{FROST-Server} können in die benötigten Formen zur Anzeige umgewandelt werden.
+	
+	\item Aus den \glspl{Messwert} der verschiedenen Feinstaubgrößen kann ein einzelner \gls{Feinstaubindex} berechnet werden
 
-	\item Messtationen haben eine Färbung, wie hoch die Bewertung der Messwerte auf der skala ist
+	\item Eine interaktive Karte zeigt alle \glspl{Station} gleichzeitig, in der Karte kann man ein- und auszoomen, und frei seitlich bewegen.
+
+	\item Messtationen haben eine Färbung je nach Bewertung der Messwerte auf der Skala.
 	
-	\item Beim Bewegen des Cursors über eine Messstation, wir ein Pop-up Box angezeigt mit der Straße und mit dem exakten Messwert.
+	\item Beim Bewegen des Cursors über eine Messstation wird eine \gls{Pop-Up} Box angezeigt mit dem Name der Station, der Position und dem exakten Messwert.
+		Über eine Schaltfläche kann die Detailansicht geöffnet werden.
 	
-	\item Der Nutzer kann auswählen welchen Aspekt der Daten er will, durch einen Kasten mit Buttons. 
+	\item Der Nutzer kann durch ein \gls{Dropdown-Menu} festlegen welchen Aspekt der Daten er will. 
 	
-	\item Für jede Eigenschaft wird ein Diagramm angezeigt, das die Entwicklung der daten zeigt. Die Zeitspanne ist mit einem Schieberegler einstellbar.
+	\item Für jede Eigenschaft wird ein Diagramm angezeigt, das die Entwicklung der \glspl{Messwert} zeigt. Die Zeitspanne ist einstellbar.
 	
-	\item Ein Diagramm die die Veränderung von dem Durchschnitt anzeigt, Dabei ist der Zeitabschnitt mit einem Schieberegler einstellbar.
+	\item Ein Diagramm das die Veränderung von dem Tagesdurchschnitt anzeigt, dabei ist der Zeitabschnitt einstellbar.
 	
 	\item Es werden auch zusammengefasste Informationen angegeben: 
 \end{Kriterien}
 		
 \begin{itemize}
 	\item Wie viel Prozent die Messwerte besser/schlechter sind als letztes Jahr.
-    \item Vergleich mit Durchschnitt.
-    \item Der Feinstaubwert war an xxx Tagen größer als heute(mit PieChart)
+    \item Vergleich mit Durchschnitt der \glspl{Messwert} im Umkreis.
+    \item Der Feinstaubwert war an xxx Tagen größer als heute (mit \gls{Kuchendiagramm})
 \end{itemize}
 
 \begin{Kriterien}{MK}	
@@ -41,15 +52,13 @@ Das erklärte Ziel der Anwendung ist es, ...
 \setcounter{counter}{10}
 \begin{Kriterien}{WK}
 
-	\item Wechseln zwischen verschiedenen interaktiven Karten für die verschiedenen Aspekten der Messdaten. Die Karten werden an einem zusätzlichen Streifen oben ausgewählt.
+	\item Wechseln zwischen verschiedenen interaktiven Karten für die verschiedenen Aspekten der \glspl{Messwert}.
 
-	\item Auf der Seite mit den Daten einer bestimmten Messtation wird eine Karte gezeigt, wo der Messstation sich genau befindet. 
+	\item Auf der Seite mit den Daten einer bestimmten \gls{Station} wird auf einer Karte gezeigt, wo die \gls{Station} sich befindet. 
 
-	\item Wenn bestimmte Daten für bestimmte Messstation nicht existieren und sie aber trotzdem ausgewählt werden, kommt eine Fehlermeldung.
+	\item Zusätzliche Informationen über die Zuverlässigkeit des Sensors sind mit einer ausklappbaren Schaltfläche erreichbar.
 
-	\item Zusätzliche Informationen über die Zuverlässigkeit des Sensors werden mit einer ausklappbaren Schaltfläche erreichbar.
-
-	\item Für verschiedenen Sprachen Auswahl ermöglichen (insbesondere Deutsch und Englisch)
+	\item Verschiedene Sprachen sind auswählbar (insbesondere Deutsch und Englisch)
 
 \end{Kriterien}
 
@@ -59,10 +68,13 @@ Das erklärte Ziel der Anwendung ist es, ...
 
 	\item Historische Daten werden nicht einzeln angezeigt, nur die Diagramme geben Informationen.
 	
-	\item Die Seite gibt keine ausführliche Erklärung dazu, was  genau Messwerte bedeuten, nur die daraus folgernde Luftqualität wird angezeigt. 
+	\item Die Seite gibt keine ausführliche Erklärung dazu, was genau die Messwerte bedeuten, nur die daraus folgernde Luftqualität wird angezeigt. 
 	
 	\item Die Folgen und Ursachen der Feinstaubbelastung werden nicht genannt.
 	
 	\item Bei der Nutzung der Webanwendung werden keine neue Tabs geöffnet. Alles passiert im gleichen Tab.
+	
+	\item Die Webanwendung benutzt den Server nur um die Anwendung zu übertragen. 
+		Es werden keine anderen Anfragen an den Server gestellt.
 	
 \end{Kriterien}
