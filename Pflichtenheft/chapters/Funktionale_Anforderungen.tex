@@ -16,19 +16,26 @@
 
  \item[Startseite]
    Bei Aufrufen der Webseite wird die Startseite angezeigt.
-   Es wird eine Karte mit allen \glspl{Station} als \glspl{Pin} angezeigt und es kann nach einer Adresse gesucht werden.
+   Es wird eine frei bewegliche Karte mit allen \glspl{Station} als \glspl{Pin} angezeigt und es kann nach einer Adresse gesucht werden.
    Bei Klick auf eine Station wird die Detailansicht angezeigt.
-   Ein Klick auf 'Filtern' öffnet ein \gls{Pop-Up} mit Filteroptionen.
+   Ein Klick auf 'Ansicht' öffnet ein \gls{Pop-Up} mit Ansichten.
 
- \item[Filterung Karte]
+ \item[Ansichten]
    Die Karte auf der Startseite lässt sich über Filter anpassen.
    Es kann ausgewählt werden welche \glspl{Messwert} angezeigt werden.
    Es werden nur \glspl{Station} angezeigt die entsprechende Daten besitzen.
    Verschiedene Optionen zur Einfärbung der Karte und \glspl{Station} sind verfügbar.
 
- \subsubsection{Filteroptionen}
+ \item[Letzte Ansicht]
+  Kehrt ein Nutzer zur Seite zurück wird die zuletzt genutzte Ansicht geladen.
 
- \item[Flächenwerte]
+ \subsubsection{Kartenansichten}
+
+ \item[Standard]
+  \glspl{Station} werden angezeigt und nach \glspl{Messwert} eingefärbt. 
+  Überschrittene Grenzwerte werden zudem mit einem '!' markiert.
+
+ \item[Flächenwerte (WK)]
    Zwischen den \glspl{Station} werden Dreiecke aufgespannt die entsprechend der Höhe der Durchschnittswerte gefärbt werden.
    Dabei überschneiden sich die Dreiecke nicht.
 
@@ -47,12 +54,7 @@
 \subsection{Detailansicht}
 
  \item[Detailansicht]
-   In der Detailansicht werden verschiedene \glspl{Graph} und \glspl{Messwert} angezeigt.
-   Es kann in die Konfigurationsansicht gewechselt werden.
-
- \item[Konfiguration]
-   Es kann frei eingestellt werden welche Graphen und \glspl{Messwert} in der Detailansicht angezeigt werden.
-   Nach jeder Änderung wird automatisch gespeichert. 
+   In der Detailansicht werden verschiedene \glspl{Graph} und \glspl{Messwert} angezeigt. 
 
  \item[Dynamische Anpassung nach Sensor]
    Da die \glspl{Station} verscheidene \glspl{Messwert} bereitstellen können passt sich die Detailansicht entsprechend an.
@@ -66,15 +68,15 @@
 
  \item[Historische Entwicklung]
    Ein Graph der die Entwicklung der \glspl{Messwert} dastellt wird anzeigt.
-   Der Zeitrahmen kann mit einem Schieberegler eingestellt werden.
+   Der Zeitrahmen kann in vorgegebenen Stufen eingestellt werden.
  
  \item[Veränderung Durchschnitt]
    Ein Graph der die Veränderung der \glspl{Messwert} dastellt wird anzeigt.
-   Der Zeitrahmen kann mit einem Schieberegler eingestellt werden.
+   Der Zeitrahmen kann in vorgegebenen Stufen eingestellt werden.
 
- \item[Jahresvergleich]
+ \item[Jahresvergleich (WK)]
    Ein Graph der den Jahresverlauf der \glspl{Messwert} mit anderen Jahren vergleicht wird angezeigt.
-   Die X-Achse umfasst Januar - Dezember, mehrere Graphen zeigen die Jahrenverläufe an.
+   Die X-Achse umfasst Januar - Dezember, mehrere Graphen zeigen die Jahresverläufe an.
 
  \item[Heute im Vergleich zum letzten Jahr]
    Ein \gls{Kuchendiagramm} das die Anzahl der Tage im letzten Jahr visualisiert an denen die Messwere gerimgfügig/sehr höher/niedriger waren als heute.
@@ -87,7 +89,7 @@
 
  \item[Sprachauswahl]
    Auf jeder Seite befindet sich eine Flagge welche die aktuell ausgewählte Sprache repräsentiert.
-   Ein Klick darauf wechselt zwischen Deutsch und Englisch.
+   Ein \gls{Dropdown-Menu} wechselt zwischen Deutsch und Englisch.
 
  \item[Ladeanzeige]
   Während im Hintergrund Daten vom \gls{FROST-Server} angefragt werden wird ein Ladesymbol angezeigt.
@@ -105,6 +107,4 @@
     \item Durch ein Klick auf einen Punkt kann die Detailansicht der Messtationen aufgerufen werden
     \item In der Detailansicht einer Messtationen werden alle aktuellen Messwerte angezeigt
     \item Eine Warnung wird in der Detailansicht neben einem Messwert angezeigt, falls dieser einen Grenzwert überschreitet
-    \item Über eine Suchfeld können Messtationen mit dem Namen gesucht werden
-    \item 
 \end{Kriterien}
