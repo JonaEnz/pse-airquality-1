@@ -1,1 +1,23 @@
 \section{Systemmodelle}
+
+\subsection{Funktionsdiagramm Frontend}
+
+\subsection{Szenarios}
+
+\subsubsection{Szenario 1: Ansicht, der studenaktuellen Feinstaubwerte (PM 10) am Smartphone}
+\textbf{Nutzer:} Nutzer mit grundlegenden IT-Kenntnissen der schon einmal ähnliche Anwendungen bedient hat (z.B. Google Maps) und somit intuitiv die Karte bedienen kann. Des Weiteren hat er jedoch wenig Kenntnisse über Feinstaubwerte und benötigt somit eine Einordnung und Erklärung der Messwerte.
+
+\textbf{Beschreibung:} Der Nutzer interessiert sich für die aktuellen Feinstaubwerte in seiner Stadt.
+
+\textbf{Konkreter Ablauf:}
+Der Nutzer öffnet die Webanwendung, indem er die URL in seinen Smartphone Browser eingibt und bestätigt. Daraufhin öffnet sich die Kartenansicht der Anwendung. Dort sind die Messstationen als Punkt eingetragen. Über einen Button in der rechten unteren Ecke ruft der Nutzer das Konfigurationsmenü der Karte auf. Dort Klickt er auf PM 10. Daraufhin werden nur die Messtationen als Punkt auf der Karte angezeigt, die das Feature PM10 messen und sie werden, aufgrund ihres zuletzt gemessenen PM10 Wertes eingefärbt. Desto grüner ein Punkt, desto niedriger der Wert. Desto roter ein Punkt, desto höher ein Wert. Die Farbskala wird in der linke unteren Ecke angezeigt.
+Um einen Messwert in Zahlenform einer Messstation anzuzeigen, klickt der Nutzer auf einen Punkt. Daraufhin öffnet am unteren Bildschirmrand ein Kasten, indem der Name der Messstation, die Position und der PM10 Wert angezeigt wird. Außerdem wird eine Warnung angezeigt, wenn der Messwert einen Grenzwert überschritten hat.
+
+\subsubsection{Szenario 2: Ansicht der Diagramme einer spezifischen Messstation am Computer}
+\textbf{Nutzer:} Nutzer mit grundlegenden IT-Kenntnissen der schon einmal ähnliche Anwendungen bedient hat (z.B. Google Maps) und somit intuitiv die Karte bedienen kann. Er hat sich schon häufiger über Luftqualität informiert und ist an konkreten Messwerten und deren zeitlicher Entwicklung interessiert.
+
+\textbf{Beschreibung:} Der Nutzer möchte Diagramme einer Messtation einsehen.
+
+\textbf{Konkreter Ablauf:} Der Nutzer öffnet die Webanwendung, indem er die URL in in den Browser seines Computer eintippt und bestätigt. Daraufhin öffnet sich die Kartenansicht der Webanwendung. Über das Suchfeld in der linken oberen Ecke gibt er den Namen einer Messtation ein. Daraufhin springt die Karte zum Punkt, der die gesuchte Messstion repressentiert. Desweiteren öffnet sich ein Popup neben dem Punkt. Darin wird der Name der Messtation, ihre Position und ihr letzter Messwert des auswewählten Features angezeigt, der in der Kartenkonfiguration eingestellt ist. Desweiteren, wird ein Button angezeigt, auf dem "weitere Informationen" steht. Der Nutzer klickt auf den Button.
+Daraufhin wird die Profilansicht der Messstation angezeigt. In der linken oberen Ecke wird der Name und Metainformationen der Messtation angezeigt. In der rechten oberen Ecke wird eine statische Karte angezeigt, auf der die Position der Messtation markiert ist.
+Darunter werden Diagramme zu den gemessenen Feature der Messstation. Die angezeigten Diagramme sind von Messtation zu Messstation unterschiedlich, da die Messstationen unterschiedliche Features messen.
