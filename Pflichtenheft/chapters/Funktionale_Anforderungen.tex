@@ -5,23 +5,27 @@
 
 \subsection{Allgemeine Anforderungen}
 
- \item[Unterstützung Mobile Endgeräte]
-   Die Webanwendung ist ohne jegliche Einschränkung auf mobilen Endgeräten nutzbar.  
+ \item[Unterstützung mobile Endgeräte]
+   Die \gls{Webanwendung} ist ohne jegliche Einschränkung auf mobilen Endgeräten nutzbar.  
 
  \item[Statische Webanwendung]
-   Die Webanwendung erfordert den Server nur um die Anwendung zu übertragen.
-   Sonst müssen keine Anfragen an den Server gestellt werden. (TODO: Eigentlich Abgrenzungkriterium)
+   Die \gls{Webanwendung} erfordert den Server nur um die Anwendung zu übertragen.
+   Sonst müssen keine Anfragen an den Server gestellt werden. 
 
 \subsection{Karte}
 
  \item[Startseite]
    Bei Aufrufen der Webseite wird die Startseite angezeigt.
    Es wird eine frei bewegliche Karte mit allen \glspl{Station} als \glspl{Pin} angezeigt und es kann nach einer Adresse gesucht werden.
-   Bei Klick auf eine Station wird die Detailansicht angezeigt.
    Ein Klick auf 'Ansicht' öffnet ein \gls{Pop-Up} mit Ansichten.
 
+ \item[Stationen Pop-Up]
+  Wird mit der Maus über einen Stations-\gls{Pin} gefahren/mit dem Finger darauf geklickt öffnet sich ein \gls{Pop-Up}.
+  Darin werden der Name der \gls{Station}, die Koordinaten und den aktuellen exakten Messwerten angezeigt.
+  Ein Klick auf 'Details anzeigen' öffnet die Detailansicht.
+
  \item[Ansichten]
-   Die Karte auf der Startseite lässt sich über Filter anpassen.
+   Die Karte auf der Startseite lässt sich über Ansichten anpassen.
    Es kann ausgewählt werden welche \glspl{Messwert} angezeigt werden.
    Es werden nur \glspl{Station} angezeigt die entsprechende Daten besitzen.
    Verschiedene Optionen zur Einfärbung der Karte und \glspl{Station} sind verfügbar.
@@ -59,10 +63,7 @@
  \item[Dynamische Anpassung nach Sensor]
    Da die \glspl{Station} verscheidene \glspl{Messwert} bereitstellen können passt sich die Detailansicht entsprechend an.
    Es werden immer nur \glspl{Graph} mit verfügbaren \glspl{Messwert} angezeigt.
-
- \item[Messdatenwechsel]
-  Über eine Auswahlbox kann der genutzte \gls{Messwert} für die \glspl{Graph} gewechselt werden.
-  Ist der aktuell ausgewählte \gls{Messwert} nicht für diese \gls{Station} verfügbar wird zu einem verfügbarem \gls{Messwert} gewechselt.
+   Welche \glspl{Graph} für einen \gls{Messwert} angezeigt werden ist für jeden \gls{Messwert} festgelegt.
 
  \subsubsection{Diagramme, Graphen und Werte}
 
@@ -81,19 +82,19 @@
  \item[Heute im Vergleich zum letzten Jahr]
    Ein \gls{Kuchendiagramm} das die Anzahl der Tage im letzten Jahr visualisiert an denen die Messwere gerimgfügig/sehr höher/niedriger waren als heute.
 
- \item[Weitere Informationen]
-   Wird bei \glspl{Graph} das (i)-Symbol angeklickt öffnet sich ein \gls{Pop-Up} mit einer Erklärung für die angezeigten Werte.
-   Diese Erklärung erläutert wie genau die vorliegenden Werte aus den \glspl{Messwert} bestimmt werden.
+ \item[Weitere Informationen (WK)]
+   Wird bei \glspl{Graph} des \gls{Feinstaubindex} (i)-Symbol angeklickt öffnet sich ein \gls{Pop-Up} mit einer Erklärung für den \gls{Feinstaubindex}.
+   Diese Erklärung erläutert wie genau der \gls{Feinstaubindex} aus den \glspl{Messwert} bestimmt werden.
 
 \subsection{Weitere Anforderungen}
 
  \item[Sprachauswahl]
    Auf jeder Seite befindet sich eine Flagge welche die aktuell ausgewählte Sprache repräsentiert.
-   Ein \gls{Dropdown-Menu} wechselt zwischen Deutsch und Englisch.
+   Ein \gls{Dropdown-Menu} wechselt zwischen den verfügbaren Sprachen.
 
  \item[Ladeanzeige]
   Während im Hintergrund Daten vom \gls{FROST-Server} angefragt werden wird ein Ladesymbol angezeigt.
-  Läuft mehr als eine Anfrage gleichzeitig wird ein Fortschrittsbaalken angezeigt.
+  Läuft mehr als eine Anfrage gleichzeitig wird ein Fortschrittsbalken angezeigt.
 
  \item[Server nicht erreichbar]
   Ist der \gls{FROST-Server} nicht erreichbar wird eine Fehlermeldung angezeigt und die Möglichkeit angeboten es erneut zu versuchen.
@@ -101,10 +102,6 @@
  \item[Datenschutzerklärung]
   Auf jeder Seite gibt es einen Link zur Datenschutzerklärung.
 
-    \item Als Startseite wird dem Benutzer eine Karte angezeigt
-    \item Messtationen werden durch einen Punkt auf der Karte markiert
-    \item Die Punkte der Messtationen können in Bezug auf die aktuellen Messdaten eingefärbt werden
-    \item Durch ein Klick auf einen Punkt kann die Detailansicht der Messtationen aufgerufen werden
     \item In der Detailansicht einer Messtationen werden alle aktuellen Messwerte angezeigt
     \item Eine Warnung wird in der Detailansicht neben einem Messwert angezeigt, falls dieser einen Grenzwert überschreitet
 \end{Kriterien}
