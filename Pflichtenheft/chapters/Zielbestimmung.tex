@@ -8,8 +8,8 @@ Die Anwendung soll die benötigten Daten selbstständig von einem \gls{FROST-Ser
 \subsection{Musskriterien}
 \setcounter{counter}{10}
 
+\subsubsection{Allgemein}
 \begin{Kriterien}{MK}
-
 	\item \gls{Webanwendung}, lauffähig in allen modernen Browsern die JavaScript unterstützen
 
 	\item Angepasste Layouts für Computer und \gls{Handy}
@@ -19,21 +19,31 @@ Die Anwendung soll die benötigten Daten selbstständig von einem \gls{FROST-Ser
 	\item Die Antworten des \gls{FROST-Server} können in die benötigten Formen zur Anzeige umgewandelt werden.
 	
 	\item Aus den \glspl{Messwert} der verschiedenen Feinstaubgrößen kann ein einzelner \gls{Feinstaubindex} berechnet werden
+\end{Kriterien}
 
+\subsubsection{\gls{Kartenansicht}}
+\begin{Kriterien}{MK}
 	\item Eine interaktive Karte zeigt alle \glspl{Station} gleichzeitig. 
 	
-	\item Der Nutzer kann auswählen, welechen Ansicht die interaktive Karte anzeigen soll.
+	\item Der Nutzer kann ein \gls{Feature} auswählen, das auf der interaktiven Karte eingefärbt wird.
+	
+	\item Der Nutzer kann die Skala der Färbung und eine kurze Erklärung des gewählten Features anzeigen lassen.
 	
 	\item Die Nutzer können Straßennamen und Stadtnamen eingeben und die interaktive Karte springt auf die Stelle. Es gibt eine Fehlermeldung, wenn der Ort nicht existiert.
 
-	\item \glspl{Station} haben eine Färbung je nach Bewertung der \glspl{Messwert} auf der Skala.
+	\item \glspl{Station} haben eine Färbung je nach Bewertung der \glspl{Messwert} auf einer Skala.
 	
 	\item Beim Klicken auf eine \gls{Station} wird eine \gls{Pop-Up} Box angezeigt mit dem Name der Station, der Position und dem exakten Messwert.
 		Über eine Schaltfläche kann die Detailansicht geöffnet werden. 
+\end{Kriterien}
+
+\subsubsection{\gls{Detailansicht}}
+\begin{Kriterien}{MK}
+	\item Für die wichtigsten \glspl{Feature} wird ein Diagramm angezeigt, das die Entwicklung der \glspl{Messwert} zeigt. Die Zeitspanne ist einstellbar. Es werden nur Diagramme von Messwerten angezeigt, die an der \gls{Station} gemessen werden.
 	
-	\item Für jedes Feature wird ein Diagramm angezeigt, das die Entwicklung der \glspl{Messwert} zeigt. Die Zeitspanne ist einstellbar. Es werden nur Diagramme von Messwerten angezeigt, die an der \gls{Station} gemessen werden.
-	
-	\item Ein \gls{Graph} der die Veränderung von dem Tagesdurchschnitt anzeigt, dabei ist der Zeitabschnitt einstellbar.
+	\item Steckbriefhaft werden die letzten \glspl{Messwert} der wichtigsten \glspl{Feature} aufgeführt.
+
+	\item Ein \gls{Graph} der die Veränderung des Tagesdurchschnitts mancher \glspl{Feature} über einen einstellbaren Zeitabschnitt (z.B. ein Jahr) anzeigt.
 	
 	\item Es werden auch zusammengefasste Informationen angegeben: 
 \end{Kriterien}
@@ -53,21 +63,20 @@ Die Anwendung soll die benötigten Daten selbstständig von einem \gls{FROST-Ser
 \setcounter{counter}{10}
 \begin{Kriterien}{WK}
 
-	\item Wechseln zwischen verschiedenen interaktiven Karten für die verschiedenen Aspekten der \glspl{Messwert}.
-
-	\item Auf der Seite mit den Daten einer bestimmten \gls{Station} wird auf einer Karte gezeigt, wo die \gls{Station} sich befindet (nur für Desktop Layout). 
+	\item In der \gls{Detailansicht} wird die Position der \gls{Station} auf einer statischen Karte angezeigt (nur für Desktop 
+	Layout). 
 
 	\item Zusätzliche Informationen über die Zuverlässigkeit des Sensors sind erreichbar.
 
 	\item Verschiedene Sprachen sind auswählbar (insbesondere Deutsch und Englisch)
 	
-	\item Auf der interaktiven Karte werden Städte als farbige Polygonen gekennzeichnet. Das Polygon ist nach dem Durchnitt in der Stadt gefärbt. Mit einem Klick auf das Polygon wird die Karte der Stadt angezeigt, auf der nur die Messtationen markiert sind. 
+	\item In der \gls{Kartenansicht} können farbige Polygone über die Karte gelegt werden. Die Ecken der Polygone bilden \glspl{Station}. Die Farbe der Polygone wird aus dem Durchschnitt der \glspl{Messwert} angrenzender \glspl{Station} berechnet.
 	
-	\item Ein Diagramm  \gls{Graph} zeigt den Verlauf der \glspl{Messwert} Anzeigt und dabei auch den Durchschnitt markiert.
+	\item In der \gls{Detailansicht} kann in einem Diagramm der Durchschnitt der \glspl{Messwert} über den gewählten Zeitraum miteingezeichnet werden.
 	
-	\item Wenn der Nutzer GPS-Lokalisiernug erlaubt, startet die Karte beim jeden neuen Aufruf der Webanwendung an dem Wohnort des Nutzers.
+	\item Wenn der Nutzer GPS-Lokalisiernug erlaubt, startet die Karte beim jeden neuen Aufruf der \gls{Webanwendung} an seiner aktuellen Position.
 	
-	\item Die Webanwendung speichert, an welcher Stelle die interaktive Karte war, als der Nutzer die Detailansicht geöffnet hat, und öffnet beim Rückkehr wieder an der Stelle. Auch bei dem Wechsel zwischen den Features bleibt die Karte bei der gleichen Stelle und Größe.
+	\item Die Webanwendung speichert den Zustand der Karte, wenn der Nutzer eine \gls{Detailansicht} öffnet. Wenn er die \gls{Detailansicht} wieder schließt, wird der vorherige Zustand der Karte wiederhergestellt.
 
 \end{Kriterien}
 
@@ -75,16 +84,13 @@ Die Anwendung soll die benötigten Daten selbstständig von einem \gls{FROST-Ser
 \setcounter{counter}{10}
 \begin{Kriterien}{AK}
 
-	\item Historische Daten werden nicht einzeln angezeigt, nur die Diagramme geben Informationen.
-	
-	\item Die Seite gibt keine ausführliche Erklärung dazu, was genau die \glspl{Messwert} bedeuten, nur die daraus folgernde Luftqualität wird angezeigt. 
+	\item Historische Daten werden nicht einzeln, sondern nur in Diagrammen angezeigt.
 	
 	\item Die Folgen und Ursachen der Feinstaubbelastung werden nicht genannt.
 	
 	\item Bei der Nutzung der \gls{Webanwendung} werden keine neue Tabs geöffnet. Alles passiert im gleichen Tab.
 	
-	\item Die \gls{Webanwendung} benutzt den Weberver nur um die Anwendung zu übertragen. 
+	\item Die \gls{Webanwendung} benutzt den \gls{Webserver} nur um die Anwendung zu übertragen. 
 		Es werden keine anderen Anfragen an den \gls{Webserver} gestellt.
-	
 	
 \end{Kriterien}
