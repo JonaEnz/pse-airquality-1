@@ -1,23 +1,16 @@
 \section{Globale Testfälle}
 \subsection{Testfälle}
 \setcounter{counter}{10}
-
-Für jede einzelne Funktion, die das Programm ausführen soll, muss es einen Testfall geben. Folgendes sind die Testfälle für diese 
-
-\gls{Webanwendung}:
 \subsubsection{Basis-Testfälle}
 \begin{Kriterien}{MK}
 
-	\item[T010] Seite aufrufen
+	\item[Webanwendung öffnen] Der Benutzer startet die \gls{Webanwendung}. Erwartetes Ergebnis: Startseite mit einer Kartenansicht öffnet sich.
 
-	\item[T020] Karte bewegen
+	\item[Karte bewegen] Der Benutzer zieht mit dem Eingabegerät an der Karte. Erwartetes Ergebnis: Die Karte bewegt sich.
 	
+	\item[Zoomen] Der Benutzer führt mit den Fingern eine Zoom-Geste aus oder Scrollt mit dem Mausrad: Die Karte zoomt.
 	
-	\item[T030] Rein-/Rauszoomen
-	
-	\item[T040] Kursor bewegen
-	
-	\item[T050] Einen Punkt anklicken
+	\item[Einen Pin einer Messtation anklicken] Der Benutzer klickt einen Pin einer Messtation auf der Karte an. Erwartetes Ergebnis: Das Stationen Pop-Up erscheint.
 	
 	\item[T060] Einen Aspekt aus der Liste auswählen
 	
@@ -31,19 +24,15 @@ Für jede einzelne Funktion, die das Programm ausführen soll, muss es einen Tes
 \end{Kriterien}
 \subsubsection{Erweiterte Testfälle}
 \begin{Kriterien}{TF}
-
-	\item Aufklapp-Button aufklappen
-
-	\item Aufklapp-Button schließen
 	
-	\item Zwischen verschiedenen Karten wechseln
+	\item Zwischen verschiedenen Kartenansichten wechseln
 	
 \end{Kriterien}
 \subsubsection{Stabilitätstests}
 \begin{Kriterien}{MK}
 
-	\item[T140] Viele Daten gleichzeitig anfordern
+	\item Viele Daten gleichzeitig anfordern
 
-	\item[T150] Schnelles Anfordern von daten
+	\item Schnelles Anfordern von daten
 	
 \end{Kriterien}
