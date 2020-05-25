@@ -9,8 +9,8 @@
    Die \gls{Webanwendung} ist ohne jegliche Einschränkung auf mobilen Endgeräten nutzbar.  
 
  \item[Statische Webanwendung]
-   Die \gls{Webanwendung} erfordert den Server nur um die Anwendung zu übertragen.
-   Sonst müssen keine Anfragen an den Server gestellt werden. 
+   Die \gls{Webanwendung} erfordert den \gls{Webserver} nur um die Anwendung zu übertragen.
+   Sonst müssen keine Anfragen an den \gls{Webserver} gestellt werden. 
 
 \subsection{Karte}
 
@@ -40,7 +40,7 @@
   Überschrittene Grenzwerte werden zudem mit einem '!' markiert.
 
  \item[Flächenwerte (WK)]
-   Zwischen den \glspl{Station} werden Dreiecke aufgespannt die entsprechend der Höhe der Durchschnittswerte gefärbt werden.
+   Zwischen den \glspl{Station} werden Dreiecke aufgespannt die entsprechend der Höhe der durchschnittlichen \glspl{Messwert} gefärbt werden.
    Dabei überschneiden sich die Dreiecke nicht.
 
  \item[Veränderung]
@@ -61,9 +61,12 @@
    In der Detailansicht werden verschiedene \glspl{Graph} und \glspl{Messwert} angezeigt. 
 
  \item[Dynamische Anpassung nach Sensor]
-   Da die \glspl{Station} verscheidene \glspl{Messwert} bereitstellen können passt sich die Detailansicht entsprechend an.
+   Da die \glspl{Station} verscheidene \glspl{Feature} bereitstellen können passt sich die Detailansicht entsprechend an.
    Es werden immer nur \glspl{Graph} mit verfügbaren \glspl{Messwert} angezeigt.
-   Welche \glspl{Graph} für einen \gls{Messwert} angezeigt werden ist für jeden \gls{Messwert} festgelegt.
+   Welche \glspl{Graph} für ein \gls{Feature} angezeigt werden ist für jedes \gls{Feature} festgelegt.
+
+ \item[Warnung bei Grenzwertüberschreitung]
+  Eine Warnung wird in der Detailansicht neben einem \gls{Messwert} angezeigt, falls dieser einen Grenzwert überschreitet
 
  \subsubsection{Diagramme, Graphen und Werte}
 
@@ -80,7 +83,7 @@
    Die X-Achse umfasst Januar - Dezember, mehrere Graphen zeigen die Jahresverläufe an.
 
  \item[Heute im Vergleich zum letzten Jahr]
-   Ein \gls{Kuchendiagramm} das die Anzahl der Tage im letzten Jahr visualisiert an denen die Messwere gerimgfügig/sehr höher/niedriger waren als heute.
+   Ein \gls{Kuchendiagramm} das die Anzahl der Tage im letzten Jahr visualisiert an denen die \glspl{Messwert} gerimgfügig/sehr höher/niedriger waren als heute.
 
  \item[Weitere Informationen (WK)]
    Wird bei \glspl{Graph} des \gls{Feinstaubindex} (i)-Symbol angeklickt öffnet sich ein \gls{Pop-Up} mit einer Erklärung für den \gls{Feinstaubindex}.
@@ -88,8 +91,12 @@
 
 \subsection{Weitere Anforderungen}
 
+ \item[Hamburgermenü]
+  Auf jeder Seite gibt es ein \gls{Seitenmenu} das über den Hamburgerbutton $\equiv$ geöffnet und geschlossen werden kann.
+  Hier befinden sich verschiedene Einstellungen und Navigationselemente.
+
  \item[Sprachauswahl]
-   Auf jeder Seite befindet sich eine Flagge welche die aktuell ausgewählte Sprache repräsentiert.
+   Auf jeder Seite befindet sich eine Flagge im \gls{Seitenmenu} welche die aktuell ausgewählte Sprache repräsentiert.
    Ein \gls{Dropdown-Menu} wechselt zwischen den verfügbaren Sprachen.
 
  \item[Ladeanzeige]
@@ -99,9 +106,10 @@
  \item[Server nicht erreichbar]
   Ist der \gls{FROST-Server} nicht erreichbar wird eine Fehlermeldung angezeigt und die Möglichkeit angeboten es erneut zu versuchen.
 
- \item[Datenschutzerklärung]
-  Auf jeder Seite gibt es einen Link zur Datenschutzerklärung.
+ \item[Fehlerseite]
+  Wird eine Seite der \gls{Webanwendung} aufgerufen die nicht verfügbar ist wird eine 404-Fehlerseite angezeigt.
 
-    \item In der Detailansicht einer Messtationen werden alle aktuellen Messwerte angezeigt
-    \item Eine Warnung wird in der Detailansicht neben einem Messwert angezeigt, falls dieser einen Grenzwert überschreitet
+ \item[Datenschutzerklärung]
+  Im \gls{Seitenmenu} gibt es einen Link zur Datenschutzerklärung.
+  Die Datenschutzerklärung erscheint als \gls{Pop-Up}.
 \end{Kriterien}

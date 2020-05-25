@@ -1,9 +1,9 @@
 \section{Zielbestimmung}
-Das erklärte Ziel der Anwendung ist es, Bürgern die Messdaten des SmartAQ-Projekts auf eine ansprechende Weise zugänglich zu machen.
+Das erklärte Ziel der Anwendung ist es, Bürgern die Messdaten des \gls{smartaq}-Projekts auf eine ansprechende Weise zugänglich zu machen.
 Zu diesem Zweck wurde eine Befragung der Zielgruppe durchgeführt, auf deren Basis die angezeigten Informationen ausgewählt wurden.
-Es sollen nicht die rohen Messdaten im Mittelpunkt stehen sondern die Daten im verständlichen Kontext dargestellt werden.
+Es sollen nicht die rohen \glspl{Messwert} im Mittelpunkt stehen sondern die Daten im verständlichen Kontext dargestellt werden.
 Auch soll die Bedienung intuitiv ohne Eingewöhnungszeit möglich sein.
-Die Anwendung soll die benötigten Daten selbstständig von einem FROST-Server anfragen ohne einen eigenen Server oder Datenbank zu benötigen.
+Die Anwendung soll die benötigten Daten selbstständig von einem \gls{FROST-Server} anfragen und, außer zur Übertragung der \gls{Webanwendung}, ohne \gls{Webserver} oder eigene Datenbank funktionieren.
 
 \subsection{Musskriterien}
 \setcounter{counter}{10}
@@ -22,22 +22,22 @@ Die Anwendung soll die benötigten Daten selbstständig von einem FROST-Server a
 
 	\item Eine interaktive Karte zeigt alle \glspl{Station} gleichzeitig, in der Karte kann man ein- und auszoomen, und frei seitlich bewegen.
 
-	\item Messtationen haben eine Färbung je nach Bewertung der Messwerte auf der Skala.
+	\item \glspl{Station} haben eine Färbung je nach Bewertung der \glspl{Messwert} auf der Skala.
 	
-	\item Beim Bewegen des Cursors über eine Messstation wird eine \gls{Pop-Up} Box angezeigt mit dem Name der Station, der Position und dem exakten Messwert.
+	\item Beim Bewegen des Cursors über eine \gls{Station} wird eine \gls{Pop-Up} Box angezeigt mit dem Name der Station, der Position und dem exakten Messwert.
 		Über eine Schaltfläche kann die Detailansicht geöffnet werden.
 	
-	\item Der Nutzer kann durch ein \gls{Dropdown-Menu} festlegen welchen Aspekt der Daten er will. 
+	\item Der Nutzer kann durch ein \gls{Dropdown-Menu} festlegen welchen Aspekt der Daten angezeigt werden soll. 
 	
 	\item Für jede Eigenschaft wird ein Diagramm angezeigt, das die Entwicklung der \glspl{Messwert} zeigt. Die Zeitspanne ist einstellbar.
 	
-	\item Ein Diagramm das die Veränderung von dem Tagesdurchschnitt anzeigt, dabei ist der Zeitabschnitt einstellbar.
+	\item Ein \gls{Graph} der die Veränderung von dem Tagesdurchschnitt anzeigt, dabei ist der Zeitabschnitt einstellbar.
 	
 	\item Es werden auch zusammengefasste Informationen angegeben: 
 \end{Kriterien}
 		
 \begin{itemize}
-	\item Wie viel Prozent die Messwerte besser/schlechter sind als letztes Jahr.
+	\item Wie viel Prozent die \glspl{Messwert} besser/schlechter sind als letztes Jahr.
     \item Vergleich mit Durchschnitt der \glspl{Messwert} im Umkreis.
     \item Der Feinstaubwert war an xxx Tagen größer als heute (mit \gls{Kuchendiagramm})
 \end{itemize}
@@ -68,13 +68,13 @@ Die Anwendung soll die benötigten Daten selbstständig von einem FROST-Server a
 
 	\item Historische Daten werden nicht einzeln angezeigt, nur die Diagramme geben Informationen.
 	
-	\item Die Seite gibt keine ausführliche Erklärung dazu, was genau die Messwerte bedeuten, nur die daraus folgernde Luftqualität wird angezeigt. 
+	\item Die Seite gibt keine ausführliche Erklärung dazu, was genau die \glspl{Messwert} bedeuten, nur die daraus folgernde Luftqualität wird angezeigt. 
 	
 	\item Die Folgen und Ursachen der Feinstaubbelastung werden nicht genannt.
 	
-	\item Bei der Nutzung der Webanwendung werden keine neue Tabs geöffnet. Alles passiert im gleichen Tab.
+	\item Bei der Nutzung der \gls{Webanwendung} werden keine neue Tabs geöffnet. Alles passiert im gleichen Tab.
 	
-	\item Die Webanwendung benutzt den Server nur um die Anwendung zu übertragen. 
-		Es werden keine anderen Anfragen an den Server gestellt.
+	\item Die \gls{Webanwendung} benutzt den Weberver nur um die Anwendung zu übertragen. 
+		Es werden keine anderen Anfragen an den \gls{Webserver} gestellt.
 	
 \end{Kriterien}
