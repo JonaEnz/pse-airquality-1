@@ -4,37 +4,38 @@
 \subsubsection{Basis-Testfälle}
 \begin{Kriterien}{TF}
 
-	\item[Webanwendung öffnen] Der Benutzer startet die \gls{Webanwendung}. Erwartetes Ergebnis: Startseite mit einer Kartenansicht öffnet sich.
+	\item[Webanwendung öffnen] Der Benutzer startet die \gls{Webanwendung}. \\ Erwartetes Ergebnis: Startseite mit einer Kartenansicht öffnet sich.
 
-	\item[Karte bewegen] Der Benutzer zieht mit dem Eingabegerät an der Karte. Erwartetes Ergebnis: Die Karte bewegt sich.
+	\item[Karte bewegen] Der Benutzer zieht mit dem Eingabegerät an der Karte. Erwartetes Ergebnis: \\ Die Karte bewegt sich.
 	
-	\item[Zoomen] Der Benutzer führt mit den Fingern eine Zoom-Geste aus oder Scrollt mit dem Mausrad: Die Karte zoomt.
+	\item[Zoomen] Der Benutzer führt mit den Fingern eine Zoom-Geste aus oder Scrollt mit dem Mausrad \\ Erwartetes Ergebnis: Die Karte zoomt.
 	
-	\item[Einen Pin einer Messtation anklicken] Der Benutzer klickt einen Pin einer Messtation auf der Karte an. Erwartetes Ergebnis: Das Stationen Pop-Up erscheint.
+	\item[Einen Pin einer Messtation anklicken] Der Benutzer klickt einen Pin einer Messtation auf der Karte an. \\ Erwartetes Ergebnis: Das Stationen Pop-Up erscheint.
 	
-	\item[Karte auswählen] Der Benutzer wählt in der Liste mit einem Knopfdruck aus, welche Ansicht die Karte anzeigen soll. Erwartetes Ergebnis: Die Karte wechselt zu dieser Ansicht.
+	\item[Karte auswählen] Der Benutzer wählt in der Liste mit einem Knopfdruck aus, welche Ansicht die Karte anzeigen soll. \\ Erwartetes Ergebnis: Die Karte wechselt zu dieser Ansicht.
 	
-	\item[Scrollen] Der Benutzer scrollt in der Detailansicht runter. Erwartetes Ergebnis: Die Seitenansicht bewegt sich nach unten und die verschiedenen Diagramme werden angezegt.
+	\item[Scrollen] Der Benutzer scrollt in der Detailansicht runter. \\ Erwartetes Ergebnis: Die Seitenansicht bewegt sich nach unten und die verschiedenen Diagramme werden angezegt.
 	
-	\item[Ort suchen] Der Benutzer tippt einen Straßennamen in die Suchmaschine und klickt Enter. Erwartetes Ergebnis: Die Karte springt auf die Straße mit dem gesuchten Namen.
+	\item[Ort suchen] Der Benutzer tippt einen Straßennamen in die Suchmaschine und klickt Enter. \\ Erwartetes Ergebnis: Die Karte springt auf die Straße mit dem gesuchten Namen.
 	
-	\item[Fehlermeldung bei der Suche] Der Benutzer gibt einen nicht-existierenden Ort ein. Erwartetes Ergebnis: Pop-Up Fenster öffnet sich mit einer Fehlermeldung.
+	\item[Fehlermeldung bei der Suche] Der Benutzer gibt einen nicht-existierenden Ort ein. \\ Erwartetes Ergebnis: Pop-Up Fenster öffnet sich mit einer Fehlermeldung.
 	
-	\item[Zur Karte zurückkehren] Der Benutzer drückt den Button fürs Züruckkehren zur Karte. Erwartetes Ergebnis: Die Seite mit der Karte wird geöffnet. 
+	\item[Zur Karte zurückkehren] Der Benutzer drückt den Button fürs Züruckkehren zur Karte. \\ Erwartetes Ergebnis: Die Seite mit der Karte wird geöffnet. 
 	
-	\item[Webanwendung schließen] Der Benutzer schließt die Webanwendung im Browser. Erwartetes Ergebnis: Webanwendung wird geschlossen.
+	\item[Webanwendung schließen] Der Benutzer schließt die Webanwendung im Browser. \\ Erwartetes Ergebnis: Webanwendung wird geschlossen.
 \end{Kriterien}
 \subsubsection{Erweiterte Testfälle}
 \begin{Kriterien}{TF}
 	
-	\item Zwischen verschiedenen Kartenansichten wechseln
+	\item[Sprache wechseln] Der Benutzer klickt eine Flaggen-Ikon an. \\ Erwartetes Ergebnis: Die Webanwendung wird in der gewählten Sprache angezeigt.
 	
 \end{Kriterien}
 \subsubsection{Stabilitätstests}
 \begin{Kriterien}{TF}
 
-	\item Viele Daten gleichzeitig anfordern
+	\item[Viele Daten gleichzeitig anfordern] Der Nutzer zoomt so weit aus wie möglich.\\ Erwartetes Ergebnis: Alle Städte werden mit carbigen Polygonen markiert.
 
-	\item Schnelles Anfordern von daten
+	\item[Schnelles Anfordern der Daten] Der Nutzer wäechselt schnell zwischen Detailansicht und Kartenansicht, wobei er immer andere \gls{Stationen} anklickt. \\ Erwartetes Ergebnis: Alle Karten und Diagramm werden geladen.
+	
 	
 \end{Kriterien}
