@@ -3,45 +3,59 @@
 \subsection{Basis-Testfälle}
 \begin{Kriterien}{TF}
 
-	\item[Webanwendung öffnen] Der Benutzer startet die \gls{Webanwendung}. \\ \textbf{Erwartetes Ergebnis:} Startseite mit einer Kartenansicht öffnet sich.
+	\item[Webanwendung öffnen] Der Benutzer startet die \gls{Webanwendung}. \\ \textbf{Erwartetes Ergebnis:} Startseite mit einer Kartenansicht öffnet sich. (FA30)
 
-	\item[Karte bewegen] Der Benutzer zieht mit dem Eingabegerät an der Karte. \textbf{Erwartetes Ergebnis:} \\ Die Karte bewegt sich.
+	\item[Karte bewegen] Der Benutzer zieht mit dem Eingabegerät an der \gls{Live-Karte}. \textbf{Erwartetes Ergebnis:} \\ Die Karte bewegt sich.  (MK60, FA30)
+    
+    \item[Handylayout] Der Benutzr öffnet die Webanwendung auf dm Handy. \\ \textbf{Erwartetes Ergebnis:} Die Layout wird an das Handy angepasst. (MK20)
 	
-	\item[Zoomen] Der Benutzer führt mit den Fingern eine Zoom-Geste aus oder Scrollt mit dem Mausrad \\ \textbf{Erwartetes Ergebnis:} Die Karte zoomt.
+	\item[Zoomen] Der Benutzer führt mit den Fingern eine Zoom-Geste aus oder Scrollt mit dem Mausrad \\ \textbf{Erwartetes Ergebnis:} Die Karte zoomt. (MK60, FA30)
 	
-	\item[Einen Pin einer Messtation anklicken] Der Benutzer klickt einen Pin einer Messtation auf der Karte an. \\ \textbf{Erwartetes Ergebnis:} Das Stationen Pop-Up erscheint.
+	\item[Einen Pin einer Messtation anklicken] Der Benutzer klickt einen Pin einer Messtation auf der Karte an. \\ \textbf{Erwartetes Ergebnis:} Das Stationen Pop-Up erscheint. (MK110,  FA40)
 	
-	\item[Karte auswählen] Der Benutzer wählt in der Liste mit einem Knopfdruck aus, welche Ansicht die Karte anzeigen soll. \\ \textbf{Erwartetes Ergebnis:} Die Karte wechselt zu dieser Ansicht.
+	\item[Karte auswählen] Der Benutzer wählt in der Liste mit einem Knopfdruck aus, welche Ansicht die Karte anzeigen soll. \\ \textbf{Erwartetes Ergebnis:} Die Karte wechselt zu dieser Ansicht. (MK70, FA50)
 	
-	\item[Scrollen] Der Benutzer scrollt in der Detailansicht runter. \\ \textbf{Erwartetes Ergebnis:} Die Seitenansicht bewegt sich nach unten und die verschiedenen Diagramme werden angezeigt.
+	\item[Scrollen] Der Benutzer scrollt in der Detailansicht runter. \\ \textbf{Erwartetes Ergebnis:} Die Seitenansicht bewegt sich nach unten und die verschiedenen Diagramme werden angezeigt. (MK150, FA60)
 	
-	\item[Ort suchen] Der Benutzer tippt einen Straßennamen in die Suchmaschine und klickt Enter. \\ \textbf{Erwartetes Ergebnis:} Die Karte springt auf die Straße mit dem gesuchten Namen.
+	\item[Ort suchen] Der Benutzer tippt einen Straßennamen in die Suchmaschine und klickt Enter. \\ \textbf{Erwartetes Ergebnis:} Die Karte springt auf die Straße mit dem gesuchten Namen. (MK90,FA120)
 	
-	\item[Fehlermeldung bei der Suche] Der Benutzer gibt einen nicht-existierenden Ort ein. \\ \textbf{Erwartetes Ergebnis:} Pop-Up Fenster öffnet sich mit einer Fehlermeldung.
+	\item[Fehlermeldung bei der Suche] Der Benutzer gibt einen nicht-existierenden Ort ein. \\ \textbf{Erwartetes Ergebnis:} Pop-Up Fenster öffnet sich mit einer Fehlermeldung. (MK90, FA120)
+    
+    \item[Zeitrahmen einstellen] Der Nutzer wählt ein Diagramm aus und stellt den gewünschten Zeitrahmen ein. \\ \textbf{Erwartetes Ergebnis:} Das Diagramm zeigt jetzt nur die \glspl{Messwert} im ausgewählten Zeitrahmen. (MK150, FA180, FA190)
+    
+    \item[Vergleich mit letztem Jahr] Der Nutzer öffnet die \gls{Detailansicht}. \\ \textbf{Erwartetes Ergebnis:} Es wird u.a. ein Kuchendiagramm gezeigt die die \glspl{Messwert} im letzten Jahr mit den aktuellem Messwrt vergleicht. (MK150, FA210)
+    
+    \item[Grenzwertüberschreitung] Der Benutzer öffnet die \gls{Detailansicht} einer \gls{Station}. \\ \textbf{Erwartetes Ergebnis:} Eine Warnung an die Grenzwertüberschreitung falls der \gls{Messwert} den Grenzwert überschreitet. Keine Warnung sonst. (FA170)
 	
-	\item[Zur Karte zurückkehren] Der Benutzer drückt den "Zurück zur Karte" Button. \\ \textbf{Erwartetes Ergebnis:} Die Seite mit der Karte wird geöffnet. 
+	\item[Zur Karte zurückkehren] Der Benutzer drückt den "Zurück zur Karte" Button. \\ \textbf{Erwartetes Ergebnis:} Die Seite mit der \gls{Live-Karte} wird geöffnet. (MK160)
 	
 	\item[Webanwendung schließen] Der Benutzer schließt die Webanwendung im Browser. \\ \textbf{Erwartetes Ergebnis:} Webanwendung wird geschlossen.
 \end{Kriterien}
 \subsection{Erweiterte Testfälle}
 \begin{Kriterien}{TF}
-	
-	\item[Sprache wechseln] Der Benutzer klickt eine Flaggen-Icon an. \\ \textbf{Erwartetes Ergebnis:} Die Webanwendung wird in der gewählten Sprache angezeigt.
-	
-	\item[An Städte einzoomen] Der Benutzer klickt an ein Polygon in der verkleinerten Karte. \\ \textbf{Erwartetes Ergebnis:} Die Karte zoomt ein und die \glspl{Station} in der Stadt werden markiert.
-	
-	\item[Durchscjnitt] Der Benutzer drückt bei der Kartenansicht einer Stadt den Button für das Durchschnittsdiagramm. \\ \textbf{Erwartetes Ergebnis:} Ein Bubble mit den \glspl{Graph} öffnet sich. Dabei werden die \glspl{Graph} von allen Jahren mit verfügbaren \glspl{Messwert}en angezeigt, sowie der allgemeiner Durchschnittswert.
-	
-	\item[Sensorinformationen] Der Benutzer klickt in der Detailansicht den Index-Button an. \\ Erwartetes Ergebnis: Ein Pop-Up Fenster
-wird geöffnet mit den Sensorinformationen.
 
-	\item[Zum jetzigen Standort springen] Der Benutzer erlaubt Standortermittlung und klickt auf den Button "Zu meinem Standort springen". \\ Erwartetes Ergebnis: Die Karte springt auf den aktuellen Standort des Nutzers und zoomt ein.
+	\item[Ladeanzeige] Der Nutzer öffnet die  \gls{Detailansicht} und scrollt weit nach unten. \\ \textbf{Erwartetes Ergebnis:} Eine animierte Ladeanzeige zeigt, dass die Seite gerade lädt. (FA250)
+
+	\item[Positionsanzige] Die Deatailnsicht wir geöffnet und hochgescrollt. \\ \textbf{Erwartetes Ergebnis:} Eine nicht bewegliche Karte wird angezeigt, auf der die aktuelle Station markiert ist. (WK10, FA150)
+	
+	\item[Sprache wechseln] Der Benutzer klickt eine Flaggen-Icon an. \\ \textbf{Erwartetes Ergebnis:} Die Webanwendung wird in der gewählten Sprache angezeigt. (WK30, FA240) 
+	
+	\item[An Städte einzoomen] Der Benutzer klickt an eine Stadt in der verkleinerten Karte. \\ \textbf{Erwartetes Ergebnis:} Die Karte zoomt ein und die \glspl{Station} in der Stadt werden markiert.
+	
+	\item[Durchschnitt] Der Benutzer drückt bei der Kartenansicht einer Stadt den Button für das Durchschnittsdiagramm. \\ \textbf{Erwartetes Ergebnis:} Ein Bubble mit den \glspl{Graph} öffnet sich. Dabei werden die \glspl{Graph} von allen Jahren mit verfügbaren \glspl{Messwert}en angezeigt, sowie der allgemeiner Durchschnittswert. (WK50, FA200)
+	
+	\item[Sensorinformationen] Der Benutzer klickt in der Detailansicht den Index-Button an. \\ \textbf{Erwartetes Ergebnis:}  Ein Pop-Up Fenster
+wird geöffnet mit den Sensorinformationen. (WK20, FA210)
+
+\item[Polygon] Der Benutzer wählt 3 \glspl{Station} aus zieht ein Polygon darauf. \\ \textbf{Erwartetes Ergebnis:} Das Durchschnittswert wird angezeigt und das Dreieck wird dementsprechend gefärbt. (WK40, FA90))
+
+	\item[Zum jetzigen Standort springen] Der Benutzer erlaubt Standortermittlung und klickt auf den Button  'zu meinem Standort springen'. \\ \textbf{Erwartetes Ergebnis:} Die Karte springt auf den aktuellen Standort des Nutzers und zoomt ein. (WK60, FA130)
 	
 	\item[Position der Karte merken 1] Der Nutzer wechselt welchen Feature die Karte anzeigen soll. \\ 
-	\textbf{Erwartetes Ergebnis:} Die gewechselte Karte bleibt in der gleichen Position wie vor dem Wechsel.
+	\textbf{Erwartetes Ergebnis:} Die gewechselte Karte bleibt in der gleichen Position wie vor dem Wechsel. (WK70)
 	
 	\item[Position der Karte merken 2] Der Nutzer kehrt vom Detailansicht zurück auf die Karte. \\ 
-	\textbf{Erwartetes Ergebnis:} Die Karte ist an der gleichen Position wie vor dem Öffnen der Detailansicht.
+	\textbf{Erwartetes Ergebnis:} Die Karte ist an der gleichen Position und bei gleichem Feature wie vor dem Öffnen der \gls{Detailansicht}. (WK70, FA70)
 	
 \end{Kriterien}
 \subsection{Stabilitättests}
