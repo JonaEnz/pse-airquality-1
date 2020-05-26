@@ -2,5 +2,16 @@
 
 \setcounter{counter}{10}
 \begin{Kriterien}{NA}
-    \item An item
+    \item[Verlässlichkeit]
+        Die \gls{Webanwendung} soll mindestens 99,99\% der Zeit verfügbar sein.
+        Dabei gilt Zeit zu der der \gls{FROST-Server} Fehler aufweist als verfügbar solange eine Fehlermeldung korrekt angezeigt wird.
+    \item[Stationsanzahl]
+        Es können sich bis zu 1.000 Messstationen auf dem \gls{FROST-Server} befinden bevor Performanceeinbußen bemerkbar werden.
+    \item[Nutzerzahl]
+        Es können so viele Nutzer auf die \gls{Webanwendung} zugreifen wie der \gls{Webserver} und \gls{FROST-Server} erlauben.
+        Die \gls{Webanwendung} selbst läuft lokal und ist daher auf unbegrenzt vielen Endgeräten gleichzeitig ausführbar.
+    \item[Usability]
+        Die Bedienung der \gls{Webanwendung} ist auch für ungeübte Nutzer intuitiv möglich und unterstützt sie mit Bedienhilfen.
+    \item[Seitenaufbau]
+        Der Seitenaufbau sollte zuzüglich der Zeit zur Datenübertragung innerhalb einer Sekunde erfolgen.
 \end{Kriterien}
