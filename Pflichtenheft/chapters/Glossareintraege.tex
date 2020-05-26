@@ -1,35 +1,34 @@
-\newglossaryentry{Webanwendung}
-{
-	name=Webanwendung,
-	description={Eine Anwendung die in einem Browser ausgeführt und über das Internet übertragen wird.}
+\newglossaryentry{Detailansicht}{
+	name=Detailansicht,
+	plural=Detailansichten,
+	description={Profilansicht einer einzigen \gls{Station}. Hier werden konkrete \glspl{Messwert}, \glspl{Metadatum} und Diagramme
+	 und weitere Visualisierungen der \glspl{Messwert} angezeigt. Da nicht jede \gls{Station} die selben \glspl{Feature} misst, 
+	 unterscheiden sich die \glspl{Detailansicht} verschiedener \glspl{Station}.}
 }
 
-\newglossaryentry{SmartAQnet}{
-	name=SmartAQnet,
-	description={Projekt Smart Air Quality Network, ein reproduzierbares Messnetzwerk in der Modellregion Augsburg.}
+\newglossaryentry{Dropdown-Menu}{
+	name=Dropdown-Menü,
+	description={Ein Oberflächenelement das verschiedene Optionen zur Auswahl über eine ausklappbare Liste anbietet.}
 }
 
-\newglossaryentry{Webbrowser}{
-	name=Webbrowser,
-	description={Webbrowser sind spezielle Computerprogramme zur Darstellung von Webseiten im World Wide Web. Beispiele sind}
+\newglossaryentry{Durchschnittsdiagramm}{
+	name=Durchschnittsdiagramm,
+	description={Das Diagramm -meistens \gls{Graph} - modelliert den ausgerechneten Durchscnitt der \glspl{Messwert}.}
 }
 
-\newglossaryentry{Messwert}{
-	name=Messwert,
-	plural=Messwerte,
-	description={Ein Messwert eines Sensors zu einem bestimmten Zeitpunkt}
+\newglossaryentry{Feature}{
+	name=Feature,
+	description={Eine bestimmte Eigenschaft der Umgebung die von einer Messstation gemessen wird.}
 }
 
-\newglossaryentry{Pin}{
-	name=Pin,
-	plural=Pins,
-	description={Ein Oberflächenelement das einen bestimmten Punkt auf einer Karte markiert}
+\newglossaryentry{Feinstaubindex}{
+	name=Feinstaubindex,
+	description={Der normierte (0 µg => 0, Grenzwert => 100) schlechteste Wert der Feinstaubgrößen.}
 }
 
-\newglossaryentry{Kuchendiagramm}{
-	name=Kuchendiagramm,
-	plural=Kuchendiagramme,
-	description={Ein kreisförmiges Diagramm das entlang des Radius in verschiedene Bereiche eingeteilt ist}
+\newglossaryentry{FROST-Server}{
+	name=FROST-Server,
+	description={Ein Server für SensorThings Daten. \url{https://github.com/FraunhoferIOSB/FROST-Server}}
 }
 
 \newglossaryentry{Graph}{
@@ -38,62 +37,9 @@
 	description={Ein Diagramm das Wertepaare auf zwei Dimensionen mit beschrifteten Achsen abbildet}
 }
 
-\newglossaryentry{Station}{
-	name=Station,
-	plural=Stationen,
-	description={Ein Objekt an einem bestimmten geographischen Ort das verschiedene Messdaten liefert}
-}
-
-\newglossaryentry{Pop-Up}{
-	name=Pop-Up,
-	plural=Pop-Ups,
-	description={Ein Element einer Webseite das sich über andere Elemente legt und durch einen Klick außerhalb des Pop-Ups geschlossen werden.}
-}
-
-\newglossaryentry{FROST-Server}{
-	name=FROST-Server,
-	description={Ein Server für SensorThings Daten. \url{https://github.com/FraunhoferIOSB/FROST-Server}}
-}
-
-\newglossaryentry{Tooltip}{
-	name=Tooltip,
-	plural=Tooltips,
-	description={Ein Oberflächenelement das weitere Informationen zu einem Objekt anzeigt wenn die Maus darüber bewegt wird/es angeklickt wird.}
-}
-
-\newglossaryentry{Dropdown-Menu}{
-	name=Dropdown-Menü,
-	description={Ein Oberflächenelement das verschiedene Optionen zur Auswahl über eine ausklappbare Liste anbietet.}
-}
-
-\newglossaryentry{Feinstaubindex}{
-	name=Feinstaubindex,
-	description={Der normierte (0 µg => 0, Grenzwert => 100) schlechteste Wert der Feinstaubgrößen.}
-}
-
 \newglossaryentry{Handy}{
 	name=Smartphone,
 	description={Ein internetfähiges Mobiltelefon mit einem Webbrowser der moderne Standards beherrscht.}
-}
-
-\newglossaryentry{Feature}{
-	name=Feature,
-	description={Eine bestimmte Eigenschaft der Umgebung die von einer Messstation gemessen wird.}
-}
-
-\newglossaryentry{Webserver}{
-	name=Webserver,
-	description=Ein Server der eine \gls{Webanwendung} bereitstellt.
-}
-
-\newglossaryentry{Seitenmenu}{
-	name=Seitenmenü,
-	description={Ein Oberflächenelement das sich an der Seite des Fensters befindet und der Navigation dient.}
-}
-
-\newglossaryentry{Querysprache}{
-	name=Querysprache,
-	description={Sprache in der die Anfragen an den \gls{FROST-Server} formuliert werden.}
 }
 
 \newglossaryentry{Kartenansicht}{
@@ -102,12 +48,22 @@
 	description={Startansicht der Anwendung. Es wird eine Karte angezeigt, auf der mit Punkten \glspl{Station} eingezeichnet sind.}
 }
 
-\newglossaryentry{Detailansicht}{
-	name=Detailansicht,
-	plural=Detailansichten,
-	description={Profilansicht einer einzigen \gls{Station}. Hier werden konkrete \glspl{Messwert}, \glspl{Metadatum} und Diagramme
-	 und weitere Visualisierungen der \glspl{Messwert} angezeigt. Da nicht jede \gls{Station} die selben \glspl{Feature} misst, 
-	 unterscheiden sich die \glspl{Detailansicht} verschiedener \glspl{Station}.}
+\newglossaryentry{Kuchendiagramm}{
+	name=Kuchendiagramm,
+	plural=Kuchendiagramme,
+	description={Ein kreisförmiges Diagramm das entlang des Radius in verschiedene Bereiche eingeteilt ist}
+}
+
+\newglossaryentry{Live-Karte}{
+	name=Live-Karte,
+	plural=Live-Karten,
+	description={Eine interaktive Karte, die aktuelle \glspl{Messwert} anzeigt. Der Nutzer kann die Karte durch Ziehen mit der Maus seitlich bewegen, sowie Einzoomen und Auszoomen.}
+}
+
+\newglossaryentry{Messwert}{
+	name=Messwert,
+	plural=Messwerte,
+	description={Ein Messwert eines Sensors zu einem bestimmten Zeitpunkt}
 }
 
 \newglossaryentry{Metadatum}{
@@ -117,3 +73,62 @@
 	Geo-Koordinaten einer \gls{Station}, Name einer \gls{Station} und Beschreibung einer \gls{Station}.}
 }
 
+\newglossaryentry{Pin}{
+	name=Pin,
+	plural=Pins,
+	description={Ein Oberflächenelement das einen bestimmten Punkt auf einer Karte markiert}
+}
+
+
+\newglossaryentry{Pop-Up}{
+	name=Pop-Up,
+	plural=Pop-Ups,
+	description={Ein Element einer Webseite das sich über andere Elemente legt und durch einen Klick außerhalb des Pop-Ups geschlossen werden.}
+}
+
+\newglossaryentry{Querysprache}{
+	name=Querysprache,
+	description={Sprache in der die Anfragen an den \gls{FROST-Server} formuliert werden.}
+}
+
+
+\newglossaryentry{Seitenmenu}{
+	name=Seitenmenü,
+	description={Ein Oberflächenelement das sich an der Seite des Fensters befindet und der Navigation dient.}
+}
+
+\newglossaryentry{SmartAQnet}{
+	name=SmartAQnet,
+	description={Projekt Smart Air Quality Network, ein reproduzierbares Messnetzwerk in der Modellregion Augsburg.}
+}
+
+\newglossaryentry{Station}{
+	name=Station,
+	plural=Stationen,
+	description={Ein Objekt an einem bestimmten geographischen Ort das verschiedene Messdaten liefert}
+}
+
+\newglossaryentry{Tooltip}{
+	name=Tooltip,
+	plural=Tooltips,
+	description={Ein Oberflächenelement das weitere Informationen zu einem Objekt anzeigt wenn die Maus darüber bewegt wird/es angeklickt wird.}
+}
+
+\newglossaryentry{Webanwendung}
+{
+	name=Webanwendung,
+	description={Eine Anwendung die in einem Browser ausgeführt und über das Internet übertragen wird.}
+}
+
+
+\newglossaryentry{Webbrowser}{
+	name=Webbrowser,
+	description={Webbrowser sind spezielle Computerprogramme zur Darstellung von Webseiten im World Wide Web. Beispiele sind}
+}
+
+
+
+\newglossaryentry{Webserver}{
+	name=Webserver,
+	description=Ein Server der eine \gls{Webanwendung} bereitstellt.
+}
