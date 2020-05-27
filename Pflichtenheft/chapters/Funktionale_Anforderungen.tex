@@ -1,5 +1,9 @@
 \section{Funktionale Anforderungen}
 
+\begin{itemize}
+  \item Die Anforderungen, die zu Wunschkriterien gehören, werden mit * gekennzeichnet.
+\end{itemize}
+
 \setcounter{counter}{10}
 \begin{Kriterien}{FA}
 
@@ -16,26 +20,26 @@
 
  \item[Startseite]
    Bei Aufrufen der Webseite wird die Startseite angezeigt.
-   Es wird eine frei bewegliche Karte mit allen \glspl{Station} als \glspl{Pin} angezeigt und es kann nach einer Adresse gesucht werden.
-   Ein Klick auf 'Ansicht' öffnet ein \gls{Pop-Up} mit Ansichten.
+   Es wird eine frei bewegliche \gls{Live-Karte} mit allen \glspl{Station} als \glspl{Pin} angezeigt und es kann nach einer Adresse gesucht werden.
+   Ein Klick auf 'Ansicht' öffnet ein \gls{Pop-Up} mit \glspl{Feature}.
 
  \item[Stationen Pop-Up]
   Wird mit der Maus über einen Stations-\gls{Pin} gefahren/mit dem Finger darauf geklickt öffnet sich ein \gls{Pop-Up}.
   Darin werden der Name der \gls{Station}, die Koordinaten und den aktuellen exakten Messwerten angezeigt.
-  Ein Klick auf 'Details anzeigen' öffnet die Detailansicht.
+  Ein Klick auf 'Details anzeigen' öffnet die \gls{Detailansicht}.
 
- \item[Ansichten]
-   Die Karte auf der Startseite lässt sich über Ansichten anpassen.
+ \item[Features]
+   Die \gls{Live-Karte} auf der Startseite lässt sich über \glspl{Feature} anpassen.
    Es kann ausgewählt werden welche \glspl{Messwert} angezeigt werden.
    Es werden nur \glspl{Station} angezeigt die entsprechende Daten besitzen.
    Verschiedene Optionen zur Einfärbung der Karte und \glspl{Station} sind verfügbar.
 
  \item[Legende]
-  Auf der Karte wird eine Legende angezeigt welche die aktuellen Einfärbungen erklärt.
+  Auf der \gls{Live-Karte} wird eine Legende angezeigt welche die aktuellen Einfärbungen erklärt.
   Dies kann beispielsweise durch eine Farbskala erfolgen.
 
- \item[Letzte Ansicht]
-  Kehrt ein Nutzer zur Seite zurück wird die zuletzt genutzte Ansicht geladen.
+ \item[Letzte Ansicht*]
+  Kehrt ein Nutzer zur Seite zurück wird die \gls{Live-Karte} von der zuletzt genutzten \gls{Feature} geladen.
 
  \subsubsection*{Kartenansichten}
 
@@ -43,7 +47,7 @@
   \glspl{Station} werden angezeigt und nach \glspl{Messwert} eingefärbt. 
   Überschrittene Grenzwerte werden zudem mit einem '!' markiert.
 
- \item[Flächenwerte (WK)]
+ \item[Flächenwerte*]
    Zwischen den \glspl{Station} werden Dreiecke aufgespannt die entsprechend der Höhe der durchschnittlichen \glspl{Messwert} gefärbt werden.
    Dabei überschneiden sich die Dreiecke nicht.
 
@@ -57,7 +61,9 @@
 
  \item[Adresse]
    Es kann eine Adresse eingegeben werden die auf der Karte eingezeichnet wird.
-   Sie wird wie eine \gls{Station} eingefärbt anhand eines durch benachbarte \glspl{Station} abgeschätzten \gls{Messwert}s.
+   Sie wird wie eine \gls{Station} eingefärbt anhand eines durch benachbarte \glspl{Station} abgeschätzten \gls{Messwert}s. Wenn die adresse nicht existiert, erscheint ein Pp-Up mit einer Fehlermeldung.
+   
+ 	\item[Jetziger Standort*] Falls der Nutzer Standortermittlung an hat, wir der Standort ermittelt. Drückt der Nutzer den Button 'Zum jetzigen Standort springen', springt die Karte auf den ermittelten Standiort. In dem Fall, dass kein Standort ermittelt werden kann rscheint eine Fehlermeldung.
 
 \subsection{Detailansicht}
 
@@ -86,18 +92,18 @@
    Ein Graph der die Veränderung der \glspl{Messwert} darstellt wird anzeigt.
    Der Zeitrahmen kann in vorgegebenen Stufen eingestellt werden.
 
- \item[Jahresvergleich (WK)]
+ \item[Jahresvergleich*]
    Ein Graph der den Jahresverlauf der \glspl{Messwert} mit anderen Jahren vergleicht wird angezeigt.
    Die X-Achse umfasst Januar - Dezember, mehrere \glspl{Graph} zeigen die Jahresverläufe an.
 
  \item[Heute im Vergleich zum letzten Jahr]
    Ein \gls{Kuchendiagramm} das die Anzahl der Tage im letzten Jahr visualisiert an denen die \glspl{Messwert} geringfügig/sehr höher/niedriger waren als heute.
 
- \item[Weitere Informationen (WK)]
+ \item[Weitere Informationen*]
    Wird bei \glspl{Graph} des \gls{Feinstaubindex} (i)-Symbol angeklickt öffnet sich ein \gls{Pop-Up} mit einer Erklärung für den \gls{Feinstaubindex}.
    Diese Erklärung erläutert wie genau der \gls{Feinstaubindex} aus den \glspl{Messwert} bestimmt werden.
 
-\subsection{Weitere Anforderungen}
+\subsection{Weitere Anforderungen*}
 
  \item[Hamburgermenü]
   Auf jeder Seite gibt es ein \gls{Seitenmenu} das über den Hamburgerbutton $\equiv$ geöffnet und geschlossen werden kann.
