@@ -56,3 +56,32 @@ der \gls{Station} angezeigt. In der rechten oberen Ecke wird eine statische Kart
 markiert ist.
 Darunter werden Diagramme zu den gemessenen Features der \gls{Station} angezeigt. Die angezeigten Diagramme sind von \gls{Station} 
 zu \gls{Station} unterschiedlich, da die \glspl{Station} unterschiedliche Features messen.
+
+\newpage
+\subsubsection*{Szenario 3: Zeitliche Entwicklung einzelner \glspl{Feature} und weitere Erklärungen der \glspl{Feature}}
+\textbf{Nutzer:} Nutzer mit guten IT-Kenntnissen, jedoch wenig Wissen über Luftqualität. Er verwendet die \gls{Webanwendung}
+mit seinem Computer. Der Browser seines Computers unterstützt Standorbestimmung.
+
+\textbf{Beschreibung:} Der Nutzer hat in der Zeitung gelesen, dass aufgrund eines Wetterphänomens die Feinstaubkonzentration in
+einigen Städten Deutschlands in den letzten drei Tagen besonders hoch war. Der Nutzer möchte nun über die \gls{Webanwendung} erfahren, ob
+ob auch in seiner Stadt die Feinstaubkonzentration erhöht war. Da er sich auch Sorgen um seine Gesundheit macht, möchte er außerdem 
+wissen, ob gesundheitlichen Bedrohungen von einer hohen Feinstaubkonzentration ausgehen.
+
+\textbf{Konkreter Ablauf:} Der Nutzer gibt die die URL der \gls{Webanwendung} in den Browser seines Computers ein und bestätigt sie. 
+Daraufhin öffnet sich die \gls{Kartenansicht} der \gls{Webanwendung}. Auf der Karte sind alle \glspl{Station} mit einem \gls{Pin} 
+markiert. Der Nutzer interessiert sich nur für die \glspl{Station} in seiner Stadt. Deshalb klickt er auf den Button zur 
+Standortbestimmung. Daraufhin zentriert sich die Karte auf den aktuellen Standort des Nutzers.
+Der Nutzer interessiert sich für Feinstaubwerte. Deshalb wählt er in der Kartenkonfiguration das \gls{Feature} 
+'PM 2.5 (Feinstaub)' aus. Daraufhin werden in der Karte nur noch die \glspl{Station} angezeigt, die das \gls{Feature} PM 2.5 in 
+der letzten Stunde gemessen haben. Die Farben der \glspl{Pin} zeigen die Höhe der \glspl{Messwert} an.
+Der Nutzer kennt PM 2.5 als Feinstaubwert nicht und klickt deshalb auf den Button mit dem Fragezeichen. Daraufhin bekommt er die 
+Skala der Färbung der \glspl{Pin} und eine kurze Erklärung des \glspl{Feature} PM 2.5 angezeigt. Des Weiteren ist eine Webseite 
+verlinkt, über die sich der Nutzer noch außführlicher über PM 2.5 informieren kann.
+
+Der Nutzer klickt nun auf den Pin der nächstgelegenen \gls{Station}. Es öffnet sich ein \gls{Pop-Up}, in dem der Name 
+der \gls{Station}, ihre Geo-Koordinaten und der letzte PM 2.5 \gls{Messwert} der \gls{Station} zu sehen ist. Des Weiteren wird 
+ein Button angezeigt, auf dem 'weitere Informationen' steht. Der Nutzer klickt auf den Button. Daraufhin öffnet sich die 
+\gls{Detailansicht} der gewählten \gls{Station}. Der Nutzer interessiert sich für die Veränderung der Feinstaubwerte in der 
+letzen Woche. Deshalb scrollt er herunter, bis er ein Diagramm angezigt bekommt, das die zeitliche Veränderung von Feinstaubwerten 
+zeigt. In der Diagramkonfiguration wählt der Nutzer einen zeitlichen Rahmen von einer Woche aus, woraufhin ihm die Feinstaubwerte 
+der letzten Woche in das Diagramm eingezeichnet werden. Der Nutzer kann die Veränderung der Werte aus dem Diagramm ablesen.
