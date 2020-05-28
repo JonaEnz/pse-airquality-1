@@ -10,13 +10,12 @@ Die Anwendung soll die benötigten Daten selbstständig von einem \gls{FROST-Ser
 
 \subsubsection*{Allgemein}
 \begin{Kriterien}{MK}
-	\item \gls{Webanwendung}, lauffähig in allen modernen Browsern die JavaScript unterstützen
 
 	\item Angepasste Layouts für Computer und \gls{Handy}
 	
 	\item Es können Anfragen in der \gls{Querysprache} des \gls{FROST-Server} erzeugt und übertragen werden.
 	
-	\item Die Antworten des \gls{FROST-Server} können in die benötigten Formen zur Anzeige umgewandelt werden.
+	\item Die Antworten des \gls{FROST-Server} können die benötigten Daten für die \glspl{Graph} ausgelesen werden.
 	
 	\item Aus den \glspl{Messwert} der verschiedenen Feinstaubgrößen kann ein einzelner \gls{Feinstaubindex} berechnet werden
 \end{Kriterien}
@@ -31,6 +30,8 @@ Die Anwendung soll die benötigten Daten selbstständig von einem \gls{FROST-Ser
 	\item Der Nutzer kann die Skala der Färbung und eine kurze Erklärung des gewählten \gls{Feature}s anzeigen lassen.
 	
 	\item Die Nutzer können Straßennamen und Stadtnamen eingeben und die \gls{Live-Karte} springt auf die Stelle. Es gibt eine Fehlermeldung, wenn der Ort nicht existiert.
+	
+	\item Wenn der Nutzer GPS-Lokalisierung erlaubt, startet die Karte beim jeden neuen Aufruf der \gls{Webanwendung} an seiner aktuellen Position.
 
 	\item \glspl{Station} haben eine Färbung je nach Bewertung der \glspl{Messwert} auf einer Skala.
 	
@@ -52,12 +53,12 @@ Die Anwendung soll die benötigten Daten selbstständig von einem \gls{FROST-Ser
 \begin{itemize}
 	\item Wie viel Prozent die \glspl{Messwert} besser/schlechter sind als letztes Jahr.
     \item Vergleich mit Durchschnitt der \glspl{Messwert} im Umkreis.
-    \item Der Feinstaubwert war an xxx Tagen größer als heute (mit \gls{Kuchendiagramm})
+    \item \gls{Kuchendiagramm}: Anzahl der Tage in Zeitraum an denen der Feinstaubwert höher war als heute.
 \end{itemize}
 
 \begin{Kriterien}{MK}	
 
-	\item Es ist in einem Klick möglich, von der \gls{Detailansicht} zur gls{Kartenansicht} zurückzukehren.
+	\item Es ist in einem Klick möglich, von der \gls{Detailansicht} zur \gls{Kartenansicht} zurückzukehren.
 
 \end{Kriterien}
 
@@ -76,8 +77,6 @@ Die Anwendung soll die benötigten Daten selbstständig von einem \gls{FROST-Ser
 	\item In der \gls{Kartenansicht} können farbige Polygone über die Karte gelegt werden. Die Ecken der Polygone bilden \glspl{Station}. Die Farbe der Polygone wird aus dem Durchschnitt der \glspl{Messwert} angrenzender \glspl{Station} berechnet.
 	
 	\item Es kann in einem Diagramm der Durchschnitt der \glspl{Messwert} über mehrere Jahre eingezeichnet werden. Dabei werden daneben auch die \glspl{Graph} der einzelnen Jahren eingezeichnet.
-	
-	\item Wenn der Nutzer GPS-Lokalisierung erlaubt, startet die Karte beim jeden neuen Aufruf der \gls{Webanwendung} an seiner aktuellen Position.
 	
 	\item Die Webanwendung speichert den Zustand der Karte, wenn der Nutzer eine \gls{Detailansicht} öffnet. Wenn er die \gls{Detailansicht} wieder schließt, wird der vorherige Zustand der Karte wiederhergestellt.
 

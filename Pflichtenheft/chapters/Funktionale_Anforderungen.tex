@@ -22,14 +22,14 @@
 
  \item[Stationen Pop-Up]
   Wird mit der Maus über einen Stations-\gls{Pin} gefahren/mit dem Finger darauf geklickt öffnet sich ein \gls{Pop-Up}.
-  Darin werden der Name der \gls{Station}, die Koordinaten und den aktuellen exakten Messwerten angezeigt.
+  Darin werden der Name der \gls{Station}, die Koordinaten und den aktuellen exakten \gls{Messwert}n der \glspl{Feature} angezeigt.
   Ein Klick auf 'Details anzeigen' öffnet die \gls{Detailansicht}.
 
  \item[Features]
    Die \gls{Live-Karte} auf der Startseite lässt sich über \glspl{Feature} anpassen.
    Es kann zwischen Feinstaub, Temperatur, Luftfeuchtigkeit, Luftdruck, Windgeschwindigkeit und Niederschlagsmenge ausgewählt werden welche \glspl{Messwert} angezeigt werden.
    Es werden nur \glspl{Station} angezeigt die entsprechende Daten besitzen.
-   Verschiedene Optionen zur Einfärbung der Karte und \glspl{Station} sind verfügbar.
+   Verschiedene Optionen (siehe "Kartenansichten") zur Einfärbung der Karte und \glspl{Station} sind verfügbar.
 
  \item[Legende]
   Auf der \gls{Live-Karte} wird eine Legende angezeigt welche die aktuellen Einfärbungen erklärt.
@@ -41,7 +41,8 @@
  \subsubsection*{Kartenansichten}
 
  \item[Standard]
-  \glspl{Station} werden angezeigt und nach \glspl{Messwert} eingefärbt. 
+  \glspl{Station} werden angezeigt und nach \gls{Messwert} eingefärbt. 
+  Die Farbskala dafür wird, wenn vorhanden, vom \gls{FROST-Server} angefragt.
   Überschrittene Grenzwerte werden zudem mit einem '!' markiert.
 
  \item[Flächenwerte*]
@@ -50,23 +51,26 @@
 
  \item[Veränderung]
    Die \gls{Station} wird entsprechend der Veränderung über den letzten Monat/Jahr eingefärbt.
-   Die \glspl{Tooltip} zeigen die prozentuale Veränderung an.
+   Die \glspl{Tooltip} zeigen die prozentuale Veränderung über diesen Zeitraum an.
 
- \item[Stadtdurchschnitt]
-  Die Färbung der \glspl{Station} wird anhand des Durchschnitts aller \glspl{Station} der Stadt festgelegt.
-  Die \glspl{Tooltip} zeigen den Wert als prozentuale Über-/Unterschreitung dieses Durschschnitts an. 
+ \item[Umkreisdurchschnitt]
+  Die Färbung der \glspl{Station} wird anhand des Durchschnitts aller \glspl{Station} im Umkreis von 20 km festgelegt.
+  Die \glspl{Tooltip} zeigen den Wert als prozentuale Über-/Unterschreitung dieses Durchschnitts an. 
 
  \item[Adresse]
    Es kann eine Adresse eingegeben werden die auf der Karte eingezeichnet wird.
-   Sie wird wie eine \gls{Station} eingefärbt anhand eines durch benachbarte \glspl{Station} abgeschätzten \gls{Messwert}s. Wenn die adresse nicht existiert, erscheint ein Pp-Up mit einer Fehlermeldung.
+   Sie wird wie eine \gls{Station} eingefärbt anhand eines durch benachbarte \glspl{Station} abgeschätzten \gls{Messwert}s.
+   Wenn die Adresse nicht existiert, erscheint ein \gls{Pop-Up} mit einer Fehlermeldung.
    
- 	\item[Jetziger Standort*] Falls der Nutzer Standortermittlung an hat, wir der Standort ermittelt. Drückt der Nutzer den Button 'Zum jetzigen Standort springen', springt die Karte auf den ermittelten Standiort. In dem Fall, dass kein Standort ermittelt werden kann rscheint eine Fehlermeldung.
+   \item[Jetziger Standort*] Falls der Nutzer Standortermittlung an hat, wird der Standort ermittelt. 
+    Drückt der Nutzer den Button 'Zum jetzigen Standort springen', springt die Karte zu dem ermittelten Standort. 
+    Falls kein Standort ermittelt werden kann erscheint eine Fehlermeldung.
 
 \subsection{Detailansicht}
 
  \item[Detailansicht]
    In der Detailansicht werden verschiedene \glspl{Graph} und \glspl{Messwert} angezeigt. 
-
+   (Siehe "Diagramme, Graphen und Werte")
  \item[Positionsanzeige]
   Neben dem Name der \gls{Station} befindet sich ein Kartenausschnitt der die Position der \gls{Station} mit einem \gls{Pin} markiert.
   Mit dieser Karte kann nicht interagiert werden.
@@ -94,7 +98,7 @@
    Die X-Achse umfasst Januar - Dezember, mehrere \glspl{Graph} zeigen die Jahresverläufe an.
 
  \item[Heute im Vergleich zum letzten Jahr]
-   Ein \gls{Kuchendiagramm} das die Anzahl der Tage im letzten Jahr visualisiert an denen die \glspl{Messwert} geringfügig/sehr höher/niedriger waren als heute.
+   Ein \gls{Kuchendiagramm} das die Anzahl der Tage im letzten Jahr visualisiert an denen die \glspl{Messwert} höher/niedriger waren als heute.
 
  \item[Weitere Informationen*]
    Wird bei \glspl{Graph} des \gls{Feinstaubindex} (i)-Symbol angeklickt öffnet sich ein \gls{Pop-Up} mit einer Erklärung für den \gls{Feinstaubindex}.
@@ -104,7 +108,7 @@
 
  \item[Hamburgermenü]
   Auf jeder Seite gibt es ein \gls{Seitenmenu} das über den Hamburgerbutton $\equiv$ geöffnet und geschlossen werden kann.
-  Hier befinden sich verschiedene Einstellungen und Navigationselemente.
+  Hier befinden sich verschiedene Einstellungen (/FA240/) und Navigationselemente (/FA280/).
 
  \item[Sprachauswahl]
    Auf jeder Seite befindet sich eine Flagge im \gls{Seitenmenu} welche die aktuell ausgewählte Sprache repräsentiert.
