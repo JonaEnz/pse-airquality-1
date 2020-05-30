@@ -5,130 +5,155 @@
 \end{itemize}
 
 \setcounter{counter}{10}
-\begin{Kriterien}{FA}
 
 \subsection{Allgemeine Anforderungen}
 
- \item[Statische Webanwendung]
-   Die \gls{Webanwendung} erfordert den \gls{Webserver} nur um die Anwendung zu übertragen.
-   Sonst müssen keine Anfragen an den \gls{Webserver} gestellt werden. 
+\begin{Kriterien}{FA}
+  \item[Statische Webanwendung]
+    Die \gls{Webanwendung} erfordert den \gls{Webserver} nur um die Anwendung zu übertragen.
+    Sonst müssen keine Anfragen an den \gls{Webserver} gestellt werden. 
+\end{Kriterien}
 
-\subsection{Karte}
 
- \item[Startseite]
-   Bei Aufrufen der Webseite wird die Startseite angezeigt.
-   Es wird eine frei bewegliche \gls{Live-Karte} mit allen \glspl{Station} als \glspl{Pin} angezeigt und es kann nach einer Adresse gesucht werden.
-   Ein Klick auf 'Ansicht' öffnet ein \gls{Pop-Up} mit \glspl{Feature}.
+\subsection{Kartenansicht}
 
- \item[Stationen Pop-Up]
-  Wird mit der Maus über einen Stations-\gls{Pin} gefahren/mit dem Finger darauf geklickt öffnet sich ein \gls{Pop-Up}.
-  Darin werden der Name der \gls{Station}, die Koordinaten und den aktuellen exakten \glspl{Messwert}n der \glspl{Feature} angezeigt.
-  Ein Klick auf 'Details anzeigen' öffnet die \gls{Detailansicht}.
+\begin{Kriterien}{FA}
+  \item[Startseite]
+    Bei Aufrufen der Webseite wird die \gls{Kartenansicht} angezeigt. Es wird eine frei bewegliche \gls{Live-Karte} 
+    angezeigt, in der zunächst alle \glspl{Station} als \glspl{Pin} angezeigt werden.
 
- \item[Features]
-   Die \gls{Live-Karte} auf der Startseite lässt sich über \glspl{Feature} anpassen.
-   Es kann zwischen Feinstaub, Temperatur, Luftfeuchtigkeit, Luftdruck, Windgeschwindigkeit und Niederschlagsmenge ausgewählt werden welche \glspl{Messwert} angezeigt werden.
-   Es werden nur \glspl{Station} angezeigt die entsprechende Daten besitzen.
-   
- \item[Färbungsoptionen]
-   Es sind verschiedene Optionen (siehe "Kartenansichten") zur Einfärbung der Karte und \glspl{Station} verfügbar.
+  \item[Stationen Pop-Up]
+    Wird mit der Maus auf einen \gls{Pin} geklickt, öffnet sich ein \gls{Pop-Up}. Darin werden der Name der \gls{Station}, 
+    die Koordinaten und der letzte gemessene \gls{Messwert} des ausgewählten \glspl{Feature} angezeigt. Ein Klick auf 
+    'Details anzeigen' öffnet die \gls{Detailansicht} der \gls{Station}.
+\end{Kriterien}
 
- \item[Legende]
-  Auf der \gls{Live-Karte} wird eine Legende angezeigt welche die aktuellen Einfärbungen erklärt.
-  Dies kann beispielsweise durch eine Farbskala erfolgen.
+\subsubsection*{Navigation in der Karte}
+\begin{Kriterien}{FA}
+  \item[Suche nach Adressen]
+    Es gibt ein Suchfeld, über das nach Adressen gesucht werden kann. Existiert die Adresse, so zentriert sich die Karte 
+    auf der gesuchten Adresse.
 
- \item[Letzte Ansicht*]
-  Kehrt ein Nutzer zur Seite zurück wird die \gls{Live-Karte} von der zuletzt genutzten \gls{Feature} geladen.
+  \item[Suche Fehlermeldung]
+    Sucht ein Nutzer nach einer Adresse, die nicht existiert, so wird eine Fehlermeldung ausgegeben. 
 
- \subsubsection{Kartenansichten}
-
- \item[Standard]
-  \glspl{Station} werden angezeigt und nach \gls{Messwert} eingefärbt. 
-  Die Farbskala dafür wird, wenn vorhanden, vom \gls{FROST-Server} angefragt.
+  \item[Standortbestimmung*]
+    Es gibt einen Button, mit dem der Nutzer in der Karte zu seinem Standort springen kann. Dazu 
+    muss sein Browser Standortbestimmung unterstützen. Klickt der Nutzer auf den Button so zentriert sich die Karte über seinem 
+    aktuellen Standort.
   
- \item[Überschrittene Grenzwerte]
-   \glspl{Station} die Grenzwerte überschreiten werden zudem mit einem '!' markiert.
+  \item[Standort Fehlermeldung*]
+    Falls kein Standort ermittelt werden kann erscheint eine Fehlermeldung.
+\end{Kriterien}
 
- \item[Flächenwerte*]
-   Zwischen den \glspl{Station} werden Dreiecke aufgespannt die entsprechend der Höhe der durchschnittlichen \glspl{Messwert} gefärbt werden.
-   Dabei überschneiden sich die Dreiecke nicht.
+\subsubsection*{Konfiguration und Färbung der Karte}
+\begin{Kriterien}{FA}
+  \item[Kartenkonfiguration]
+    Die \gls{Live-Karte} der \gls{Kartenansicht} lässt sich über die Kartenkonfiguration anpassen. Es kann ausgewählt werden, welches 
+    \gls{Feature} eingefärbt werden soll. Wird ein Feature ausgewählt, so werden in der \gls{Live-Karte} nur noch die \glspl{Station} 
+    mit einem \gls{Pin} eingezeichnet, die in der letzten Stunde einen \gls{Messwert} des gewählten \glspl{Feature} gemessen 
+    haben. Des Weiteren werden die \glspl{Pin} bezüglich dieses Messwertes eingefärbt. Zwischen folgenden \glspl{Feature} 
+    kann gewählt werden: Feinstaubindex, PM 10, PM 2.5, Temperatur, Luftfeuchtigkeit und Luftdruck.
+    Zuzüglich können spezielle Optionen an- und abgewählt werden, die Darstellung und Färbung der Karte unabhängig vom gewählten 
+    Feature verändern.
+    
+  \item[Färbungsskala und Feature-Info]
+    Zu jedem Feature gibt es eine Skala, die einem \gls{Messwert} eine Farbe zuordnet. Nach dieser Skala werden die 
+    \glspl{Pin} eingefärbt. Falls vorhanden wird die Skala vom \gls{FROST-Server} abgefragt. Die Skala kann über den Info 
+    Button aus- und eingeblendet werden. Zuzüglich zur Skala, wird ein kurzer Infotext zum gewählen Feature angezeigt. Bei 
+    Bedarf wird eine externe Webseite verlinkt, in der das Feature noch ausführlicher erklärt wird.
 
- \item[Veränderung]
-   Die \gls{Station} wird entsprechend der Veränderung über den letzten Monat/Jahr eingefärbt.
-   Die \glspl{Tooltip} zeigen die prozentuale Veränderung über diesen Zeitraum an.
+  \item[Option: Flächenwerte*]
+    Zwischen den \glspl{Station} werden Dreiecke aufgespannt die entsprechend der Höhe der durchschnittlichen \glspl{Messwert} 
+    gefärbt werden. Dabei überschneiden sich die Dreiecke nicht.
 
- \item[Umkreisdurchschnitt]
-  Die Färbung der \glspl{Station} wird anhand des Durchschnitts aller \glspl{Station} im Umkreis von 20 km festgelegt.
-  Die \glspl{Tooltip} zeigen den Wert als prozentuale Über-/Unterschreitung dieses Durchschnitts an. 
+  \item[Option: Färbung Umkreisdurchschnitt*]
+    Die Färbung der \glspl{Station} wird nun nicht mehr anhand der featurespezifischen Skala vorgenommen, sondern anhand der 
+    Durchschnittswerte aller \glspl{Station} im Umkreis von 20 km festgelegt. Je nach dem, wie weit der letzte \gls{Messwert} 
+    dieser Station über bzw. unter dem Umkreisdurchschnitt liegt, wird der \gls{Pin} der \gls{Station} unterschiedlich eingefärbt.
+    In der Pop-Up-Ansicht einer \gls{Station} wird die prozentuale Über-/Unterschreitung angezeigt.
+\end{Kriterien}
 
- \item[Adresse]
-   Es kann eine Adresse eingegeben werden die auf der Karte eingezeichnet wird.
-   Sie wird wie eine \gls{Station} eingefärbt anhand eines durch benachbarte \glspl{Station} abgeschätzten \gls{Messwert}s.
-   
- \item[Adresse existiert nicht]
-   Wenn die Adresse nicht existiert, erscheint ein \gls{Pop-Up} mit einer Fehlermeldung.
-   
- \item[Jetziger Standort*] Falls der Nutzer Standortermittlung erlaubt hat, wird der Standort ermittelt. 
-   Drückt der Nutzer den Button 'Zum jetzigen Standort springen', springt die Karte zu dem ermittelten Standort. 
- \item[Standort Fehlermeldung*]
-  Falls kein Standort ermittelt werden kann erscheint eine Fehlermeldung.
+\subsubsection*{Sonstiges}
+\begin{Kriterien}{FA}
+  \item[Überschrittene Grenzwerte*]
+    Wurde für ein ausgewähltes \gls{Feature} an einer \gls{Station} am vergangenen Tag ein Grenzwert überschritten, so wird der 
+    \gls{Pin} dieser \gls{Station} mit einem '!' markiert. Des Weiteren wird ein Hinweis auf die Überschreitung in der 
+    Pop-Up-Ansicht und der \gls{Detailansicht} dieser \gls{Station} angezeigt.
+
+  \item[Letzte Ansicht*]
+    Kehrt ein Nutzer zur Seite zurück, wird die \gls{Live-Karte} geladen, die der Nutzer zuletzt verwendet hat. Es wird also 
+    gespeichert, welches Feature der Nutzer zulezt ausgewählt hat und worauf er die Karte (per Adresssuche oder per 
+    Standortbestimmung) zuletzt zentriert hat.
+\end{Kriterien}
+
 
 \subsection{Detailansicht}
 
- \item[Detailansicht]
-   In der Detailansicht werden verschiedene \glspl{Graph} und \glspl{Messwert} angezeigt. 
-   (Siehe "Diagramme, Graphen und Werte")
- \item[Positionsanzeige]
-  Neben dem Name der \gls{Station} befindet sich ein Kartenausschnitt der die Position der \gls{Station} mit einem \gls{Pin} markiert.
-  Mit dieser Karte kann nicht interagiert werden.
+\begin{Kriterien}{FA}
+  \item[Detailansicht]
+    In der Detailansicht werden verschiedene \glspl{Graph} und \glspl{Messwert} angezeigt. 
+    (Siehe "Diagramme, Graphen und Werte")
 
- \item[Dynamische Anpassung nach Sensor]
-   Da die \glspl{Station} verschiedene \glspl{Feature} bereitstellen können passt sich die Detailansicht entsprechend an.
-   Es werden immer nur \glspl{Graph} mit verfügbaren \glspl{Messwert} angezeigt.
-   Welche \glspl{Graph} für ein \gls{Feature} angezeigt werden ist für jedes \gls{Feature} festgelegt.
+  \item[Positionsanzeige]
+    Neben dem Name der \gls{Station} befindet sich ein Kartenausschnitt der die Position der \gls{Station} mit einem \gls{Pin} 
+    markiert. Mit dieser Karte kann nicht interagiert werden.
 
- \item[Warnung bei Grenzwertüberschreitung]
-  Eine Warnung wird in der Detailansicht neben einem \gls{Messwert} angezeigt, falls dieser einen Grenzwert überschreitet
+  \item[Warnung bei Grenzwertüberschreitung]
+     Eine Warnung wird in der Detailansicht neben einem \gls{Messwert} angezeigt, falls dieser einen Grenzwert überschritten 
+     hat. (Im Tagesdurchschnitt des letzten Tages)
 
- \subsubsection{Diagramme, Graphen und Werte}
+  \item[Dynamische Anpassung nach Sensor]
+    Da die \glspl{Station} verschiedene \glspl{Feature} bereitstellen können passt sich die Detailansicht entsprechend an. Es 
+    werden immer nur \glspl{Graph} mit verfügbaren \glspl{Messwert} angezeigt. Welche \glspl{Graph} für ein \gls{Feature} 
+    angezeigt werden ist für jedes \gls{Feature} festgelegt.
+\end{Kriterien}
 
- \item[Historische Entwicklung]
-   Ein \gls{Graph} der die Entwicklung der \glspl{Messwert} darstellt wird anzeigt.
-   Der Zeitrahmen kann in vorgegebenen Stufen eingestellt werden.
+ \subsubsection*{Diagramme, Graphen und Werte}
+ \begin{Kriterien}{FA}
+  \item[Historische Entwicklung]
+    Ein \gls{Graph} der die Entwicklung der \glspl{Messwert} darstellt wird anzeigt. Der Zeitrahmen kann in vorgegebenen Stufen 
+    eingestellt werden.
 
- \item[Jahresvergleich*]
-   Ein Graph der den Jahresverlauf der \glspl{Messwert} mit anderen Jahren vergleicht wird angezeigt.
-   Die X-Achse umfasst Januar - Dezember, mehrere \glspl{Graph} zeigen die Jahresverläufe an.
+  \item[Jahresvergleich*]
+    Ein Diagramm, dass den Jahresverlauf der \glspl{Messwert} verschiedener Jahre zeigt wird dargestellt.
+    Die X-Achse umfasst Januar - Dezember, mehrere \glspl{Graph} zeigen die Jahresverläufe an.
 
- \item[Heute im Vergleich zum letzten Jahr*]
-   Ein \gls{Kuchendiagramm} das die Anzahl der Tage im letzten Jahr visualisiert, an denen die \glspl{Messwert} höher/niedriger waren als heute.
+  \item[Heute im Vergleich zum letzten Jahr*]
+    Ein \gls{Kuchendiagramm}, das die Anzahl der Tage im letzten Jahr visualisiert, an denen die \glspl{Messwert} höher/niedriger 
+    waren als heute.
 
- \item[Weitere Informationen*]
-   Wird bei \glspl{Graph} des \gls{Feinstaubindex} (i)-Symbol angeklickt öffnet sich ein \gls{Pop-Up} mit einer Erklärung für den \gls{Feinstaubindex}.
-   Diese Erklärung erläutert wie genau der \gls{Feinstaubindex} aus den \glspl{Messwert} bestimmt werden.
+  \item[Weitere Informationen*]
+    Wird bei \glspl{Graph} des \gls{Feinstaubindex} (i)-Symbol angeklickt öffnet sich ein \gls{Pop-Up} mit einer Erklärung für den 
+    \gls{Feinstaubindex}.
+    Diese Erklärung erläutert wie genau der \gls{Feinstaubindex} aus den \glspl{Messwert} bestimmt wird.
+\end{Kriterien}
+
 
 \subsection{Weitere Anforderungen*}
 
- \item[Hamburgermenü]
-  Auf jeder Seite gibt es ein \gls{Seitenmenu} das über den Hamburgerbutton $\equiv$ geöffnet und geschlossen werden kann.
-  Hier befinden sich verschiedene Einstellungen (/FA240/) und Navigationselemente (/FA280/).
-  \\TODO: Nummern vor finalem Release anpassen
+\begin{Kriterien}{FA}
+  \item[Ladeanzeige]
+    Während im Hintergrund Daten vom \gls{FROST-Server} angefragt werden wird ein Ladesymbol angezeigt.
 
- \item[Sprachauswahl]
-   Auf jeder Seite befindet sich eine Flagge im \gls{Seitenmenu} welche die aktuell ausgewählte Sprache repräsentiert.
-   Ein \gls{Dropdown-Menu} wechselt zwischen den verfügbaren Sprachen.
+  \item[Server nicht erreichbar]
+    Ist der \gls{FROST-Server} nicht erreichbar wird eine Fehlermeldung angezeigt und die Möglichkeit angeboten es erneut zu 
+    versuchen.
 
- \item[Ladeanzeige]
-  Während im Hintergrund Daten vom \gls{FROST-Server} angefragt werden wird ein Ladesymbol angezeigt.
-  Läuft mehr als eine Anfrage gleichzeitig wird ein Fortschrittsbalken angezeigt.
+  \item[Fehlerseite]
+    Wird eine Seite der \gls{Webanwendung} aufgerufen die nicht verfügbar ist wird eine 404-Fehlerseite angezeigt.
 
- \item[Server nicht erreichbar]
-  Ist der \gls{FROST-Server} nicht erreichbar wird eine Fehlermeldung angezeigt und die Möglichkeit angeboten es erneut zu versuchen.
+  \item[Hamburgermenü]
+    Auf jeder Seite gibt es ein \gls{Seitenmenu}, das über den Hamburgerbutton $\equiv$ geöffnet und geschlossen werden kann.
+    Hier befinden sich unten aufgeführte Einstellungen und Navigationselemente.
 
- \item[Fehlerseite]
-  Wird eine Seite der \gls{Webanwendung} aufgerufen die nicht verfügbar ist wird eine 404-Fehlerseite angezeigt.
+  \item[Sprachauswahl]
+    Über das \gls{Seitenmenu} kann eine Sprache gewählt werden. Der Text aller Seiten wird daraufhin in der gewählten Sprache 
+    angezeigt.
 
- \item[Datenschutzerklärung]
-  Im \gls{Seitenmenu} gibt es einen Link zur Datenschutzerklärung.
-  Die Datenschutzerklärung erscheint als \gls{Pop-Up}.
+  \item[Datenschutzerklärung]
+    Es gibt eine Seite mit einer Datenschutzerklärung, die im \gls{Seitenmenu} verlinkt ist.
+
+  \item[Impressum]
+    Es gibt ein Impressum, das im \gls{Seitenmenu} verlinkt ist.
 \end{Kriterien}
