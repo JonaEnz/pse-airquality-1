@@ -43,22 +43,21 @@ Die Anwendung soll die benötigten Daten selbstständig von einem \gls{FROST-Ser
 
 \subsubsection*{\gls{Detailansicht}}
 \begin{Kriterien}{MK}
-	\item Für die wichtigsten \glspl{Feature} wird ein Diagramm angezeigt, das die Entwicklung der \glspl{Messwert} zeigt. 
-	Die Zeitspanne ist einstellbar. Es werden nur Diagramme von \glspl{Messwert}n angezeigt, die an der \gls{Station} gemessen 
-	werden.
+	\item Es werden \glspl{Metadatum} zur gewählten \gls{Station} angezeigt.
 	
-	\item Steckbriefhaft werden die letzten \glspl{Messwert} der wichtigsten \glspl{Feature} aufgeführt.
+	\item Es werden die zuletzt gemessenen \glspl{Messwert} der gewählten \gls{Station} angezeigt.
 
-	\item Es wird ein \gls{Graph} angezeigt, der die Veränderung des Tagesdurschnitts der Feintstaub \glspl{Feature} über einen 
-	einstellbaren Zeitabschnitt (z.B. ein Jahr) anzeigt.
+	\item Die zeitliche Veränderung der \glspl{Messwert} an dieser \gls{Station}, wird für die wichtigsten \glspl{Feature} (PM 10, 
+	PM 2.5, Temperatur, Luftfeuchtigkeit, Luftdruck) in Form eines Diagramms dargestellt. Der zeitliche Rahmen kann eingestellt 
+	werden.
 
-	\item Es werden auch zusammengefasste Informationen angegeben: 
+	\item Es werden zusammengefasste Informationen angegeben: 
 \end{Kriterien}
 		
 \begin{itemize}
-	\item Wie viel Prozent die \glspl{Messwert} besser/schlechter sind als letztes Jahr.
-    \item Vergleich mit Durchschnitt der \glspl{Messwert} im Umkreis.
-    \item \gls{Kuchendiagramm}: Anzahl der Tage im gewählten Zeitraum an denen der Feinstaubwert höher war als heute.
+	\item Einordnung der (historischen) Feinstaubwerte an dieser \gls{Station} im Bezug auf die offiziellen Grenzwerte.
+    \item Vergleich mit Durchschnitt der \glspl{Messwert} im Umkreis (20 km).
+    \item \gls{Kuchendiagramm}: Anzahl der Tage im gewählten Zeitraum, an denen der Feinstaubwert höher war als heute.
 \end{itemize}
 
 \begin{Kriterien}{MK}	
@@ -72,18 +71,21 @@ Die Anwendung soll die benötigten Daten selbstständig von einem \gls{FROST-Ser
 \setcounter{counter}{10}
 \begin{Kriterien}{WK}
 
-	\item In der \gls{Detailansicht} wird die Position der \gls{Station} auf einer statischen Karte angezeigt (nur für Desktop 
-	Layout). 
+	\item In der \gls{Detailansicht} wird die Position der ausgewählten \gls{Station} auf einer statischen Karte angezeigt 
+	(nur für Desktop Layout). 
 
-	\item Zusätzliche Informationen über die Zuverlässigkeit des Sensors sind erreichbar.
+	\item Zusätzliche Informationen über die Zuverlässigkeit des Sensors werden angezeigt.
 
 	\item Verschiedene Sprachen sind auswählbar (insbesondere Deutsch und Englisch)
 	
-	\item In der \gls{Kartenansicht} können farbige Polygone über die Karte gelegt werden. Die Ecken der Polygone bilden \glspl{Station}. Die Farbe der Polygone wird aus dem Durchschnitt der \glspl{Messwert} angrenzender \glspl{Station} berechnet.
+	\item In der \gls{Kartenansicht} können farbige Polygone über die Karte gelegt werden. Die Ecken der Polygone bilden 
+	\glspl{Station}. Die Farbe der Polygone wird aus dem Durchschnitt der \glspl{Messwert} angrenzender \glspl{Station} berechnet.
 	
-	\item Es kann in einem Diagramm der Durchschnitt der \glspl{Messwert} über mehrere Jahre eingezeichnet werden. Dabei werden daneben auch die \glspl{Graph} der einzelnen Jahren eingezeichnet.
+	\item In der \gls{Detailansicht} wird ein \gls{Graph} angezeigt, der die Veränderung des Tagesdurschnitts der Feintstaub 
+	\glspl{Feature} über einen einstellbaren Zeitabschnitt (z.B. ein Jahr) anzeigt.
 	
-	\item Die Webanwendung speichert den Zustand der Karte, wenn der Nutzer eine \gls{Detailansicht} öffnet. Wenn er die \gls{Detailansicht} wieder schließt, wird der vorherige Zustand der Karte wiederhergestellt.
+	\item Die Webanwendung speichert den Zustand der Karte, wenn der Nutzer eine \gls{Detailansicht} öffnet. Wenn er die 
+	\gls{Detailansicht} wieder schließt, wird der vorherige Zustand der Karte wiederhergestellt.
 
 \end{Kriterien}
 
@@ -93,11 +95,13 @@ Die Anwendung soll die benötigten Daten selbstständig von einem \gls{FROST-Ser
 
 	\item Historische Daten werden nicht einzeln, sondern nur in Diagrammen angezeigt.
 	
-	\item Die Folgen und Ursachen der Feinstaubbelastung werden nicht genannt.
+	\item Die Folgen und Ursachen der Feinstaubbelastung werden nicht genannt. Es wird aber auf andere Webseiten verlinkt, die diese
+	Informationen bereitstellen.
 	
-	\item Bei der Nutzung der \gls{Webanwendung} werden keine neue Tabs geöffnet. Alles passiert im gleichen Tab.
+	\item Bei der Nutzung der \gls{Webanwendung} werden keine neue Tabs geöffnet. Alles passiert im gleichen Tab. Außgenommen 
+	davon ist das Öffnen von externen Links. Diese Seiten werden in einem neuen Tab geöffnet.
 	
-	\item Die \gls{Webanwendung} benutzt den \gls{Webserver} nur um die Anwendung zu übertragen. 
-		Es werden keine anderen Anfragen an den \gls{Webserver} gestellt.
+	\item Die \gls{Webanwendung} benutzt den \gls{Webserver} nur um die Anwendung zu übertragen. Es werden keine anderen Anfragen 
+	an den \gls{Webserver} gestellt.
 	
 \end{Kriterien}
