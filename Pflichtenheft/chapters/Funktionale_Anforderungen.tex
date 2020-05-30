@@ -29,7 +29,9 @@
    Die \gls{Live-Karte} auf der Startseite lässt sich über \glspl{Feature} anpassen.
    Es kann zwischen Feinstaub, Temperatur, Luftfeuchtigkeit, Luftdruck, Windgeschwindigkeit und Niederschlagsmenge ausgewählt werden welche \glspl{Messwert} angezeigt werden.
    Es werden nur \glspl{Station} angezeigt die entsprechende Daten besitzen.
-   Verschiedene Optionen (siehe "Kartenansichten") zur Einfärbung der Karte und \glspl{Station} sind verfügbar.
+   
+ \item[Färbungsoptionen]
+   Es sind verschiedene Optionen (siehe "Kartenansichten") zur Einfärbung der Karte und \glspl{Station} verfügbar.
 
  \item[Legende]
   Auf der \gls{Live-Karte} wird eine Legende angezeigt welche die aktuellen Einfärbungen erklärt.
@@ -38,12 +40,14 @@
  \item[Letzte Ansicht*]
   Kehrt ein Nutzer zur Seite zurück wird die \gls{Live-Karte} von der zuletzt genutzten \gls{Feature} geladen.
 
- \subsubsection*{Kartenansichten}
+ \subsubsection{Kartenansichten}
 
  \item[Standard]
   \glspl{Station} werden angezeigt und nach \gls{Messwert} eingefärbt. 
   Die Farbskala dafür wird, wenn vorhanden, vom \gls{FROST-Server} angefragt.
-  Überschrittene Grenzwerte werden zudem mit einem '!' markiert.
+  
+ \item[Überschrittene Grenzwerte]
+   \glspl{Station} die Grenzwerte überschreiten werden zudem mit einem '!' markiert.
 
  \item[Flächenwerte*]
    Zwischen den \glspl{Station} werden Dreiecke aufgespannt die entsprechend der Höhe der durchschnittlichen \glspl{Messwert} gefärbt werden.
@@ -60,11 +64,14 @@
  \item[Adresse]
    Es kann eine Adresse eingegeben werden die auf der Karte eingezeichnet wird.
    Sie wird wie eine \gls{Station} eingefärbt anhand eines durch benachbarte \glspl{Station} abgeschätzten \gls{Messwert}s.
+   
+ \item[Adresse existiert nicht]
    Wenn die Adresse nicht existiert, erscheint ein \gls{Pop-Up} mit einer Fehlermeldung.
    
-   \item[Jetziger Standort*] Falls der Nutzer Standortermittlung an hat, wird der Standort ermittelt. 
-    Drückt der Nutzer den Button 'Zum jetzigen Standort springen', springt die Karte zu dem ermittelten Standort. 
-    Falls kein Standort ermittelt werden kann erscheint eine Fehlermeldung.
+ \item[Jetziger Standort*] Falls der Nutzer Standortermittlung erlaubt hat, wird der Standort ermittelt. 
+   Drückt der Nutzer den Button 'Zum jetzigen Standort springen', springt die Karte zu dem ermittelten Standort. 
+ \item[Standort Fehlermeldung*]
+  Falls kein Standort ermittelt werden kann erscheint eine Fehlermeldung.
 
 \subsection{Detailansicht}
 
@@ -83,7 +90,7 @@
  \item[Warnung bei Grenzwertüberschreitung]
   Eine Warnung wird in der Detailansicht neben einem \gls{Messwert} angezeigt, falls dieser einen Grenzwert überschreitet
 
- \subsubsection*{Diagramme, Graphen und Werte}
+ \subsubsection{Diagramme, Graphen und Werte}
 
  \item[Historische Entwicklung]
    Ein \gls{Graph} der die Entwicklung der \glspl{Messwert} darstellt wird anzeigt.
@@ -94,7 +101,7 @@
    Die X-Achse umfasst Januar - Dezember, mehrere \glspl{Graph} zeigen die Jahresverläufe an.
 
  \item[Heute im Vergleich zum letzten Jahr*]
-   Ein \gls{Kuchendiagramm} das die Anzahl der Tage im letzten Jahr visualisiert an denen die \glspl{Messwert} höher/niedriger waren als heute.
+   Ein \gls{Kuchendiagramm} das die Anzahl der Tage im letzten Jahr visualisiert, an denen die \glspl{Messwert} höher/niedriger waren als heute.
 
  \item[Weitere Informationen*]
    Wird bei \glspl{Graph} des \gls{Feinstaubindex} (i)-Symbol angeklickt öffnet sich ein \gls{Pop-Up} mit einer Erklärung für den \gls{Feinstaubindex}.
@@ -105,6 +112,7 @@
  \item[Hamburgermenü]
   Auf jeder Seite gibt es ein \gls{Seitenmenu} das über den Hamburgerbutton $\equiv$ geöffnet und geschlossen werden kann.
   Hier befinden sich verschiedene Einstellungen (/FA240/) und Navigationselemente (/FA280/).
+  \\TODO: Nummern vor finalem Release anpassen
 
  \item[Sprachauswahl]
    Auf jeder Seite befindet sich eine Flagge im \gls{Seitenmenu} welche die aktuell ausgewählte Sprache repräsentiert.
