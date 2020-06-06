@@ -1,0 +1,129 @@
+@startuml
+
+
+package FROST {
+    
+    FROSTQuery --> FROSTServer
+    FROSTQuery --> QueryResult
+
+
+    class FROSTServer
+    abstract FROSTQuery {
+        send() : QueryResult
+    }
+    class Observation extends FROSTQuery
+    class Datastream extends FROSTQuery
+    class ObservedProperty extends FROSTQuery
+    class Thing extends FROSTQuery
+
+    abstract QueryResult
+    
+
+    class ObservationResult extends QueryResult
+    class DatastreamResult extends QueryResult
+    class ObservedPropertyResult extends QueryResult
+    class ThingResult extends QueryResult
+} 
+
+
+package Modell {
+    class Messstation {
+    + getName() : string
+    + getFeatures() : List<Feature>
+    + getValue() : int
+    + getPosition() : Position
+    }
+
+    abstract Feature {
+    + getId() : String/int
+    + getValue() : float
+    + getFeatureInfo() : String
+    }
+    class Feinstaub extends Feature
+    class Luftfeuchtigkeit extends Feature
+    class Luftdruck extends Feature
+    class Temperatur extends Feature
+
+    class Färbung
+    class Skala
+    class Feature-Info
+}
+
+package Kartenansicht {
+    class Karte {
+        + gotoPosition(position: Position) : void
+    }
+
+    class Position {
+        + getCoordinates() : string
+    }
+    class Suchmaschine {
+        + find() : void
+    }
+
+    class Kartenkonfiguration {
+        + position : Position
+        + window : Viewport
+        + legend : Färbung
+        + selectedFeature : Feature
+        --
+        + save()
+        + load()
+    }
+    class Polygon {
+    ArrayList : Messstation[] messstationen
+    }
+    class Stadt{
+    ArrayList : Messstation[] messstationen
+    }
+}
+
+package Detailansicht {
+    abstract Diagram
+    class Graph extends Diagram
+    class PieChart extends Diagram
+    class HistorischeVeränderung extends Graph
+    class Jahresvergleich extends Graph
+    class HeutevsLetztesJahr extends PieChart
+    class StaticMap
+    class DiagramConfiguration
+    class Messwertübersicht
+    class Grenzwertwarnung extends PopUp
+}
+
+package Layout {
+    abstract Seite
+    class Fehlerseite extends Seite
+    class Datenschutzerklärung extends Seite
+    class Impressum extends Seite
+    class Ladeanzeige extends Seite
+    class Kartenansicht extends Seite
+    class Detailansicht extends Seite
+    class Positionsanzeige
+    class Seitenmenü
+    class Sprachauswahl
+    class Sprache
+    class Kopfleiste
+}
+
+
+package UserInterface {
+    class PopUp extends React.Component {
+    + open() :void
+    + close() :void
+    }
+    abstracts Button
+    class HamburgerMenu
+    class Indexbutton
+    class InfoPopup extends PopUp {
+        
+    }
+    class Infotext
+    class Skala {
+        färbung : Färbung
+    }
+    
+}
+
+
+@enduml
