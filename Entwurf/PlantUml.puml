@@ -1,4 +1,4 @@
-@startuml
+@startuml Komplett
 
 
 package FROST {
@@ -11,10 +11,10 @@ package FROST {
     abstract FROSTQuery {
         send() : QueryResult
     }
-    class Observation extends FROSTQuery
-    class Datastream extends FROSTQuery
-    class ObservedProperty extends FROSTQuery
-    class Thing extends FROSTQuery
+    class ObservationQuery extends FROSTQuery
+    class DatastreamQuery extends FROSTQuery
+    class ObservedPropertyQuery extends FROSTQuery
+    class ThingQuery extends FROSTQuery
 
     abstract QueryResult
     
@@ -44,37 +44,120 @@ package Modell {
     class Luftdruck extends Feature
     class Temperatur extends Feature
 
-    class Färbung
+    class Färbung {
+        + getColor(value : float)
+    }
     class Skala
     class Feature-Info
 }
 
-package Kartenansicht {
-    class Karte {
-        + gotoPosition(position: Position) : void
+Kartenseite +-- Modell
+
+package Kartenseite {
+
+    package Components {
+        class Kartenansicht extends React.Component {
+        + goToPosition(position : Position) : void
+        + setZoom(zoom : int)
+        + selectFeature(id : string)
+        + openPopUp(pin : MapPin)
+
+        + addPin(pin: MapPin)
+        + removePin(pin: MapPin)
+        }
+
+        class FeatureSelect extends React.Component {
+            + getSelectedFeature() : Feature
+            + setFeature(feature : Feature)
+        }
+
+        class Search extends React.Component {
+            + find(string searchTerm) : Position
+            + findCurrentPosition() : Position
+            + reset() : void
+        }
+
+        class Karte extends React.Component {
+        + stationen : ArrayList<Messstation>
+        --
+        + selectStation(station : Messstation)
+        + setPosition(position : Position)
+        }
+    }
+
+    Karte --> Modell.Färbung
+    Karte --> Modell.Feature
+    Kartenansicht --> Viewport
+    Kartenansicht --> Position
+    Karte --> Search
+    Karte --> Messstation
+    Kartenansicht -- Karte
+
+    
+
+    Kartenansicht --> UserInterface.PopUp 
+
+    
+
+    class Viewport {
+        + getCenter() : Position
+        + setCenter(position : Position)
+
+        + getZoom() : int
+        + setZoom(zoom : int)
     }
 
     class Position {
         + getCoordinates() : string
+        + setCoordinates() : string
+
+        + toString() : string 
     }
-    class Suchmaschine {
-        + find() : void
+    
+
+    Kartenansicht -- Kartenkonfiguration
+    Kartenkonfiguration "1" -- "*" MapPin
+    Kartenansicht --> "*" MapPin
+    Kartenansicht --> "*" Polygon
+
+    abstract Kartenkonfiguration {
+        + getPins(port : Viewport) : MapPin[]
     }
 
-    class Kartenkonfiguration {
-        + position : Position
-        + window : Viewport
-        + legend : Färbung
-        + selectedFeature : Feature
-        --
-        + save()
-        + load()
+    class testMapConfig extends Kartenkonfiguration {
+        + getScale() : Skala
     }
+
+    class MapPin {
+        + getPosition() : Position
+        + setPosition(position : Position)
+
+        + getValue() : float
+        + setValue(value : float)
+
+        + getStationId() : string
+        + setStationId(id : string)
+
+        + getColor() : Color
+        + setColor(color : Color)
+    }
+
+    class Legend extends React.Component{
+        + setScale(scale : Skala)
+        + loadScale(feature : Feature)
+    }
+
     class Polygon {
-    ArrayList : Messstation[] messstationen
+        + messstationen : ArrayList<Messstation>
+        --
+        + getAvgValue() : float
     }
+
     class Stadt{
-    ArrayList : Messstation[] messstationen
+    + ArrayList<Messstation> messstationen
+    + getMiddlePosition() : Position
+    --
+    + 
     }
 }
 
@@ -101,9 +184,24 @@ package Layout {
     class Detailansicht extends Seite
     class Positionsanzeige
     class Seitenmenü
-    class Sprachauswahl
-    class Sprache
+
+    Sprachauswahl --> Store.Sprache
+    class Sprachauswahl extends React.Component {
+        + setLanguage(id : string)
+    }
     class Kopfleiste
+}
+
+package Store {
+    class Sprache {
+        + getString(id: string) : string
+        + loadLanguage(file : string)
+    }
+
+    class KartenkonfigurationSpeicher {
+        + save(Kartenkonfiguration conf, viewport : Viewport)
+        + load() : Kartenkonfiguration
+    }
 }
 
 
@@ -112,9 +210,9 @@ package UserInterface {
     + open() :void
     + close() :void
     }
-    abstracts Button
+    abstract Button
     class HamburgerMenu
-    class Indexbutton
+    class Indexbutton    
     class InfoPopup extends PopUp {
         
     }
