@@ -82,20 +82,15 @@ package Kartenseite {
         --
         + selectStation(station : Messstation)
         + setPosition(position : Position)
+        + getValueAt(position: Position, feature : Feature) : float
         }
     }
 
-    Karte --> Modell.Färbung
-    Karte --> Modell.Feature
     Kartenansicht --> Viewport
     Kartenansicht --> Position
     Karte --> Search
-    Karte --> Messstation
     Kartenansicht -- Karte
-
-    
-
-    Kartenansicht --> UserInterface.PopUp 
+    Karte -- Legend
 
     
 
@@ -152,13 +147,6 @@ package Kartenseite {
         --
         + getAvgValue() : float
     }
-
-    class Stadt{
-    + ArrayList<Messstation> messstationen
-    + getMiddlePosition() : Position
-    --
-    + 
-    }
 }
 
 package Detailansicht {
@@ -173,6 +161,8 @@ package Detailansicht {
     class Messwertübersicht
     class Grenzwertwarnung extends PopUp
 }
+
+Layout +-- Kartenseite
 
 package Layout {
     abstract Seite
