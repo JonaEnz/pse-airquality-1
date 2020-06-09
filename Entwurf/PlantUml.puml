@@ -41,12 +41,16 @@ package Modell {
         + isLimitExceeded() : Boolean
     }
     
+    Measuringstation -- Feature    
+   
      class Date  {
         day : Integer
         month : Integer
         year : Integer
         hour : float
     }
+    
+    Measuringstation --* Position
     
     class Position {
         xCoordinate : float
@@ -105,6 +109,8 @@ package Modell {
         -info : String
         + getInfo() : String
     }
+    
+    Feature *-- FeatureInfo
 }
 
 Kartenseite +-- Modell
