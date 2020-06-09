@@ -165,7 +165,7 @@ package MapPage {
             + loadScale(feature : Feature)
         }
 
-        StationInfo --> UserInterface.Button
+        StationInfo --> MaterialUI.Button
 
         class StationInfo extends React.Component {
             + station : Messstation
@@ -279,22 +279,9 @@ package Storage {
 }
 
 
-package UserInterface {
-    class PopUp extends React.Component {
-    + open() :void
-    + close() :void
-    }
-    abstract Button
-    class HamburgerMenu
-    class Indexbutton    
-    class InfoPopup extends PopUp {
-        
-    }
-    class Infotext
-    class Skala {
-        färbung : Färbung
-    }
-    
+package MaterialUI {
+    class PopUp
+    class Button
 }
 
 
