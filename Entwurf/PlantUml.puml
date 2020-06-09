@@ -38,7 +38,7 @@ package FROST {
 } 
 
 
-package Modell {
+package Model {
     class ObservationStation {
         -name : String
         -position : Position
@@ -70,10 +70,8 @@ package Modell {
     }
 
     abstract class Feature {
-    + getFeatureInfo() : FeatureInfo
-    } 
-
-
+        + getFeatureInfo() : FeatureInfo
+    }
     class PM10 extends Feature {
         -name : String
         -stations : Measurestations
@@ -130,7 +128,7 @@ package Modell {
     Feature *-- FeatureInfo
 }
 
-MapPage +-- Modell
+MapPage +-- Model
 
 package MapPage {
 
@@ -158,11 +156,11 @@ package MapPage {
         }
 
         class Map extends React.Component {
-        + pins : MapPin[]
-        --
-        + setPosition(position : Position)
-        + setZoom(zoom : int)
-        + openPopUp(station : Messstation)
+            + pins : MapPin[]
+            --
+            + setPosition(position : Position)
+            + setZoom(zoom : int)
+            + openPopUp(station : Messstation)
         }
 
         class Legend extends React.Component{
@@ -238,46 +236,46 @@ package MapPage {
     }
 }
 
-package Detailansicht {
+package DetailPage {
     abstract Diagram
     class Graph extends Diagram
     class PieChart extends Diagram
-    class HistorischeVeränderung extends Graph
-    class Jahresvergleich extends Graph
-    class HeutevsLetztesJahr extends PieChart
+    class HistoricalChange extends Graph
+    class AnualChange extends Graph
+    class AnualComparison extends PieChart
     class StaticMap
     class DiagramConfiguration
-    class Messwertübersicht
-    class Grenzwertwarnung extends PopUp
+    class ObservationOverview
 }
 
 Layout +-- MapPage
 
 package Layout {
-    abstract Seite
-    class Fehlerseite extends Seite
-    class Datenschutzerklärung extends Seite
-    class Impressum extends Seite
-    class Ladeanzeige extends Seite
-    class MapView extends Seite
-    class Detailansicht extends Seite
-    class Positionsanzeige
-    class Seitenmenü
+    abstract Page
+    class ErrorPage extends Page
+    class PrivacyPolicyPage extends Page
+    class AboutPage extends Page
+    class MapView extends Page
+    class DetailPage extends Page
 
-    Sprachauswahl --> Storage.Sprache
-    class Sprachauswahl extends React.Component {
+    class PageMenu
+    class Ladeanzeige
+
+    class LanguageMenu extends React.Component {
         + setLanguage(id : string)
     }
-    class Kopfleiste
+    LanguageMenu --> Storage.Language
+
+    class TopBar
 }
 
 package Storage {
-    class Sprache {
+    class Language {
         + getString(id: string) : string
         + loadLanguage(file : string)
     }
 
-    class MapConfigurationSpeicher {
+    class MapConfigurationMemory {
         + save(MapConfiguration conf, viewport : Viewport)
         + load() : (MapConfiguration, Viewport)
     }
