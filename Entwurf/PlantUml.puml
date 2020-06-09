@@ -40,6 +40,18 @@ package Modell {
         + getAllData(Date date, Date date) : List<float>
         + isLimitExceeded() : Boolean
     }
+    
+     class Date  {
+        day : Integer
+        month : Integer
+        year : Integer
+        hour : float
+    }
+    
+    class Position {
+        xCoordinate : float
+        yCoordinate : float
+    }
 
     abstract class Feature {
     + getFeatureInfo() : FeatureInfo
