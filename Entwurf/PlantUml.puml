@@ -27,29 +27,72 @@ package FROST {
 
 
 package Modell {
-    class Messstation {
-    + getName() : string
-    + getFeatures() : List<Feature>
-    + getValue() : int
-    + getPosition() : Position
+    class Measuringstation {
+        -name : String
+        -position : Position
+        -availableFeatures : List<Feature>
+        + getName() : string
+        + getFeatures() : List<Feature>
+        + getCurrentValue() : int
+        + getPosition() : Position
+        + getCurrentValue() : float
+        + getAvarage() : float
+        + getAllData(Date date, Date date) : List<float>
+        + isLimitExceeded() : Boolean
     }
 
-    abstract Feature {
-    + getId() : String/int
-    + getValue() : float
-    + getFeatureInfo() : String
+    abstract class Feature {
+    + getFeatureInfo() : FeatureInfo
+    } 
+
+
+    class Feinstaub extends Feature {
+        -name : String
+        -stations : Measurestations
+        +getFeatureInfo() : FeatureInfo
+    }
+    class Luftfeuchtigkeit extends Feature {
+        -name : String
+        -stations : Measurestations
+        +getFeatureInfo() : FeatureInfo
+    }
+    class Luftdruck extends Feature {
+        -name : String
+        -stations : Measurestations
+        +getFeatureInfo() : FeatureInfo
+    }
+    class Temperatur extends Feature {
+        -name : String
+        -stations : Measurestations
+        +getFeatureInfo() : FeatureInfo
+    }
+   
+    enum Colors {
+        GREEN
+        LIGHTGREEN
+        YELLOW
+        ORANGE
+        RED
     }
 
-    class Feinstaub extends Feature
-    class Luftfeuchtigkeit extends Feature
-    class Luftdruck extends Feature
-    class Temperatur extends Feature
+    Colors *-- ColorCode
+    Colors *-- Skala
+    ColorCode -- Skala
 
-    class Färbung {
-        + getColor(value : float) : Color
+    class ColorCode {
+        color : Colors
+        + getColor(value : float)
     }
-    class Skala
-    class Feature-Info
+
+    class Skala {
+        -colors : Colors[]
+        +listAllColors() : Colors
+    }
+    
+    class FeatureInfo {
+        -info : String
+        + getInfo() : String
+    }
 }
 
 MapPage +-- Modell
