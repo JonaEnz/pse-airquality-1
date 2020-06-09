@@ -67,11 +67,27 @@ package Modell {
         +getFeatureInfo() : FeatureInfo
     }
    
+    enum Colors {
+        GREEN
+        LIGHTGREEN
+        YELLOW
+        ORANGE
+        RED
+    }
 
-    class Färbung {
+    Colors *-- ColorCode
+    Colors *-- Skala
+    ColorCode -- Skala
+
+    class ColorCode {
+        color : Colors
         + getColor(value : float)
     }
-    class Skala
+
+    class Skala {
+        -colors : Colors[]
+        +listAllColors() : Colors
+    }
     
     class FeatureInfo {
         -info : String
