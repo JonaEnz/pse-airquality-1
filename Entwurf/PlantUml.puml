@@ -61,6 +61,15 @@ package Model {
         year : Integer
         hour : float
     }
+
+    enum Timespan {
+            LAST_YEAR,
+            LAST_3_MONTHS,
+            LAST_MONTH,
+            LAST_WEEK,
+            LAST_3_DAYS,
+            TODAY,
+        }
     
     ObservationStation --* Position
     
@@ -237,15 +246,23 @@ package MapPage {
 }
 
 package DetailPage {
-    abstract Diagram
+    abstract DetailPageComponant extends MaterialUI.Paper
+
+    class ObservationOverview extends DetailPageComponant
+    class ObservationStationInfo extends DetailPageComponant
+    class StaticMap extends DetailPageComponant
+    abstract Diagram extends DetailPageComponant
+
     class Graph extends Diagram
     class PieChart extends Diagram
-    class HistoricalChange extends Graph
-    class AnualChange extends Graph
-    class AnualComparison extends PieChart
-    class StaticMap
-    class DiagramConfiguration
-    class ObservationOverview
+
+    class FeatureHistoryDiagram extends Graph
+    class YearComparisonDiagram extends Graph
+    class ComparisonToLastYearDiagram extends PieChart
+
+    class DiagramConfiguration {
+        + setTimespan(timespan : Timespan) : void
+    }
 }
 
 Layout +-- MapPage
