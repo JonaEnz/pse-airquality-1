@@ -41,21 +41,42 @@ package Modell {
         + isLimitExceeded() : Boolean
     }
 
-    abstract Feature {
-    + getId() : String/int
-    + getValue() : float
-    + getFeatureInfo() : String
+    abstract class Feature {
+    + getFeatureInfo() : FeatureInfo
+    } 
+
+
+    class Feinstaub extends Feature {
+        -name : String
+        -stations : Measurestations
+        +getFeatureInfo() : FeatureInfo
     }
-    class Feinstaub extends Feature
-    class Luftfeuchtigkeit extends Feature
-    class Luftdruck extends Feature
-    class Temperatur extends Feature
+    class Luftfeuchtigkeit extends Feature {
+        -name : String
+        -stations : Measurestations
+        +getFeatureInfo() : FeatureInfo
+    }
+    class Luftdruck extends Feature {
+        -name : String
+        -stations : Measurestations
+        +getFeatureInfo() : FeatureInfo
+    }
+    class Temperatur extends Feature {
+        -name : String
+        -stations : Measurestations
+        +getFeatureInfo() : FeatureInfo
+    }
+   
 
     class Färbung {
         + getColor(value : float)
     }
     class Skala
-    class Feature-Info
+    
+    class FeatureInfo {
+        -info : String
+        + getInfo() : String
+    }
 }
 
 Kartenseite +-- Modell
