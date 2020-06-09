@@ -39,7 +39,7 @@ package FROST {
 
 
 package Modell {
-    class Measuringstation {
+    class ObservationStation {
         -name : String
         -position : Position
         -availableFeatures : List<Feature>
@@ -53,7 +53,7 @@ package Modell {
         + isLimitExceeded() : Boolean
     }
     
-    Measuringstation -- Feature    
+    ObservationStation -- Feature    
    
      class Date  {
         day : Integer
@@ -62,7 +62,7 @@ package Modell {
         hour : float
     }
     
-    Measuringstation --* Position
+    ObservationStation --* Position
     
     class Position {
         xCoordinate : float
@@ -74,22 +74,27 @@ package Modell {
     } 
 
 
-    class Feinstaub extends Feature {
+    class PM10 extends Feature {
         -name : String
         -stations : Measurestations
         +getFeatureInfo() : FeatureInfo
     }
-    class Luftfeuchtigkeit extends Feature {
+    class PM2_5 extends Feature {
         -name : String
         -stations : Measurestations
         +getFeatureInfo() : FeatureInfo
     }
-    class Luftdruck extends Feature {
+    class Humidity extends Feature {
         -name : String
         -stations : Measurestations
         +getFeatureInfo() : FeatureInfo
     }
-    class Temperatur extends Feature {
+    class AirPressure extends Feature {
+        -name : String
+        -stations : Measurestations
+        +getFeatureInfo() : FeatureInfo
+    }
+    class Temperature extends Feature {
         -name : String
         -stations : Measurestations
         +getFeatureInfo() : FeatureInfo
@@ -104,15 +109,15 @@ package Modell {
     }
 
     Colors *-- ColorCode
-    Colors *-- Skala
-    ColorCode -- Skala
+    Colors *-- Scale
+    ColorCode -- Scale
 
     class ColorCode {
         color : Colors
         + getColor(value : float)
     }
 
-    class Skala {
+    class Scale {
         -colors : Colors[]
         +listAllColors() : Colors
     }
