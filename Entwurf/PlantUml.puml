@@ -27,11 +27,18 @@ package FROST {
 
 
 package Modell {
-    class Messstation {
-    + getName() : string
-    + getFeatures() : List<Feature>
-    + getValue() : int
-    + getPosition() : Position
+    class Measuringstation {
+        -name : String
+        -position : Position
+        -availableFeatures : List<Feature>
+        + getName() : string
+        + getFeatures() : List<Feature>
+        + getCurrentValue() : int
+        + getPosition() : Position
+        + getCurrentValue() : float
+        + getAvarage() : float
+        + getAllData(Date date, Date date) : List<float>
+        + isLimitExceeded() : Boolean
     }
 
     abstract Feature {
