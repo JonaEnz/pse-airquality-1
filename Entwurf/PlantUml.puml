@@ -39,31 +39,31 @@ package Modell {
     + getValue() : float
     + getFeatureInfo() : String
     }
+
     class Feinstaub extends Feature
     class Luftfeuchtigkeit extends Feature
     class Luftdruck extends Feature
     class Temperatur extends Feature
 
     class Färbung {
-        + getColor(value : float)
+        + getColor(value : float) : Color
     }
     class Skala
     class Feature-Info
 }
 
-Kartenseite +-- Modell
+MapPage +-- Modell
 
-package Kartenseite {
+package MapPage {
 
     package Components {
-        class Kartenansicht extends React.Component {
-        + goToPosition(position : Position) : void
-        + setZoom(zoom : int)
-        + selectFeature(id : string)
-        + openPopUp(pin : MapPin)
-
-        + addPin(pin: MapPin)
-        + removePin(pin: MapPin)
+        class MapView extends React.Component {
+            + stations : ArrayList<Messstation>
+            + loading : boolean
+            + selectedFeature : Feature
+            --
+            + selectStation(station : Messstation)
+            + getValueAt(position: Position, feature : Feature) : float
         }
 
         class FeatureSelect extends React.Component {
@@ -72,25 +72,40 @@ package Kartenseite {
         }
 
         class Search extends React.Component {
+            + searchTerm : string
+            --
             + find(string searchTerm) : Position
             + findCurrentPosition() : Position
             + reset() : void
         }
 
-        class Karte extends React.Component {
-        + stationen : ArrayList<Messstation>
+        class Map extends React.Component {
+        + pins : MapPin[]
         --
-        + selectStation(station : Messstation)
         + setPosition(position : Position)
-        + getValueAt(position: Position, feature : Feature) : float
+        + setZoom(zoom : int)
+        + openPopUp(station : Messstation)
+        }
+
+        class Legend extends React.Component{
+            + setScale(scale : Skala)
+            + loadScale(feature : Feature)
+        }
+
+        StationInfo --> UserInterface.Button
+
+        class StationInfo extends React.Component {
+            + station : Messstation
         }
     }
 
-    Kartenansicht --> Viewport
-    Kartenansicht --> Position
-    Karte --> Search
-    Kartenansicht -- Karte
-    Karte -- Legend
+    Map --> Viewport
+    Map --> Position
+    Map --> StationInfo
+    MapView --> Search
+    MapView --> Map
+    FeatureSelect --> Legend
+    MapView --> FeatureSelect
 
     
 
@@ -103,24 +118,25 @@ package Kartenseite {
     }
 
     class Position {
-        + getCoordinates() : string
-        + setCoordinates() : string
+        + getCoordinates() : (lng : float, lat : float)
+        + setCoordinates(lng : float, lat : float)
 
-        + toString() : string 
+        + toString() : string
     }
     
 
-    Kartenansicht -- Kartenkonfiguration
-    Kartenkonfiguration "1" -- "*" MapPin
-    Kartenansicht --> "*" MapPin
-    Kartenansicht --> "*" Polygon
+    Map -- "1" MapConfiguration
+    MapConfiguration --> MapPin
+    Map -- "*" MapPin
+    Map -- "*" Polygon
 
-    abstract Kartenkonfiguration {
+    abstract MapConfiguration {
         + getPins(port : Viewport) : MapPin[]
+        + getScale() : Skala
     }
 
-    class testMapConfig extends Kartenkonfiguration {
-        + getScale() : Skala
+    class testMapConfig extends MapConfiguration {
+        
     }
 
     class MapPin {
@@ -137,13 +153,8 @@ package Kartenseite {
         + setColor(color : Color)
     }
 
-    class Legend extends React.Component{
-        + setScale(scale : Skala)
-        + loadScale(feature : Feature)
-    }
-
     class Polygon {
-        + messstationen : ArrayList<Messstation>
+        + stations : ArrayList<Messstation>
         --
         + getAvgValue() : float
     }
@@ -162,7 +173,7 @@ package Detailansicht {
     class Grenzwertwarnung extends PopUp
 }
 
-Layout +-- Kartenseite
+Layout +-- MapPage
 
 package Layout {
     abstract Seite
@@ -170,27 +181,27 @@ package Layout {
     class Datenschutzerklärung extends Seite
     class Impressum extends Seite
     class Ladeanzeige extends Seite
-    class Kartenansicht extends Seite
+    class MapView extends Seite
     class Detailansicht extends Seite
     class Positionsanzeige
     class Seitenmenü
 
-    Sprachauswahl --> Store.Sprache
+    Sprachauswahl --> Storage.Sprache
     class Sprachauswahl extends React.Component {
         + setLanguage(id : string)
     }
     class Kopfleiste
 }
 
-package Store {
+package Storage {
     class Sprache {
         + getString(id: string) : string
         + loadLanguage(file : string)
     }
 
-    class KartenkonfigurationSpeicher {
-        + save(Kartenkonfiguration conf, viewport : Viewport)
-        + load() : Kartenkonfiguration
+    class MapConfigurationSpeicher {
+        + save(MapConfiguration conf, viewport : Viewport)
+        + load() : (MapConfiguration, Viewport)
     }
 }
 
