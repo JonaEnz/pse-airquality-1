@@ -7,17 +7,29 @@ package FROST {
     FROSTQuery --> QueryResult
 
 
-    class FROSTServer
+    class FROSTServer {
+        + setUrl(url : string) : void
+        + getUrl() : string
+    }
     abstract FROSTQuery {
-        send() : QueryResult
+        + send() : QueryResult
+        + setTop(n : int) : void           
+        + setSkip(n : int) : void
+        + setCount(set : bool) : void
+        + setOrderBy(orderBy : string) : void
+        + setSelect(select : string) : void
+        + setFilter(filter : string) : void
+        + setExpand(expand : string) : void
+        + setID(id : string) : void
     }
     class ObservationQuery extends FROSTQuery
     class DatastreamQuery extends FROSTQuery
     class ObservedPropertyQuery extends FROSTQuery
-    class ThingQuery extends FROSTQuery
+    class ThingQuery extends FROSTQuery 
+    class LocationQuery
 
-    abstract QueryResult
-    
+
+    abstract QueryResult    
 
     class ObservationResult extends QueryResult
     class DatastreamResult extends QueryResult
