@@ -40,6 +40,22 @@ package Modell {
         + getAllData(Date date, Date date) : List<float>
         + isLimitExceeded() : Boolean
     }
+    
+    Measuringstation -- Feature    
+   
+     class Date  {
+        day : Integer
+        month : Integer
+        year : Integer
+        hour : float
+    }
+    
+    Measuringstation --* Position
+    
+    class Position {
+        xCoordinate : float
+        yCoordinate : float
+    }
 
     abstract class Feature {
     + getFeatureInfo() : FeatureInfo
@@ -93,6 +109,8 @@ package Modell {
         -info : String
         + getInfo() : String
     }
+    
+    Feature *-- FeatureInfo
 }
 
 MapPage +-- Modell
