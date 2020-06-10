@@ -55,11 +55,23 @@ package Model {
     
     ObservationStation -- Feature    
    
-     class Date  {
+    class Observation {
+        observationStation : ObservationStation
+        feature : Feature
+        dateTime : DateTime
+        value : float
+
+        + getValue() : float
+    }
+    
+     class DateTime  {
         day : Integer
         month : Integer
         year : Integer
         hour : float
+        minute : float
+        second : float
+        milisecond : float
     }
 
     enum Timespan {
