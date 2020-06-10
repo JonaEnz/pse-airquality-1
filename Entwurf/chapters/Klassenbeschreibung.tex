@@ -1,5 +1,12 @@
 \section{Klassenbeschreibung}
 
-\begin{Class}{Test}
-    Text
+\begin{Class}{RequestClass}
+    \textbf{Methoden:}
+    \begin{itemize}
+        \item \texttt{getLatestObservations(center: Position, radius: int, feature: Feature): Observation[]}
+        \item \texttt{getStationsIn(middle: Position, radius: int): Station[]}
+        \item \texttt{getHistoricalObservations(station: Station, start: Date, end: Date): Observation[]}
+        \item \texttt{getHistoricalObservations(station: Station, start: Date, end: Date, frequency: Frequency, feature: Feature): Observation[]}
+        
+    \end{itemize}
 \end{Class}
