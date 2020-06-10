@@ -154,7 +154,6 @@ package MapPage {
 
     package Components {
         class MapView extends React.Component {
-            + stations : ArrayList<Messstation>
             + loading : boolean
             + selectedFeature : Feature
             --
@@ -177,6 +176,7 @@ package MapPage {
 
         class Map extends React.Component {
             + pins : MapPin[]
+            + viewport : Viewport
             --
             + setPosition(position : Position)
             + setZoom(zoom : int)
@@ -188,19 +188,19 @@ package MapPage {
             + loadScale(feature : Feature)
         }
 
-        StationInfo --> MaterialUI.Button
-
         class StationInfo extends React.Component {
+            + openDetails : MaterialUI.Button
             + station : Messstation
         }
     }
 
     Map --> Viewport
-    Map --> Position
     Map --> StationInfo
+    Map --> MapPin
+    Map --> Polygon
     MapView --> Search
     MapView --> Map
-    FeatureSelect --> Legend
+    MapView --> Legend
     MapView --> FeatureSelect
 
     
@@ -221,18 +221,18 @@ package MapPage {
     }
     
 
-    Map -- "1" MapConfiguration
+    MapView -- "1" MapConfiguration
     MapConfiguration --> MapPin
-    Map -- "*" MapPin
-    Map -- "*" Polygon
+    MapConfiguration --> Polygon
 
     abstract MapConfiguration {
         + getPins(port : Viewport) : MapPin[]
+        + getPolygons(port: Viewport) : Polygon[]
         + getScale() : Skala
-        + getChoosenFeature() : Feature
+        + getFeature() : Feature
     }
 
-    class testMapConfig extends MapConfiguration {
+    class StationConfiguration extends MapConfiguration {
         
     }
 
@@ -278,6 +278,7 @@ package DetailPage {
 }
 
 Layout +-- MapPage
+MapPage +-- MaterialUI
 
 package Layout {
     abstract Page
