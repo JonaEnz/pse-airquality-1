@@ -43,11 +43,10 @@ package Model {
         -name : String
         -position : Position
         -availableFeatures : List<Feature>
+        --
         + getName() : string
         + getFeatures() : List<Feature>
-        + getCurrentValue() : int
         + getPosition() : Position
-        + getCurrentValue() : float
         + getAvarage() : float
         + getAllData(Date date, Date date) : List<float>
         + isLimitExceeded() : Boolean
@@ -230,6 +229,7 @@ package MapPage {
     abstract MapConfiguration {
         + getPins(port : Viewport) : MapPin[]
         + getScale() : Skala
+        + getChoosenFeature() : Feature
     }
 
     class testMapConfig extends MapConfiguration {
