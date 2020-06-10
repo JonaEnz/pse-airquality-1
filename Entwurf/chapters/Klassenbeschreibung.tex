@@ -4,8 +4,11 @@
     \textbf{Methoden:}
     \begin{itemize}
         \item \texttt{getLatestObservations(center: Position, radius: int, feature: Feature): Observation[]}
+        \\Gibt alle Observations im gegebenen Bereich zurück.
         \item \texttt{getStationsIn(middle: Position, radius: int): Station[]}
-        \item \texttt{getHistoricalObservations(station: Station, start: Date, end: Date): Observation[]}
+        \\Gibt alle Messstationen im gegebenen Bereich zurück.
+        \item \texttt{getHistoricalObservations(station: Station, start: Date, end: Date, feature: Feature): Observation[]}
+        \\Gibt alle Observations einer Station in einem gegebenen Zeitraum für das gegebene Feature zurück.
         \item \texttt{getHistoricalObservations(station: Station, start: Date, end: Date, frequency: Frequency, feature: Feature): Observation[]}
         
     \end{itemize}
