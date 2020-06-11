@@ -7,6 +7,7 @@
 \usepackage{csquotes}       % provides \enquote{} macro for "quotes"
 \usepackage{hyperref}       % detailed hyperlink/pdf configuration
 \usepackage{color}
+\usepackage{tcolorbox}
 \usepackage{tabu}			% provides tables
 \usepackage[nonumberlist]{glossaries}     % provides glossary commands
 \hypersetup{                % ‘texdoc hyperref‘ for options
@@ -31,6 +32,12 @@
 
 \definecolor{mintgreen}{RGB}{50,161,137} % theme color of the Karlsruhe Institute of Technology (KIT)
 
+\newenvironment{Class}[1]{
+      \begin{tcolorbox}[title=#1,colbacktitle=mintgreen,colframe=mintgreen,colback=white]
+  }{
+      \end{tcolorbox}
+  }
+
 % header and footer
 \usepackage[automark,autooneside=false,headsepline=0.5pt,footsepline=0.5pt]{scrlayer-scrpage}
 \addtokomafont{headsepline}{\color{mintgreen}}
@@ -52,7 +59,9 @@
 \include{./chapters/Titelseite}
 
 \tableofcontents
+\include{./chapters/Vorwort}
 \include{./chapters/Architektur}
+\include{./chapters/Klassenbeschreibung}
 
 % end content
 \end{document}
