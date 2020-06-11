@@ -159,6 +159,7 @@ package MapPage {
             --
             + selectStation(station : Messstation)
             + getValueAt(position: Position, feature : Feature) : float
+            + openPopUp(station : ObservationStation)
         }
 
         class FeatureSelect extends React.Component {
@@ -180,7 +181,6 @@ package MapPage {
             --
             + setPosition(position : Position)
             + setZoom(zoom : int)
-            + openPopUp(station : Messstation)
         }
 
         class Legend extends React.Component{
@@ -191,11 +191,12 @@ package MapPage {
         class StationInfo extends React.Component {
             + openDetails : MaterialUI.Button
             + station : Messstation
+            + isOpen : boolean
         }
     }
 
     Map --> Viewport
-    Map --> StationInfo
+    MapView --> StationInfo
     Map --> MapPin
     Map --> Polygon
     MapView --> Search
@@ -211,6 +212,8 @@ package MapPage {
 
         + getZoom() : int
         + setZoom(zoom : int)
+
+        + getRadius() : int
     }
 
     class Position {

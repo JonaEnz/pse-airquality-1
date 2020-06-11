@@ -1,0 +1,48 @@
+@startuml MapPageTest
+
+actor User
+participant Map
+participant MapView
+participant StationConfiguration
+participant Legend 
+participant StationInfo
+participant RequestClass
+
+User -> Map ++: open()
+Map -> MapView ++: open()
+MapView -> StationConfiguration ++ : getPins(viewport)
+StationConfiguration -> RequestClass ++ : getStationsIn(viewport.getCenter(), viewport.getRadius())
+return stations
+StationConfiguration -> RequestClass ++ : getLatestObservations(viewport.getCenter(), viewport.getRadius())
+return observations
+StationConfiguration --> MapView --: pins
+
+MapView -> StationConfiguration ++ : getPolygons(viewport)
+StationConfiguration --> MapView -- : []
+
+MapView -> StationConfiguration ++ : getFeature()
+StationConfiguration --> MapView -- : selectedFeature
+MapView -> FeatureSelect ++ : setFeature(selectedFeature)
+return
+
+MapView -> StationConfiguration ++ : getScale()
+StationConfiguration -> RequestClass ++: getScale(selectedFeature)
+return scale
+StationConfiguration --> MapView -- : scale
+MapView -> Legend : setScale(scale)
+
+' Zooming out
+User -> MapView : zoom()
+MapView -> Map ++: setViewport()
+return
+MapView -> StationConfiguration : getPins(viewport)
+
+' Click on station
+
+User -> MapView : clickMarker()
+MapView -> MapView : selectStation(station)
+MapView -> MapView : openPopUp(station)
+MapView -> StationInfo ++: isOpen = true
+return
+
+@enduml
