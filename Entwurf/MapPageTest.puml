@@ -32,11 +32,9 @@ StationConfiguration --> MapView -- : scale
 MapView -> Legend : setScale(scale)
 
 ' Zooming out
-User -> MapView : zoom()
-MapView -> Map ++: setViewport()
-return
-MapView -> StationConfiguration : getPins(viewport)
-
+User -> Map : zoom()
+MapView -> StationConfiguration ++: getPins(Map.viewport)
+return pins
 ' Click on station
 
 User -> MapView : clickMarker()

@@ -47,9 +47,10 @@ package Model {
         + getName() : string
         + getFeatures() : List<Feature>
         + getPosition() : Position
-        + getAvarage() : float
+        + getAverage() : float
         + getAllData(Date date, Date date) : List<float>
         + isLimitExceeded() : Boolean
+        + hasFeature(feature : Feature) : boolean
     }
     
     ObservationStation -- Feature    
@@ -119,16 +120,21 @@ package Model {
     }
    
     enum Colors {
-        GREEN
-        LIGHTGREEN
-        YELLOW
-        ORANGE
-        RED
+        GREEN = "#50EE70"
+        LIGHTGREEN = "#AAFF55"
+        YELLOW = "#FFFF00"
+        ORANGE = "#FFA500"
+        RED = "#FF0000" 
     }
 
     Colors *-- ColorCode
     Colors *-- Scale
     ColorCode -- Scale
+
+    class Color {
+        + getRGB() : string
+        + setRGB(hex : string) : void
+    }
 
     class ColorCode {
         color : Colors
@@ -160,6 +166,7 @@ package MapPage {
             + selectStation(station : Messstation)
             + getValueAt(position: Position, feature : Feature) : float
             + openPopUp(station : ObservationStation)
+            + closePopUp() : void
         }
 
         class FeatureSelect extends React.Component {
@@ -170,13 +177,12 @@ package MapPage {
         class Search extends React.Component {
             + searchTerm : string
             --
-            + find(string searchTerm) : Position
+            + find() : Position
             + findCurrentPosition() : Position
             + reset() : void
         }
 
         class Map extends React.Component {
-            + pins : MapPin[]
             + viewport : Viewport
             --
             + setPosition(position : Position)
@@ -184,8 +190,7 @@ package MapPage {
         }
 
         class Legend extends React.Component{
-            + setScale(scale : Skala)
-            + loadScale(feature : Feature)
+            + scale : Skala
         }
 
         class StationInfo extends React.Component {
@@ -208,10 +213,10 @@ package MapPage {
 
     class Viewport {
         + getCenter() : Position
-        + setCenter(position : Position)
+        + setCenter(position : Position) : void
 
         + getZoom() : int
-        + setZoom(zoom : int)
+        + setZoom(zoom : int) : void
 
         + getRadius() : int
     }
@@ -232,7 +237,7 @@ package MapPage {
         + getPins(port : Viewport) : MapPin[]
         + getPolygons(port: Viewport) : Polygon[]
         + getScale() : Skala
-        + getFeature() : Feature
+        + getFeatures() : Feature[]
     }
 
     class StationConfiguration extends MapConfiguration {
@@ -241,22 +246,20 @@ package MapPage {
 
     class MapPin {
         + getPosition() : Position
-        + setPosition(position : Position)
+        + setPosition(position : Position) : void
 
         + getValue() : float
-        + setValue(value : float)
+        + setValue(value : float) : void
 
         + getStationId() : string
-        + setStationId(id : string)
+        + setStationId(id : string) : void
 
         + getColor() : Color
-        + setColor(color : Color)
+        + setColor(color : Color) : void
     }
 
     class Polygon {
-        + stations : ArrayList<Messstation>
-        --
-        + getAvgValue() : float
+        + stations : ObservationStation[]
     }
 }
 
@@ -288,7 +291,6 @@ package Layout {
     class ErrorPage extends Page
     class PrivacyPolicyPage extends Page
     class AboutPage extends Page
-    class MapView extends Page
     class DetailPage extends Page
 
     class PageMenu
