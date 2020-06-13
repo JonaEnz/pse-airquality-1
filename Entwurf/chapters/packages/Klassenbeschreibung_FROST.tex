@@ -1,0 +1,174 @@
+\subsection{FROST}
+
+\begin{Class}{RequestClass}
+    \textbf{Methoden:}
+    \begin{itemize}
+        \item \texttt{getLatestObservations(center: Position, radius: int, feature: Feature): Observation[]}
+        \\Gibt alle Observations im gegebenen Bereich zurück.
+        \item \texttt{getStationsIn(middle: Position, radius: int): Station[]}
+        \\Gibt alle Messstationen im gegebenen Bereich zurück.
+        \item \texttt{getHistoricalObservations(station: Station, start: Date, end: Date, feature: Feature): Observation[]}
+        \\Gibt alle Observations einer Station in einem gegebenen Zeitraum für das gegebene Feature zurück.
+        \item \texttt{getHistoricalObservations(station: Station, start: Date, end: Date, frequency: Frequency, feature: Feature): Observation[]}
+        
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{FROSTServer}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{setUrl(url : string) : void}
+        \item \texttt{getUrl() : string}
+        \item \texttt{send() : QueryResult}
+        \item \texttt{setTop(n : int) : void   }
+        \item \texttt{setSkip(n : int) : void}
+        \item \texttt{setCount(set : bool) : void}
+        \item \texttt{setOrderBy(orderBy : string) : void}
+        \item \texttt{setSelect(select : string) : void}
+        \item \texttt{setFilter(filter : string) : void}
+        \item \texttt{setExpand(expand : string) : void}
+        \item \texttt{setID(id : string) : void}
+    \end{itemize}
+    
+    \textbf{Attribute}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{ObservationQuery}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+    
+    \textbf{Attribute}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{DatastreamQuery}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+    
+    \textbf{Attribute}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{ObservedPropertyQuery}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+    
+    \textbf{Attribute}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{ThingQuery}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+    
+    \textbf{Attribute}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{LocationQuery}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+    
+    \textbf{Attribute}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{ObservationResult}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+    
+    \textbf{Attribute}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{DatastreamResult}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+    
+    \textbf{Attribute}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{ObservedPropertyResult}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+    
+    \textbf{Attribute}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{ThingResult}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+    
+    \textbf{Attribute}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{All}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+    
+    \textbf{Attribute}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{DataProvider}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{getLatestObservations(center : Position, radius: int, feature : Feature) : Observation[]}
+        \item \texttt{getStationsIn(middle: Position, radius : int) : Station[]}
+        \item \texttt{getHistoricalObservations(station : Station, start : Date, end : Date, feature : Feature) : Observation[]}
+        \item \texttt{getHistoricalObservations(station : Station, start : Date, end : Date, frequency : Frequency, feature : Feature) : Observation[]}
+        \item \texttt{getScale(feature : Feature) : Scale}
+        \item \texttt{getStation(id : string) : Station}
+    \end{itemize}
+    
+    \textbf{Attribute}
+    \begin{itemize}
+        \item //Todo
+    \end{itemize}
+\end{Class}

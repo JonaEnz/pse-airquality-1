@@ -1,0 +1,101 @@
+\subsection{MapPage}
+
+    \begin{Class}{Viewport}
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{getCenter() : Position}
+            \\ Gibt das aktuelle Zentrum zurück.
+            \item \texttt{setCenter(position : Position) : void}
+            \\ Setzt \emph{position} als das Zentrum fest.
+            \item \texttt{getZoom() : int}
+            \\ Liefert den Zoom des Viewports.
+            \item \texttt{setZoom(zoom : int) : void}
+            \\ Setzt den Zoom des Viewports auf \emph{zoom}.
+            \item \texttt{getRadius() : int}
+            \\ Liefert den kleinsten Radius des Kreises in Koordinateneinheiten um das Zentrum zurück,
+            der den kompletten Anzeigebereich des Viewport einschließt.
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{Position}
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{getCoordinates() : (lng : float, lat : float)}
+            \\ Liefert die Koordinaten der Position als Tupel.
+            \item \texttt{setCoordinates(lng : float, lat : float)}
+            \\ Setzt die Koordinaten auf lng und lat fest.
+            \\ Ist einer der beiden Parameter \emph{null} bleibt dieser unverändert, der andere wird angepasst.
+            \item \texttt{toString() : string}
+            \\ Liefert die Position als string im Dezimalgrad-Format.
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{<<abstract>> MapConfiguration}
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{getPins(port : Viewport) : MapPin[]}
+            \\ Liefert MapPins innerhalb (oder nahe) des Viewports zurück.
+            \item \texttt{getPolygons(port: Viewport) : Polygon[]}
+            \\ Liefert Polygone innerhalb (oder nahe) des Viewports zurück.
+            \item \texttt{getScale() : Skala}
+            \\ Liefert die Skala der Konfiguration zurück.
+            \item \texttt{getFeatures() : Feature[]}
+            \\ Liefert das Features die die Konfiguration darstellt zurück.
+            \\ \emph{[]}, wenn keine Features dargestellt werden
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{StationConfiguration extends MapConfiguration}
+        Eine Kartenkonfiguration die die Stationen mit Farbe nach einer Skala anzeigt.
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{setFeature(feature : Feature) : void}
+            \\ Legt das Feature der Konfiguration fest.
+            \item \texttt{<<implements>>getPins(port : Viewport) : MapPin[]}
+            \\ Liefert MapPins innerhalb (oder nahe) des Viewports zurück.
+            \\ Es werden nur Stationen angezeigt die das ausgewählte Feature besitzen
+            \item \texttt{<<implements>>getPolygons(port: Viewport) : Polygon[]}
+            \\ Liefert immer [] zurück.
+            \item \texttt{<<implements>>getScale() : Skala}
+            \\ Liefert die Skala des gewählten Features zurück.
+            \item \texttt{<<implements>>getFeatures() : Feature[]}
+            \\ Liefert das ausgewählte Feature in einem Array zurück.
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{MapPin}
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{getPosition() : Position}
+            \\ Liefert die Position des Pins
+            \item \texttt{setPosition(position : Position) : void}
+            \\ Setzt die Position des Pins
+
+            \bigskip
+            \item \texttt{getValue() : float}
+            \\ Liefert den Wert zurück anhand dem die Färbung bestimmt wird.
+            \item \texttt{setValue(value : float) : void}
+            \\ Setzt den Wert des Pins.
+
+            \bigskip
+            \item \texttt{getStationId() : string}
+            \\ Liefert die interne Stations ID der Station die der Pin repräsentiert.
+            \item \texttt{setStationId(id : string) : void}
+            \\ Setzt die interne Stations ID der Station die der Pin repräsentiert.
+
+            \bigskip
+            \item \texttt{getColor() : Color}
+            \\ Liefert die Farbe des Pins.
+            \item \texttt{setColor(color : Color) : void}
+            \\ Legt die Farbe des Pins fest.
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{Polygon}
+        \textbf{Attribute}
+        \begin{itemize}
+            \item \texttt{stations : ObservationStation[]}
+            \\ Liefert die Stationen zurück die die Ecken des Polygons bilden.
+        \end{itemize}
+    \end{Class}
+
