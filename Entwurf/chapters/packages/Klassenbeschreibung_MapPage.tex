@@ -49,7 +49,7 @@
         Eine Kartenkonfiguration die die Stationen mit Farbe nach einer Skala anzeigt.
         \textbf{Methoden}
         \begin{itemize}
-            \item \texttt{setFeature(feature : Feature) : void}
+            \item \texttt{setFeature(features : Feature) : void}
             \\ Legt das Feature der Konfiguration fest.
             \item \texttt{<<implements>>getPins(port : Viewport) : MapPin[]}
             \\ Liefert MapPins innerhalb (oder nahe) des Viewports zurück.
@@ -60,6 +60,49 @@
             \\ Liefert die Skala des gewählten Features zurück.
             \item \texttt{<<implements>>getFeatures() : Feature[]}
             \\ Liefert das ausgewählte Feature in einem Array zurück.
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{PolygonConfiguration extends MapConfiguration}
+        Eine Kartenkonfiguration die zwischen den Stationen Polygone aufspannt und sie nach den gemittelten Werten einfärbt.
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{setFeature(feature : Feature) : void}
+            \\ Legt das Feature der Konfiguration fest.
+            \item \texttt{<<implements>>getPins(port : Viewport) : MapPin[]}
+            \\ Liefert MapPins innerhalb (oder nahe) des Viewports zurück.
+            \\ Es werden nur Stationen angezeigt die das ausgewählte Feature besitzen
+            \item \texttt{<<implements>>getPolygons(port: Viewport) : Polygon[]}
+            \\ Liefert Polygone die zwischen Stationen im Viewport \emph{port} aufgespannt sind zurück
+            \item \texttt{<<implements>>getScale() : Skala}
+            \\ Liefert die Skala des gewählten Features zurück.
+            \item \texttt{<<implements>>getFeatures() : Feature[]}
+            \\ Liefert das ausgewählte Feature in einem Array zurück.
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{NearConfiguration extends MapConfiguration}
+        Eine Kartenkonfiguration die die Stationen mit Farbe nach einer Skala anzeigt.
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{setFeature(feature : Feature) : void}
+            \\ Legt das Feature der Konfiguration fest.
+            \item \texttt{<<implements>>getPins(port : Viewport) : MapPin[]}
+            \\ Liefert MapPins innerhalb des Radius \emph{radius} um die Mitte des Viewports zurück.
+            \\ Es werden nur Stationen angezeigt die das ausgewählte Feature besitzen.
+            \\ Die Färbung wird anhand des Mittelwerts der Stationen im Umkreis von \emph{radius} km festgelegt.
+            \\ Dabei gibt der höchste Wert die Farbe am oberen Ende der Skala an, der niedrigste das untere Ende.
+            \item \texttt{<<implements>>getPolygons(port: Viewport) : Polygon[]}
+            \\ Liefert immer [] zurück.
+            \item \texttt{<<implements>>getScale() : Skala}
+            \\ Liefert die Skala des gewählten Features zurück.
+            \item \texttt{<<implements>>getFeatures() : Feature[]}
+            \\ Liefert das ausgewählte Feature in einem Array zurück.
+        \end{itemize}
+        \textbf{Attribute}
+        \begin{itemize}
+            \item \texttt{radius : int}
+            \\ Gibt den Radius an innerhalb dessen die Stationen angezeigt ung gemittelt werden.
         \end{itemize}
     \end{Class}
 
@@ -96,6 +139,8 @@
         \begin{itemize}
             \item \texttt{stations : ObservationStation[]}
             \\ Liefert die Stationen zurück die die Ecken des Polygons bilden.
+            \item \texttt{color : Color}
+            \\ Liefert die Farbe des Polygons zurück.
         \end{itemize}
     \end{Class}
 

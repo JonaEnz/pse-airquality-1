@@ -154,6 +154,7 @@ package Model {
     class Scale {
         -colors : Colors[]
         +listAllColors() : Colors
+        + getColor(value : float) : Color
     }
     
     class FeatureInfo {
@@ -251,7 +252,17 @@ package MapPage {
     }
 
     class StationConfiguration extends MapConfiguration {
-        
+        + setFeature(feature : Feature)
+    }
+
+    class PolygonConfiguration extends MapConfiguration {
+        + setFeature(feature : Feature)
+    }
+
+    class NearConfiguration extends MapConfiguration {
+        + radius : int
+        --
+        + setFeature(feature : Feature)
     }
 
     class MapPin {
@@ -298,10 +309,13 @@ MapPage +-- MaterialUI
 
 package Layout {
     abstract Page
-    class ErrorPage extends Page
+    class ErrorPage extends Page {
+        + errorCode : int
+        + errorMessage : string
+    }
     class PrivacyPolicyPage extends Page
     class AboutPage extends Page
-    class DetailPage extends Page
+    class DetailPage extends Page 
 
     class PageMenu
     class Ladeanzeige
