@@ -45,6 +45,12 @@ package FROST {
         + getScale(feature : Feature) : Scale
         + getStation(id : string) : Station
     }
+
+    class Cache {
+        + getStation(stationId : string) : Station
+        + getHistoricalObservations(station : Station, start : Date, end : Date, frequency : Frequency, feature : Feature) : Observation[]
+        + getLatestObservations(stationId : string) : Observation
+    }
 } 
 
 
@@ -56,9 +62,10 @@ package Model {
         --
         + getName() : string
         + getFeatures() : List<Feature>
+        + getLatestObservation(featureId : string) : Observation
         + getPosition() : Position
         + getAverage() : float
-        + getAllData(Date date, Date date) : List<float>
+        + getAllData(Date date, Date date) : List<Observation>
         + isLimitExceeded() : Boolean
         + hasFeature(feature : Feature) : boolean
     }
@@ -68,20 +75,10 @@ package Model {
     class Observation {
         observationStation : ObservationStation
         feature : Feature
-        dateTime : DateTime
+        dateTime : Date
         value : float
 
         + getValue() : float
-    }
-    
-     class DateTime  {
-        day : Integer
-        month : Integer
-        year : Integer
-        hour : float
-        minute : float
-        second : float
-        milisecond : float
     }
 
     enum Timespan {
@@ -100,8 +97,13 @@ package Model {
         yCoordinate : float
     }
 
+    Feature --> Scale
+
     abstract class Feature {
+        + getId() : string
+        + getName() : string
         + getFeatureInfo() : FeatureInfo
+        + getDefaultScale() : Scale
     }
     class PM10 extends Feature {
         -name : String
@@ -137,18 +139,11 @@ package Model {
         RED = "#FF0000" 
     }
 
-    Colors *-- ColorCode
-    Colors *-- Scale
-    ColorCode -- Scale
+    Color *-- Scale
 
     class Color {
         + getRGB() : string
         + setRGB(hex : string) : void
-    }
-
-    class ColorCode {
-        color : Colors
-        + getColor(value : float)
     }
 
     class Scale {
@@ -309,13 +304,12 @@ MapPage +-- MaterialUI
 
 package Layout {
     abstract Page
-    class ErrorPage extends Page {
+    class ErrorPage extends React.Component {
         + errorCode : int
         + errorMessage : string
     }
-    class PrivacyPolicyPage extends Page
-    class AboutPage extends Page
-    class DetailPage extends Page 
+    class PrivacyPolicyPage extends React.Component
+    class AboutPage extends React.Component
 
     class PageMenu
     class Ladeanzeige
@@ -331,7 +325,7 @@ package Layout {
 package Storage {
     class Language {
         + getString(id: string) : string
-        + loadLanguage(file : string)
+        + loadLanguage(languageId : string)
     }
 
     class MapConfigurationMemory {
