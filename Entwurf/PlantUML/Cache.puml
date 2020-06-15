@@ -1,0 +1,14 @@
+@startuml DataFlow
+
+start
+if (Is the requested data in the cache?) then (yes)
+
+else (no)
+    :Create FROST Querys;
+    :Send Requests to Server;
+    :Convert respones in Model objects;
+    :Save responses in cache;
+endif
+:Return data from cache;
+stop
+@enduml

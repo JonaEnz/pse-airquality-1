@@ -1,0 +1,13 @@
+{
+  "id": "temperature",
+  "nameId": "feature_temp_name",
+  "unitOfMeasurement": "°C",
+  "descriptionId": "feature_temp_desc",
+  "defaultScale": {
+    "0": "#50EE70",
+    "10": "#AAFF55",
+    "20": "#FFFF00",
+    "30": "#FFA500",
+    "40": "#FF0000"
+  }
+}

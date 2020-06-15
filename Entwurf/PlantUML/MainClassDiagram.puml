@@ -99,36 +99,12 @@ package Model {
 
     Feature --> Scale
 
-    abstract class Feature {
+    class Feature {
         + getId() : string
-        + getName() : string
-        + getFeatureInfo() : FeatureInfo
+        + getNameId() : string
+        + getUnitOfMeasurement() : string
+        + getDescriptionId() : string
         + getDefaultScale() : Scale
-    }
-    class PM10 extends Feature {
-        -name : String
-        -stations : Measurestations
-        +getFeatureInfo() : FeatureInfo
-    }
-    class PM2_5 extends Feature {
-        -name : String
-        -stations : Measurestations
-        +getFeatureInfo() : FeatureInfo
-    }
-    class Humidity extends Feature {
-        -name : String
-        -stations : Measurestations
-        +getFeatureInfo() : FeatureInfo
-    }
-    class AirPressure extends Feature {
-        -name : String
-        -stations : Measurestations
-        +getFeatureInfo() : FeatureInfo
-    }
-    class Temperature extends Feature {
-        -name : String
-        -stations : Measurestations
-        +getFeatureInfo() : FeatureInfo
     }
    
     enum Colors {
@@ -150,11 +126,6 @@ package Model {
         -colors : Colors[]
         +listAllColors() : Colors
         + getColor(value : float) : Color
-    }
-    
-    class FeatureInfo {
-        -info : String
-        + getInfo() : String
     }
     
     Feature *-- FeatureInfo
