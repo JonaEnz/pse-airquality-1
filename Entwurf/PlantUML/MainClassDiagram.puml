@@ -31,11 +31,6 @@ package FROST {
 
     abstract QueryResult    
 
-    class ObservationResult extends QueryResult
-    class DatastreamResult extends QueryResult
-    class ObservedPropertyResult extends QueryResult
-    class ThingResult extends QueryResult
-
     note top of DataProvider : This is a facade class. All requests for data run through this class.\nThe underlying mechanism of the request is hidden. \nOnly model data is given to the outside.
     class DataProvider {
         + getLatestObservations(center : Position, radius: int, feature : Feature) : Observation[]
@@ -93,8 +88,9 @@ package Model {
     ObservationStation --* Position
     
     class Position {
-        xCoordinate : float
-        yCoordinate : float
+        latitude : float
+        longitude : float
+        station : ObservationStation
     }
 
     Feature --> Scale
