@@ -68,6 +68,7 @@ package Model {
     
     ObservationStation -- Feature
     ObservationStation "1" -- "N" Observation    
+    Observation --> Feature
    
     class Observation {
         + getFeature() : Feature
@@ -122,8 +123,6 @@ package Model {
         + removeColor(treshold : flaot) : void
         + getAllEntries() : (float, Color)[]
     }
-    
-    Feature *-- FeatureInfo
 }
 
 MapPage +-- Model
