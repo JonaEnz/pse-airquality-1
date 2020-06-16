@@ -288,6 +288,7 @@ package DetailPage {
     note top of DetailPage : This class manages the page build process. Based on which features the respective observation \nstation provides, the page is built differently. There is a configuration file which says which \ndiagrams must be drawn for which features. Accordingly the page is built.
     class DetailPage extends React.Component
     DetailPage "1" --> "1" Model.ObservationStation
+    DetailPage "1" --> "1" FROST.DataProvider
     DetailPage "1" --o "1" ObservationStationInfo
     DetailPage "1" --o "1" LocationMap
     DetailPage "1" --o "*" Diagram
@@ -295,12 +296,14 @@ package DetailPage {
 
     class ObservationStationInfo extends React.Component
     ObservationStationInfo "1" --> "1" Model.ObservationStation
+    ObservationStation "1" --> "1" FROST.DataProvider
     ObservationStationInfo "1" --> "*" Model.Observation
 
     class LocationMap extends React.Component
     LocationMap "1" --> "1" Model.Position
 
     abstract Diagram extends React.Component
+    Diagram "1" --> "1" FROST.DataProvider
     Diagram "1" --> "*" Model.Observation
     Diagram "1" --o "1" ReactGoogleCharts.Chart
     Diagram "1" --o "1" MaterialUI.Progress
