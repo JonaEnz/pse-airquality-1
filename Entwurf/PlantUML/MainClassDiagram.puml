@@ -26,10 +26,9 @@ package FROST {
     class DatastreamQuery extends FROSTQuery
     class ObservedPropertyQuery extends FROSTQuery
     class ThingQuery extends FROSTQuery 
-    class LocationQuery
+    class LocationQuery   
 
-
-    abstract QueryResult    
+    interface QueryResult
 
     note top of DataProvider : This is a facade class. All requests for data run through this class.\nThe underlying mechanism of the request is hidden. \nOnly model data is given to the outside.
     class DataProvider {
@@ -37,14 +36,20 @@ package FROST {
         + getStationsIn(middle: Position, radius : int) : Station[]
         + getHistoricalObservations(station : Station, start : Date, end : Date, feature : Feature) : Observation[]
         + getHistoricalObservations(station : Station, start : Date, end : Date, frequency : Frequency, feature : Feature) : Observation[]
-        + getScale(feature : Feature) : Scale
         + getStation(id : string) : Station
+        + getFeature(id : string) : Feature
+    }
+
+    class FeatureProvider {
+        makeFeature(id : string) : Feature
+        - getScale(feature : Feature) : Scale
     }
 
     class Cache {
-        + getStation(stationId : string) : Station
-        + getHistoricalObservations(station : Station, start : Date, end : Date, frequency : Frequency, feature : Feature) : Observation[]
-        + getLatestObservations(stationId : string) : Observation
+        getStation(stationId : string) : Station
+        getHistoricalObservations(station : Station, start : Date, end : Date, frequency : Frequency, feature : Feature) : Observation[]
+        getLatestObservations(stationId : string) : Observation
+        getFeature(featureid : string) : Feature
     }
 } 
 
@@ -94,7 +99,7 @@ package Model {
         + getUnitOfMeasurement() : string
         + getDescriptionId() : string
         + isLimitExceeded(obs : Observation) : Boolean
-        + getDefaultScale() : Scale
+        + getScale() : Scale
     }
    
     enum Colors {
