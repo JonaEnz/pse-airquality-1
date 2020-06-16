@@ -18,22 +18,41 @@
     \textbf{Methoden}
     \begin{itemize}
         \item \texttt{setUrl(url : string) : void}
+        \\Setzt die URL des FROSTServer ein.
         \item \texttt{getUrl() : string}
-        \item \texttt{send() : QueryResult}
-        \item \texttt{setTop(n : int) : void   }
-        \item \texttt{setSkip(n : int) : void}
-        \item \texttt{setCount(set : bool) : void}
-        \item \texttt{setOrderBy(orderBy : string) : void}
-        \item \texttt{setSelect(select : string) : void}
-        \item \texttt{setFilter(filter : string) : void}
-        \item \texttt{setExpand(expand : string) : void}
-        \item \texttt{setID(id : string) : void}
+        \\Gibt die URL des FROSTServer zurück.
     \end{itemize}
     
     \textbf{Attribute}
     \begin{itemize}
         \item //Todo
     \end{itemize}
+\end{Class}
+
+\begin{Class}{FROSTQuery}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{send() : QueryResult}
+        \\Schickt die Query an den Server. Gibt die Antwort als QueryResult zurück.
+        \item \texttt{setTop(n : int) : void}
+        \\Stellt die maximale Anzahl von Objekten ein.
+        \item \texttt{setSkip(n : int) : void}
+        \\Stellt die Anzahl der zu überspringenden Objekten ein.
+        \item \texttt{setCount(set : bool) : void}
+        \\Stellt ein ob die Anzahl der Objekte zurück gegeben werden soll.
+        \item \texttt{setOrderBy(orderBy : string) : void}
+        \\TODO
+        \item \texttt{setSelect(select : string) : void}
+        \\Spezifiziert welche Attribute in der Antwort enthalten sein sollen.
+        \item \texttt{setFilter(filter : string) : void}
+        \\TODO
+        \item \texttt{setExpand(expand : string) : void}
+        \\Stellt ein ein verschachtelten Objekttypen noch zurück gegeben werden sollen.
+        \item \texttt{setID(id : string) : void}
+        \\TODO
+    \end{itemize}
+    Für die Standardwerte der set-Methoden siehe:
+    \\https://fraunhoferiosb.github.io/FROST-Server/sensorthingsapi/STA-Tailoring-Responses.html
 \end{Class}
 
 \begin{Class}{ObservationQuery}
