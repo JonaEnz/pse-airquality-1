@@ -56,10 +56,6 @@ package FROST {
 
 package Model {
     class ObservationStation {
-        -name : String
-        -position : Position
-        -availableFeatures : List<Feature>
-        --
         + getName() : string
         + getFeatures() : List<Feature>
         + getLatestObservation(featureId : string) : Observation
@@ -70,15 +66,13 @@ package Model {
         + hasFeature(feature : Feature) : boolean
     }
     
-    ObservationStation -- Feature    
+    ObservationStation -- Feature
+    ObservationStation "1" -- "N" Observation    
    
     class Observation {
-        observationStation : ObservationStation
-        feature : Feature
-        dateTime : Date
-        value : float
-
-        + getValue() : float
+        + getFeature() : Feature
+        + getDate() : Date
+        + getValue : float
     }
 
     enum Timespan {
@@ -123,9 +117,10 @@ package Model {
     }
 
     class Scale {
-        -colors : Colors[]
-        +listAllColors() : Colors
         + getColor(value : float) : Color
+        + addColor(color: Color, threshold : float) : void
+        + removeColor(treshold : flaot) : void
+        + getAllEntries() : (float, Color)[]
     }
     
     Feature *-- FeatureInfo

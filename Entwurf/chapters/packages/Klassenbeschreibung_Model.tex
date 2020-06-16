@@ -12,49 +12,31 @@
             \item \texttt{isLimitExceeded() : Boolean}
             \item \texttt{hasFeature(feature : Feature) : boolean}
         \end{itemize}
-        
-        \textbf{Attribute}
-        \begin{itemize}
-            \item \texttt{Todo}
-        \end{itemize}
     \end{Class}
 
     \begin{Class}{Observation}
+        
         \textbf{Methoden}
         \begin{itemize}
-            \item \texttt{Todo}
+            \item \texttt{getFeature() : Feature}
+            \\ Gibt das Feature der Beobachtung zurück.
+            \item \texttt{getDate() : Date}
+            \\ Gibt den Zeitpunkt der Beobachtung zurück.
             \item \texttt{getValue() : float}
-        \end{itemize}
-        
-        \textbf{Attribute}
-        \begin{itemize}
-            \item \texttt{Todo}
-        \end{itemize}
-    \end{Class}
-
-    \begin{Class}{DateTime}
-        \textbf{Methoden}
-        \begin{itemize}
-            \item \texttt{Todo}
-        \end{itemize}
-        
-        \textbf{Attribute}
-        \begin{itemize}
-            \item \texttt{Todo}
+            \\ Gibt den Wert der Beobachtung (in der Einheit des Feature) zurück.
         \end{itemize}
     \end{Class}
 
     \begin{Class}{Position}
         \textbf{Methoden}
         \begin{itemize}
-            \item \texttt{Todo}
             \item \texttt{getCoordinates() : (lng : float, lat : float)}
+            \\ Liefert die Koordinaten im Dezimalgrad als Tupel zurück.
             \item \texttt{setCoordinates(lng : float, lat : float)}
+            \\ Setzt die Koordinaten fest. Die Eingaben werden als Dezimalgrad interpretiert.
+
             \item \texttt{toString() : string}
-            \item \texttt{getPins(port : Viewport) : MapPin[]}
-            \item \texttt{getPolygons(port: Viewport) : Polygon[]}
-            \item \texttt{getScale() : Skala}
-            \item \texttt{getFeatures() : Feature[]}
+            \\ Gibt die Daten im Format '0.00000 °N, 0.00000 °O' als Zeichenkette zurück.
         \end{itemize}
         
         \textbf{Attribute}
@@ -66,118 +48,43 @@
     \begin{Class}{Feature}
         \textbf{Methoden}
         \begin{itemize}
-            \item \texttt{Todo}
-            \item \texttt{getFeatureInfo() : FeatureInfo}
-        \end{itemize}
-        
-        \textbf{Attribute}
-        \begin{itemize}
-            \item \texttt{Todo}
-        \end{itemize}
-    \end{Class}
-
-    \begin{Class}{PM10}
-        \textbf{Methoden}
-        \begin{itemize}
-            \item \texttt{Todo}
-            \item \texttt{getFeatureInfo() : FeatureInfo}
-        \end{itemize}
-        
-        \textbf{Attribute}
-        \begin{itemize}
-            \item \texttt{Todo}
-        \end{itemize}
-    \end{Class}
-
-    \begin{Class}{PM2\_5}
-        \textbf{Methoden}
-        \begin{itemize}
-            \item \texttt{Todo}
-            \item \texttt{getFeatureInfo() : FeatureInfo}
-        \end{itemize}
-        
-        \textbf{Attribute}
-        \begin{itemize}
-            \item \texttt{Todo}
-        \end{itemize}
-    \end{Class}
-
-    \begin{Class}{Humidity}
-        \textbf{Methoden}
-        \begin{itemize}
-            \item \texttt{Todo}
-            \item \texttt{getFeatureInfo() : FeatureInfo}
-        \end{itemize}
-        
-        \textbf{Attribute}
-        \begin{itemize}
-            \item \texttt{Todo}
-        \end{itemize}
-    \end{Class}
-
-    \begin{Class}{AirPressure}
-        \textbf{Methoden}
-        \begin{itemize}
-            \item \texttt{Todo}
-            \item \texttt{getFeatureInfo() : FeatureInfo}
-        \end{itemize}
-        
-        \textbf{Attribute}
-        \begin{itemize}
-            \item \texttt{Todo}
-        \end{itemize}
-    \end{Class}
-
-    \begin{Class}{Temperature}
-        \textbf{Methoden}
-        \begin{itemize}
-            \item \texttt{Todo}
-            \item \texttt{getFeatureInfo() : FeatureInfo}
-        \end{itemize}
-        
-        \textbf{Attribute}
-        \begin{itemize}
-            \item \texttt{Todo}
+            \item \texttt{getId() : string}
+            \\ Gibt die FROST-Id des Features zurück.
+            \item \texttt{getNameId() : string}
+            \\ Gibt die Id des Featurenamens für die Sprachdatei zurück.
+            \item \texttt{getUnitOfMeasurement() : string}
+            \\ Gibt die Einheit in der das Feature angegeben ist zurück.
+            \item \texttt{getDescriptionId() : string}
+            \\ Gibt die Id der Featurebeschreibung für die Sprachdatei zurück.
+            \item \texttt{getDefaultScale() : Scale}
+            \\ Gibt die Farbskala aus der Featurekonfiguration zurück.
         \end{itemize}
     \end{Class}
 
     \begin{Class}{Color}
         \textbf{Methoden}
         \begin{itemize}
-            \item \texttt{Todo}
             \item \texttt{getRGB() : string}
+            \\ Liefert den RGB-Wert der Farbe im Format '\#FFFFFF' zurück.
             \item \texttt{setRGB(hex : string) : void}
-        \end{itemize}
-        
-        \textbf{Attribute}
-        \begin{itemize}
-            \item \texttt{Todo}
-        \end{itemize}
-    \end{Class}
-
-    \begin{Class}{ColorCode}
-        \textbf{Methoden}
-        \begin{itemize}
-            \item \texttt{Todo}
-            \item \texttt{getColor(value : float)}
-        \end{itemize}
-        
-        \textbf{Attribute}
-        \begin{itemize}
-            \item \texttt{Todo}
+            \\ Speichert die Farbe mit RGB Wert \emph{hex}. Es wird nur das Format '\#FFFFFF' akzeptiert.
         \end{itemize}
     \end{Class}
 
     \begin{Class}{Scale}
         \textbf{Methoden}
         \begin{itemize}
-            \item \texttt{Todo}
-            \item \texttt{listAllColors() : Colors}
-        \end{itemize}
-        
-        \textbf{Attribute}
-        \begin{itemize}
-            \item \texttt{Todo}
+            \item \texttt{getColor(value : float) : Color}
+            \\ Gibt die Farbe des Wertes entsprechend der Konfiguration zurück.
+            \item \texttt{addColor(color: Color, threshold : float)}
+            \\ Fügt eine Farbe und eine entsprechende Grenze hinzu.
+            \\ Gibt es bereits eine Farbe mit dieser Grenze wird sie überschrieben.
+            \item \texttt{removeColor(threshold : float) : void}
+            \\ Entfernt den Eintrag mit Grenze \emph{threshold}.
+            \\ Gibt es einen solchen Eintrag nicht geschieht nichts.
+            \item \texttt{getAllEntries() : (float, Color)[]}
+            \\ Liefert ein Array an Tupeln aus Farben und Grenzwerten zurück.
+            \\ Das Array ist aufsteigend nach Grenzwerten sortiert.
         \end{itemize}
     \end{Class}
 
