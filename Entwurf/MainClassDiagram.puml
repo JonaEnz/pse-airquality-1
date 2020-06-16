@@ -50,20 +50,21 @@ package FROST {
 
 package Model {
     class ObservationStation {
+        -id : int
         -name : String
         -position : Position
         -availableFeatures : List<Feature>
-        --
+
+        + getId : int
         + getName() : string
         + getFeatures() : List<Feature>
         + getPosition() : Position
-        + getAverage() : float
-        + getAllData(Date date, Date date) : List<float>
-        + isLimitExceeded() : Boolean
-        + hasFeature(feature : Feature) : boolean
+        + isLimitExceeded(feature : Feature) : Boolean
+        + hasFeature(feature : Feature) : Boolean
+        + getDiagrams() : DetailPage.Diagram[]
     }
-    
-    ObservationStation -- Feature    
+    ObservationStation --> Position
+    ObservationStation "1" --> "*" Feature
    
     class Observation {
         observationStation : ObservationStation
@@ -72,7 +73,13 @@ package Model {
         value : float
 
         + getValue() : float
+        + getObservationStation() : ObservationStation
+        + getFeature() : Feature
+        + getDateTime : Date
     }
+    Observation --> Position
+    Observation  --> ObservationStation
+    Observation --> Feature
 
     enum Timespan {
             LAST_YEAR,
@@ -83,42 +90,35 @@ package Model {
             TODAY,
         }
     
-    ObservationStation --* Position
-    
     class Position {
         xCoordinate : float
         yCoordinate : float
     }
 
-    abstract class Feature {
-        + getFeatureInfo() : FeatureInfo
+    note top of Feature : Designed as a modified Singleton. There is only \n one object of each feature (Temperature, Air Pressure, ...).\n There is a config file which says which different types of \nfeatures exist.
+    class Feature {
+        - id : int
+        - name : String
+        - description : String
+        - scale : Scale
+        - fallbackScale : Scale
+        - relatedWeblink : String
+        - drawableDiagrams : DetailPage.Diagram[]
+        - limit : float
+        {static} + getFeature(featureID : int) : Feature
+        {static} + getFeature(featureName : String) : Feature
+        {static} + getRegisteredFeatures() : Feature[]
+        + getID() : int
+        + getName() : String
+        + getDescription() : String
+        + getRelatedScale() : Scale
+        + getRelatedWeblink() : String
+        + getDrawableDiagrams() : DetailPage.Diagram[]
+        + getLimit : float
     }
-    class PM10 extends Feature {
-        -name : String
-        -stations : Measurestations
-        +getFeatureInfo() : FeatureInfo
-    }
-    class PM2_5 extends Feature {
-        -name : String
-        -stations : Measurestations
-        +getFeatureInfo() : FeatureInfo
-    }
-    class Humidity extends Feature {
-        -name : String
-        -stations : Measurestations
-        +getFeatureInfo() : FeatureInfo
-    }
-    class AirPressure extends Feature {
-        -name : String
-        -stations : Measurestations
-        +getFeatureInfo() : FeatureInfo
-    }
-    class Temperature extends Feature {
-        -name : String
-        -stations : Measurestations
-        +getFeatureInfo() : FeatureInfo
-    }
-   
+    Feature "1" --> "1" Scale
+    Feature --> DetailPage.Diagram
+
     enum Colors {
         GREEN = "#50EE70"
         LIGHTGREEN = "#AAFF55"
@@ -126,7 +126,6 @@ package Model {
         ORANGE = "#FFA500"
         RED = "#FF0000" 
     }
-
     Colors *-- ColorCode
     Colors *-- Scale
     ColorCode -- Scale
@@ -146,13 +145,6 @@ package Model {
         +listAllColors() : Colors
         + getColor(value : float) : Color
     }
-    
-    class FeatureInfo {
-        -info : String
-        + getInfo() : String
-    }
-    
-    Feature *-- FeatureInfo
 }
 
 MapPage +-- Model
@@ -275,8 +267,8 @@ package MapPage {
 }
 
 package DetailPage {
-    note top of DetailPage : This class manages the page build process. Based on which features the respective observation \nstation provides, the page is built differently. There is a configuration file which says which \ndiagrams must be drawn for which features. Accordingly the page is built.
-    class DetailPage extends React.Component
+    note top of DetailPage.DetailPage : This class manages the page build process. Based on which features the respective observation \nstation provides, the page is built differently. There is a configuration file which says which \ndiagrams must be drawn for which features. Accordingly the page is built.
+    class DetailPage extends Layout.Page
     DetailPage "1" --> "1" Model.ObservationStation
     DetailPage "1" --> "1" FROST.DataProvider
     DetailPage "1" --o "1" ObservationStationInfo
@@ -286,13 +278,20 @@ package DetailPage {
 
     class ObservationStationInfo extends React.Component
     ObservationStationInfo "1" --> "1" Model.ObservationStation
-    ObservationStation "1" --> "1" FROST.DataProvider
+    ObservationStationInfo "1" --> "1" FROST.DataProvider
     ObservationStationInfo "1" --> "*" Model.Observation
 
     class LocationMap extends React.Component
     LocationMap "1" --> "1" Model.Position
 
-    abstract Diagram extends React.Component
+    note top of Diagram : Must be initialized with a Feature. The observationStation can be set afterwards, as\n well as the data of the diagram can be loaded. When all the necessary data is loaded, \nthe diagram can be drawn and becomes visable in the userinterface.\n This allowes asynchronous page loading from outside of this class.
+    abstract Diagram extends React.Component {
+        - feature : Model.Feature
+        + draw() : void
+        + setObservationStation(observationStation : Model.ObservationStation) : void
+        + loadData() : void
+        + isDataLoaded() : Boolean
+    }
     Diagram "1" --> "1" FROST.DataProvider
     Diagram "1" --> "*" Model.Observation
     Diagram "1" --o "1" ReactGoogleCharts.Chart
@@ -320,7 +319,6 @@ package Layout {
     }
     class PrivacyPolicyPage extends Page
     class AboutPage extends Page
-    class DetailPage extends Page 
 
     class PageMenu
     class Ladeanzeige
