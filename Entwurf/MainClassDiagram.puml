@@ -31,6 +31,11 @@ package FROST {
 
     abstract QueryResult    
 
+    class ObservationResult extends QueryResult
+    class DatastreamResult extends QueryResult
+    class ObservedPropertyResult extends QueryResult
+    class ThingResult extends QueryResult
+
     note top of DataProvider : This is a facade class. All requests for data run through this class.\nThe underlying mechanism of the request is hidden. \nOnly model data is given to the outside.
     class DataProvider {
         + getLatestObservations(center : Position, radius: int, feature : Feature) : Observation[]
@@ -40,33 +45,33 @@ package FROST {
         + getScale(feature : Feature) : Scale
         + getStation(id : string) : Station
     }
-
-    class Cache {
-        + getStation(stationId : string) : Station
-        + getHistoricalObservations(station : Station, start : Date, end : Date, frequency : Frequency, feature : Feature) : Observation[]
-        + getLatestObservations(stationId : string) : Observation
-    }
 } 
 
 
 package Model {
     class ObservationStation {
+        -name : String
+        -position : Position
+        -availableFeatures : List<Feature>
+        --
         + getName() : string
         + getFeatures() : List<Feature>
-        + getLatestObservation(featureId : string) : Observation
         + getPosition() : Position
         + getAverage() : float
+        + getAllData(Date date, Date date) : List<float>
+        + isLimitExceeded() : Boolean
         + hasFeature(feature : Feature) : boolean
     }
     
-    ObservationStation -- Feature
-    ObservationStation "1" -- "N" Observation    
-    Observation --> Feature
+    ObservationStation -- Feature    
    
     class Observation {
-        + getFeature() : Feature
-        + getDate() : Date
-        + getValue : float
+        observationStation : ObservationStation
+        feature : Feature
+        dateTime : Date
+        value : float
+
+        + getValue() : float
     }
 
     enum Timespan {
@@ -81,20 +86,37 @@ package Model {
     ObservationStation --* Position
     
     class Position {
-        latitude : float
-        longitude : float
-        station : ObservationStation
+        xCoordinate : float
+        yCoordinate : float
     }
 
-    Feature --> Scale
-
-    class Feature {
-        + getId() : string
-        + getNameId() : string
-        + getUnitOfMeasurement() : string
-        + getDescriptionId() : string
-        + isLimitExceeded(obs : Observation) : Boolean
-        + getDefaultScale() : Scale
+    abstract class Feature {
+        + getFeatureInfo() : FeatureInfo
+    }
+    class PM10 extends Feature {
+        -name : String
+        -stations : Measurestations
+        +getFeatureInfo() : FeatureInfo
+    }
+    class PM2_5 extends Feature {
+        -name : String
+        -stations : Measurestations
+        +getFeatureInfo() : FeatureInfo
+    }
+    class Humidity extends Feature {
+        -name : String
+        -stations : Measurestations
+        +getFeatureInfo() : FeatureInfo
+    }
+    class AirPressure extends Feature {
+        -name : String
+        -stations : Measurestations
+        +getFeatureInfo() : FeatureInfo
+    }
+    class Temperature extends Feature {
+        -name : String
+        -stations : Measurestations
+        +getFeatureInfo() : FeatureInfo
     }
    
     enum Colors {
@@ -105,19 +127,32 @@ package Model {
         RED = "#FF0000" 
     }
 
-    Color *-- Scale
+    Colors *-- ColorCode
+    Colors *-- Scale
+    ColorCode -- Scale
 
     class Color {
         + getRGB() : string
         + setRGB(hex : string) : void
     }
 
-    class Scale {
-        + getColor(value : float) : Color
-        + addColor(color: Color, threshold : float) : void
-        + removeColor(treshold : flaot) : void
-        + getAllEntries() : (float, Color)[]
+    class ColorCode {
+        color : Colors
+        + getColor(value : float)
     }
+
+    class Scale {
+        -colors : Colors[]
+        +listAllColors() : Colors
+        + getColor(value : float) : Color
+    }
+    
+    class FeatureInfo {
+        -info : String
+        + getInfo() : String
+    }
+    
+    Feature *-- FeatureInfo
 }
 
 MapPage +-- Model
@@ -240,23 +275,38 @@ package MapPage {
 }
 
 package DetailPage {
-    abstract DetailPageComponant extends MaterialUI.Paper
+    note top of DetailPage : This class manages the page build process. Based on which features the respective observation \nstation provides, the page is built differently. There is a configuration file which says which \ndiagrams must be drawn for which features. Accordingly the page is built.
+    class DetailPage extends React.Component
+    DetailPage "1" --> "1" Model.ObservationStation
+    DetailPage "1" --> "1" FROST.DataProvider
+    DetailPage "1" --o "1" ObservationStationInfo
+    DetailPage "1" --o "1" LocationMap
+    DetailPage "1" --o "*" Diagram
+    DetailPage "1" --o "1" MaterialUI.Button
 
-    class ObservationOverview extends DetailPageComponant
-    class ObservationStationInfo extends DetailPageComponant
-    class StaticMap extends DetailPageComponant
-    abstract Diagram extends DetailPageComponant
+    class ObservationStationInfo extends React.Component
+    ObservationStationInfo "1" --> "1" Model.ObservationStation
+    ObservationStation "1" --> "1" FROST.DataProvider
+    ObservationStationInfo "1" --> "*" Model.Observation
 
-    class Graph extends Diagram
-    class PieChart extends Diagram
+    class LocationMap extends React.Component
+    LocationMap "1" --> "1" Model.Position
 
-    class FeatureHistoryDiagram extends Graph
-    class YearComparisonDiagram extends Graph
-    class ComparisonToLastYearDiagram extends PieChart
+    abstract Diagram extends React.Component
+    Diagram "1" --> "1" FROST.DataProvider
+    Diagram "1" --> "*" Model.Observation
+    Diagram "1" --o "1" ReactGoogleCharts.Chart
+    Diagram "1" --o "1" MaterialUI.Progress
 
-    class DiagramConfiguration {
-        + setTimespan(timespan : Timespan) : void
-    }
+    class FeatureHistoryLineChart extends Diagram
+    FeatureHistoryLineChart "1" --> "1" MaterialUI.Select
+
+    class YearComparisonLineChart extends Diagram
+    class ComparisonToLastYearPieChart extends Diagram
+}
+
+package ReactGoogleCharts {
+    class Chart extends React.Component
 }
 
 Layout +-- MapPage
@@ -264,12 +314,13 @@ MapPage +-- MaterialUI
 
 package Layout {
     abstract Page
-    class ErrorPage extends React.Component {
+    class ErrorPage extends Page {
         + errorCode : int
         + errorMessage : string
     }
-    class PrivacyPolicyPage extends React.Component
-    class AboutPage extends React.Component
+    class PrivacyPolicyPage extends Page
+    class AboutPage extends Page
+    class DetailPage extends Page 
 
     class PageMenu
     class Ladeanzeige
@@ -285,7 +336,7 @@ package Layout {
 package Storage {
     class Language {
         + getString(id: string) : string
-        + loadLanguage(languageId : string)
+        + loadLanguage(file : string)
     }
 
     class MapConfigurationMemory {
@@ -296,8 +347,10 @@ package Storage {
 
 
 package MaterialUI {
-    class PopUp
-    class Button
+    class PopUp extends React.Component
+    class Button extends React.Component
+    class Select extends React.Component
+    class Progress extends React.Component
 }
 
 
