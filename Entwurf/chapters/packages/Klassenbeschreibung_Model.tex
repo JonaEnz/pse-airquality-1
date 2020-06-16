@@ -5,12 +5,16 @@
         \begin{itemize}
             \item \texttt{Todo}
             \item \texttt{getName() : string}
+            \\ Der Name der Station.
             \item \texttt{getFeatures() : List<Feature>}
+            \\ Liste an Features die die Station erfassen kann und von der Anwendung unterstützt werden.
             \item \texttt{getPosition() : Position}
+            \\ Die Position an der sich die Station befindet.
             \item \texttt{getAverage() : float}
-            \item \texttt{getAllData(Date date, Date date) : List<float>}
-            \item \texttt{isLimitExceeded() : Boolean}
+            \\ Der Durchschnitt der Messwerte des letzten Tages.
             \item \texttt{hasFeature(feature : Feature) : boolean}
+            \\ \emph{true} wenn die Station das Feature erfassen kann.
+            \\ \emph{false} sonst.
         \end{itemize}
     \end{Class}
 
@@ -58,6 +62,11 @@
             \\ Gibt die Id der Featurebeschreibung für die Sprachdatei zurück.
             \item \texttt{getDefaultScale() : Scale}
             \\ Gibt die Farbskala aus der Featurekonfiguration zurück.
+            \item \texttt{getLimit() : float}
+            \\ Das Limit für eine Warnmeldung. Wenn das Limit -1 ist wird nie eine Warnung ausgegeben.
+            \item \texttt{isLimitExceeded(obs : Observation) : Boolean}
+            \\ \emph{true} wenn der Wert der Observation das Limit des Features übersteigt.
+            \\ \emph{false} wenn das Limit -1 ist oder der Wert der Observation <= Limit.
         \end{itemize}
     \end{Class}
 
@@ -87,17 +96,3 @@
             \\ Das Array ist aufsteigend nach Grenzwerten sortiert.
         \end{itemize}
     \end{Class}
-
-    \begin{Class}{FeatureInfo}
-        \textbf{Methoden}
-        \begin{itemize}
-            \item \texttt{Todo}
-            \item \texttt{getInfo() : String}
-        \end{itemize}
-        
-        \textbf{Attribute}
-        \begin{itemize}
-            \item \texttt{Todo}
-        \end{itemize}
-    \end{Class}
-

@@ -61,8 +61,6 @@ package Model {
         + getLatestObservation(featureId : string) : Observation
         + getPosition() : Position
         + getAverage() : float
-        + getAllData(Date date, Date date) : List<Observation>
-        + isLimitExceeded() : Boolean
         + hasFeature(feature : Feature) : boolean
     }
     
@@ -86,11 +84,6 @@ package Model {
         }
     
     ObservationStation --* Position
-    
-    class Position {
-        xCoordinate : float
-        yCoordinate : float
-    }
 
     Feature --> Scale
 
@@ -99,6 +92,7 @@ package Model {
         + getNameId() : string
         + getUnitOfMeasurement() : string
         + getDescriptionId() : string
+        + isLimitExceeded(obs : Observation) : Boolean
         + getDefaultScale() : Scale
     }
    
