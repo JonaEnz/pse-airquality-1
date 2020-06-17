@@ -15,20 +15,26 @@ package FROST {
         + send() : QueryResult
         + setTop(n : int) : void           
         + setSkip(n : int) : void
-        + enableCount(set : boolean) : void
+        + setCount(set : bool) : void
         + setOrderBy(orderBy : string) : void
         + setSelect(select : string) : void
         + setFilter(filter : string) : void
         + setExpand(expand : string) : void
-        + setId(id : string) : void
+        + setID(id : string) : void
     }
     class ObservationQuery extends FROSTQuery
     class DatastreamQuery extends FROSTQuery
     class ObservedPropertyQuery extends FROSTQuery
     class ThingQuery extends FROSTQuery 
-    class LocationQuery   
+    class LocationQuery
 
-    interface QueryResult
+
+    abstract QueryResult    
+
+    class ObservationResult extends QueryResult
+    class DatastreamResult extends QueryResult
+    class ObservedPropertyResult extends QueryResult
+    class ThingResult extends QueryResult
 
     note top of DataProvider : This is a facade class. All requests for data run through this class.\nThe underlying mechanism of the request is hidden. \nOnly model data is given to the outside.
     class DataProvider {
@@ -36,79 +42,83 @@ package FROST {
         + getStationsIn(middle: Position, radius : int) : Station[]
         + getHistoricalObservations(station : Station, start : Date, end : Date, feature : Feature) : Observation[]
         + getHistoricalObservations(station : Station, start : Date, end : Date, frequency : Frequency, feature : Feature) : Observation[]
+        + getScale(feature : Feature) : Scale
         + getStation(id : string) : Station
-        + getFeature(id : string) : Feature
-    }
-
-    class FeatureProvider {
-        makeFeature(id : string) : Feature
-        - getScale(feature : Feature) : Scale
-    }
-
-    class Cache {
-        getStation(stationId : string) : Station
-        getHistoricalObservations(station : Station, start : Date, end : Date, frequency : Frequency, feature : Feature) : Observation[]
-        getLatestObservations(stationId : string) : Observation
-        getFeature(featureid : string) : Feature
     }
 } 
 
 
 package Model {
     class ObservationStation {
+        -id : int
+        -name : String
+        -position : Position
+        -availableFeatures : List<Feature>
+
+        + getId : int
         + getName() : string
-        + getFeatures() : Feature[]
-        + getLatestObservation(featureId : string) : Observation
+        + getFeatures() : List<Feature>
         + getPosition() : Position
-        + getAverage() : number
-        + hasFeature(feature : Feature) : boolean
+        + isLimitExceeded(feature : Feature) : Boolean
+        + hasFeature(feature : Feature) : Boolean
+        + getDiagrams() : DetailPage.Diagram[]
     }
-    
-    ObservationStation -- Feature
-    ObservationStation "1" -- "N" Observation    
-    Observation --> Feature
+    ObservationStation --> Position
+    ObservationStation "1" --> "*" Feature
    
     class Observation {
+        observationStation : ObservationStation
+        feature : Feature
+        dateTime : Date
+        value : float
+
+        + getValue() : float
+        + getObservationStation() : ObservationStation
         + getFeature() : Feature
-        + getDate() : Date
-        + getValue : number
+        + getDateTime : Date
     }
+    Observation --> Position
+    Observation  --> ObservationStation
+    Observation --> Feature
 
     enum Timespan {
-        LAST_YEAR,
-        LAST_3_MONTHS,
-        LAST_MONTH,
-        LAST_WEEK,
-        LAST_3_DAYS,
-        TODAY,
-    }
-
-    class Position {
-        + getCoordinates() : (lng : float, lat : float)
-        + setCoordinates(lng : float, lat : float)
-
-        + toString() : string
-    }
-    
-    ObservationStation --* Position
+            LAST_YEAR,
+            LAST_3_MONTHS,
+            LAST_MONTH,
+            LAST_WEEK,
+            LAST_3_DAYS,
+            TODAY,
+        }
     
     class Position {
-        latitude : number
-        longitude : number
-        station : ObservationStation
+        xCoordinate : float
+        yCoordinate : float
     }
 
-    Feature --> Scale
-
+    note top of Feature : Designed as a modified Singleton. There is only \n one object of each feature (Temperature, Air Pressure, ...).\n There is a config file which says which different types of \nfeatures exist.
     class Feature {
-        + getId() : string
-        + getNameId() : string
-        + getUnitOfMeasurement() : string
-        + getDescriptionId() : string
-        + isLimitExceeded(obs : Observation) : Boolean
-        + getScale() : Scale
+        - id : int
+        - name : String
+        - description : String
+        - scale : Scale
+        - fallbackScale : Scale
+        - relatedWeblink : String
+        - drawableDiagrams : DetailPage.Diagram[]
+        - limit : float
+        {static} + getFeature(featureID : int) : Feature
+        {static} + getFeature(featureName : String) : Feature
+        {static} + getRegisteredFeatures() : Feature[]
+        + getID() : int
+        + getName() : String
+        + getDescription() : String
+        + getRelatedScale() : Scale
+        + getRelatedWeblink() : String
+        + getDrawableDiagrams() : DetailPage.Diagram[]
+        + getLimit : float
     }
-   
+    Feature "1" --> "1" Scale
+    Feature --> DetailPage.Diagram
+
     enum Colors {
         GREEN = "#50EE70"
         LIGHTGREEN = "#AAFF55"
@@ -116,19 +126,24 @@ package Model {
         ORANGE = "#FFA500"
         RED = "#FF0000" 
     }
-
-    Color *-- Scale
+    Colors *-- ColorCode
+    Colors *-- Scale
+    ColorCode -- Scale
 
     class Color {
-        + toString() : string
+        + getRGB() : string
         + setRGB(hex : string) : void
     }
 
+    class ColorCode {
+        color : Colors
+        + getColor(value : float)
+    }
+
     class Scale {
+        -colors : Colors[]
+        +listAllColors() : Colors
         + getColor(value : float) : Color
-        + addColor(color: Color, threshold : float) : void
-        + removeColor(treshold : flaot) : void
-        + getAllEntries() : (float, Color)[]
     }
 }
 
@@ -168,7 +183,7 @@ package MapPage {
         }
 
         class Legend extends React.Component{
-            + scale : Scale
+            + scale : Skala
         }
 
         class StationInfo extends React.Component {
@@ -198,6 +213,13 @@ package MapPage {
 
         + getRadius() : int
     }
+
+    class Position {
+        + getCoordinates() : (lng : float, lat : float)
+        + setCoordinates(lng : float, lat : float)
+
+        + toString() : string
+    }
     
 
     MapView -- "1" MapConfiguration
@@ -207,7 +229,7 @@ package MapPage {
     abstract MapConfiguration {
         + getPins(port : Viewport) : MapPin[]
         + getPolygons(port: Viewport) : Polygon[]
-        + getScale() : Scale
+        + getScale() : Skala
         + getFeatures() : Feature[]
     }
 
@@ -245,23 +267,45 @@ package MapPage {
 }
 
 package DetailPage {
-    abstract DetailPageComponant extends MaterialUI.Paper
+    note top of DetailPage.DetailPage : This class manages the page build process. Based on which features the respective observation \nstation provides, the page is built differently. There is a configuration file which says which \ndiagrams must be drawn for which features. Accordingly the page is built.
+    class DetailPage extends Layout.Page
+    DetailPage "1" --> "1" Model.ObservationStation
+    DetailPage "1" --> "1" FROST.DataProvider
+    DetailPage "1" --o "1" ObservationStationInfo
+    DetailPage "1" --o "1" LocationMap
+    DetailPage "1" --o "*" Diagram
+    DetailPage "1" --o "1" MaterialUI.Button
 
-    class ObservationOverview extends DetailPageComponant
-    class ObservationStationInfo extends DetailPageComponant
-    class StaticMap extends DetailPageComponant
-    abstract Diagram extends DetailPageComponant
+    class ObservationStationInfo extends React.Component
+    ObservationStationInfo "1" --> "1" Model.ObservationStation
+    ObservationStationInfo "1" --> "1" FROST.DataProvider
+    ObservationStationInfo "1" --> "*" Model.Observation
 
-    class Graph extends Diagram
-    class PieChart extends Diagram
+    class LocationMap extends React.Component
+    LocationMap "1" --> "1" Model.Position
 
-    class FeatureHistoryDiagram extends Graph
-    class YearComparisonDiagram extends Graph
-    class ComparisonToLastYearDiagram extends PieChart
-
-    class DiagramConfiguration {
-        + setTimespan(timespan : Timespan) : void
+    note top of Diagram : Must be initialized with a Feature. The observationStation can be set afterwards, as\n well as the data of the diagram can be loaded. When all the necessary data is loaded, \nthe diagram can be drawn and becomes visable in the userinterface.\n This allowes asynchronous page loading from outside of this class.
+    abstract Diagram extends React.Component {
+        - feature : Model.Feature
+        + draw() : void
+        + setObservationStation(observationStation : Model.ObservationStation) : void
+        + loadData() : void
+        + isDataLoaded() : Boolean
     }
+    Diagram "1" --> "1" FROST.DataProvider
+    Diagram "1" --> "*" Model.Observation
+    Diagram "1" --o "1" ReactGoogleCharts.Chart
+    Diagram "1" --o "1" MaterialUI.Progress
+
+    class FeatureHistoryLineChart extends Diagram
+    FeatureHistoryLineChart "1" --> "1" MaterialUI.Select
+
+    class YearComparisonLineChart extends Diagram
+    class ComparisonToLastYearPieChart extends Diagram
+}
+
+package ReactGoogleCharts {
+    class Chart extends React.Component
 }
 
 Layout +-- MapPage
@@ -269,12 +313,12 @@ MapPage +-- MaterialUI
 
 package Layout {
     abstract Page
-    class ErrorPage extends React.Component {
+    class ErrorPage extends Page {
         + errorCode : int
         + errorMessage : string
     }
-    class PrivacyPolicyPage extends React.Component
-    class AboutPage extends React.Component
+    class PrivacyPolicyPage extends Page
+    class AboutPage extends Page
 
     class PageMenu
     class Ladeanzeige
@@ -290,7 +334,7 @@ package Layout {
 package Storage {
     class Language {
         + getString(id: string) : string
-        + loadLanguage(languageId : string)
+        + loadLanguage(file : string)
     }
 
     class MapConfigurationMemory {
@@ -301,8 +345,10 @@ package Storage {
 
 
 package MaterialUI {
-    class PopUp
-    class Button
+    class PopUp extends React.Component
+    class Button extends React.Component
+    class Select extends React.Component
+    class Progress extends React.Component
 }
 
 
