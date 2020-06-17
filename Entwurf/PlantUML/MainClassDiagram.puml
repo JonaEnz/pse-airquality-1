@@ -82,6 +82,13 @@ package Model {
             LAST_3_DAYS,
             TODAY,
         }
+
+    class Position {
+        + getCoordinates() : (lng : float, lat : float)
+        + setCoordinates(lng : float, lat : float)
+
+        + toString() : string
+    }
     
     ObservationStation --* Position
 
@@ -184,13 +191,6 @@ package MapPage {
         + setZoom(zoom : int) : void
 
         + getRadius() : int
-    }
-
-    class Position {
-        + getCoordinates() : (lng : float, lat : float)
-        + setCoordinates(lng : float, lat : float)
-
-        + toString() : string
     }
     
 
