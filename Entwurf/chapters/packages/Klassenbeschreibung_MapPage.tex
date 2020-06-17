@@ -4,15 +4,15 @@
         \textbf{Methoden}
         \begin{itemize}
             \item \texttt{getCenter() : Position}
-            \\ Gibt das aktuelle Zentrum zurück.
+            \\ Gibt die aktuelle Position des Zentrums zurück.
             \item \texttt{setCenter(position : Position) : void}
             \\ Setzt \emph{position} als das Zentrum fest.
-            \item \texttt{getZoom() : int}
+            \item \texttt{getZoom() : float}
             \\ Liefert den Zoom des Viewports.
-            \item \texttt{setZoom(zoom : int) : void}
+            \item \texttt{setZoom(zoom : float) : void}
             \\ Setzt den Zoom des Viewports auf \emph{zoom}.
             \item \texttt{getRadius() : int}
-            \\ Liefert den kleinsten Radius des Kreises in Koordinateneinheiten um das Zentrum zurück,
+            \\ Liefert den kleinsten Radius des Kreises in Koordinateneinheiten um das Zentrum,
             der den kompletten Anzeigebereich des Viewport einschließt.
         \end{itemize}
     \end{Class}
@@ -20,6 +20,7 @@
     \begin{Class}{Position}
         \textbf{Methoden}
         \begin{itemize}
+            \\ Die gleiche Klasse gibt es schon in Model. Erfüllt sie einen unterschiedlichen Zweck? Ansonsten löschen!!1!
             \item \texttt{getCoordinates() : (lng : float, lat : float)}
             \\ Liefert die Koordinaten der Position als Tupel.
             \item \texttt{setCoordinates(lng : float, lat : float)}
@@ -34,13 +35,13 @@
         \textbf{Methoden}
         \begin{itemize}
             \item \texttt{getPins(port : Viewport) : MapPin[]}
-            \\ Liefert MapPins innerhalb (oder nahe) des Viewports zurück.
+            \\ Gibt MapPins innerhalb (oder nahe) des Viewports zurück.
             \item \texttt{getPolygons(port: Viewport) : Polygon[]}
-            \\ Liefert Polygone innerhalb (oder nahe) des Viewports zurück.
-            \item \texttt{getScale() : Skala}
-            \\ Liefert die Skala der Konfiguration zurück.
+            \\ Gibt Polygone innerhalb (oder nahe) des Viewports zurück.
+            \item \texttt{getScale() : Scale}
+            \\ Gibt die Skala der Konfiguration zurück.
             \item \texttt{getFeatures() : Feature[]}
-            \\ Liefert das Features die die Konfiguration darstellt zurück.
+            \\ Gibt die durch die Konfiguration spezifizierten Features zurück.
             \\ \emph{[]}, wenn keine Features dargestellt werden
         \end{itemize}
     \end{Class}
@@ -52,14 +53,14 @@
             \item \texttt{setFeature(features : Feature) : void}
             \\ Legt das Feature der Konfiguration fest.
             \item \texttt{<<implements>>getPins(port : Viewport) : MapPin[]}
-            \\ Liefert MapPins innerhalb (oder nahe) des Viewports zurück.
+            \\ Liefert MapPins innerhalb (oder nahe) des Viewports.
             \\ Es werden nur Stationen angezeigt die das ausgewählte Feature besitzen
             \item \texttt{<<implements>>getPolygons(port: Viewport) : Polygon[]}
-            \\ Liefert immer [] zurück.
-            \item \texttt{<<implements>>getScale() : Skala}
-            \\ Liefert die Skala des gewählten Features zurück.
+            \\ Liefert [].
+            \item \texttt{<<implements>>getScale() : Scale}
+            \\ Liefert die Skala des gewählten Features.
             \item \texttt{<<implements>>getFeatures() : Feature[]}
-            \\ Liefert das ausgewählte Feature in einem Array zurück.
+            \\ Liefert das ausgewählte Feature in einem Array.
         \end{itemize}
     \end{Class}
 
@@ -70,14 +71,14 @@
             \item \texttt{setFeature(feature : Feature) : void}
             \\ Legt das Feature der Konfiguration fest.
             \item \texttt{<<implements>>getPins(port : Viewport) : MapPin[]}
-            \\ Liefert MapPins innerhalb (oder nahe) des Viewports zurück.
+            \\ Liefert MapPins innerhalb (oder nahe) des Viewports.
             \\ Es werden nur Stationen angezeigt die das ausgewählte Feature besitzen
             \item \texttt{<<implements>>getPolygons(port: Viewport) : Polygon[]}
-            \\ Liefert Polygone die zwischen Stationen im Viewport \emph{port} aufgespannt sind zurück
-            \item \texttt{<<implements>>getScale() : Skala}
-            \\ Liefert die Skala des gewählten Features zurück.
+            \\ Liefert Polygone die zwischen Stationen im Viewport \emph{port} aufgespannt sind.
+            \item \texttt{<<implements>>getScale() : Scale}
+            \\ Liefert die Skala des gewählten Features.
             \item \texttt{<<implements>>getFeatures() : Feature[]}
-            \\ Liefert das ausgewählte Feature in einem Array zurück.
+            \\ Liefert das ausgewählte Feature in einem Array.
         \end{itemize}
     \end{Class}
 
@@ -88,21 +89,21 @@
             \item \texttt{setFeature(feature : Feature) : void}
             \\ Legt das Feature der Konfiguration fest.
             \item \texttt{<<implements>>getPins(port : Viewport) : MapPin[]}
-            \\ Liefert MapPins innerhalb des Radius \emph{radius} um die Mitte des Viewports zurück.
+            \\ Liefert MapPins innerhalb des Radius \emph{radius} um die Mitte des Viewports.
             \\ Es werden nur Stationen angezeigt die das ausgewählte Feature besitzen.
             \\ Die Färbung wird anhand des Mittelwerts der Stationen im Umkreis von \emph{radius} km festgelegt.
             \\ Dabei gibt der höchste Wert die Farbe am oberen Ende der Skala an, der niedrigste das untere Ende.
             \item \texttt{<<implements>>getPolygons(port: Viewport) : Polygon[]}
-            \\ Liefert immer [] zurück.
-            \item \texttt{<<implements>>getScale() : Skala}
-            \\ Liefert die Skala des gewählten Features zurück.
+            \\ Liefert immer [].
+            \item \texttt{<<implements>>getScale() : Scale}
+            \\ Liefert die Skala des gewählten Features.
             \item \texttt{<<implements>>getFeatures() : Feature[]}
-            \\ Liefert das ausgewählte Feature in einem Array zurück.
+            \\ Liefert das ausgewählte Feature in einem Array.
         \end{itemize}
         \textbf{Attribute}
         \begin{itemize}
             \item \texttt{radius : int}
-            \\ Gibt den Radius an innerhalb dessen die Stationen angezeigt ung gemittelt werden.
+            \\ Radius, innerhalb dessen die Stationen angezeigt und gemittelt werden.
         \end{itemize}
     \end{Class}
 
@@ -116,15 +117,16 @@
 
             \bigskip
             \item \texttt{getValue() : float}
-            \\ Liefert den Wert zurück anhand dem die Färbung bestimmt wird.
+            \\ Todo: Genaue Dokumentation für value.
+            \\ Liefert den Wert anhand dem die Färbung bestimmt wird.
             \item \texttt{setValue(value : float) : void}
             \\ Setzt den Wert des Pins.
 
             \bigskip
             \item \texttt{getStationId() : string}
-            \\ Liefert die interne Stations ID der Station die der Pin repräsentiert.
+            \\ Liefert die interne Id der Station, die durch den Pin repräsentiert wird.
             \item \texttt{setStationId(id : string) : void}
-            \\ Setzt die interne Stations ID der Station die der Pin repräsentiert.
+            \\ Setzt die interne Id der Station, die durch den Pin repräsentiert wird.
 
             \bigskip
             \item \texttt{getColor() : Color}
@@ -138,9 +140,9 @@
         \textbf{Attribute}
         \begin{itemize}
             \item \texttt{stations : ObservationStation[]}
-            \\ Liefert die Stationen zurück die die Ecken des Polygons bilden.
+            \\ Stationen, die die Ecken des Polygons bilden.
             \item \texttt{color : Color}
-            \\ Liefert die Farbe des Polygons zurück.
+            \\ Farbe des Polygons.
         \end{itemize}
     \end{Class}
 
