@@ -1,7 +1,7 @@
 @startuml Komplett
 
 
-package FROST {
+namespace FROST {
     
     FROSTQuery --> FROSTServer
     FROSTQuery --> QueryResult
@@ -54,7 +54,7 @@ package FROST {
 } 
 
 
-package Model {
+namespace Model {
     class ObservationStation {
         -id : int
         -name : String
@@ -155,9 +155,9 @@ package Model {
 
 MapPage +-- Model
 
-package MapPage {
+namespace MapPage {
 
-    package Components {
+    namespace Components {
         class MapView extends React.Component {
             + loading : boolean
             + selectedFeature : Feature
@@ -265,7 +265,7 @@ package MapPage {
     }
 }
 
-package DetailPage {
+namespace DetailPage {
     class DetailPage extends Layout.Page
     DetailPage "1" --> "1" Model.ObservationStation
     DetailPage "1" --> "1" FROST.DataProvider
@@ -303,14 +303,14 @@ package DetailPage {
     class ComparisonToLastYearPieChart extends Diagram
 }
 
-package ReactGoogleCharts {
+namespace ReactGoogleCharts {
     class Chart extends React.Component
 }
 
 Layout +-- MapPage
 MapPage +-- MaterialUI
 
-package Layout {
+namespace Layout {
     abstract Page
     class ErrorPage extends React.Component {
         + errorCode : int
@@ -330,7 +330,7 @@ package Layout {
     class TopBar
 }
 
-package Storage {
+namespace Storage {
     class Language {
         + getString(id: string) : string
         + loadLanguage(languageId : string)
@@ -343,7 +343,7 @@ package Storage {
 }
 
 
-package MaterialUI {
+namespace MaterialUI {
     class PopUp
     class Button
 }
