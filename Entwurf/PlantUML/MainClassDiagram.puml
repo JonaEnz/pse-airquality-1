@@ -44,14 +44,7 @@ namespace FROST {
         makeFeature(id : string) : Feature
         - getScale(feature : Feature) : Scale
     }
-
-    class Cache {
-        getStation(stationId : string) : Station
-        getHistoricalObservations(station : Station, start : Date, end : Date, frequency : Frequency, feature : Feature) : Observation[]
-        getLatestObservations(stationId : string) : Observation
-        getFeature(featureid : string) : Feature
-    }
-} 
+}
 
 
 namespace Model {
