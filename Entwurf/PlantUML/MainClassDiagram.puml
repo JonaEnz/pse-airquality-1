@@ -245,23 +245,45 @@ package MapPage {
 }
 
 package DetailPage {
-    abstract DetailPageComponant extends MaterialUI.Paper
+    note top of DetailPage.DetailPage : This class manages the page build process. Based on which features the respective observation \nstation provides, the page is built differently. There is a configuration file which says which \ndiagrams must be drawn for which features. Accordingly the page is built.
+    class DetailPage extends Layout.Page
+    DetailPage "1" --> "1" Model.ObservationStation
+    DetailPage "1" --> "1" FROST.DataProvider
+    DetailPage "1" --o "1" ObservationStationInfo
+    DetailPage "1" --o "1" LocationMap
+    DetailPage "1" --o "*" Diagram
+    DetailPage "1" --o "1" MaterialUI.Button
 
-    class ObservationOverview extends DetailPageComponant
-    class ObservationStationInfo extends DetailPageComponant
-    class StaticMap extends DetailPageComponant
-    abstract Diagram extends DetailPageComponant
+    class ObservationStationInfo extends React.Component
+    ObservationStationInfo "1" --> "1" Model.ObservationStation
+    ObservationStationInfo "1" --> "1" FROST.DataProvider
+    ObservationStationInfo "1" --> "*" Model.Observation
 
-    class Graph extends Diagram
-    class PieChart extends Diagram
+    class LocationMap extends React.Component
+    LocationMap "1" --> "1" Model.Position
 
-    class FeatureHistoryDiagram extends Graph
-    class YearComparisonDiagram extends Graph
-    class ComparisonToLastYearDiagram extends PieChart
-
-    class DiagramConfiguration {
-        + setTimespan(timespan : Timespan) : void
+    note top of Diagram : Must be initialized with a Feature. The observationStation can be set afterwards, as\n well as the data of the diagram can be loaded. When all the necessary data is loaded, \nthe diagram can be drawn and becomes visable in the userinterface.\n This allowes asynchronous page loading from outside of this class.
+    abstract Diagram extends React.Component {
+        - feature : Model.Feature
+        + draw() : void
+        + setObservationStation(observationStation : Model.ObservationStation) : void
+        + loadData() : void
+        + isDataLoaded() : Boolean
     }
+    Diagram "1" --> "1" FROST.DataProvider
+    Diagram "1" --> "*" Model.Observation
+    Diagram "1" --o "1" ReactGoogleCharts.Chart
+    Diagram "1" --o "1" MaterialUI.Progress
+
+    class FeatureHistoryLineChart extends Diagram
+    FeatureHistoryLineChart "1" --> "1" MaterialUI.Select
+
+    class YearComparisonLineChart extends Diagram
+    class ComparisonToLastYearPieChart extends Diagram
+}
+
+package ReactGoogleCharts {
+    class Chart extends React.Component
 }
 
 Layout +-- MapPage
