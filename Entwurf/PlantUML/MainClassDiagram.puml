@@ -56,59 +56,75 @@ package FROST {
 
 package Model {
     class ObservationStation {
+        -id : int
+        -name : String
+        -position : Position
+        -availableFeatures : List<Feature>
+
+        + getId : int
         + getName() : string
-        + getFeatures() : Feature[]
-        + getLatestObservation(featureId : string) : Observation
+        + getFeatures() : List<Feature>
         + getPosition() : Position
-        + getAverage() : number
-        + hasFeature(feature : Feature) : boolean
+        + isLimitExceeded(feature : Feature) : Boolean
+        + hasFeature(feature : Feature) : Boolean
+        + getDiagrams() : DetailPage.Diagram[]
     }
-    
-    ObservationStation -- Feature
-    ObservationStation "1" -- "N" Observation    
-    Observation --> Feature
+    ObservationStation --> Position
+    ObservationStation "1" --> "*" Feature
    
     class Observation {
+        observationStation : ObservationStation
+        feature : Feature
+        dateTime : Date
+        value : float
+
+        + getValue() : float
+        + getObservationStation() : ObservationStation
         + getFeature() : Feature
-        + getDate() : Date
-        + getValue : number
+        + getDateTime : Date
     }
+    Observation --> Position
+    Observation  --> ObservationStation
+    Observation --> Feature
 
     enum Timespan {
-        LAST_YEAR,
-        LAST_3_MONTHS,
-        LAST_MONTH,
-        LAST_WEEK,
-        LAST_3_DAYS,
-        TODAY,
-    }
-
-    class Position {
-        + getCoordinates() : (lng : float, lat : float)
-        + setCoordinates(lng : float, lat : float)
-
-        + toString() : string
-    }
-    
-    ObservationStation --* Position
+            LAST_YEAR,
+            LAST_3_MONTHS,
+            LAST_MONTH,
+            LAST_WEEK,
+            LAST_3_DAYS,
+            TODAY,
+        }
     
     class Position {
-        latitude : number
-        longitude : number
-        station : ObservationStation
+        xCoordinate : float
+        yCoordinate : float
     }
 
-    Feature --> Scale
-
+    note top of Feature : Designed as a modified Singleton. There is only \n one object of each feature (Temperature, Air Pressure, ...).\n There is a config file which says which different types of \nfeatures exist.
     class Feature {
-        + getId() : string
-        + getNameId() : string
-        + getUnitOfMeasurement() : string
-        + getDescriptionId() : string
-        + isLimitExceeded(obs : Observation) : Boolean
-        + getScale() : Scale
+        - id : int
+        - name : String
+        - description : String
+        - scale : Scale
+        - fallbackScale : Scale
+        - relatedWeblink : String
+        - drawableDiagrams : DetailPage.Diagram[]
+        - limit : float
+        {static} + getFeature(featureID : int) : Feature
+        {static} + getFeature(featureName : String) : Feature
+        {static} + getRegisteredFeatures() : Feature[]
+        + getID() : int
+        + getName() : String
+        + getDescription() : String
+        + getRelatedScale() : Scale
+        + getRelatedWeblink() : String
+        + getDrawableDiagrams() : DetailPage.Diagram[]
+        + getLimit : float
     }
-   
+    Feature "1" --> "1" Scale
+    Feature --> DetailPage.Diagram
+
     enum Colors {
         GREEN = "#50EE70"
         LIGHTGREEN = "#AAFF55"
@@ -116,19 +132,24 @@ package Model {
         ORANGE = "#FFA500"
         RED = "#FF0000" 
     }
-
-    Color *-- Scale
+    Colors *-- ColorCode
+    Colors *-- Scale
+    ColorCode -- Scale
 
     class Color {
-        + toString() : string
+        + getRGB() : string
         + setRGB(hex : string) : void
     }
 
+    class ColorCode {
+        color : Colors
+        + getColor(value : float)
+    }
+
     class Scale {
+        -colors : Colors[]
+        +listAllColors() : Colors
         + getColor(value : float) : Color
-        + addColor(color: Color, threshold : float) : void
-        + removeColor(treshold : flaot) : void
-        + getAllEntries() : (float, Color)[]
     }
 }
 
@@ -245,7 +266,6 @@ package MapPage {
 }
 
 package DetailPage {
-    note top of DetailPage.DetailPage : This class manages the page build process. Based on which features the respective observation \nstation provides, the page is built differently. There is a configuration file which says which \ndiagrams must be drawn for which features. Accordingly the page is built.
     class DetailPage extends Layout.Page
     DetailPage "1" --> "1" Model.ObservationStation
     DetailPage "1" --> "1" FROST.DataProvider
@@ -253,6 +273,7 @@ package DetailPage {
     DetailPage "1" --o "1" LocationMap
     DetailPage "1" --o "*" Diagram
     DetailPage "1" --o "1" MaterialUI.Button
+        note top of DetailPage.DetailPage : This class manages the page build process. Based on which features the respective observation \nstation provides, the page is built differently. There is a configuration file which says which \ndiagrams must be drawn for which features. Accordingly the page is built.
 
     class ObservationStationInfo extends React.Component
     ObservationStationInfo "1" --> "1" Model.ObservationStation
