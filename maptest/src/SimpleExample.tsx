@@ -42,7 +42,9 @@ export default class SimpleExample extends React.Component<
           </Marker>
           {this.props.marker.map((m) => (
             <Marker position={[m.position.lat, m.position.lng]}>
-              <Popup>A Popup.</Popup>
+              <Popup>
+                <button onClick={() => console.log("Hi")}>Test</button>
+              </Popup>
             </Marker>
           ))}
         </Map>
