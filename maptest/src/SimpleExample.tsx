@@ -1,14 +1,14 @@
 import React from "react";
-import { Map, TileLayer, Marker, Popup } from "react-leaflet";
+import { Map, TileLayer, Marker, Popup, Viewport } from "react-leaflet";
 import { LatLng } from "leaflet";
 import ReactDOM from "react-dom";
 import Chart from "react-google-charts";
 
 export default class SimpleExample extends React.Component<
-  {},
+  { onViewChanged(viewport: Viewport): void },
   { lat: number; lng: number; zoom: number }
 > {
-  constructor(props: Readonly<{}>) {
+  constructor(props: { onViewChanged(viewport: Viewport): void }) {
     super(props);
     this.state = {
       lat: 51.505,
@@ -21,7 +21,11 @@ export default class SimpleExample extends React.Component<
     const position: [number, number] = [this.state.lat, this.state.lng];
     return (
       <div>
-        <Map center={position} zoom={this.state.zoom}>
+        <Map
+          center={position}
+          zoom={this.state.zoom}
+          onViewportChanged={this.props.onViewChanged}
+        >
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://tile.openstreetmap.de/{z}/{x}/{y}.png"

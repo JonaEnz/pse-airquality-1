@@ -166,6 +166,7 @@ namespace MapPage {
             + getValueAt(position: Position, feature : Feature) : float
             + openPopUp(station : ObservationStation)
             + closePopUp() : void
+            + onViewportChange(viewport : Viewport)
         }
 
         class FeatureSelect extends React.Component {
@@ -186,6 +187,7 @@ namespace MapPage {
             --
             + setPosition(position : Position)
             + setZoom(zoom : int)
+            + onViewportChange() : function
         }
 
         class Legend extends React.Component{
