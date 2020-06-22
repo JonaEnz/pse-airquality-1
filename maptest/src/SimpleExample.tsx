@@ -1,18 +1,23 @@
 import React from "react";
 import { Map, TileLayer, Marker, Popup, Viewport } from "react-leaflet";
-import { LatLng } from "leaflet";
+import { LatLng, marker } from "leaflet";
 import ReactDOM from "react-dom";
 import Chart from "react-google-charts";
+import { Position } from "./Model/Position";
+import { Station } from "./Model/Station";
 
 export default class SimpleExample extends React.Component<
-  { onViewChanged(viewport: Viewport): void },
+  { onViewChanged(viewport: Viewport): void; marker: Station[] },
   { lat: number; lng: number; zoom: number }
 > {
-  constructor(props: { onViewChanged(viewport: Viewport): void }) {
+  constructor(props: {
+    onViewChanged(viewport: Viewport): void;
+    marker: Station[];
+  }) {
     super(props);
     this.state = {
-      lat: 51.505,
-      lng: -0.09,
+      lat: 49,
+      lng: 8.4,
       zoom: 13,
     };
   }
@@ -35,6 +40,11 @@ export default class SimpleExample extends React.Component<
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
           </Marker>
+          {this.props.marker.map((m) => (
+            <Marker position={[m.position.lat, m.position.lng]}>
+              <Popup>A Popup.</Popup>
+            </Marker>
+          ))}
         </Map>
         <Chart
           width={400}

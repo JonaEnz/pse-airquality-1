@@ -15,6 +15,8 @@
             \\ Tausche die Daten aus falls \emph{StationInfo} bereits geöffnet ist.
             \item \texttt{closePopUp() : void}
             \\ Schließt die StationInfo in Map falls sie geöffnet ist.
+            \item \texttt{onViewportChanged(viewport : Viewport)}
+            \\ Verarbeitet die Änderung des Viewports und aktualisiert die Pins und Polygone auf der Karte.
         \end{itemize}
         \textbf{Attribute}
         \begin{itemize}
@@ -70,6 +72,8 @@
             \\ Sonst wird die Leaflet-Karte auf die angegebene Position zentriert.
             \item \texttt{setZoom(zoom : int) : void}
             \\ Setzt den Zoom der Leaflet-Karte auf \emph{zoom}.
+            \item \texttt{props.onViewportChanged(viewport : Viewport)}
+            \\ Wird aufgerufen wenn die Leaflet-Karte verschoben wird.
         \end{itemize}
         \textbf{Attribute}
         \begin{itemize}

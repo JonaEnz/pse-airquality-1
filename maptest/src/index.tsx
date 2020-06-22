@@ -5,6 +5,7 @@ import SimpleExample from "./SimpleExample";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Viewport } from "react-leaflet";
+import { DataProvider } from "./DataProvider";
 
 function change(viewport: Viewport) {
   console.log(viewport.center?.toString());
@@ -12,7 +13,7 @@ function change(viewport: Viewport) {
 
 ReactDOM.render(
   <React.StrictMode>
-    <SimpleExample onViewChanged={change} />
+    <SimpleExample onViewChanged={change} marker={DataProvider.getStations()} />
   </React.StrictMode>,
   document.getElementById("root")
 );
