@@ -1,0 +1,190 @@
+@startuml MVC
+
+namespace Model {
+    class ObservationStation {
+        -id : int
+        -name : String
+        -position : Position
+        -availableFeatures : List<Feature>
+
+        + getId : int
+        + getName() : string
+        + getFeatures() : List<Feature>
+        + getPosition() : Position
+        + isLimitExceeded(feature : Feature) : Boolean
+        + hasFeature(feature : Feature) : Boolean
+        + getDiagrams() : DetailPage.Diagram[]
+    }
+   
+    class Observation {
+        observationStation : ObservationStation
+        feature : Feature
+        dateTime : Date
+        value : float
+
+        + getValue() : float
+        + getObservationStation() : ObservationStation
+        + getFeature() : Feature
+        + getDateTime : Date
+    }
+
+    enum Timespan {
+            LAST_YEAR,
+            LAST_3_MONTHS,
+            LAST_MONTH,
+            LAST_WEEK,
+            LAST_3_DAYS,
+            TODAY,
+        }
+    
+    class Position {
+        xCoordinate : float
+        yCoordinate : float
+    }
+
+    note top of Feature : Designed as a modified Singleton. There is only \n one object of each feature (Temperature, Air Pressure, ...).\n There is a config file which says which different types of \nfeatures exist.
+    class Feature {
+        - id : int
+        - name : String
+        - description : String
+        - scale : Scale
+        - fallbackScale : Scale
+        - relatedWeblink : String
+        - drawableDiagrams : DetailPage.Diagram[]
+        - limit : float
+        {static} + getFeature(featureID : int) : Feature
+        {static} + getFeature(featureName : String) : Feature
+        {static} + getRegisteredFeatures() : Feature[]
+        + getID() : int
+        + getName() : String
+        + getDescription() : String
+        + getRelatedScale() : Scale
+        + getRelatedWeblink() : String
+        + getDrawableDiagrams() : DetailPage.Diagram[]
+        + getLimit : float
+    }
+
+    enum Colors {
+        GREEN = "#50EE70"
+        LIGHTGREEN = "#AAFF55"
+        YELLOW = "#FFFF00"
+        ORANGE = "#FFA500"
+        RED = "#FF0000" 
+    }
+
+    class Color {
+        + getRGB() : string
+        + setRGB(hex : string) : void
+    }
+
+    class ColorCode {
+        color : Colors
+        + getColor(value : float)
+    }
+
+    class Scale {
+        -colors : Colors[]
+        +listAllColors() : Colors
+        + getColor(value : float) : Color
+    }
+
+    
+}
+
+namespace View {
+    namespace Components {
+        namespace MapPage {
+            class FeatureSelect {
+                + getSelectedFeature() : Feature
+                + setFeature(feature : Feature)
+            }
+            class Search {
+                + reset() : void
+            }
+            class Map {
+                + setPosition(position : Position)
+                + setZoom(zoom: int)
+            }
+            class Legend {
+                + setScale(scale : Scale) : void
+            }
+            class StationPopUp
+
+        }
+        namespace DetailPage {
+            class ObservationStationInfo
+            class LocationMap
+            abstract Diagram {
+                - feature : Feature
+            }
+            class FeatureHistoryLineChart extends Diagram
+            class YearComparisonLineChart extends Diagram
+            class ComparisonToLastYearPieChart extends Diagram
+        }
+    }
+
+    namespace Layout {
+        class MapPage
+        class DetailPage
+        class ErrorPage {
+            + errorCode : int
+            + errorMessage : string
+        }
+        class PrivacyPolicyPage
+        class AboutPage
+        class PageMenu
+        class LanguageMenu
+        class TopBar
+    }
+}
+
+
+namespace Controller {
+    namespace Frost {
+        class FROSTServer {
+            + setUrl(url : string) : void
+            + getUrl() : string
+        }
+
+        class FROSTQuery {
+            + send() : QueryResult
+            + setTop(n : int) : void           
+            + setSkip(n : int) : void
+            + enableCount(set : boolean) : void
+            + setOrderBy(orderBy : string) : void
+            + setSelect(select : string) : void
+            + setFilter(filter : string) : void
+            + setExpand(expand : string) : void
+            + setId(id : string) : void
+        }
+
+        interface QueryResult
+        class DataProvider {
+            + getLatestObservations(center : Position, radius: int, feature : Feature) : Observation[]
+            + getStationsIn(middle: Position, radius : int) : Station[]
+            + getHistoricalObservations(station : Station, start : Date, end : Date, feature : Feature) : Observation[]
+            + getHistoricalObservations(station : Station, start : Date, end : Date, frequency : Frequency, feature : Feature) : Observation[]
+            + getStation(id : string) : Station
+            + getFeature(id : string) : Feature
+        }
+        class FeatureProvider {
+            makeFeature(id : string) : Feature
+            getScale(feature : Feature) : Scale
+        }
+    }
+    namespace Storage {
+        class Language {
+            + getString(id: string) : string
+            + loadLanguage(languageId : string)
+        }
+
+        class MapConfigurationMemory {
+            + save(MapConfiguration conf, viewport : Viewport)
+            + load() : (MapConfiguration, Viewport)
+        }
+    }
+
+
+}
+
+@enduml
