@@ -6,4 +6,8 @@ export class Position {
 
   lat: number;
   lng: number;
+
+  getString(): string {
+    return "N " + this.lat + "° O" + this.lng + "°";
+  }
 }

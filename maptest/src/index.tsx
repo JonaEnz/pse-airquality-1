@@ -1,11 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import SimpleExample from "./SimpleExample";
-import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Viewport } from "react-leaflet";
-import { DataProvider } from "./DataProvider";
+import Layout from "./Layout";
 
 function change(viewport: Viewport) {
   console.log(viewport.center?.toString());
@@ -13,7 +11,7 @@ function change(viewport: Viewport) {
 
 ReactDOM.render(
   <React.StrictMode>
-    <SimpleExample onViewChanged={change} marker={DataProvider.getStations()} />
+    <Layout />
   </React.StrictMode>,
   document.getElementById("root")
 );
