@@ -33,6 +33,7 @@ namespace FROST {
     note top of DataProvider : This is a facade class. All requests for data run through this class.\nThe underlying mechanism of the request is hidden. \nOnly model data is given to the outside.
     class DataProvider {
         + getLatestObservations(center : Position, radius: int, feature : Feature) : Observation[]
+        + getLatestObservation(station : ObservationStation, feature Feature) : Observation
         + getStationsIn(middle: Position, radius : int) : Station[]
         + getHistoricalObservations(station : Station, start : Date, end : Date, feature : Feature) : Observation[]
         + getHistoricalObservations(station : Station, start : Date, end : Date, frequency : Frequency, feature : Feature) : Observation[]
