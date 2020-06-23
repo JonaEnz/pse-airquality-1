@@ -249,6 +249,8 @@ namespace MapPage {
     }
 
     class MapPin {
+        <<constructor>> MapPin(position : Position)
+
         + getPosition() : Position
         + setPosition(position : Position) : void
 
