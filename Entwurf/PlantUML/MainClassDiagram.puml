@@ -159,8 +159,8 @@ namespace MapPage {
 
     namespace Components {
         class MapView extends React.Component {
-            + loading : boolean
-            + selectedFeature : Feature
+            + State.loading : boolean
+            + State.selectedFeature : Feature
             --
             + selectStation(station : Messstation)
             + getValueAt(position: Position, feature : Feature) : float
@@ -183,7 +183,7 @@ namespace MapPage {
         }
 
         class Map extends React.Component {
-            + viewport : Viewport
+            + State.viewport : Viewport
             --
             + setPosition(position : Position)
             + setZoom(zoom : int)

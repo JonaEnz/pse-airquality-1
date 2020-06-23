@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import Chart from "react-google-charts";
 import { Position } from "./Model/Position";
 import { Station } from "./Model/Station";
+import { Button } from "@material-ui/core";
 
 export default class SimpleExample extends React.Component<
   { onViewChanged(viewport: Viewport): void; marker: Station[] },
@@ -43,7 +44,13 @@ export default class SimpleExample extends React.Component<
           {this.props.marker.map((m) => (
             <Marker position={[m.position.lat, m.position.lng]}>
               <Popup>
-                <button onClick={() => console.log("Hi")}>Test</button>
+                <Button
+                  onClick={() => console.log("Hi")}
+                  variant="contained"
+                  color="primary"
+                >
+                  Test
+                </Button>
               </Popup>
             </Marker>
           ))}
