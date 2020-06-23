@@ -1,19 +1,5 @@
 \subsection{FROST}
 
-\begin{Class}{RequestClass}
-    \textbf{Methoden:}
-    \begin{itemize}
-        \item \texttt{getLatestObservations(center: Position, radius: int, feature: Feature): Observation[]}
-        \\Gibt alle Observations im gegebenen Bereich zurück.
-        \item \texttt{getStationsIn(middle: Position, radius: int): Station[]}
-        \\Gibt alle Messstationen im gegebenen Bereich zurück.
-        \item \texttt{getHistoricalObservations(station: Station, start: Date, end: Date, feature: Feature): Observation[]}
-        \\Gibt alle Observations einer Station in einem gegebenen Zeitraum für das gegebene Feature zurück.
-        \item \texttt{getHistoricalObservations(station: Station, start: Date, end: Date, frequency: Frequency, feature: Feature): Observation[]}
-        
-    \end{itemize}
-\end{Class}
-
 \begin{Class}{FROSTServer}
     \textbf{Methoden}
     \begin{itemize}
@@ -25,15 +11,16 @@
     
     \textbf{Attribute}
     \begin{itemize}
-        \item //Todo
+        \item \texttt{url : string}
+        \\Die URL des FROSTServers.
     \end{itemize}
 \end{Class}
 
 \begin{Class}{FROSTQuery}
     \textbf{Methoden}
     \begin{itemize}
-        \item \texttt{send() : QueryResult}
-        \\ Todo: Ist nicht asyncron(?)
+        \item \texttt{send() : }
+        \\ Todo: Ist nicht asyncron(?), was wird zurückgegeben
         \\Sendet die Abfrage an den Server und gibt die Antwort als QueryResult zurück.
         \item \texttt{setTop(n : int) : void}
         \\Stellt die maximale Anzahl von Objekten ein.
@@ -53,80 +40,24 @@
         \item \texttt{setId(id : string) : void}
         \\TODO
     \end{itemize}
-    Für die Standardwerte der set-Methoden siehe:
-    \\https://fraunhoferiosb.github.io/FROST-Server/sensorthingsapi/STA-Tailoring-Responses.html
-\end{Class}
-
-\begin{Class}{ObservationQuery}
-    \textbf{Methoden}
-    \begin{itemize}
-        \item //Todo
-    \end{itemize}
-    
-    \textbf{Attribute}
-    \begin{itemize}
-        \item //Todo
-    \end{itemize}
-\end{Class}
-
-\begin{Class}{DatastreamQuery}
-    \textbf{Methoden}
-    \begin{itemize}
-        \item //Todo
-    \end{itemize}
-    
-    \textbf{Attribute}
-    \begin{itemize}
-        \item //Todo
-    \end{itemize}
-\end{Class}
-
-\begin{Class}{ObservedPropertyQuery}
-    \textbf{Methoden}
-    \begin{itemize}
-        \item //Todo
-    \end{itemize}
-    
-    \textbf{Attribute}
-    \begin{itemize}
-        \item //Todo
-    \end{itemize}
-\end{Class}
-
-\begin{Class}{ThingQuery}
-    \textbf{Methoden}
-    \begin{itemize}
-        \item //Todo
-    \end{itemize}
-    
-    \textbf{Attribute}
-    \begin{itemize}
-        \item //Todo
-    \end{itemize}
-\end{Class}
-
-\begin{Class}{LocationQuery}
-    \textbf{Methoden}
-    \begin{itemize}
-        \item //Todo
-    \end{itemize}
-    
-    \textbf{Attribute}
-    \begin{itemize}
-        \item //Todo
-    \end{itemize}
+    Für die Standardwerte der set-Methoden siehe: \url{https://fraunhoferiosb.github.io/FROST-Server/sensorthingsapi/STA-Tailoring-Responses.html}
 \end{Class}
 
 \begin{Class}{DataProvider}
     \textbf{Methoden}
     \begin{itemize}
         \item \texttt{getLatestObservations(center : Position, radius: int, feature : Feature) : Observation[]}
+        \\Gibt alle Observations im spezifizierten Bereich zurück
         \item \texttt{getStationsIn(middle: Position, radius : int) : Station[]}
+        \\TODO: brauchen wir diese Methode?
         \item \texttt{getHistoricalObservations(station : Station, start : Date, end : Date, feature : Feature) : Observation[]}
-        \item \texttt{getHistoricalObservations(station : Station, start : Date, end : Date, frequency : Frequency, feature : Feature) : Observation[]}
-	\\Todo: Overload in TypeScript könnte kompliziert werden.
+        \\Gibt Observations der gegebenen Station, zwischen start und end Zeitpunkt, des gegebenen Features zurück.
+        \item \texttt{getHistoricalObservationsFreq(station : Station, start : Date, end : Date, frequency : Frequency, feature : Feature) : Observation[]}
+        \\Gibt Observations der gegebenen Station, zwischen start und end Zeitpunkt mit gegebener Frequenz, des gegebenen Features zurück.
         \item \texttt{getScale(feature : Feature) : Scale}
+        \\Gibt die Skala des gegebenen Features zurück.
         \item \texttt{getStation(id : string) : Station}
+        \\Gibt die Station die zur gegebenen ID gehört zurück.
     \end{itemize}
     
     \textbf{Attribute}
