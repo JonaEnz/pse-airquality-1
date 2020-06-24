@@ -159,6 +159,7 @@ namespace Controller {
         interface QueryResult
         class DataProvider {
             + getLatestObservations(center : Position, radius: int, feature : Feature) : Observation[]
+            + getLatestObservation(station : ObservationStation, feature : Feature) : Observation
             + getStationsIn(middle: Position, radius : int) : Station[]
             + getHistoricalObservations(station : Station, start : Date, end : Date, feature : Feature) : Observation[]
             + getHistoricalObservations(station : Station, start : Date, end : Date, frequency : Frequency, feature : Feature) : Observation[]
