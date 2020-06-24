@@ -42,7 +42,6 @@ namespace Model {
         yCoordinate : float
     }
 
-    note top of Feature : Designed as a modified Singleton. There is only \n one object of each feature (Temperature, Air Pressure, ...).\n There is a config file which says which different types of \nfeatures exist.
     class Feature {
         - id : int
         - name : String
@@ -88,7 +87,6 @@ namespace Model {
         + getColor(value : float) : Color
     }
 
-    
 }
 
 namespace View {
@@ -104,12 +102,12 @@ namespace View {
             class Map {
                 + setPosition(position : Position)
                 + setZoom(zoom: int)
+                + placeObservations(observations : Observation[])
             }
             class Legend {
                 + setScale(scale : Scale) : void
             }
             class StationPopUp
-
         }
         namespace DetailPage {
             class ObservationStationInfo
@@ -182,6 +180,17 @@ namespace Controller {
             + save(MapConfiguration conf, viewport : Viewport)
             + load() : (MapConfiguration, Viewport)
         }
+    }
+
+    class MapController {
+        + featureChange(feature : Feature) : void
+        + configurationChange() : void
+        + search(searchTerm : string) : void
+        + findCurrentPosition() : void
+    }
+
+    class DetailController {
+        
     }
 
 
