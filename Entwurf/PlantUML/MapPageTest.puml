@@ -1,48 +1,47 @@
 @startuml MapPageTest
 
 actor User
-participant Map
 participant MapView
+participant Map
+participant MapController
 participant StationConfiguration
 participant Legend 
 participant StationInfo
-participant RequestClass
+participant DataProvider
 
-User -> Map ++: open()
-Map -> MapView ++: open()
-MapView -> StationConfiguration ++ : getPins(viewport)
-StationConfiguration -> RequestClass ++ : getStationsIn(viewport.getCenter(), viewport.getRadius())
-return stations
-StationConfiguration -> RequestClass ++ : getLatestObservations(viewport.getCenter(), viewport.getRadius())
+User -> MapView ++ : open()
+MapView -> Map ++ : open()
+Map -> MapController ++ : getPins()
+MapController -> StationConfiguration ++ : getPins()
+StationConfiguration -> DataProvider ++ : getLatestObservations(center, radius, feature)
 return observations
-StationConfiguration --> MapView --: pins
-
-MapView -> StationConfiguration ++ : getPolygons(viewport)
-StationConfiguration --> MapView -- : []
-
-MapView -> StationConfiguration ++ : getFeature()
-StationConfiguration --> MapView -- : selectedFeature
-MapView -> FeatureSelect ++ : setFeature(selectedFeature)
-return
-
-MapView -> StationConfiguration ++ : getScale()
-StationConfiguration -> RequestClass ++: getScale(selectedFeature)
-return scale
-StationConfiguration --> MapView -- : scale
-MapView -> Legend : setScale(scale)
-
-' Zooming out
-User -> Map : zoom()
-Map -> MapView ++ : onViewportChange(viewport) 
-MapView -> StationConfiguration ++: getPins(viewport)
+StationConfiguration -> DataProvider ++ : getStationsIn(center, radius)
+return stations
 return pins
-return
-' Click on station
+return pins
+Map -> MapController ++ : getPolygons()
+MapController -> StationConfiguration ++ : getPolygons()
+return []
+return []
+MapView -> MapController ++ : getScale()
+MapController -> StationConfiguration ++ : getScale()
+return scale
+return scale
+MapView -> Legend ++ : open(scale)
 
-User -> MapView : clickMarker()
-MapView -> MapView : selectStation(station)
-MapView -> MapView : openPopUp(station)
-MapView -> StationInfo ++: isOpen = true
+'Nutzer zoomt'
+User -> Map ++ : zoom()
+Map -> MapController ++ : handleViewportChange(viewport)
+MapController -> StationConfiguration ++ : getPins, Polygons wie oben
+return pins, polygons
+return 
 return
 
+'Nutzer wählt Station'
+User -> Map ++ : clickOnMarker()
+Map -> MapController ++ : handlePopup(id)
+MapController -> DataProvider ++ : getStation(id)
+return station
+return station
+return
 @enduml

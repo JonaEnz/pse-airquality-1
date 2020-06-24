@@ -101,7 +101,19 @@ namespace View {
             class Search {
                 + reset() : void
             }
+
+            class MapView {
+            + selectStation(station : Messstation)
+            + getValueAt(position: Position, feature : Feature) : float
+            + openPopUp(station : ObservationStation)
+            + closePopUp() : void
+            + onViewportChange(viewport : Viewport)
+        }
             class Map {
+                + State.selectedStation : ObservationStation
+                --
+                + Props.onViewportChange()
+                + setPins(mapPins : MapPin[])
                 + setPosition(position : Position)
                 + setZoom(zoom: int)
                 + placeObservations(observations : Observation[])
@@ -186,10 +198,37 @@ namespace Controller {
     }
 
     class MapController {
-        + featureChange(feature : Feature) : void
-        + configurationChange() : void
+        + handlePopup(id : string)
+        + handleViewportChange(viewport : Viewport)
+        --
+        + getPins() : MapPin[]
+        + getPolygons() : Polygon[]
+
+        + changeFeature(feature : Feature) : void
+        + onConfigurationChange(mapConf : MapConfiguration) : void
         + search(searchTerm : string) : void
-        + findCurrentPosition() : void
+        + updateCurrentPosition() : void
+    }
+
+    abstract MapConfiguration {
+        + getPins(port : Viewport) : MapPin[]
+        + getPolygons(port: Viewport) : Polygon[]
+        + getScale() : Scale
+        + getFeatures() : Feature[]
+    }
+
+    class StationConfiguration extends MapConfiguration {
+        + setFeature(feature : Feature)
+    }
+
+    class PolygonConfiguration extends MapConfiguration {
+        + setFeature(feature : Feature)
+    }
+
+    class NearConfiguration extends MapConfiguration {
+        + radius : int
+        --
+        + setFeature(feature : Feature)
     }
 
     class DetailController {
