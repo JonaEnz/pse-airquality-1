@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Map, TileLayer, Marker, Popup, Viewport } from "react-leaflet";
 import { LatLng, marker } from "leaflet";
 import ReactDOM from "react-dom";
@@ -6,10 +6,11 @@ import Chart from "react-google-charts";
 import { Position } from "./Model/Position";
 import { Station } from "./Model/Station";
 import { Button } from "@material-ui/core";
+import { DataProvider } from "./DataProvider";
 
 export default class SimpleExample extends React.Component<
   { onViewChanged(viewport: Viewport): void; marker: Station[] },
-  { lat: number; lng: number; zoom: number }
+  { lat: number; lng: number; zoom: number; stations: Station[] }
 > {
   constructor(props: {
     onViewChanged(viewport: Viewport): void;
@@ -20,8 +21,15 @@ export default class SimpleExample extends React.Component<
       lat: 49,
       lng: 8.4,
       zoom: 13,
+      stations: [],
     };
+    this.setState({ stations: DataProvider.getStations() });
   }
+
+  onViewChanged = (viewport: Viewport) => {
+    DataProvider.add();
+    this.setState({ stations: DataProvider.getStations() });
+  };
 
   render() {
     const position: [number, number] = [this.state.lat, this.state.lng];
@@ -30,7 +38,7 @@ export default class SimpleExample extends React.Component<
         <Map
           center={position}
           zoom={this.state.zoom}
-          onViewportChanged={this.props.onViewChanged}
+          onViewportChanged={this.onViewChanged}
         >
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -41,7 +49,7 @@ export default class SimpleExample extends React.Component<
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
           </Marker>
-          {this.props.marker.map((m) => (
+          {this.state.stations.map((m) => (
             <Marker position={[m.position.lat, m.position.lng]}>
               <Popup>
                 <Button

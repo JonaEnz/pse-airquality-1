@@ -9,6 +9,7 @@ import SimpleExample from "./SimpleExample";
 import { DataProvider } from "./DataProvider";
 import { Viewport } from "react-leaflet";
 import { MenuItem } from "@material-ui/core";
+import { render } from "@testing-library/react";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,7 +29,7 @@ export default function ButtonAppBar() {
   const classes = useStyles();
 
   function change(viewport: Viewport) {
-    console.log(viewport.center);
+    DataProvider.add();
   }
 
   return (
