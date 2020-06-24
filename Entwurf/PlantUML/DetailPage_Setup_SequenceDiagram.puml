@@ -1,0 +1,48 @@
+@startuml
+
+title Setup of Detail Page
+
+actor User
+participant  DetailPage
+participant  ObservationStationInfo
+participant  LocationMap
+participant  Diagram
+participant  ObservationStation
+participant  DataProvider
+
+User -> DetailPage : initialize(station:ObservationStation)
+activate DetailPage
+
+DetailPage -> ObservationStationInfo : initialize(station:ObservationStation)
+activate ObservationStationInfo
+ObservationStationInfo -> ObservationStation : station.getName()
+ObservationStationInfo <- ObservationStation : name
+ObservationStationInfo -> ObservationStation: station.getDescription()
+ObservationStationInfo <- ObservationStation : description
+ObservationStationInfo -> ObservationStation : station.getPosition()
+ObservationStationInfo <- ObservationStation : position
+ObservationStationInfo -> ObservationStation : station.getFeatures()
+ObservationStationInfo <- ObservationStation : features
+loop for each feature in features
+    ObservationStationInfo -> DataProvider : getLatestObservation(station, feature)
+    ObservationStationInfo <- DataProvider : observation
+end
+
+DetailPage -> LocationMap : initialize(station:ObservationStation)
+activate LocationMap
+LocationMap -> ObservationStation : station.getPosition()
+LocationMap <- ObservationStation : position
+
+DetailPage -> ObservationStation : getDiagrams()
+loop for each feature
+    ObservationStation -> Feature : getDiagrams()
+    ObservationStation <- Feature : diagrams
+    ObservationStation -> Diagram : setObservationStation()
+end
+DetailPage <- ObservationStation : diagrams
+
+loop for each Diagram in diagrams
+    DetailPage -> Diagram: loadData
+end
+
+@enduml

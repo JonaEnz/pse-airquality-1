@@ -52,11 +52,13 @@ namespace Model {
     class ObservationStation {
         -id : int
         -name : String
+        -description : String
         -position : Position
         -availableFeatures : List<Feature>
 
         + getId : int
         + getName() : string
+        + getDescription() : String
         + getFeatures() : List<Feature>
         + getPosition() : Position
         + isLimitExceeded(feature : Feature) : Boolean

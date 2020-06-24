@@ -4,11 +4,13 @@ namespace Model {
     class ObservationStation {
         -id : int
         -name : String
+        - description : String
         -position : Position
         -availableFeatures : List<Feature>
 
         + getId : int
         + getName() : string
+        + getDescription() : String
         + getFeatures() : List<Feature>
         + getPosition() : Position
         + isLimitExceeded(feature : Feature) : Boolean
@@ -42,7 +44,6 @@ namespace Model {
         yCoordinate : float
     }
 
-    note top of Feature : Designed as a modified Singleton. There is only \n one object of each feature (Temperature, Air Pressure, ...).\n There is a config file which says which different types of \nfeatures exist.
     class Feature {
         - id : int
         - name : String
@@ -88,7 +89,6 @@ namespace Model {
         + getColor(value : float) : Color
     }
 
-    
 }
 
 namespace View {
@@ -104,12 +104,12 @@ namespace View {
             class Map {
                 + setPosition(position : Position)
                 + setZoom(zoom: int)
+                + placeObservations(observations : Observation[])
             }
             class Legend {
                 + setScale(scale : Scale) : void
             }
             class StationPopUp
-
         }
         namespace DetailPage {
             class ObservationStationInfo
@@ -161,6 +161,7 @@ namespace Controller {
         interface QueryResult
         class DataProvider {
             + getLatestObservations(center : Position, radius: int, feature : Feature) : Observation[]
+            + getLatestObservation(station : ObservationStation, feature : Feature) : Observation
             + getStationsIn(middle: Position, radius : int) : Station[]
             + getHistoricalObservations(station : Station, start : Date, end : Date, feature : Feature) : Observation[]
             + getHistoricalObservations(station : Station, start : Date, end : Date, frequency : Frequency, feature : Feature) : Observation[]
@@ -182,6 +183,17 @@ namespace Controller {
             + save(MapConfiguration conf, viewport : Viewport)
             + load() : (MapConfiguration, Viewport)
         }
+    }
+
+    class MapController {
+        + featureChange(feature : Feature) : void
+        + configurationChange() : void
+        + search(searchTerm : string) : void
+        + findCurrentPosition() : void
+    }
+
+    class DetailController {
+        
     }
 
 
