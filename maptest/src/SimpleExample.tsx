@@ -7,11 +7,19 @@ import { Position } from "./Model/Position";
 import { Station } from "./Model/Station";
 import { Button } from "@material-ui/core";
 import { DataProvider } from "./DataProvider";
+import { MapController } from "./Controller/MapController";
 
 export default class SimpleExample extends React.Component<
   { onViewChanged(viewport: Viewport): void; marker: Station[] },
-  { lat: number; lng: number; zoom: number; stations: Station[] }
+  {
+    lat: number;
+    lng: number;
+    zoom: number;
+    stations: Station[];
+    selectedStation: Station | null;
+  }
 > {
+  controller: MapController;
   constructor(props: {
     onViewChanged(viewport: Viewport): void;
     marker: Station[];
@@ -22,14 +30,26 @@ export default class SimpleExample extends React.Component<
       lng: 8.4,
       zoom: 13,
       stations: [],
+      selectedStation: null,
     };
-    this.setState({ stations: DataProvider.getStations() });
+    this.controller = new MapController({
+      center: [this.state.lat, this.state.lng],
+      zoom: this.state.zoom,
+    });
+    this.setState({ stations: this.controller.getPins() });
   }
 
   onViewChanged = (viewport: Viewport) => {
-    DataProvider.add();
-    this.setState({ stations: DataProvider.getStations() });
+    this.controller.handleViewportChange(viewport);
+    this.setState({ stations: this.controller.getPins() });
   };
+
+  popup(station: Station) {
+    var s = this.controller.handlePopup(station.id);
+    console.log(s.id);
+    console.log(station.id);
+    this.setState({ selectedStation: s });
+  }
 
   render() {
     const position: [number, number] = [this.state.lat, this.state.lng];
@@ -51,13 +71,15 @@ export default class SimpleExample extends React.Component<
           </Marker>
           {this.state.stations.map((m) => (
             <Marker position={[m.position.lat, m.position.lng]}>
-              <Popup>
+              <Popup onOpen={() => this.popup(m)}>
                 <Button
                   onClick={() => console.log("Hi")}
                   variant="contained"
                   color="primary"
                 >
-                  Test
+                  {this.state.selectedStation
+                    ? this.state.selectedStation.id
+                    : "Null"}
                 </Button>
               </Popup>
             </Marker>
