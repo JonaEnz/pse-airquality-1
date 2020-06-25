@@ -1,0 +1,146 @@
+\subsection{Model}
+
+    \begin{Class}{ObservationStation}
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{getName() : string}
+            \\ Der Name der Station.
+            \item \texttt{getFeatures() : Feature[]}
+            \\ Array von Features, die die Station erfassen kann, und von der Anwendung unterstützt werden.
+            \item \texttt{getPosition() : Position}
+            \\ Die Position an der sich die Station befindet.
+            \item \texttt{getAverage() : number}
+            \\ Der Durchschnitt der Messwerte des letzten Tages.
+            \item \texttt{hasFeature(feature : Feature) : boolean}
+            \\ \emph{true} wenn die Station das Feature erfassen kann.
+            \\ \emph{false} sonst.
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{Observation}
+        
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{getFeature() : Feature}
+            \\ Gibt das Feature der Beobachtung zurück.
+            \item \texttt{getDate() : Date}
+            \\ Gibt den Zeitpunkt der Beobachtung zurück.
+            \item \texttt{getValue() : number}
+            \\ Gibt den Wert der Beobachtung (in der Einheit des Feature) zurück.
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{Position}
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{getCoordinates() : (lng : number, lat : number)}
+            \\ Liefert die Koordinaten im Dezimalgrad als Tupel zurück.
+            \item \texttt{setCoordinates(lng : number, lat : number)}
+            \\ Setzt die Koordinaten fest. Die Eingaben werden als Dezimalgrad interpretiert.
+
+            \item \texttt{toString() : string}
+            \\ Gibt die Daten im Format 'N 0.00000°, O 0.00000°' als Zeichenkette zurück.
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{Feature}
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{getId() : string}
+            \\ Gibt die FROST-Id des Features zurück.
+            \item \texttt{getNameId() : string}
+            \\ Gibt die Id des Featurenamens für die Sprachdatei zurück.
+            \item \texttt{getUnitOfMeasurement() : string}
+            \\ Gibt die Einheit in der das Feature angegeben ist zurück.
+            \item \texttt{getDescriptionId() : string}
+            \\ Gibt die Id der Featurebeschreibung für die Sprachdatei zurück.
+            \item \texttt{getDefaultScale() : Scale}
+            \\ Gibt die Farbskala aus der Featurekonfiguration zurück.
+            \item \texttt{getLimit() : number}
+            \\ Das Limit für eine Warnmeldung. Wenn das Limit -1 ist, wird nie eine Warnung ausgegeben.
+            \item \texttt{isLimitExceeded(obs : Observation) : Boolean}
+            \\ \emph{true} wenn der Wert der Observation das Limit des Features übersteigt.
+            \\ \emph{false} wenn das Limit -1 ist oder der Wert der Observation <= Limit.
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{Position}
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{getCoordinates() : (lng : float, lat : float)}
+            \\ Liefert die Koordinaten der Position als Tupel.
+            \item \texttt{setCoordinates(lng : float, lat : float)}
+            \\ Setzt die Koordinaten auf lng und lat fest.
+            \\ Ist einer der beiden Parameter \emph{null} bleibt dieser unverändert, der andere wird angepasst.
+            \item \texttt{toString() : string}
+            \\ Liefert die Position als string im Dezimalgrad-Format.
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{Color}
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{toString() : string}
+            \\ Liefert den RGB-Wert der Farbe im Format '\#FFFFFF' zurück.
+            \item \texttt{setRGB(hex : string) : void}
+            \\ Todo: Genauere Dokumentation erforderlich. Wohin wird die Farbe gespeichert? Soll das eine Art constructor sein? Braucht man überhaupt so eine Funktion, sollte die Farbe nicht lieber durch ein Zahlentripel kodiert werden?
+            \\ Speichert die Farbe mit RGB Wert \emph{hex}. Es wird nur das Format '\#FFFFFF' akzeptiert.
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{Scale}
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{getColor(value : number) : Color}
+            \\ Gibt die Farbe des Wertes entsprechend der Konfiguration zurück.
+            \item \texttt{addColor(color: Color, threshold : number)}
+            \\ Fügt eine Farbe und eine entsprechende Grenze hinzu.
+            \\ Gibt es bereits eine Farbe mit dieser Grenze wird sie überschrieben.
+            \item \texttt{removeColor(threshold : number) : void}
+            \\ Todo: Genauere Dokumentation bezüglich des Grenzwerts. 
+            \\ Entfernt den Eintrag mit dem Grenzwert \emph{threshold}.
+            \\ Gibt es einen solchen Eintrag nicht, geschieht nichts.
+            \item \texttt{getAllEntries() : (number, Color)[]}
+            \\ Liefert ein Array an Tupeln von Grenzwerten und Farben zurück.
+            \\ Das Array ist aufsteigend nach Grenzwerten sortiert.
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{Polygon}
+        \textbf{Attribute}
+        \begin{itemize}
+            \item \texttt{stations : ObservationStation[]}
+            \\ Stationen, die die Ecken des Polygons bilden.
+            \item \texttt{color : Color}
+            \\ Farbe des Polygons.
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{MapPin}
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{getPosition() : Position}
+            \\ Liefert die Position des Pins
+            \item \texttt{setPosition(position : Position) : void}
+            \\ Setzt die Position des Pins
+
+            \bigskip
+            \item \texttt{getValue() : float}
+            \\ Todo: Genaue Dokumentation für value.
+            \\ Liefert den Wert anhand dem die Färbung bestimmt wird.
+            \item \texttt{setValue(value : float) : void}
+            \\ Setzt den Wert des Pins.
+
+            \bigskip
+            \item \texttt{getStationId() : string}
+            \\ Liefert die interne Id der Station, die durch den Pin repräsentiert wird.
+            \item \texttt{setStationId(id : string) : void}
+            \\ Setzt die interne Id der Station, die durch den Pin repräsentiert wird.
+
+            \bigskip
+            \item \texttt{getColor() : Color}
+            \\ Liefert die Farbe des Pins.
+            \item \texttt{setColor(color : Color) : void}
+            \\ Legt die Farbe des Pins fest.
+        \end{itemize}
+    \end{Class}
