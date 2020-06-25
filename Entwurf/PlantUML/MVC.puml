@@ -1,6 +1,17 @@
 @startuml MVC
 
 namespace Model {
+
+    class Viewport {
+        + getCenter() : Position
+        + setCenter(position : Position) : void
+
+        + getZoom() : int
+        + setZoom(zoom : int) : void
+
+        + getRadius() : int
+    }
+    
     class ObservationStation {
         -id : int
         -name : String
@@ -99,29 +110,26 @@ namespace View {
                 + setFeature(feature : Feature)
             }
             class Search {
+                + State.searchTerm : string
+                + onSearch(string searchTerm) : void
+                + onLocationSearch() : void
                 + reset() : void
             }
 
             class MapView {
             + selectStation(station : Messstation)
-            + getValueAt(position: Position, feature : Feature) : float
-            + openPopUp(station : ObservationStation)
-            + closePopUp() : void
+            + getValueAt(position: Position, feature : Feature) : number
             + onViewportChange(viewport : Viewport)
+            + onStationSelected(pin : MapPin)
         }
             class Map {
-                + State.selectedStation : ObservationStation
-                --
+                + Props.pins : MapPin[]
+                + Props.polygons : Polygon[]
                 + Props.onViewportChange()
-                + setPins(mapPins : MapPin[])
-                + setPosition(position : Position)
-                + setZoom(zoom: int)
-                + placeObservations(observations : Observation[])
             }
             class Legend {
-                + setScale(scale : Scale) : void
+                + Pros.scale : Scale
             }
-            class StationPopUp
         }
         namespace DetailPage {
             class ObservationStationInfo
@@ -198,7 +206,7 @@ namespace Controller {
     }
 
     class MapController {
-        + handlePopup(id : string) : Station
+        + handlePopup(pin : MapPin) : (Station, Observation)
         + handleViewportChange(viewport : Viewport)
         --
         + getPins() : MapPin[]

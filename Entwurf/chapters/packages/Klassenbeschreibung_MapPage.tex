@@ -32,6 +32,7 @@
         \end{itemize}
     \end{Class}
 
+
     \begin{Class}{StationConfiguration extends MapConfiguration}
         Eine Kartenkonfiguration die die Stationen mit Farbe nach einer Skala anzeigt.
         \textbf{Methoden}
@@ -93,42 +94,31 @@
         \end{itemize}
     \end{Class}
 
-    \begin{Class}{MapPin}
+    \begin{Class}{MapController}
         \textbf{Methoden}
         \begin{itemize}
-            \item \texttt{getPosition() : Position}
-            \\ Liefert die Position des Pins
-            \item \texttt{setPosition(position : Position) : void}
-            \\ Setzt die Position des Pins
-
+            \item \texttt{handlePopup(pin : MapPin) : (ObservationStation, Observation)}
+            \\ Wird aufgerufen wenn das Popup eines Stations-Markers geöffnet wird.
+            \\ Liefert die zugehörige ObservationStation und die letzte Observation des aktuell gewählten Features zurück.
+            \\ Existiert diese nicht wird (null, null) zurückgegeben.
+            \item \texttt{handleViewportChange(viewport : Viewport)}
+            \\ Wird aufgerufen wenn sich der Viewport der Leaflet-Karte ändert.
+            \\ Aktualisiert gegebenenfalls private Eigenschaften.
             \bigskip
-            \item \texttt{getValue() : float}
-            \\ Todo: Genaue Dokumentation für value.
-            \\ Liefert den Wert anhand dem die Färbung bestimmt wird.
-            \item \texttt{setValue(value : float) : void}
-            \\ Setzt den Wert des Pins.
-
+            \item \texttt{getPins() : MapPin[]}
+            \\ Liefert die MapPins entsprechend der aktuellen Konfiguration und des aktuellen \emph{viewport} zurück.
+            \item \texttt{getPolygons() : Polygon[]}
+            \\ \\ Liefert die Polygone entsprechend der aktuellen Konfiguration und des aktuellen \emph{viewport} zurück.
             \bigskip
-            \item \texttt{getStationId() : string}
-            \\ Liefert die interne Id der Station, die durch den Pin repräsentiert wird.
-            \item \texttt{setStationId(id : string) : void}
-            \\ Setzt die interne Id der Station, die durch den Pin repräsentiert wird.
-
-            \bigskip
-            \item \texttt{getColor() : Color}
-            \\ Liefert die Farbe des Pins.
-            \item \texttt{setColor(color : Color) : void}
-            \\ Legt die Farbe des Pins fest.
-        \end{itemize}
-    \end{Class}
-
-    \begin{Class}{Polygon}
-        \textbf{Attribute}
-        \begin{itemize}
-            \item \texttt{stations : ObservationStation[]}
-            \\ Stationen, die die Ecken des Polygons bilden.
-            \item \texttt{color : Color}
-            \\ Farbe des Polygons.
+            \item \texttt{changeFeature(feature : Feature) : void}
+            \\ Ändert das aktuell gewählte Feature und aktualisiert die Karte entsprechend.
+            \item \texttt{onConfigurationChange(mapConf : MapConfiguration) : void}
+            \\ Wird aufgerufen wenn sich die aktuelle Konfiguration ändert. Ersetzt die aktuelle Konfiguration durch \emph{mapConf}und aktualisiert die Karte.
+            \item \texttt{search(searchTerm : string) : void}
+            \\ Versucht zum \emph{searchTerm} eine entsprechende Position zu finden und setzt die Mitte des Viewports darauf.
+            Schlägt die Suche fehl wird ein Warnung ausgegeben.
+            \item \texttt{updateCurrentPosition(position : Position) : void}
+            \\ Setzt die Mitte des Viewports auf \emph{Position} und aktualisiert die Karte. 
         \end{itemize}
     \end{Class}
 

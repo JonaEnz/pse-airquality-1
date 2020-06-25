@@ -10,23 +10,10 @@
             \\ Rückgabe:
             \\ \emph{null}: Es konnte kein Wert bestimmt werden da der Punkt zu weit entfernt von Messstationen ist.
             \\ \emph{float}: Der geschätzte Wert
-            \item \texttt{openPopUp(station : ObservationStation) : void}
-            \\ Öffnet die StationInfo in Map mit den Daten aus \emph{observation}.
-            \\ Tausche die Daten aus falls \emph{StationInfo} bereits geöffnet ist.
-            \item \texttt{closePopUp() : void}
-            \\ Schließt die StationInfo in Map falls sie geöffnet ist.
             \item \texttt{onViewportChanged(viewport : Viewport)}
             \\ Verarbeitet die Änderung des Viewports und aktualisiert die Pins und Polygone auf der Karte.
-        \end{itemize}
-        \textbf{Attribute}
-        \begin{itemize}
-            \item \texttt{loading : boolean}
-            \\ \emph{true}: Über der Map wird ein Ladesymbol angezeigt.
-            \\ \emph{false}: Alle Kinds-Komponenten von MapView haben aktuelle Anzeigedaten.
-            \\ \emph{null}: Nicht definiert.
-            \item \texttt{selectedFeature : Feature}
-            \\ \emph{null}: Die aktuelle \emph{MapConfiguration} unterstützt keine Features als Parameter.
-            \\ \emph{Feature}: Die MapConfiguration zeigt aktuell Daten für das gewählte Feature an.
+            \item \texttt{onStationSelected(pin : MapPin)}
+            \\ Verarbeitet den Klick auf einen Stations-Marker und aktualisiert das zugehörige Popup.
         \end{itemize}
     \end{Class}
 
@@ -46,14 +33,11 @@
     \begin{Class}{Search extends React.Component}
         \textbf{Methoden}
         \begin{itemize}
-            \item \texttt{find() : Position}
-            \\ Rückgabe:
-            \\ \emph{null}: Der aktuelle \emph{searchTerm} ist keine gültige Adresse und konnte nicht in eine umgewandelt werden.
-            \\ \emph{Position}: Die Position des \emph{searchTerm} als Koordinaten.
-            \item \texttt{findCurrentPosition() : Position}
-            \\ Rückgabe:
-            \\ Falls Positionsanfragen vom Nutzer erlaubt wurden: Die aktuelle Position des Nutzers
-            \\ Falls Positionsanfragen vom Nutzer NICHT erlaubt wurden: null
+            \item \texttt{onSearch(string searchTerm) : void}
+            \\ Wird aufgerufen wenn auf den Such-Button geklickt wird.
+            \\ Es wird nach der Adresse gesucht und das entsprechende Event im MapController aufgerufen.
+            \item \texttt{onLocationSearch() : void}
+            \\ Wird bei Klick auf den "Lokalisieren" Knopf aufgerufen und ruft die entsprechende Methode im MapController auf.
             \item \texttt{reset() : void}
             \\ Setzt searchTerm auf das leere Wort.
         \end{itemize}
@@ -67,25 +51,22 @@
     \begin{Class}{Map extends React.Component}
         \textbf{Methoden}
         \begin{itemize}
-            \item \texttt{setPosition(position : Position) : void}
-            \\ Falls \emph{position} \emph{null}: Fehler
-            \\ Sonst wird die Leaflet-Karte auf die angegebene Position zentriert.
-            \item \texttt{setZoom(zoom : int) : void}
-            \\ Setzt den Zoom der Leaflet-Karte auf \emph{zoom}.
-            \item \texttt{props.onViewportChanged(viewport : Viewport)}
+            \item \texttt{Props.onViewportChanged(viewport : Viewport)}
             \\ Wird aufgerufen wenn die Leaflet-Karte verschoben wird.
         \end{itemize}
         \textbf{Attribute}
         \begin{itemize}
-            \item \texttt{viewport : Viewport}
-            \\ Der aktuelle Viewport der Leaflet-Karte, wird maximal einmal pro Sekunde aktualisiert.
+            \item \texttt{Props.pins : MapPin[]}
+            \\ Die Marker die auf der Karte angezeigt werden sollen.
+            \item \texttt{Props.polygons : Polygon[]}
+            \\ Die Polygone die auf der Karte angezeigt werden sollen.
         \end{itemize}
     \end{Class}
     
     \begin{Class}{Legend extends React.Component}
         \textbf{Attribute}
         \begin{itemize}
-            \item \texttt{scale : Skala}
+            \item \texttt{Props.scale : Skala}
             \\ Die aktuell verwendete Skala.
         \end{itemize}
     \end{Class}
@@ -95,11 +76,8 @@
         \begin{itemize}
             \item \texttt{openDetails : MaterialUI.Button}
             \\ click() öffnet die Detailansicht mit der ID der \emph{station}
-            \item \texttt{station : Messstation}
+            \item \texttt{Props.station : Messstation}
             \\ Die Messstation zu der die StationInfo gehört.
-            \item \texttt{isOpen : boolean}
-            \\ \emph{true}: StationInfo wird bei der Position der \emph{station} angezeigt
-            \\ \emph{false}: StationInfo ist ausgeblendet
         \end{itemize}
     \end{Class}
 
