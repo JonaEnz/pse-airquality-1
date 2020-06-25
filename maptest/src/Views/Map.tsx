@@ -1,64 +1,65 @@
-import React, { useState } from "react";
-import { Map, TileLayer, Marker, Popup, Viewport } from "react-leaflet";
-import { LatLng, marker } from "leaflet";
-import ReactDOM from "react-dom";
+import React from "react";
+import { Viewport, TileLayer, Popup, Marker } from "react-leaflet";
+import { MapPin } from "../Model/MapPin";
+import { Station } from "../Model/Station";
+import { Position } from "../Model/Position";
+import { Polygon } from "../Model/Polygon";
 import Chart from "react-google-charts";
-import { Position } from "./Model/Position";
-import { Station } from "./Model/Station";
 import { Button } from "@material-ui/core";
-import { DataProvider } from "./DataProvider";
-import { MapController } from "./Controller/MapController";
+import { Map as LeafletMap } from "react-leaflet";
 
-export default class SimpleExample extends React.Component<
-  { onViewChanged(viewport: Viewport): void; marker: Station[] },
+export default class Map extends React.Component<
   {
-    lat: number;
-    lng: number;
+    pins: MapPin[];
+    polygons: Polygon[];
+    onViewportChange(viewport: Viewport): void;
+    popup(mp: MapPin): Station;
+  },
+  {
+    position: Position;
     zoom: number;
-    stations: Station[];
     selectedStation: Station | null;
+    pins: MapPin[];
   }
 > {
-  controller: MapController;
   constructor(props: {
-    onViewChanged(viewport: Viewport): void;
-    marker: Station[];
+    pins: MapPin[];
+    polygons: Polygon[];
+    onViewportChange(viewport: Viewport): void;
+    popup(mp: MapPin): Station;
   }) {
     super(props);
+    console.log(props);
     this.state = {
-      lat: 49,
-      lng: 8.4,
-      zoom: 13,
-      stations: [],
+      position: new Position(49, 8.4),
+      zoom: 10,
+      pins: [],
       selectedStation: null,
     };
-    this.controller = new MapController({
-      center: [this.state.lat, this.state.lng],
-      zoom: this.state.zoom,
-    });
-    this.setState({ stations: this.controller.getPins() });
   }
 
-  onViewChanged = (viewport: Viewport) => {
-    this.controller.handleViewportChange(viewport);
-    this.setState({ stations: this.controller.getPins() });
-  };
+  onViewChanged(viewport: Viewport) {
+    this.props.onViewportChange(viewport);
+    this.setState({ zoom: this.state.zoom });
+  }
 
-  popup(station: Station) {
-    var s = this.controller.handlePopup(station.id);
-    console.log(s.id);
-    console.log(station.id);
+  popup(mp: MapPin) {
+    var s = this.props.popup(mp);
+    console.log(s);
     this.setState({ selectedStation: s });
   }
 
   render() {
-    const position: [number, number] = [this.state.lat, this.state.lng];
+    const position: [number, number] = [
+      this.state.position.lat,
+      this.state.position.lng,
+    ];
     return (
       <div>
-        <Map
+        <LeafletMap
           center={position}
           zoom={this.state.zoom}
-          onViewportChanged={this.onViewChanged}
+          onViewportChange={(v) => this.onViewChanged(v)}
         >
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -69,14 +70,10 @@ export default class SimpleExample extends React.Component<
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
           </Marker>
-          {this.state.stations.map((m) => (
-            <Marker position={[m.position.lat, m.position.lng]}>
+          {this.props.pins.map((m) => (
+            <Marker position={[m.getPosition().lat, m.getPosition().lng]}>
               <Popup onOpen={() => this.popup(m)}>
-                <Button
-                  onClick={() => console.log("Hi")}
-                  variant="contained"
-                  color="primary"
-                >
+                <Button variant="contained" color="primary">
                   {this.state.selectedStation
                     ? this.state.selectedStation.id
                     : "Null"}
@@ -84,7 +81,7 @@ export default class SimpleExample extends React.Component<
               </Popup>
             </Marker>
           ))}
-        </Map>
+        </LeafletMap>
         <Chart
           width={400}
           height={"300px"}

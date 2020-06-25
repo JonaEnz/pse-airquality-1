@@ -3,6 +3,7 @@ import { Station } from "../Model/Station";
 import { MapConfiguration } from "./MapConfiguration";
 import { DataProvider } from "../DataProvider";
 import { Position } from "../Model/Position";
+import { MapPin } from "../Model/MapPin";
 
 export class MapController {
   configuration: MapConfiguration;
@@ -24,7 +25,7 @@ export class MapController {
     DataProvider.add();
   }
 
-  getPins(): Station[] {
+  getPins(): MapPin[] {
     return this.configuration.getPins(this.viewport);
   }
 

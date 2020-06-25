@@ -5,11 +5,11 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import SimpleExample from "./SimpleExample";
 import { DataProvider } from "./DataProvider";
 import { Viewport } from "react-leaflet";
 import { MenuItem } from "@material-ui/core";
 import { render } from "@testing-library/react";
+import MapView from "./Views/MapView";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,10 +48,7 @@ export default function ButtonAppBar() {
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
-      <SimpleExample
-        marker={DataProvider.getStations()}
-        onViewChanged={change}
-      />
+      <MapView />
     </div>
   );
 }

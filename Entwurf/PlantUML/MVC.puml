@@ -2,6 +2,22 @@
 
 namespace Model {
 
+    class MapPin {
+        <<constructor>> MapPin(position : Position)
+
+        + getPosition() : Position
+        + setPosition(position : Position) : void
+
+        + getValue() : float
+        + setValue(value : float) : void
+
+        + getStationId() : string
+        + setStationId(id : string) : void
+
+        + getColor() : Color
+        + setColor(color : Color) : void
+    }
+
     class Viewport {
         + getCenter() : Position
         + setCenter(position : Position) : void
