@@ -152,6 +152,10 @@ namespace View {
             class LocationMap
             abstract Diagram {
                 - feature : Feature
+                + draw() : void
+                + setObservationStation(observationStation : Model.ObservationStation) : void
+                + loadData() : void
+                + isDataLoaded() : Boolean
             }
             class FeatureHistoryLineChart extends Diagram
             class YearComparisonLineChart extends Diagram
