@@ -2,55 +2,42 @@
 
    
     \begin{Class}{ObservationStationInfo}
-        \textbf{Methoden}
-        \begin{itemize}
-            \item \texttt{Todo}
-        \end{itemize}
-        
-        \textbf{Attribute}
-        \begin{itemize}
-            \item \texttt{Todo}
-        \end{itemize}
+      
+            \\ Information über die Station für die Nutzer.
     \end{Class}
 
     \begin{Class}{StaticMap}
-        \textbf{Methoden}
-        \begin{itemize}
-            \item Eine statische Karte soll angezeigt werden, die die Position des Sensors anzeigt.
-        \end{itemize}
+            \\Eine statische Karte soll angezeigt werden, die die Position des Sensors anzeigt.
     \end{Class}
 
   
     \begin{Class}{FeatureHistoryLineChart}
-        \begin{itemize}
-            \item Graph zeigt die Veränderung der Messdaten eines Features.
-        \end{itemize}
-        
-
+           \\ Graph zeigt die Veränderung der Messdaten eines Feature
     \end{Class}
 
     \begin{Class}{ComparisonLineChart}
-        \begin{itemize}
-            \item Vergleicht einen Zeitraum mit dem vorherigen Zeitraum.
-        \end{itemize}
+            \\Vergleicht einen Zeitraum mit dem vorherigen Zeitraum.
     \end{Class}
 
     \begin{Class}{ComparisonToLastYearPieChart}
-        \begin{itemize}
-            \item PieChart, die die Grenzwertüberschreitungen im aktuellen Jahr mit denen aus dem letzten jahr vergleict 
-        \end{itemize}
+            \\ PieChart, die die Grenzwertüberschreitungen im aktuellen Jahr mit denen aus dem letzten jahr vergleict 
     \end{Class}
 
     \begin{Class}{Diagram}
         \textbf{Methoden}
         \begin{itemize}
-            \item \texttt{Todo}
-            \item \texttt{setTimespan(timespan : Timespan) : void}
+            \item \texttt{draw() : void}
+            \item Übergibt die Daten an Google Charts, womet der das Diagramm gezeichnet wird.
+            \item \texttt{setTimespan(timespan : Timespan) : void} 
+            \item ??? 
+            \item \texttt{setObservationStation(observationStation : Model.ObservationStation) : void}
+            \item \texttt{loadData() : void}
         \end{itemize}
         
         \textbf{Attribute}
         \begin{itemize}
-            \item \texttt{Todo}
+            \item \texttt{fature : Feature}
+            \item Das Diagramm modelliert immer nur ein Feature.
         \end{itemize}
     \end{Class}
 
