@@ -2,6 +2,22 @@
 
 namespace Model {
 
+
+    Feature --> Position
+    Feature --> Scale
+
+    MapPin --> Position
+    Viewport --> Position
+
+    Observation --> Feature
+    Observation --> Position
+    Observation --> ObservationStation
+
+    ObservationStation --> Feature
+    ObservationStation --> Position
+
+    Scale --> Color
+
     class MapPin {
         +constructor(position : Position)
 
@@ -117,7 +133,7 @@ namespace Model {
     }
 
     class Scale {
-        + constructor(linearTransition: boolean, color1: Color, color2: Color, color3: Color, color4: Color, color5: Color, weight: number)
+        + constructor(linearTransition: boolean, colors : {number, string}[])
         + getColor(value : number) : Color
     }
 
@@ -126,6 +142,16 @@ namespace Model {
 namespace View {
     namespace Components {
         namespace MapPage {
+
+            MapPage *-- MapView
+            
+            MapView *-- Search
+            
+            MapView *-- Map
+            MapView *-- FeatureSelect
+
+            Map *-- Legend
+
             class FeatureSelect {
                 + getSelectedFeature() : Feature
                 + setFeature(feature : Feature)
@@ -207,7 +233,7 @@ namespace Controller {
             + setId(id : string) : void
         }
 
-        numbererface QueryResult
+        interface QueryResult
         class DataProvider {
             + getLatestObservations(center : Position, radius: number, feature : Feature) : Observation[]
             + getLatestObservation(station : ObservationStation, feature : Feature) : Observation
