@@ -234,6 +234,13 @@ namespace Controller {
         }
 
         interface QueryResult
+
+        class Adapter {
+            + convertToLoc(data : QueryResult) : Location[]
+            + convertToObs(data : QueryResult) : Observations[]
+            + convertToSta(data : QueryResult) : ObservationStatio[]
+        }
+
         class DataProvider {
             + getLatestObservations(center : Position, radius: number, feature : Feature) : Observation[]
             + getLatestObservation(station : ObservationStation, feature : Feature) : Observation
