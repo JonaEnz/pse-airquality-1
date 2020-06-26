@@ -2,13 +2,17 @@ export class Scale {
   d: { n: number; s: string }[];
   constructor(d: { n: number; s: string }[]) {
     this.d = d;
+    console.log(d);
   }
   getColor(n: number): string {
-    for (let index = 0; index < this.d.length; index++) {
-      if (this.d[index].n > n) {
-        return this.d[index].s;
+    console.log(this.d);
+    var keys = Object.keys(this.d);
+    console.log(keys);
+    for (let index = 0; index < keys.length - 1; index++) {
+      if (keys[index] <= n.toString() && keys[index + 1] > n.toString()) {
+        return (this.d[parseInt(keys[index])] as unknown) as string;
       }
     }
-    return this.d[this.d.length - 1].s;
+    return (this.d[parseInt(keys[keys.length - 1])] as unknown) as string;
   }
 }

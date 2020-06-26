@@ -9,7 +9,6 @@ export default class Search extends React.Component<
   constructor(props: { onSearch(term: string): void }) {
     super(props);
     var f = new Feature("temperature");
-    console.log(f);
     this.state = {};
   }
 

@@ -143,7 +143,7 @@ namespace View {
     namespace Components {
         namespace MapPage {
 
-            MapPage *-- MapView
+            View.Components.Layout.MapPage *-- View.Components.MapPage.MapView
             
             MapView *-- Search
             
