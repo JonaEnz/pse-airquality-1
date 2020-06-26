@@ -1,7 +1,8 @@
 @startuml
 
 rectangle Model {
-    rectangle "Stationen"
+    rectangle "Sensor Things"
+    rectangle "Map Objekte"
 }
 
 rectangle Controller {
@@ -11,7 +12,8 @@ rectangle Controller {
 
 rectangle View {
     rectangle "Layout"
-    rectangle "Components"
+    rectangle "MapPage"
+    rectangle "DeitailPage"
 }
 
 @enduml
