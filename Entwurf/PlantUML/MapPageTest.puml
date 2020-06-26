@@ -38,8 +38,8 @@ return
 return
 
 'Nutzer wählt Station'
-User -> Map ++ : clickOnMarker()
-Map -> MapController ++ : handlePopup(id)
+User -> Map ++ : clickOnMarker(pin)
+Map -> MapController ++ : handlePopup(pin)
 MapController -> DataProvider ++ : getStation(id)
 return station
 return station

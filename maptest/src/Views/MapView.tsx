@@ -28,10 +28,12 @@ export default class MapView extends React.Component<{}, {}> {
     return s;
   }
 
+  onSearch() {}
+
   render() {
     return (
       <div>
-        <Search />
+        <Search onSearch={this.onSearch} />
         <Map
           pins={this.controller.getPins()}
           polygons={this.controller.getPolygons()}

@@ -2,8 +2,24 @@
 
 namespace Model {
 
+
+    Feature --> Position
+    Feature --> Scale
+
+    MapPin --> Position
+    Viewport --> Position
+
+    Observation --> Feature
+    Observation --> Position
+    Observation --> ObservationStation
+
+    ObservationStation --> Feature
+    ObservationStation --> Position
+
+    Scale --> Color
+
     class MapPin {
-        <<constructor>> MapPin(position : Position)
+        +constructor(position : Position)
 
         + getPosition() : Position
         + setPosition(position : Position) : void
@@ -20,99 +36,104 @@ namespace Model {
 
     class Viewport {
         + getCenter() : Position
-        + setCenter(position : Position) : void
-
         + getZoom() : number
-        + setZoom(zoom : number) : void
-
         + getRadius() : number
+        + setCenter(position : Position) : void
+        + setZoom(zoom : number) : void
     }
-    
+
     class ObservationStation {
-        -id : number
-        -name : String
-        - description : String
-        -position : Position
-        -availableFeatures : List<Feature>
+        - id : number
+        - name : string
+        - description : string
+        - position : Position
+        - availableFeatures : Feature[]
 
-        + getId : number
+        + constructor(id: number, name: string, description: string, position: Position, features: Feature[])
+        + getId() : number
         + getName() : string
-        + getDescription() : String
-        + getFeatures() : List<Feature>
+        + getDescription() : string
         + getPosition() : Position
-        + isLimitExceeded(feature : Feature) : Boolean
-        + hasFeature(feature : Feature) : Boolean
+        + getFeatures() : Feature[]
         + getDiagrams() : DetailPage.Diagram[]
+        + hasFeature(feature : Feature) : Boolean
     }
-   
-    class Observation {
-        observationStation : ObservationStation
-        feature : Feature
-        dateTime : Date
-        value : number
 
-        + getValue() : number
+    class Observation {
+        - observationStation : ObservationStation
+        - position: Position
+        - feature : Feature
+        - value : number
+        - timestamp : Date
+
+        + constructor(observationStation: ObservationStation, position: Position, feature: Feature, dateTime: Date, value: number)
         + getObservationStation() : ObservationStation
+        + getPosition(): Position
         + getFeature() : Feature
-        + getDateTime : Date
+        + getValue() : number
+        + getTimeStamp() : Date
     }
 
     enum Timespan {
-            LAST_YEAR,
-            LAST_3_MONTHS,
-            LAST_MONTH,
-            LAST_WEEK,
-            LAST_3_DAYS,
-            TODAY,
-        }
-    
+        LAST_YEAR,
+        LAST_3_MONTHS,
+        LAST_MONTH,
+        LAST_WEEK,
+        LAST_3_DAYS,
+        TODAY,
+    }
+
     class Position {
-        xCoordinate : number
-        yCoordinate : number
+        - latitude : number
+        - logitude : number
+
+        + constructor(latitude: number, logitude: number)
+        + getLatitude(): number
+        + getLongitude(): number
+        + toString(): string
     }
 
     class Feature {
         - id : number
-        - name : String
-        - description : String
+        - name : string
+        - description : string
         - scale : Scale
-        - fallbackScale : Scale
-        - relatedWeblink : String
+        - relatedWeblink : string
         - drawableDiagrams : DetailPage.Diagram[]
-        - limit : number
-        {static} + getFeature(featureID : number) : Feature
-        {static} + getFeature(featureName : String) : Feature
-        {static} + getRegisteredFeatures() : Feature[]
-        + getID() : number
-        + getName() : String
-        + getDescription() : String
-        + getRelatedScale() : Scale
-        + getRelatedWeblink() : String
-        + getDrawableDiagrams() : DetailPage.Diagram[]
-        + getLimit : number
-    }
+        - limit: number
+        - unitOfMeasurement: string
 
-    enum Colors {
-        GREEN = "#50EE70"
-        LIGHTGREEN = "#AAFF55"
-        YELLOW = "#FFFF00"
-        ORANGE = "#FFA500"
-        RED = "#FF0000" 
+        + constructor(id : number, name : string, description : string, scale : Scale, relatedWeblink : string, drawableDiagrams : DetailPage.Diagram[], limit: number, unitOfMeasurement: string)
+        + getID(): number
+        + getName(): string
+        + getDescription(): string
+        + getRelatedScale(): Scale
+        + getRelatedWeblink(): string
+        + getDrawableDiagrams(): DetailPage.Diagram[]
+        + getLimit(): number
+        + getUnitOfMeasurement(): string
+        + limitIsExceeded(observation: Observation): boolean
     }
 
     class Color {
-        + getRGB() : string
-        + setRGB(hex : string) : void
-    }
+        {static} + readonly GREEN = "#50EE70"
+        {static} + readonly LIGHTGREEN = "#AAFF55"
+        {static} + readonly YELLOW = "#FFFF00"
+        {static} + readonly ORANGE = "#FFA500"
+        {static} + readonly RED = "#FF0000"
+        {static} + readonly WHITE = "#FFFFFF"
+        {static} + readonly BLACK = "#000000"
+        {static} + readonly PRIMARY
+        {static} + readonly SECONDARY
 
-    class ColorCode {
-        color : Colors
-        + getColor(value : number)
+        + constructor(r: number, g: number, b: number)
+        + constructor(hex: string)
+        + getRGB() : [number, number, number]
+        + getHex() : string
     }
 
     class Scale {
-        -colors : Colors[]
-        +listAllColors() : Colors
+        + constructor(linearTransition: boolean, colors : {number, string}[])
         + getColor(value : number) : Color
     }
 
@@ -121,6 +142,16 @@ namespace Model {
 namespace View {
     namespace Components {
         namespace MapPage {
+
+            View.Components.Layout.MapPage *-- View.Components.MapPage.MapView
+            
+            MapView *-- Search
+            
+            MapView *-- Map
+            MapView *-- FeatureSelect
+
+            Map *-- Legend
+
             class FeatureSelect {
                 + getSelectedFeature() : Feature
                 + setFeature(feature : Feature)
@@ -133,44 +164,52 @@ namespace View {
             }
 
             class MapView {
-            + selectStation(station : Messstation)
-            + getValueAt(position: Position, feature : Feature) : number
-            + onViewportChange(viewport : Viewport)
-            + onStationSelected(pin : MapPin)
-        }
+                + selectStation(station : Messstation)
+                + getValueAt(position: Position, feature : Feature) : number
+                + onViewportChange(viewport : Viewport)
+                + onStationSelected(pin : MapPin)
+            }
             class Map {
                 + Props.pins : MapPin[]
                 + Props.polygons : Polygon[]
                 + Props.onViewportChange()
             }
             class Legend {
-                + Pros.scale : Scale
+                + Props.scale : Scale
             }
         }
         namespace DetailPage {
-            class ObservationStationInfo
-            class LocationMap
+            class ObservationStationProfile {
+                + Props.observationStation: ObservationStation
+            }
+            class LocationMap {
+                + Props.position: Position
+            }
             abstract Diagram {
-                - feature : Feature
+                + props.feature: Feature
+                + props.observationStation: ObservationStation
             }
             class FeatureHistoryLineChart extends Diagram
             class YearComparisonLineChart extends Diagram
             class ComparisonToLastYearPieChart extends Diagram
         }
-    }
 
-    namespace Layout {
-        class MapPage
-        class DetailPage
-        class ErrorPage {
-            + errorCode : number
-            + errorMessage : string
+
+        namespace Layout {
+            class MapPage
+            class DetailPage {
+                Props.observationStation: ObservationStation
+            }
+            class ErrorPage {
+                props.errorCode : number
+                props.errorMessage : string
+            }
+            class PrivacyPolicyPage
+            class AboutPage
+            class PageMenu
+            class LanguageMenu
+            class TopBar
         }
-        class PrivacyPolicyPage
-        class AboutPage
-        class PageMenu
-        class LanguageMenu
-        class TopBar
     }
 }
 
@@ -184,7 +223,7 @@ namespace Controller {
 
         class FROSTQuery {
             + send() : QueryResult
-            + setTop(n : number) : void           
+            + setTop(n : number) : void
             + setSkip(n : number) : void
             + enableCount(set : boolean) : void
             + setOrderBy(orderBy : string) : void
@@ -198,21 +237,21 @@ namespace Controller {
         class DataProvider {
             + getLatestObservations(center : Position, radius: number, feature : Feature) : Observation[]
             + getLatestObservation(station : ObservationStation, feature : Feature) : Observation
-            + getStationsIn(middle: Position, radius : number) : Station[]
-            + getHistoricalObservations(station : Station, start : Date, end : Date, feature : Feature) : Observation[]
-            + getHistoricalObservations(station : Station, start : Date, end : Date, frequency : Frequency, feature : Feature) : Observation[]
-            + getStation(id : string) : Station
-            + getFeature(id : string) : Feature
+            + getObservations(station : ObservationStation, start : Date, end : Date, feature : Feature) : Observation[]
+            + getObservations(station : ObservationStation, start : Date, end : Date, feature : Feature, frequency : Frequency) : Observation[]
+            + getObservationStations(middle: Position, radius : number) : ObservationStation[]
+            + getObservationStation(id : string) : ObservationStation
         }
         class FeatureProvider {
-            makeFeature(id : string) : Feature
-            getScale(feature : Feature) : Scale
+            + getFeature(featureID : number) : Feature
+            + getFeature(featureName : string) : Feature
+            + getRegisteredFeatures() : Feature[]
         }
     }
     namespace Storage {
         class Language {
-            + getString(id: string) : string
-            + loadLanguage(languageId : string)
+            {static} + getText(id: string) : string
+            {static} + changeLanguage(languageId : number): void
         }
 
         class MapConfigurationMemory {
@@ -254,11 +293,6 @@ namespace Controller {
         --
         + setFeature(feature : Feature)
     }
-
-    class DetailController {
-        
-    }
-
 
 }
 
