@@ -1,0 +1,17 @@
+@startuml
+
+rectangle Model {
+    rectangle "Stationen"
+}
+
+rectangle Controller {
+    rectangle "Frost"
+    rectangle "View-Contoller"
+}
+
+rectangle View {
+    rectangle "Layout"
+    rectangle "Components"
+}
+
+@enduml
