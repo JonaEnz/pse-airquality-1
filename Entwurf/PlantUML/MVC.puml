@@ -109,7 +109,7 @@ namespace Model {
         + getDescription(): string
         + getRelatedScale(): Scale
         + getRelatedWeblink(): string
-        + async getDrawableDiagrams(): Promise<DetailPage.Diagram[]>
+        + async getDrawableDiagrams(observationStation: ObservationStation): Promise<DetailPage.Diagram[]>
         + getLimit(): number
         + getUnitOfMeasurement(): string
         + limitIsExceeded(observation: Observation): boolean
