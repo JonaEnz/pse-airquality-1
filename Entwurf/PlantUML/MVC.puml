@@ -55,7 +55,7 @@ namespace Model {
         + getDescription() : string
         + getPosition() : Position
         + getFeatures() : Feature[]
-        + getDiagrams() : DetailPage.Diagram[]
+        + async getDiagrams() : Promise<DetailPage.Diagram[]>
         + hasFeature(feature : Feature) : Boolean
     }
 
@@ -109,7 +109,7 @@ namespace Model {
         + getDescription(): string
         + getRelatedScale(): Scale
         + getRelatedWeblink(): string
-        + getDrawableDiagrams(): DetailPage.Diagram[]
+        + async getDrawableDiagrams(): Promise<DetailPage.Diagram[]>
         + getLimit(): number
         + getUnitOfMeasurement(): string
         + limitIsExceeded(observation: Observation): boolean
@@ -272,7 +272,7 @@ namespace Controller {
     MapController --> Controller.Storage.MapConfigurationMemory
 
     class MapController {
-        + handlePopup(pin : MapPin) : (Station, Observation)
+        + handlePopup(pin : MapPin) : [Station, Observation]
         + handleViewportChange(viewport : Viewport)
         --
         + getPins() : MapPin[]
