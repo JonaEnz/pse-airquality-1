@@ -233,6 +233,7 @@ namespace Controller {
             + setExpand(expand : string) : void
             + setId(id : string) : void
             + setType(type : string) : void
+            + setSubType(type : string) : void
         }
 
         interface QueryResult
@@ -241,6 +242,7 @@ namespace Controller {
             + convertToLoc(data : QueryResult) : Location[]
             + convertToObs(data : QueryResult) : Observations[]
             + convertToSta(data : QueryResult) : ObservationStation[]
+            + getaAvaiableFeatures(data : QueryResult) : Features[]
         }
 
         class DataProvider {
