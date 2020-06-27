@@ -1,4 +1,4 @@
-@startuml MapPageTest
+@startuml MapPageScenario
 
 actor User
 participant MapView

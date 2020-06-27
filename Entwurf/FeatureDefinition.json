@@ -10,5 +10,6 @@
     "20": "#FFFF00",
     "30": "#FFA500",
     "40": "#FF0000"
-  }
+  },
+  "supportedDiagrams": ["FeatureHistoryLineChart", "YearComparisonLineChart"]
 }

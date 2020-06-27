@@ -154,7 +154,7 @@ namespace View {
 
             class FeatureSelect {
                 + getSelectedFeature() : Feature
-                + setFeature(feature : Feature)
+                + onConfigurationChanged(conf : MapConfiguration)
             }
             class Search {
                 + State.searchTerm : string
@@ -168,6 +168,7 @@ namespace View {
                 + getValueAt(position: Position, feature : Feature) : number
                 + onViewportChange(viewport : Viewport)
                 + onStationSelected(pin : MapPin)
+                + update() : void
             }
             class Map {
                 + Props.pins : MapPin[]
@@ -188,6 +189,7 @@ namespace View {
             abstract Diagram {
                 + props.feature: Feature
                 + props.observationStation: ObservationStation
+                + getId() : string
             }
             class FeatureHistoryLineChart extends Diagram
             class YearComparisonLineChart extends Diagram
@@ -198,7 +200,7 @@ namespace View {
         namespace Layout {
             class MapPage
             class DetailPage {
-                Props.observationStation: ObservationStation
+                Props.id: string
             }
             class ErrorPage {
                 props.errorCode : number
@@ -208,7 +210,7 @@ namespace View {
             class AboutPage
             class PageMenu
             class LanguageMenu
-            class TopBar
+            class Layout
         }
     }
 }
@@ -238,7 +240,7 @@ namespace Controller {
         class Adapter {
             + convertToLoc(data : QueryResult) : Location[]
             + convertToObs(data : QueryResult) : Observations[]
-            + convertToSta(data : QueryResult) : ObservationStatio[]
+            + convertToSta(data : QueryResult) : ObservationStation[]
         }
 
         class DataProvider {
@@ -267,6 +269,8 @@ namespace Controller {
         }
     }
 
+    MapController --> Controller.Storage.MapConfigurationMemory
+
     class MapController {
         + handlePopup(pin : MapPin) : (Station, Observation)
         + handleViewportChange(viewport : Viewport)
@@ -277,7 +281,7 @@ namespace Controller {
         + changeFeature(feature : Feature) : void
         + onConfigurationChange(mapConf : MapConfiguration) : void
         + search(searchTerm : string) : void
-        + updateCurrentPosition() : void
+        + updateCurrentPosition(position : Position) : void
     }
 
     abstract MapConfiguration {

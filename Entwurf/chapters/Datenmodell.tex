@@ -1,0 +1,61 @@
+\section{Datenmodell}
+\subsection{Feature}
+
+Unterstützte Features sind in JSON Dateien definiert.
+Dies ermöglicht das einfache Hinzufügen von weiteren Features und die freie Konfiguration für die Betreiber der Seite.
+
+
+\begin{lstlisting}[language=json,firstnumber=1]
+    {
+	    "id": string,
+	    "nameId": string,
+	    "unitOfMeasurement": string,
+	    "descriptionId": string,
+	    "limit": number,
+	    "defaultScale": {
+		    [number] : string,
+	    },
+	    "supportedDiagrams": string[]
+    }
+    
+\end{lstlisting}
+
+\begin{itemize}
+	\item \texttt{id} 
+	\\ Eine eindeutige Id, wird vom FROST-Server übernommen.
+	\item \texttt{nameId} 
+	\\ Der Schlüssel für den lokalisierten Namen des Features
+	\item \texttt{unitOfMeasurement} 
+	\\ Die Messeinheit des Features
+	\item \texttt{descriptionId} 
+	\\ Der Schlüssel für die lokalisierte Beschreibung
+	\item \texttt{limit} 
+	\\ Der Messwert ab dem eine Warnung ausgegeben wird
+	\item \texttt{defaultScale} 
+	\\ Eine Farbskala für das Feature, dient als Fallback falls keine Skala auf dem Server gefunden wird.
+	\\ Bei \emph{[number] : string} ist der Schlüssel die untere Grenze für die Farbe.
+	Die Farbe selbst ist in HEX codiert (bspw. '\#AAAAAA') 
+\end{itemize}
+\newpage
+\subsection{Sprachdateien}
+
+
+\begin{lstlisting}[language=json,firstnumber=1]
+	{
+		"id": string,
+		"name": string,
+		"strings": {
+			[string]: string,
+		}
+	}
+	
+\end{lstlisting}
+
+\begin{itemize}
+	\item \texttt{id} 
+	\\ Eine eindeutige Id für die Sprache.
+	\item \texttt{name} 
+	\\ Der Name der Sprache in der Sprache selbst.
+	\item \texttt{strings} 
+	\\ Eine Liste an Schlüsseln und der zugehörigen Zeichenkette in der Sprache.
+\end{itemize}
