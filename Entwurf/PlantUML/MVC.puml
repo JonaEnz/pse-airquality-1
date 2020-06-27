@@ -237,10 +237,10 @@ namespace Controller {
         }
 
         interface QueryResult
-
+ 
         class Adapter {
             + convertToLoc(data : QueryResult) : Location[]
-            + convertToObs(data : QueryResult) : Observations[]
+            + convertToObs(data : QueryResult, station ObservationStation) : Observations[]
             + convertToSta(data : QueryResult) : ObservationStation[]
             + getaAvaiableFeatures(data : QueryResult) : Features[]
         }

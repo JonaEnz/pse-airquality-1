@@ -65,7 +65,8 @@ FrostQuery -> FrostServer ++ : getUrl()
 FrostServer ->> FrostQuery -- : url
 FrostQuery ->> DataProvider -- : result
 deactivate FrostQuery
-DataProvider -> Adapter ++ : convertToObs(result)
+DataProvider -> Adapter ++ : convertToObs(result, station)
+Adapter -> Observation ++ : <<create>>
 Adapter ->> DataProvider -- : latestObservation
 end
 DataProvider ->> StationConfiguration -- : observations 
