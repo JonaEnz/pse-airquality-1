@@ -9,7 +9,8 @@
     "10": "#AAFF55",
     "20": "#FFFF00",
     "30": "#FFA500",
-    "40": "#FF0000"
+    "40": "#FF0000",
+    "linearTransition": true
   },
   "supportedDiagrams": ["FeatureHistoryLineChart", "YearComparisonLineChart"]
 }
