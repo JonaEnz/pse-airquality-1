@@ -1,0 +1,26 @@
+@startuml FrostSeq
+
+title DataProvider request
+
+actor MapController
+participant DataProvider
+participant FrostQuery
+participant FrostServer
+participant Adapter
+
+
+MapController -> DataProvider ++ : getLatestObservations(center, radius, feature)
+DataProvider -> FrostQuery ++ : <<create>>
+DataProvider -> FrostQuery ++ : setFilter(filter)
+FrostQuery ->> DataProvider --
+
+DataProvider -> FrostQuery ++ : send()
+FrostQuery -> FrostServer : getUrl()
+FrostServer ->> FrostQuery : url
+FrostQuery ->> DataProvider -- : result
+deactivate FrostQuery
+DataProvider -> Adapter ++ : convertToLoc(result)
+Adapter ->> DataProvider -- : locations 
+
+
+@enduml
