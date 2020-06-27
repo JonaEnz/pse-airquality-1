@@ -233,6 +233,7 @@ namespace Controller {
             + setFilter(filter : string) : void
             + setExpand(expand : string) : void
             + setId(id : string) : void
+            + setType(type : string) : void
         }
 
         interface QueryResult
