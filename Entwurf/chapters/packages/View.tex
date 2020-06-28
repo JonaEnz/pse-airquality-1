@@ -1,1 +1,93 @@
 \subsection{View}
+Sofern nicht anders angebeben sind alle Klassen in diesem Unterkapitel React-Komponenten.
+\subsubsection{MapPage.Components}
+    \begin{Class}{MapPage}
+        Die Hauptkomponente der Kartenansicht. Enthält \emph{MapView}.
+    \end{Class}
+    \begin{Class}{MapView}
+        Eine Komponente die die Karte selbst und weitere Steuerelemente wie die Suche, Konfiguration und Legende beinhaltet.
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{selectStation(station : ObservationStation)}
+            \\ Legt die angegebene ObservationStation als ausgewählt fest.
+            \item \texttt{getValueAt(position: Position, feature : Feature) : float}
+            \\ Berechnet mithilfe naher Messstationen einen Schätzwert des gewählten Features an einer bestimmter Position.
+            \\ Rückgabe:
+            \\ \emph{null}: Es konnte kein Wert bestimmt werden da der Punkt zu weit entfernt von Messstationen ist.
+            \\ \emph{float}: Der geschätzte Wert
+            \item \texttt{onViewportChange(viewport : Viewport)}
+            \\ Verarbeitet die Änderung des Viewports und aktualisiert die Pins und Polygone auf der Karte.
+            \item \texttt{onStationSelected(pin : MapPin)}
+            \\ Verarbeitet den Klick auf einen Stations-Marker und aktualisiert das zugehörige Popup.
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{FeatureSelect}
+        Eine Komponente für Einstellungen der Karte.
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{getSelectedFeature() : Feature}
+            \\ Rückgabe:
+            \\ \emph{null}: Fehler, nicht definiert
+            \\ \emph{Feature}: aktuell ausgewähltes Feature
+            \item \texttt{onConfigurationChange(conf: MapConfiguration)}
+            \\ Wird aufgerufen wenn sich aus einer Aktion des Nutzers eine neue Kartenkonfiguration ergibt.
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{Search}
+        Ein Suchfeld für Adressen und ein Button zur automatischen Positionserkennung.
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{onSearch(string searchTerm) : void}
+            \\ Wird aufgerufen wenn auf den Such-Button geklickt wird.
+            \\ Es wird nach der Adresse gesucht und das entsprechende Event im MapController aufgerufen.
+            \item \texttt{onLocationSearch() : void}
+            \\ Wird bei Klick auf den "Lokalisieren" Knopf aufgerufen und ruft die entsprechende Methode im MapController auf.
+            \item \texttt{reset() : void}
+            \\ Setzt searchTerm auf das leere Wort.
+        \end{itemize}
+        \textbf{Attribute}
+        \begin{itemize}
+            \item \texttt{searchTerm : string}
+            \\ Der aktuelle Inhalt der Textbox der Komponente.
+        \end{itemize}
+    \end{Class}
+    
+    \begin{Class}{Map}
+        Eine Leaflet-Karte mit anpassbaren Markern und Polygonen.
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{Props.onViewportChanged(viewport : Viewport)}
+            \\ Wird aufgerufen wenn die Leaflet-Karte verschoben wird.
+        \end{itemize}
+        \textbf{Attribute}
+        \begin{itemize}
+            \item \texttt{Props.pins : MapPin[]}
+            \\ Die Marker die auf der Karte angezeigt werden sollen.
+            \item \texttt{Props.polygons : Polygon[]}
+            \\ Die Polygone die auf der Karte angezeigt werden sollen.
+        \end{itemize}
+    \end{Class}
+    
+    \begin{Class}{Legend}
+        Eine Legende für die Farben der aktuellen Ansicht.
+        \textbf{Attribute}
+        \begin{itemize}
+            \item \texttt{Props.scale : Skala}
+            \\ Die aktuell verwendete Skala.
+        \end{itemize}
+    \end{Class}
+    
+    \begin{Class}{StationInfo}
+        Das Popup für eine bestimmte Messstation. Es beinhaltet Metadaten und einen Button zur Detailseite.
+        \textbf{Attribute}
+        \begin{itemize}
+            \item \texttt{openDetails : MaterialUI.Button}
+            \\ click() öffnet die Detailansicht mit der ID der \emph{station}
+            \item \texttt{Props.station : Messstation}
+            \\ Die Messstation zu der die StationInfo gehört.
+        \end{itemize}
+    \end{Class}
+
+

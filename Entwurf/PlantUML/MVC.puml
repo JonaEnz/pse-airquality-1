@@ -169,7 +169,6 @@ namespace View {
                 + getValueAt(position: Position, feature : Feature) : number
                 + onViewportChange(viewport : Viewport)
                 + onStationSelected(pin : MapPin)
-                + update() : void
             }
             class Map {
                 + Props.pins : MapPin[]
