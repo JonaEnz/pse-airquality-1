@@ -43,15 +43,15 @@ namespace Model {
     }
 
     class ObservationStation {
-        - id : number
+        - id : string
         - name : string
         - description : string
         - position : Position
         - availableFeatures : Feature[]
 
-        + constructor(id: number, name: string, description: string, position: Position)
+        + constructor(id: string, name: string, description: string, position: Position)
         + setFeatures(features : Features[])
-        + getId() : number
+        + getId() : string
         + getName() : string
         + getDescription() : string
         + getPosition() : Position
@@ -87,6 +87,8 @@ namespace Model {
         - logitude : number
 
         + constructor(latitude: number, longitude: number)
+        + getCoordinates(): [lat : number, lng: number]
+
         + getLatitude(): number
         + getLongitude(): number
         + toString(): string
@@ -111,7 +113,7 @@ namespace Model {
         + async getDrawableDiagrams(observationStation: ObservationStation): Promise<DetailPage.Diagram[]>
         + getLimit(): number
         + getUnitOfMeasurement(): string
-        + limitIsExceeded(observation: Observation): boolean
+        + isLimitExeeded(observation: Observation): boolean
     }
 
     class Color {
@@ -262,7 +264,8 @@ namespace Controller {
     namespace Storage {
         class Language {
             {static} + getText(id: string) : string
-            {static} + changeLanguage(languageId : number): void
+            {static} + changeLanguage(languageId : string): void
+            {static} + getSelectedLanguageId() : string
         }
 
         class MapConfigurationMemory {
