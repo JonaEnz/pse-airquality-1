@@ -1,0 +1,75 @@
+@startuml FrostSeq
+
+title DataProvider request
+
+actor StationConfiguration
+participant DataProvider
+participant FrostQuery
+participant FrostServer
+participant Adapter
+participant Position
+participant ObservationStation
+participant Observation
+
+
+StationConfiguration -> DataProvider ++ : getLatestObservations(center, radius, feature)
+DataProvider --> FrostQuery ++ : <<create>>
+DataProvider -> FrostQuery ++ : setType("Locations")
+FrostQuery ->> DataProvider -- 
+DataProvider -> FrostQuery ++ : setExpand("Things")
+FrostQuery ->> DataProvider --
+DataProvider -> FrostQuery ++ : send()
+FrostQuery -> FrostServer ++ : getUrl()
+FrostServer ->> FrostQuery -- : url
+FrostQuery ->> DataProvider -- : result
+deactivate FrostQuery
+DataProvider -> Adapter ++ : convertToSta(result)
+loop as required
+Adapter --> Position ++ : <<create>>
+Adapter --> ObservationStation ++ : <<create>>
+end
+Adapter ->> DataProvider -- : stations
+loop for every station
+DataProvider --> FrostQuery ++ : <<create>>
+DataProvider -> FrostQuery ++ : setType("Things")
+FrostQuery ->> DataProvider -- 
+DataProvider -> FrostQuery ++ : setId(id)
+FrostQuery ->> DataProvider -- 
+DataProvider -> FrostQuery ++ : setSubType("Datastreams")
+FrostQuery ->> DataProvider -- 
+DataProvider -> FrostQuery ++ : setExpand("ObservedProperty")
+FrostQuery ->> DataProvider -- 
+DataProvider -> FrostQuery ++ : send()
+FrostQuery -> FrostServer ++ : getUrl()
+FrostServer ->> FrostQuery -- : url
+FrostQuery ->> DataProvider -- : result
+deactivate FrostQuery
+DataProvider -> Adapter ++ : getAvaiableFeatures(result)
+Adapter ->> DataProvider -- : features
+deactivate FrostQuery
+DataProvider -> ObservationStation ++ : setFeatures(features)
+ObservationStation ->> DataProvider -- 
+end
+loop for every station with desired feature
+DataProvider --> FrostQuery ++ : <<create>>
+DataProvider -> FrostQuery ++ : setType("Datastream")
+FrostQuery ->> DataProvider -- 
+DataProvider -> FrostQuery ++ : setId(id)
+FrostQuery ->> DataProvider --
+DataProvider -> FrostQuery ++ : setSubType("Observations")
+FrostQuery ->> DataProvider --
+DataProvider -> FrostQuery ++ : setTop(1)
+FrostQuery ->> DataProvider --
+DataProvider -> FrostQuery ++ : send()
+FrostQuery -> FrostServer ++ : getUrl()
+FrostServer ->> FrostQuery -- : url
+FrostQuery ->> DataProvider -- : result
+deactivate FrostQuery
+DataProvider -> Adapter ++ : convertToObs(result, station)
+Adapter -> Observation ++ : <<create>>
+Adapter ->> DataProvider -- : latestObservation
+end
+DataProvider ->> StationConfiguration -- : observations 
+
+
+@enduml

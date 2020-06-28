@@ -6,7 +6,6 @@
     \textbf{Methoden}
     \begin{itemize}
         \item \texttt{send() : }
-        \\ Todo: Ist nicht asyncron(?), was wird zurückgegeben
         \\Sendet die Abfrage an den Server und gibt die Antwort als QueryResult zurück.
         \item \texttt{setTop(n : int) : void}
         \\Stellt die maximale Anzahl von Objekten ein.
@@ -15,18 +14,23 @@
         \item \texttt{enableCount(set : boolean) : void}
         \\Stellt ein, ob die Anzahl der Objekte zurückgegeben werden soll.
         \item \texttt{setOrderBy(orderBy : string) : void}
-        \\TODO
+        \\Setzt die Sortierung
         \item \texttt{setSelect(select : string) : void}
-	\\Todo: Hat select ein spezielles Format? Soll das nicht lieber ein Array sein?
+        \\Setzt die gesuchten Attribute
         \\Spezifiziert, welche Attribute in der Antwort enthalten sein sollen.
         \item \texttt{setFilter(filter : string) : void}
-        \\TODO
+        \\Setzt den Filter
         \item \texttt{setExpand(expand : string) : void}
         \\Stellt ein, ob verschachtelte Objekttypen zurückgegeben werden sollen.
         \item \texttt{setId(id : string) : void}
-        \\TODO
+        \\Setzt die Id des gesuchten Typs
+        \item \texttt{setType(id : string) : void}
+        \\Setzt den gesuchten Typ
+        \item \texttt{setSubType(id : string) : void}
+        \\Setzt den gesuchten Subtyp
     \end{itemize}
-    Für die Standardwerte der set-Methoden siehe: \url{https://fraunhoferiosb.github.io/FROST-Server/sensorthingsapi/STA-Tailoring-Responses.html}
+    Für die Standardwerte und Syntax der set-Methoden siehe: 
+    \\ \url{https://fraunhoferiosb.github.io/FROST-Server/sensorthingsapi/STA-Tailoring-Responses.html}
 \end{Class}
 
 \begin{Class}{FROSTServer}
@@ -35,7 +39,7 @@
         \item \texttt{setUrl(url : string) : void}
         \\Setzt die URL des FROSTServers ein.
         \item \texttt{getUrl() : string}
-        \\Gibt die URL des FROSTServers zurück. njskdngkj
+        \\Gibt die URL des FROSTServers zurück.
     \end{itemize}
     
     \textbf{Attribute}
@@ -48,22 +52,151 @@
 \begin{Class}{DataProvider}
     \textbf{Methoden}
     \begin{itemize}
-        \item \texttt{getLatestObservations(center : Position, radius: int, feature : Feature) : Observation[]}
+        \item \texttt{getLatestObservations(center : Position,
+        \\radius: number, feature : Feature) : Observation[]}
         \\Gibt alle Observations im spezifizierten Bereich zurück
-        \item \texttt{getStationsIn(middle: Position, radius : int) : Station[]}
-        \\TODO: brauchen wir diese Methode?
-        \item \texttt{getHistoricalObservations(station : Station, start : Date, end : Date, feature : Feature) : Observation[]}
+        \item \texttt{getStationsIn(center: Position,
+        \\radius : int) : Station[]}
+        \\TODO: brauchen wir diese Methode? Gute Frage!
+        \item \texttt{getHistoricalObservations(
+            \\station : Station, start : Date, end : Date,
+            \\feature : Feature) : Observation[]}
         \\Gibt Observations der gegebenen Station, zwischen start und end Zeitpunkt, des gegebenen Features zurück.
-        \item \texttt{getHistoricalObservationsFreq(station : Station, start : Date, end : Date, frequency : Frequency, feature : Feature) : Observation[]}
+        \item \texttt{getHistoricalObservationsFreq(
+            \\station : Station, start : Date, end : Date,
+            \\frequency : Frequency, feature : Feature
+            \\) : Observation[]}
         \\Gibt Observations der gegebenen Station, zwischen start und end Zeitpunkt mit gegebener Frequenz, des gegebenen Features zurück.
         \item \texttt{getScale(feature : Feature) : Scale}
         \\Gibt die Skala des gegebenen Features zurück.
         \item \texttt{getStation(id : string) : Station}
         \\Gibt die Station die zur gegebenen ID gehört zurück.
     \end{itemize}
-    
+\end{Class}
+
+\begin{Class}{Adapter}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{convertToLoc(data : QueryResult) : Location[]}
+        \\TODO brauchen wir diese Methode?
+        \item \texttt{convertToObs(data : QueryResult,
+        \\station ObservationStation) : Observations[]}
+        \\Wandelt den QueryResult zu Observations um die zur gegebenen ObservationStation gehören.
+        \item \texttt{convertToSta(data : QueryResult) : ObservationStation[]}
+        \\Wandelt den QueryResult zu ObservationStation um. Die Position muss in der QueryResult enthalten sein.
+        \item \texttt{getAvailableFeatures(date : QueryResult) : Features []}
+        \\Extrahiert die verfügbaren Features (einer ObservationStation) aus dem QueryResult.
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{FeatureProvider}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{getFeature(id : string)}
+        \\Gibt Feature mit angegebener ID zurück. Bei erstem Aufruf werden für alle ObservedProperties vom FROSTServer Features erstellt. 
+        \item \texttt{getRegisteredFeatures()}
+        \\Gibt alle bekannten Features zurück.
+    \end{itemize}
     \textbf{Attribute}
     \begin{itemize}
-        \item //Todo
+        \item \texttt{getRegisteredFeatures}
+        \\Array aller bekannten Features
+    \end{itemize}
+\end{Class}
+
+\subsubsection{MapPage}
+\begin{Class}{MapController}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{handlePopup(pin : MapPin) : [Station, Observation]}
+        \\ Holt sich die zum \emph{pin} gehörige ObservationStation vom FROST-Server,
+        holt den letzten Messwert des aktuell gewählten Features und gibt beides zurück.
+        \item \texttt{handleViewportChange(viewport : Viewport)}
+        \\ Aktualisiert den aktuellen Viewport auf \emph{viewport}.
+
+        \bigskip
+        \item \texttt{getPins() : MapPin[]}
+        \\ Holt die Pins der aktuellen MapConfiguration mit dem aktuellen Viewport 
+        und gibt sie zurück.
+        \item \texttt{getPolygons() : Polygon[]}
+        \\ Holt die Polygone der aktuellen MapConfiguration mit dem aktuellen Viewport 
+        und gibt sie zurück.
+
+        \bigskip
+        \item \texttt{changeFeature(feature : Feature) : void}
+        \\ Wechselt das aktuell gewählte Feature auf \emph{feature}.
+        \item \texttt{onConfigurationChange(mapConf : MapConfiguration) : void}
+        \\ Behandelt eine Änderung der Kartenkonfiguration.
+        Die aktuelle Konfiguration wird auf \emph{mapConf} gesetzt und die Pins und Polygone der Karte aktualisiert.
+        \item \texttt{search(searchTerm : string) : void}
+        \\ Versucht den \emph{searchTerm} als Position zu interpretieren und setzt die Mitte des Viewports darauf.
+        Wenn die Interpretation nicht möglich ist wird eine Warnung ausgegeben.
+        \item \texttt{updateCurrentPosition(position : Position) : void}
+        \\ Setzt die aktuelle Position auf \emph{position} und aktualisiert die Karte.
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{MapConfiguration}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{getPins(port : Viewport) : MapPin[]}
+        \\ Holt Messstationen die eines der gewählten Features unterstützen und im \emph{viewport} liegen vom Server,
+        erstellt daraus MapPins und gibt sie zurück.
+        \item \texttt{getPolygons(port: Viewport) : Polygon[]}
+        \\ Wie getPins(v), nur mit Polygonen. 
+        \item \texttt{getScale() : Scale}
+        \\ Gibt die aktuell aktive Skala zurück.
+        \item \texttt{getFeatures() : Feature[]}
+        \\ Die aktuell gewählten Features die von der Konfiguration benötigt werden.
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{StationConfiguration extends MapConfiguration}
+    Eine Konfiguration bei der die einzelnen Messstationen als Marker dargestellt werden.
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{getPins(port : Viewport) : MapPin[]}
+        \\ Messstationen, als Pins repräsentiert.
+        erstellt daraus MapPins und gibt sie zurück.
+        \item \texttt{getPolygons(port: Viewport) : Polygon[]}
+        \\ Gibt [] zurück.
+        \bigskip
+        \item \texttt{setFeature(feature : Feature)}
+        \\ Setzt die gewählten Features auf [\emph{feature}].
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{PolygonConfiguration extends MapConfiguration}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{getPins(port : Viewport) : MapPin[]}
+        \\ Gibt [] zurück.
+        erstellt daraus MapPins und gibt sie zurück.
+        \item \texttt{getPolygons(port: Viewport) : Polygon[]}
+        \\ Spannt zwischen jeweils drei Stationen Polygone auf.
+        Die Polygone werden in der Farbe gefärbt die entsprechend der Skala für den Mittelwert der einzelnen letzten Messwerte entsprechen.
+        \bigskip
+        \item \texttt{setFeature(feature : Feature)}
+        \\ Setzt die gewählten Features auf [\emph{feature}].
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{NearConfiguration extends MapConfiguration}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{getPins(port : Viewport) : MapPin[]}
+        \\ Die Messstationen werden als Pins repräsentiert die entsprechend der Skala gefärbt sind.
+        \\ Dabei wird allerdings der Messwert so skaliert dass der niedrigste Messwert im Radius 0 ist, der höchste die größte Zahl der Skala.
+        erstellt daraus MapPins und gibt sie zurück.
+        \item \texttt{getPolygons(port: Viewport) : Polygon[]}
+        \\ Gibt [] zurück.
+        \bigskip
+        \item \texttt{setFeature(feature : Feature)}
+        \\ Setzt die gewählten Features auf [\emph{feature}].
+    \end{itemize}
+    \textbf{Attribute}
+    \begin{itemize}
+        \item \texttt{Radius}
+        \\ Der Radius aus dem die Daten für die Skalierung geholt werden.
     \end{itemize}
 \end{Class}

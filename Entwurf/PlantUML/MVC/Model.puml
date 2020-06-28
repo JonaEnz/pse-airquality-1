@@ -1,0 +1,143 @@
+@startuml Model
+
+namespace Model {
+
+
+    Feature --> Position
+    Feature --> Scale
+
+    MapPin --> Position
+    Viewport --> Position
+
+    Observation --> Feature
+    Observation --> Position
+    Observation --> ObservationStation
+
+    ObservationStation --> Feature
+    ObservationStation --> Position
+
+    Scale --> Color
+
+    class MapPin {
+        +constructor(position : Position)
+
+        + getPosition() : Position
+        + setPosition(position : Position) : void
+
+        + getValue() : number
+        + setValue(value : number) : void
+
+        + getStationId() : string
+        + setStationId(id : string) : void
+
+        + getColor() : Color
+        + setColor(color : Color) : void
+    }
+
+    class Viewport {
+        + getCenter() : Position
+        + getZoom() : number
+        + getRadius() : number
+        + setCenter(position : Position) : void
+        + setZoom(zoom : number) : void
+    }
+
+    class ObservationStation {
+        - id : string
+        - name : string
+        - description : string
+        - position : Position
+        - availableFeatures : Feature[]
+
+        + constructor(id: string, name: string, description: string, position: Position)
+        + setFeatures(features : Features[])
+        + getId() : string
+        + getName() : string
+        + getDescription() : string
+        + getPosition() : Position
+        + getFeatures() : Feature[]
+        + async getDiagrams() : Promise<DetailPage.Diagram[]>
+        + hasFeature(feature : Feature) : Boolean
+    }
+
+    class Observation {
+        - observationStation : ObservationStation
+        - feature : Feature
+        - value : number
+        - timestamp : Date
+
+        + constructor(observationStation: ObservationStation, feature: Feature, date: Date, value: number)
+        + getObservationStation() : ObservationStation
+        + getFeature() : Feature
+        + getValue() : number
+        + getTimeStamp() : Date
+    }
+
+    enum Timespan {
+        LAST_YEAR,
+        LAST_3_MONTHS,
+        LAST_MONTH,
+        LAST_WEEK,
+        LAST_3_DAYS,
+        TODAY,
+    }
+
+    class Position {
+        - latitude : number
+        - logitude : number
+
+        + constructor(latitude: number, longitude: number)
+        + getCoordinates(): [lat : number, lng: number]
+
+        + getLatitude(): number
+        + getLongitude(): number
+        + toString(): string
+    }
+
+    class Feature {
+        - id : number
+        - name : string
+        - description : string
+        - scale : Scale
+        - relatedWeblink : string
+        - drawableDiagrams : DetailPage.Diagram[]
+        - limit: number
+        - unitOfMeasurement: string
+
+        + constructor(id : number, name : string, description : string, scale : Scale, relatedWeblink : string, drawableDiagrams : DetailPage.Diagram[], limit: number, unitOfMeasurement: string)
+        + getID(): number
+        + getName(): string
+        + getDescription(): string
+        + getRelatedScale(): Scale
+        + getRelatedWeblink(): string
+        + async getDrawableDiagrams(observationStation: ObservationStation): Promise<DetailPage.Diagram[]>
+        + getLimit(): number
+        + getUnitOfMeasurement(): string
+        + isLimitExeeded(observation: Observation): boolean
+    }
+
+    class Color {
+        {static} + readonly GREEN = "#50EE70"
+        {static} + readonly LIGHTGREEN = "#AAFF55"
+        {static} + readonly YELLOW = "#FFFF00"
+        {static} + readonly ORANGE = "#FFA500"
+        {static} + readonly RED = "#FF0000"
+        {static} + readonly WHITE = "#FFFFFF"
+        {static} + readonly BLACK = "#000000"
+        {static} + readonly PRIMARY
+        {static} + readonly SECONDARY
+
+        + constructor(r: number, g: number, b: number)
+        + constructor(hex: string)
+        + getRGB() : [number, number, number]
+        + getHex() : string
+    }
+
+    class Scale {
+        + constructor(linearTransition: boolean, colors : {number, string}[])
+        + getColor(value : number) : Color
+    }
+
+}
+
+@enduml

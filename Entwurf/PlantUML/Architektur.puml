@@ -1,7 +1,7 @@
 @startuml Architektur
 
-View -- Controller 
-Controller -- Model
+View -right- Controller 
+Controller -left- Model
 
 rectangle Model {
     rectangle "Sensor Things"

@@ -1,14 +1,20 @@
 @startuml MapPageScenario
 
 actor User
+
+box 'View' #LightGreen
 participant MapView
 participant Map
-participant MapController
-participant StationConfiguration
 participant Legend 
 participant StationInfo
-participant DataProvider
+end box
 
+box 'Controller' #LightSalmon
+participant MapController
+participant StationConfiguration
+
+participant DataProvider
+end box
 User -> MapView ++ : open()
 MapView -> Map ++ : open()
 Map -> MapController ++ : getPins()

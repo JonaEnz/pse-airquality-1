@@ -1,0 +1,98 @@
+@startuml Controller
+
+namespace Controller {
+    namespace Frost {
+        class FROSTServer {
+            + setUrl(url : string) : void
+            + getUrl() : string
+        }
+
+        class FROSTQuery {
+            + send() : QueryResult
+            + setTop(n : number) : void
+            + setSkip(n : number) : void
+            + enableCount(set : boolean) : void
+            + setOrderBy(orderBy : string) : void
+            + setSelect(select : string) : void
+            + setFilter(filter : string) : void
+            + setExpand(expand : string) : void
+            + setId(id : string) : void
+            + setType(type : string) : void
+            + setSubType(type : string) : void
+        }
+
+        interface QueryResult
+ 
+        class Adapter {
+            + convertToLoc(data : QueryResult) : Location[]
+            + convertToObs(data : QueryResult, station ObservationStation) : Observations[]
+            + convertToSta(data : QueryResult) : ObservationStation[]
+            + getaAvaiableFeatures(data : QueryResult) : Features[]
+        }
+
+        class DataProvider {
+            + getLatestObservations(center : Position, radius: number, feature : Feature) : Observation[]
+            + getLatestObservation(station : ObservationStation, feature : Feature) : Observation
+            + getObservations(station : ObservationStation, start : Date, end : Date, feature : Feature) : Observation[]
+            + getObservations(station : ObservationStation, start : Date, end : Date, feature : Feature, frequency : Frequency) : Observation[]
+            + getObservationStations(middle: Position, radius : number) : ObservationStation[]
+            + getObservationStation(id : string) : ObservationStation
+        }
+        class FeatureProvider {
+            + getFeature(featureID : number) : Feature
+            + getFeature(featureName : string) : Feature
+            + getRegisteredFeatures() : Feature[]
+        }
+    }
+    namespace Storage {
+        class Language {
+            {static} + getText(id: string) : string
+            {static} + changeLanguage(languageId : string): void
+            {static} + getSelectedLanguageId() : string
+        }
+
+        class MapConfigurationMemory {
+            + save(MapConfiguration conf, viewport : Viewport)
+            + load() : (MapConfiguration, Viewport)
+        }
+    }
+
+    MapController --> Controller.Storage.MapConfigurationMemory
+
+    class MapController {
+        + handlePopup(pin : MapPin) : [Station, Observation]
+        + handleViewportChange(viewport : Viewport)
+        --
+        + getPins() : MapPin[]
+        + getPolygons() : Polygon[]
+
+        + changeFeature(feature : Feature) : void
+        + onConfigurationChange(mapConf : MapConfiguration) : void
+        + search(searchTerm : string) : void
+        + updateCurrentPosition(position : Position) : void
+    }
+
+    abstract MapConfiguration {
+        + getPins(port : Viewport) : MapPin[]
+        + getPolygons(port: Viewport) : Polygon[]
+        + getScale() : Scale
+        + getFeatures() : Feature[]
+    }
+
+    class StationConfiguration extends MapConfiguration {
+        + setFeature(feature : Feature)
+    }
+
+    class PolygonConfiguration extends MapConfiguration {
+        + setFeature(feature : Feature)
+    }
+
+    class NearConfiguration extends MapConfiguration {
+        + radius : number
+        --
+        + setFeature(feature : Feature)
+    }
+
+}
+
+@enduml

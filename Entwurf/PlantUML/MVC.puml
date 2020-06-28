@@ -43,14 +43,15 @@ namespace Model {
     }
 
     class ObservationStation {
-        - id : number
+        - id : string
         - name : string
         - description : string
         - position : Position
         - availableFeatures : Feature[]
 
-        + constructor(id: number, name: string, description: string, position: Position, features: Feature[])
-        + getId() : number
+        + constructor(id: string, name: string, description: string, position: Position)
+        + setFeatures(features : Features[])
+        + getId() : string
         + getName() : string
         + getDescription() : string
         + getPosition() : Position
@@ -61,14 +62,12 @@ namespace Model {
 
     class Observation {
         - observationStation : ObservationStation
-        - position: Position
         - feature : Feature
         - value : number
         - timestamp : Date
 
-        + constructor(observationStation: ObservationStation, position: Position, feature: Feature, dateTime: Date, value: number)
+        + constructor(observationStation: ObservationStation, feature: Feature, date: Date, value: number)
         + getObservationStation() : ObservationStation
-        + getPosition(): Position
         + getFeature() : Feature
         + getValue() : number
         + getTimeStamp() : Date
@@ -87,7 +86,9 @@ namespace Model {
         - latitude : number
         - logitude : number
 
-        + constructor(latitude: number, logitude: number)
+        + constructor(latitude: number, longitude: number)
+        + getCoordinates(): [lat : number, lng: number]
+
         + getLatitude(): number
         + getLongitude(): number
         + toString(): string
@@ -112,7 +113,7 @@ namespace Model {
         + async getDrawableDiagrams(observationStation: ObservationStation): Promise<DetailPage.Diagram[]>
         + getLimit(): number
         + getUnitOfMeasurement(): string
-        + limitIsExceeded(observation: Observation): boolean
+        + isLimitExeeded(observation: Observation): boolean
     }
 
     class Color {
@@ -143,7 +144,7 @@ namespace View {
     namespace Components {
         namespace MapPage {
 
-            View.Components.Layout.MapPage *-- View.Components.MapPage.MapView
+            'View.Components.Layout.MapPage *-- View.Components.MapPage.MapView
             
             MapView *-- Search
             
@@ -168,7 +169,6 @@ namespace View {
                 + getValueAt(position: Position, feature : Feature) : number
                 + onViewportChange(viewport : Viewport)
                 + onStationSelected(pin : MapPin)
-                + update() : void
             }
             class Map {
                 + Props.pins : MapPin[]
@@ -233,14 +233,17 @@ namespace Controller {
             + setFilter(filter : string) : void
             + setExpand(expand : string) : void
             + setId(id : string) : void
+            + setType(type : string) : void
+            + setSubType(type : string) : void
         }
 
         interface QueryResult
-
+ 
         class Adapter {
             + convertToLoc(data : QueryResult) : Location[]
-            + convertToObs(data : QueryResult) : Observations[]
+            + convertToObs(data : QueryResult, station ObservationStation) : Observations[]
             + convertToSta(data : QueryResult) : ObservationStation[]
+            + getaAvailableFeatures(data : QueryResult) : Features[]
         }
 
         class DataProvider {
@@ -252,15 +255,16 @@ namespace Controller {
             + getObservationStation(id : string) : ObservationStation
         }
         class FeatureProvider {
-            + getFeature(featureID : number) : Feature
-            + getFeature(featureName : string) : Feature
+            registeredFeatures : Feature[]
+            + getFeature(featureID : string) : Feature
             + getRegisteredFeatures() : Feature[]
         }
     }
     namespace Storage {
         class Language {
             {static} + getText(id: string) : string
-            {static} + changeLanguage(languageId : number): void
+            {static} + changeLanguage(languageId : string): void
+            {static} + getSelectedLanguageId() : string
         }
 
         class MapConfigurationMemory {
