@@ -1,5 +1,5 @@
 \subsection{DetailPage}
-
+\\Das ist das Detailansicht-Component. Die Detailansicht von der Kartenansicht aus geöffnet, wenn der Nutzer auf eine Messtation klickt. Hier werden dann Diagramme und eine statische Karte angezeigt.
    
     \begin{Class}{ObservationStationInfo}
       
@@ -28,7 +28,10 @@
         \textbf{Attribute}
         \begin{itemize}
             \item \texttt{props.feature : Feature}
-            \item Das Diagramm modelliert immer nur ein Feature.
+            \item Das Diagramm modelliert immer genau ein Feature.
+            \item \texttt{props.observationStation : ObservationStation}
+            \item Das Diagram modelliert den Vrlauf für genau eine Messstaion.
+
         \end{itemize}
     \end{Class}
 
