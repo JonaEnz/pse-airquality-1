@@ -1,0 +1,78 @@
+@startuml View
+
+namespace View {
+    namespace Components {
+        namespace MapPage {
+
+            'View.Components.Layout.MapPage *-- View.Components.MapPage.MapView
+            
+            MapView *-- Search
+            
+            MapView *-- Map
+            MapView *-- FeatureSelect
+
+            Map *-- Legend
+
+            class FeatureSelect {
+                + getSelectedFeature() : Feature
+                + onConfigurationChanged(conf : MapConfiguration)
+            }
+            class Search {
+                + State.searchTerm : string
+                + onSearch(string searchTerm) : void
+                + onLocationSearch() : void
+                + reset() : void
+            }
+
+            class MapView {
+                + selectStation(station : Messstation)
+                + getValueAt(position: Position, feature : Feature) : number
+                + onViewportChange(viewport : Viewport)
+                + onStationSelected(pin : MapPin)
+            }
+            class Map {
+                + Props.pins : MapPin[]
+                + Props.polygons : Polygon[]
+                + Props.onViewportChange()
+            }
+            class Legend {
+                + Props.scale : Scale
+            }
+        }
+        namespace DetailPage {
+            class ObservationStationProfile {
+                + Props.observationStation: ObservationStation
+            }
+            class LocationMap {
+                + Props.position: Position
+            }
+            abstract Diagram {
+                + props.feature: Feature
+                + props.observationStation: ObservationStation
+                + getId() : string
+            }
+            class FeatureHistoryLineChart extends Diagram
+            class YearComparisonLineChart extends Diagram
+            class ComparisonToLastYearPieChart extends Diagram
+        }
+
+
+        namespace Layout {
+            class MapPage
+            class DetailPage {
+                Props.id: string
+            }
+            class ErrorPage {
+                props.errorCode : number
+                props.errorMessage : string
+            }
+            class PrivacyPolicyPage
+            class AboutPage
+            class PageMenu
+            class LanguageMenu
+            class Layout
+        }
+    }
+}
+
+@enduml
