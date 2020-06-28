@@ -87,6 +87,10 @@
 \ihead{\@title}
 \ohead{\rightmark}
 
+% load glossary entries
+\makenoidxglossaries
+\loadglsentries{./chapters/Glossareintraege}
+
 % center page number
 \cfoot*{\pagemark}
 
@@ -100,6 +104,7 @@
 \include{./chapters/Klassenbeschreibung}
 \include{./chapters/Datenmodell}
 \include{./chapters/Anhang}
+\include{./chapters/Glossar}
 
 % end content
 \end{document}
