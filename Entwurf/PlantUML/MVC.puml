@@ -243,7 +243,7 @@ namespace Controller {
             + convertToLoc(data : QueryResult) : Location[]
             + convertToObs(data : QueryResult, station ObservationStation) : Observations[]
             + convertToSta(data : QueryResult) : ObservationStation[]
-            + getaAvaiableFeatures(data : QueryResult) : Features[]
+            + getaAvailableFeatures(data : QueryResult) : Features[]
         }
 
         class DataProvider {
@@ -255,7 +255,7 @@ namespace Controller {
             + getObservationStation(id : string) : ObservationStation
         }
         class FeatureProvider {
-            + getFeature(featureID : number) : Feature
+            + getFeature(featureID : string) : Feature
             + getFeature(featureName : string) : Feature
             + getRegisteredFeatures() : Feature[]
         }
