@@ -52,11 +52,11 @@
     \textbf{Methoden}
     \begin{itemize}
         \item \texttt{getLatestObservations(center : Position,
-        \\radius: int, feature : Feature) : Observation[]}
+        \\radius: number, feature : Feature) : Observation[]}
         \\Gibt alle Observations im spezifizierten Bereich zurück
-        \item \texttt{getStationsIn(middle: Position,
+        \item \texttt{getStationsIn(center: Position,
         \\radius : int) : Station[]}
-        \\TODO: brauchen wir diese Methode?
+        \\TODO: brauchen wir diese Methode? Gute Frage!
         \item \texttt{getHistoricalObservations(
             \\station : Station, start : Date, end : Date,
             \\feature : Feature) : Observation[]}
@@ -71,12 +71,21 @@
         \item \texttt{getStation(id : string) : Station}
         \\Gibt die Station die zur gegebenen ID gehört zurück.
     \end{itemize}
-    
-    \textbf{Attribute}
-    \begin{itemize}
-        \item //Todo
-    \end{itemize}
 \end{Class}
+
+\begin{class}{Adapter}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{convertToLoc(data : QueryResult) : Location[]}
+        \\TODO brauchen wir diese Methode?
+        \item \texttt{convertToObs(data : QueryResult, station ObservationStation) : Observations[]}
+        \\Wandelt den QueryResult zu Observations um die zur gegebenen ObservationStation gehören.
+        \item \texttt{convertToSta(data : QueryResult) : ObservationStation[]}
+        \\Wandelt den QueryResult zu ObservationStation um. Die Position muss in der QueryResult enthalten sein.
+        \item \texttt{getAvailableFeatures(date : QueryResult) : Features []}
+        \\Extrahiert die verfügbaren Features (einer ObservationStation) aus dem QueryResult.
+    \end{itemize}
+\end{class}
 
 \subsubsection{MapPage}
 \begin{Class}{MapController}
