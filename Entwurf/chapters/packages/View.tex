@@ -123,4 +123,49 @@ Sofern nicht anders angebeben sind alle Klassen in diesem
         \end{itemize}
     \end{Class}
 
+\subsubsection{DetailPage}
+    \begin{Class}{<<abstract>> Diagram}
+        Ein Diagramm, dass verschiedene Daten visualisiert. Ein Diagramm Hat eine Überschrift, eine Erklärung, und eine GoogleCharts Chart. Die Klasse fragt ihre dargestellten Daten selbstständig beim Rendern vom DataProvider an.
+        \textbf{Attribute}
+        \begin{itemize}
+            \item \texttt{Props.observationStation: ObservationStation}
+            \item \texttt{Props.feature: Feature}
+        \end{itemize}
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{getId(): number}
+            \\Gibt die Id des Diagramms zurück.
+        \end{itemize}
+        
+
+    \end{Class}
+
+    \begin{Class}{LocationMap}
+        Eine Karte, die eine Position anzeigt.
+        \textbf{Attribute}
+        \begin{itemize}
+            \item \texttt{Props.position: Position}
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{ObservationStationProfile}
+        Steckbrief einer ObservationStation, die den Namen, die Position, die Beschreibung und die letzten Messwerte einer ObservationStation anzeigt.
+        \textbf{Attribute}
+        \begin{itemize}
+            \item \texttt{props.observationStation: ObservationStation}
+        \end{itemize}
+    \end{Class}
+
+    \begin{Class}{FeatureHistoryLineChart}
+        Diagramm, dass die Messwerte eines Features über einen gewählten Zeitraum anzeigt. Dieses Dieagramm bietet die die Auswahl mehrerer Zeiträume.
+    \end{Class}
+
+    \begin{Class}{YearComparisonLineChart}
+        Liniendiagramm, dass mit verschiedenen Graphen den Jahresverlauf der Messwerte eines Features von verschiedenen Jahren visualisiert.
+    \end{Class}
+
+    \begin{Class}{ComparisonToLastYearPieChart}
+        Tortendiagramm, dass anzeigt, an wie vielen Tagen des letzen Jahres der Messwert eines Features zu vergleichbarer Uhrzeit höher bzw. niedriger war als der derzeitige Messwert.
+    \end{Class}
+
 
