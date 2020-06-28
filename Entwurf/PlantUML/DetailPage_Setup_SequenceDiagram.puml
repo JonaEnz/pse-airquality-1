@@ -1,48 +1,102 @@
 @startuml
 
 title Setup of Detail Page
+skinparam BoxPadding 10
 
 actor User
-participant  DetailPage
-participant  ObservationStationInfo
-participant  LocationMap
-participant  Diagram
-participant  ObservationStation
-participant  DataProvider
 
-User -> DetailPage : initialize(station:ObservationStation)
+box 'View' #LightGreen
+participant App
+participant DetailPage
+participant ObservationStationInfo
+participant LocationMap
+participant Diagram
+end box
+
+box 'Model' #LightSkyBlue
+participant ObservationStation
+participant Feature
+end box
+
+box 'Controller' #LightSalmon
+participant  DataProvider
+end box
+
+User -> App : request detail page
+
+activate App
+App -> DetailPage : render() with props = {observationStation}
 activate DetailPage
 
-DetailPage -> ObservationStationInfo : initialize(station:ObservationStation)
+DetailPage -> ObservationStationInfo : render() with props = {observationStation}
 activate ObservationStationInfo
-ObservationStationInfo -> ObservationStation : station.getName()
-ObservationStationInfo <- ObservationStation : name
-ObservationStationInfo -> ObservationStation: station.getDescription()
-ObservationStationInfo <- ObservationStation : description
-ObservationStationInfo -> ObservationStation : station.getPosition()
-ObservationStationInfo <- ObservationStation : position
-ObservationStationInfo -> ObservationStation : station.getFeatures()
-ObservationStationInfo <- ObservationStation : features
+ObservationStationInfo -> ObservationStation : observationStation.getName()
+activate ObservationStation
+ObservationStationInfo <- ObservationStation : name: string
+deactivate ObservationStation
+ObservationStationInfo -> ObservationStation: observationStation.getDescription()
+activate ObservationStation
+ObservationStationInfo <- ObservationStation : description: string
+deactivate ObservationStation
+ObservationStationInfo -> ObservationStation : observationStation.getPosition()
+activate ObservationStation
+ObservationStationInfo <- ObservationStation : position: Position
+deactivate ObservationStation
+ObservationStationInfo -> ObservationStation : observationStation.getFeatures()
+activate ObservationStation
+ObservationStationInfo <- ObservationStation : features: Feature[]
+deactivate ObservationStation
 loop for each feature in features
-    ObservationStationInfo -> DataProvider : getLatestObservation(station, feature)
-    ObservationStationInfo <- DataProvider : observation
+    ObservationStationInfo -> DataProvider : getLatestObservation(observationStation, feature)
+    activate DataProvider
+    ObservationStationInfo <- DataProvider : observation: Observation
+    deactivate DataProvider
 end
+DetailPage <- ObservationStationInfo : observationStationInfo: React.Component
+deactivate ObservationStationInfo
 
-DetailPage -> LocationMap : initialize(station:ObservationStation)
+DetailPage -> ObservationStation : getPosition()
+activate ObservationStation
+DetailPage <- ObservationStation : position: Position
+deactivate ObservationStation
+
+DetailPage -> LocationMap: render() with props = {position}
 activate LocationMap
 LocationMap -> ObservationStation : station.getPosition()
+activate ObservationStation
 LocationMap <- ObservationStation : position
+deactivate ObservationStation
+DetailPage <- LocationMap: locationMap: React.Component
+deactivate LocationMap
 
 DetailPage -> ObservationStation : getDiagrams()
-loop for each feature
-    ObservationStation -> Feature : getDiagrams()
-    ObservationStation <- Feature : diagrams
-    ObservationStation -> Diagram : setObservationStation()
+activate ObservationStation
+loop for each feature of this
+    ObservationStation -> Feature : getDiagrams(this)
+    activate Feature
+    ObservationStation <- Feature : diagrams: Diagram[]
+    deactivate Feature
 end
-DetailPage <- ObservationStation : diagrams
+DetailPage <- ObservationStation : diagrams: React.Component[]
+deactivate ObservationStation
 
-loop for each Diagram in diagrams
-    DetailPage -> Diagram: loadData
-end
+App <- DetailPage : detailPage: React.Component
+deactivate DetailPage
 
+User <- App : show detail page
+
+...page built complete...
+
+User -> Diagram : change diagram configuration
+activate DetailPage
+activate Diagram
+Diagram -> DataProvider : get new data
+activate DataProvider
+Diagram <- DataProvider : data
+deactivate DataProvider
+Diagram -> Diagram : plot new data (change state)
+App <-- Diagram : page is automatically updated
+deactivate Diagram
+deactivate DetailPage
+User <- App : show updated detail page
 @enduml

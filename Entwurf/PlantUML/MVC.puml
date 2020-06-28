@@ -49,7 +49,8 @@ namespace Model {
         - position : Position
         - availableFeatures : Feature[]
 
-        + constructor(id: number, name: string, description: string, position: Position, features: Feature[])
+        + constructor(id: number, name: string, description: string, position: Position)
+        + setFeatures(features : Features[])
         + getId() : number
         + getName() : string
         + getDescription() : string
@@ -61,14 +62,12 @@ namespace Model {
 
     class Observation {
         - observationStation : ObservationStation
-        - position: Position
         - feature : Feature
         - value : number
         - timestamp : Date
 
-        + constructor(observationStation: ObservationStation, position: Position, feature: Feature, dateTime: Date, value: number)
+        + constructor(observationStation: ObservationStation, feature: Feature, date: Date, value: number)
         + getObservationStation() : ObservationStation
-        + getPosition(): Position
         + getFeature() : Feature
         + getValue() : number
         + getTimeStamp() : Date
@@ -87,7 +86,7 @@ namespace Model {
         - latitude : number
         - logitude : number
 
-        + constructor(latitude: number, logitude: number)
+        + constructor(latitude: number, longitude: number)
         + getLatitude(): number
         + getLongitude(): number
         + toString(): string
@@ -143,7 +142,7 @@ namespace View {
     namespace Components {
         namespace MapPage {
 
-            View.Components.Layout.MapPage *-- View.Components.MapPage.MapView
+            'View.Components.Layout.MapPage *-- View.Components.MapPage.MapView
             
             MapView *-- Search
             
@@ -233,14 +232,17 @@ namespace Controller {
             + setFilter(filter : string) : void
             + setExpand(expand : string) : void
             + setId(id : string) : void
+            + setType(type : string) : void
+            + setSubType(type : string) : void
         }
 
         interface QueryResult
-
+ 
         class Adapter {
             + convertToLoc(data : QueryResult) : Location[]
-            + convertToObs(data : QueryResult) : Observations[]
+            + convertToObs(data : QueryResult, station ObservationStation) : Observations[]
             + convertToSta(data : QueryResult) : ObservationStation[]
+            + getaAvaiableFeatures(data : QueryResult) : Features[]
         }
 
         class DataProvider {
