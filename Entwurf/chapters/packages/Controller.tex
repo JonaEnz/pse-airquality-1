@@ -88,11 +88,17 @@
 \end{class}
 
 \begin{Class}{FeatureProvider}
+    \textbf{Mathoden}
     \begin{itemize}
         \item \texttt{getFeature(id : string)}
-        \\Gibt Feature mit angegebener ID zurück.
+        \\Gibt Feature mit angegebener ID zurück. Bei erstem Aufruf werden für alle ObservedProperties vom FROSTServer Features erstellt. 
         \item \texttt{getRegisteredFeatures()}
         \\Gibt alle bekannten Features zurück.
+    \end{itemize}
+    \textbf{Attribute}
+    \begin{itemize}
+        \item \texttt{getRegisteredFeatures}
+        \\Array aller bekannten Features
     \end{itemize}
 \end{Class}
 
