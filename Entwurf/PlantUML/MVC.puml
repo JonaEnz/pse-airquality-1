@@ -255,8 +255,8 @@ namespace Controller {
             + getObservationStation(id : string) : ObservationStation
         }
         class FeatureProvider {
+            registeredFeatures : Feature[]
             + getFeature(featureID : string) : Feature
-            + getFeature(featureName : string) : Feature
             + getRegisteredFeatures() : Feature[]
         }
     }
