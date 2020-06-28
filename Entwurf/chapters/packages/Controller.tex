@@ -14,18 +14,22 @@
         \item \texttt{enableCount(set : boolean) : void}
         \\Stellt ein, ob die Anzahl der Objekte zurückgegeben werden soll.
         \item \texttt{setOrderBy(orderBy : string) : void}
-        \\TODO
+        \\Setzt die Sortierung
         \item \texttt{setSelect(select : string) : void}
-	\\Todo: Hat select ein spezielles Format? Soll das nicht lieber ein Array sein?
+        \\Setzt die gesuchten Attribute
         \\Spezifiziert, welche Attribute in der Antwort enthalten sein sollen.
         \item \texttt{setFilter(filter : string) : void}
-        \\TODO
+        \\Setzt den Filter
         \item \texttt{setExpand(expand : string) : void}
         \\Stellt ein, ob verschachtelte Objekttypen zurückgegeben werden sollen.
         \item \texttt{setId(id : string) : void}
-        \\TODO
+        \\Setzt die Id des gesuchten Typs
+        \item \texttt{setType(id : string) : void}
+        \\Setzt den gesuchten Typ
+        \item \texttt{setSubType(id : stirng) : void}
+        \\Setzt den gesuchten Subtyp
     \end{itemize}
-    Für die Standardwerte der set-Methoden siehe: \url{https://fraunhoferiosb.github.io/FROST-Server/sensorthingsapi/STA-Tailoring-Responses.html}
+    Für die Standardwerte und Syntax der set-Methoden siehe: \url{https://fraunhoferiosb.github.io/FROST-Server/sensorthingsapi/STA-Tailoring-Responses.html}
 \end{Class}
 
 \begin{Class}{FROSTServer}
