@@ -26,10 +26,11 @@
         \\Setzt die Id des gesuchten Typs
         \item \texttt{setType(id : string) : void}
         \\Setzt den gesuchten Typ
-        \item \texttt{setSubType(id : stirng) : void}
+        \item \texttt{setSubType(id : string) : void}
         \\Setzt den gesuchten Subtyp
     \end{itemize}
-    Für die Standardwerte und Syntax der set-Methoden siehe: \url{https://fraunhoferiosb.github.io/FROST-Server/sensorthingsapi/STA-Tailoring-Responses.html}
+    Für die Standardwerte und Syntax der set-Methoden siehe: 
+    \\ \url{https://fraunhoferiosb.github.io/FROST-Server/sensorthingsapi/STA-Tailoring-Responses.html}
 \end{Class}
 
 \begin{Class}{FROSTServer}
@@ -78,7 +79,8 @@
     \begin{itemize}
         \item \texttt{convertToLoc(data : QueryResult) : Location[]}
         \\TODO brauchen wir diese Methode?
-        \item \texttt{convertToObs(data : QueryResult, station ObservationStation) : Observations[]}
+        \item \texttt{convertToObs(data : QueryResult,
+        \\station ObservationStation) : Observations[]}
         \\Wandelt den QueryResult zu Observations um die zur gegebenen ObservationStation gehören.
         \item \texttt{convertToSta(data : QueryResult) : ObservationStation[]}
         \\Wandelt den QueryResult zu ObservationStation um. Die Position muss in der QueryResult enthalten sein.
@@ -88,7 +90,7 @@
 \end{Class}
 
 \begin{Class}{FeatureProvider}
-    \textbf{Mathoden}
+    \textbf{Methoden}
     \begin{itemize}
         \item \texttt{getFeature(id : string)}
         \\Gibt Feature mit angegebener ID zurück. Bei erstem Aufruf werden für alle ObservedProperties vom FROSTServer Features erstellt. 
