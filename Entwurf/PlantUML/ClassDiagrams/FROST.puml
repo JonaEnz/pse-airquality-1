@@ -13,13 +13,13 @@ DataProvider .. N1
 DataProvider -- FrostFactory
 
 abstract QueryBuilder {
-    {static} getQuery(obj : any) : string
+     getQuery(obj : any) : string
 }
 
 FrostFactory --> ResultModelConverter
 
 class GetObservationStationsBuilder extends QueryBuilder {
-    {static} getQuery(obj: GetObservationStationsOptions) : string
+    getQuery(options: GetObservationStationsOptions) : string
 }
 
 GetObservationStationsBuilder --> GetObservationStationsOptions
@@ -31,11 +31,11 @@ interface GetObservationStationsOptions {
     radius : number
 }
 
-abstract ResultModelConverter {
-    convert(json : string): any
+abstract ResultModelConverter<T> {
+    convert(json : string): T
 }
 
-class GetObservationStationsConverter extends ResultModelConverter {
+class GetObservationStationsConverter<ObservationStation[]> extends ResultModelConverter {
     convert(json : string) : FrostResult<ObservationStation[]>
 }
 
@@ -67,11 +67,10 @@ class FrostServer {
 }
 note as N2
 request(new GetObservationStationsFactory(), options : GetObservationStationsOptions) {
-    var query = GetObservationStationsBuilder.getQueryBuilder().getQuery(obj)
-    var json = FrostServer.send(query)
-    var obs = GetObservationStationsConverter.getConverter().convert(json)
-    var result = new FrostResult<ObservationStation[]>(obs, true)
-    return result
+    var query = ff.getQueryBuilder().getQuery(options)
+    var json = this.send(query)
+    var obs = ff.getConverter().convert(json)
+    return obs
     }
 end note
 FrostServer .. N2
