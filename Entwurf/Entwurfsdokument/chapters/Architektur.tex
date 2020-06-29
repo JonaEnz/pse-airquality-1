@@ -5,13 +5,13 @@ Die Grundstruktur der Webanwendung orientiert sich an der "Model View Controller
 Die drei Komponenten sollen dabei folgende Aufgaben erfüllen:
 \begin{addmargin}[25pt]{0pt}
     \textbf{Model}\\
-    Das Model enthält die Datenstruktur der Messtationen, angelehnt an die Datenstruktur des FROSTServers, und für die Objekte der Karte.
+    Das Model enthält die Datenstruktur der Messtationen, angelehnt an die Datenstruktur des \gls{FROST-Server}s, und für die Objekte der Karte.
     \\ \\
     \textbf{Controller}\\
-    Der Controller ist die zentrale Steuerungseinheit der Webanwendung. Er entscheidet was bei Nutzereingaben passieren soll und kümmert sich darum Daten vom FROSTServer abzurufen und den REACT-Komponenten in passender Form zur Darstellung zu übergeben,
+    Der Controller ist die zentrale Steuerungseinheit der Webanwendung. Er entscheidet was bei Nutzereingaben passieren soll und kümmert sich darum Daten vom \gls{FROST-Server} abzurufen und den REACT-Komponenten in passender Form zur Darstellung zu übergeben,
     \\ \\
     \textbf{View}\\
-    Die View kümmert sich über die REACT-Komponenten um die Interaktion mit dem Benutzer. Sie zeigt die Detail- und MapPage an, und nimmt ebenfalls Interaktionen des Benutzers entgegen und leitet diese an den Controller weiter.
+    Die View kümmert sich über \gls{React} um die Interaktion mit dem Benutzer. Sie zeigt die Detail- und MapPage an, und nimmt ebenfalls Interaktionen des Benutzers entgegen und leitet diese an den Controller weiter.
 \end{addmargin}
 
 Des Weiteren wird der Code entsprechend dem Entwurfsprinzip "separation of concerns" nach Aufgaben getrennt. Somit wird der Programmcode logisch strukturiert und bleibt übersichtlich und verständlich. Das erleichtert auch die gemeinsame Entwicklung im Team.
