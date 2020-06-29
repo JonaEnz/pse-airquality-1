@@ -1,0 +1,79 @@
+@startuml FROST
+
+class DataProvider {
+    {static} getObservationStations(middle: Position, radius : number) : ObservationStation[]
+}
+
+note as N1
+    Fassade, nur diese Klasse ist nach außen sichtbar.
+end note
+
+DataProvider .. N1
+
+DataProvider -- FrostFactory
+
+abstract QueryBuilder {
+    {static} getQuery(obj : any) : string
+}
+
+FrostFactory --> ResultModelConverter
+
+class GetObservationStationsBuilder extends QueryBuilder {
+    {static} getQuery(obj: GetObservationStationsOptions) : string
+}
+
+GetObservationStationsBuilder --> GetObservationStationsOptions
+GetObservationStationFactory --> GetObservationStationsBuilder
+GetObservationStationFactory --> GetObservationStationsConverter
+
+interface GetObservationStationsOptions {
+    middle : Position
+    radius : number
+}
+
+abstract ResultModelConverter {
+    convert(json : string): any
+}
+
+class GetObservationStationsConverter extends ResultModelConverter {
+    convert(json : string) : FrostResult<ObservationStation[]>
+}
+
+abstract FrostFactory {
+    GetConverter() : ResultModelConverter
+    GetQueryBuilder() : QueryBuilder
+}
+
+class GetObservationStationFactory {
+    GetQueryBuilder() : GetObservationStationsBuilder
+    GetConverter() : GetObservationStationsConverter
+}
+
+FrostFactory --> QueryBuilder
+FrostFactory --> FrostResult
+
+class FrostResult<T> {
+    constructor(res : T, success : boolean, err? : string)
+    result : T
+    success : boolean
+    errorMessage : string
+}
+
+class FrostServer {
+    getUrl() : string
+    setUrl(url : string)
+
+    request(ff : FrostFactory, options : any) : FrostResult
+}
+note as N2
+request(new GetObservationStationsFactory(), options : GetObservationStationsOptions) {
+    var query = GetObservationStationsBuilder.getQueryBuilder().getQuery(obj)
+    var json = FrostServer.send(query)
+    var obs = GetObservationStationsConverter.getConverter().convert(json)
+    var result = new FrostResult<ObservationStation[]>(obs, true)
+    return result
+    }
+end note
+FrostServer .. N2
+
+@enduml
