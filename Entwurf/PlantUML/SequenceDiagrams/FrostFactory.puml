@@ -50,8 +50,8 @@ return observations
 create FrostResult
 GetObservationStationsConverter -> FrostResult ++: new(observations, true)
 return result
-destroy GetObservationStationsConverter
 return result
+destroy GetObservationStationsConverter
 return result
 [<- DataProvider : result
 @enduml
