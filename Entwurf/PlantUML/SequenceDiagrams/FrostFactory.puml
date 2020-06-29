@@ -1,10 +1,15 @@
 @startuml FrostFactory
 
 participant DataProvider
-participant GetObservationStationsFactory
 participant FrostServer
 participant FrostResult
+box "GetObservationStations" #LightGreen
+participant GetObservationStationsFactory
 participant GetObservationStationsOptions <<(I, #FFFFFF)>>
+participant GetObservationStationsBuilder
+participant GetObservationStationsConverter
+end box
+participant ObservationStation
 
 [-> DataProvider ++ : getObservationStations(middle, radius)
 
@@ -34,6 +39,9 @@ return json
 
 'Converter
 FrostServer -> GetObservationStationsFactory ++ : getConverter()
+create GetObservationStationsConverter
+GetObservationStationsFactory -> GetObservationStationsConverter ++ : new()
+return converter
 return converter
 FrostServer -> GetObservationStationsConverter ++ : convert(json)
 create ObservationStation
