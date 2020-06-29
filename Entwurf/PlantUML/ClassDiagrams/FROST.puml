@@ -10,7 +10,8 @@ end note
 
 DataProvider .. N1
 
-DataProvider -- FrostFactory
+DataProvider --> FrostFactory
+DataProvider --> FrostServer
 
 abstract QueryBuilder {
      getQuery(obj : any) : string
@@ -18,36 +19,42 @@ abstract QueryBuilder {
 
 FrostFactory --> ResultModelConverter
 
-class GetObservationStationsBuilder extends QueryBuilder {
-    getQuery(options: GetObservationStationsOptions) : string
+package GetObservationStation {
+    class GetObservationStationsBuilder implements QueryBuilder {
+        getQuery(options: GetObservationStationsOptions) : string
+    }
+
+    class GetObservationStationFactory implements FrostFactory{
+        GetQueryBuilder() : GetObservationStationsBuilder
+        GetConverter() : GetObservationStationsConverter
+    }
+
+    GetObservationStationsBuilder --> GetObservationStationsOptions
+    GetObservationStationFactory --> GetObservationStationsBuilder
+    GetObservationStationFactory --> GetObservationStationsConverter
+
+    interface GetObservationStationsOptions {
+        middle : Position
+        radius : number
+    }
+    
+    class GetObservationStationsConverter<ObservationStation[]> implements ResultModelConverter {
+        convert(json : string) : FrostResult<ObservationStation[]>
+    }
 }
 
-GetObservationStationsBuilder --> GetObservationStationsOptions
-GetObservationStationFactory --> GetObservationStationsBuilder
-GetObservationStationFactory --> GetObservationStationsConverter
-
-interface GetObservationStationsOptions {
-    middle : Position
-    radius : number
-}
 
 abstract ResultModelConverter<T> {
     convert(json : string): T
 }
 
-class GetObservationStationsConverter<ObservationStation[]> extends ResultModelConverter {
-    convert(json : string) : FrostResult<ObservationStation[]>
-}
 
 abstract FrostFactory {
-    GetConverter() : ResultModelConverter
+    GetConverter() : ResultModelConverter<T>
     GetQueryBuilder() : QueryBuilder
 }
 
-class GetObservationStationFactory {
-    GetQueryBuilder() : GetObservationStationsBuilder
-    GetConverter() : GetObservationStationsConverter
-}
+
 
 FrostFactory --> QueryBuilder
 FrostFactory --> FrostResult

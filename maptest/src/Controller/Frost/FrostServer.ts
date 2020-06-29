@@ -2,10 +2,14 @@ import { FrostFactory } from "./FrostFactory";
 import { FrostResult } from "../../Model/FrostResult";
 
 export class FrostServer {
+  url: string = "";
+
   getUrl(): string {
-    return "";
+    return this.url;
   }
-  setUrl(url: string) {}
+  setUrl(url: string) {
+    this.url = url;
+  }
 
   send(url: string) {
     return "{}";
