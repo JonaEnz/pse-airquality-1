@@ -1,0 +1,49 @@
+@startuml FrostFactory
+
+participant DataProvider
+participant GetObservationStationsFactory
+participant FrostServer
+participant FrostResult
+participant GetObservationStationsOptions <<(I, #FFFFFF)>>
+
+[-> DataProvider ++ : getObservationStations(middle, radius)
+
+'Factory
+create GetObservationStationsFactory
+DataProvider -> GetObservationStationsFactory ++ : new()
+return factory
+create GetObservationStationsOptions
+DataProvider -> GetObservationStationsOptions ++ : new(middle, radius)
+return options
+DataProvider -> FrostServer ++ : request(factory, options)
+
+'Builder
+
+FrostServer -> GetObservationStationsFactory ++ : getQueryBuilder()
+create GetObservationStationsBuilder
+GetObservationStationsFactory -> GetObservationStationsBuilder ++ : new()
+return builder
+return builder
+FrostServer -> GetObservationStationsBuilder ++ : builder.getQuery(options)
+return query
+destroy GetObservationStationsBuilder
+
+'Request
+FrostServer -> FrostServer ++ : send(url + "/" + query)
+return json
+
+'Converter
+FrostServer -> GetObservationStationsFactory ++ : getConverter()
+return converter
+FrostServer -> GetObservationStationsConverter ++ : convert(json)
+create ObservationStation
+GetObservationStationsConverter -> ObservationStation ++ : new()
+return observations
+create FrostResult
+GetObservationStationsConverter -> FrostResult ++: new(observations, true)
+return result
+destroy GetObservationStationsConverter
+return result
+return result
+[<- DataProvider : result
+@enduml
