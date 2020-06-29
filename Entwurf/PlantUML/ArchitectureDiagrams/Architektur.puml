@@ -1,11 +1,15 @@
 @startuml Architektur
 
-title MVC Architektur
 skinparam padding 10
 
 rectangle Model {
     rectangle "Sensor Things"
     rectangle "Map Objekte"
+}
+
+rectangle Controller{
+    rectangle "Frost"
+    rectangle "View-Contoller"
 }
 
 rectangle View {
@@ -14,9 +18,9 @@ rectangle View {
     rectangle "DetailPage"
 }
 
-rectangle Controller {
-    rectangle "Frost"
-    rectangle "View-Contoller"
-}
+Controller -> View : Aktualisiert
+View -> Controller : Benachrichtigt
+
+Controller -> Model : Manipuliert
 
 @enduml
