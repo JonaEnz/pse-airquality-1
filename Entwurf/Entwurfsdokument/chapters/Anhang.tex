@@ -1,8 +1,7 @@
 \section{Anhang}
 \subsection{Sequenzdiagramme}
 \subsubsection*{Kartenansicht}
-Dieses Sequenzdiagramm zeigt den Start der \gls{Kartenansicht}. Die Karten-Komponente holt sich bei dem MapController Pins/Polygone und die Skala. 
-Der MapController holt sich diese von der StationCinfiguration, welche die Pins/Polygone aus Observations erstellt, die vom DataProvider angefragt worden sind.
+Dieses Sequenzdiagramm zeigt den Start der \gls{Kartenansicht}. Die Karten-Komponente holt sich bei dem MapController Pins/Polygone und die Skala. Der MapController holt sich diese von der StationConfiguration, welche die Pins/Polygone aus Observations erstellt, die vom DataProvider angefragt worden sind. Bei einem Viewport-Change wird der MapController den neuen Viewport mitgeteilt, und die Map-Komponente rendert sich selber neu. Wird auf ein Pin geklickt, wird der Pin dem MapController überreicht, welcher die passende Station liefert, und der Map zurück gibt. Diese rendert daraufhin ein StationInfo Pop-Up.
 \\
 \includegraphics[width=\textwidth,keepaspectratio]{diagrams/MapPageSeq.png}
 
