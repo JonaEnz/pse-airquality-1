@@ -39,6 +39,7 @@ namespace Model {
     }
 
     class Viewport {
+        + constructor(center: Position, zoom: number)
         + getCenter() : Position
         + getZoom() : number
         + getRadius() : number
