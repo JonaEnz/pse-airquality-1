@@ -103,15 +103,15 @@ namespace Model {
 
     class Feature {
         - id : number
-        - name : string
-        - description : string
+        - nameId : string
+        - descriptionId : string
         - scale : Scale
-        - relatedWeblink : string
-        - drawableDiagrams : DetailPage.Diagram[]
+        - relatedWeblinkId : string
         - limit: number
         - unitOfMeasurement: string
+        - drawableDiagramIds: string[]
 
-        + constructor(id : number, name : string, description : string, scale : Scale, relatedWeblink : string, drawableDiagrams : DetailPage.Diagram[], limit: number, unitOfMeasurement: string)
+        + constructor(id : string, nameId : string, descriptionId : string, relatedWeblinkId : string, scale : Scale, drawableDiagramIds: string[], limit: number, unitOfMeasurement: string)
         + getID(): number
         + getName(): string
         + getDescription(): string

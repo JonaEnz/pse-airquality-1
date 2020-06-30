@@ -1,5 +1,232 @@
 \subsection{Controller}
 
+\includegraphics[angle=90, origin=c,height=\textwidth]{MVC/Controller/Controller_part1.png}
+\newpage
+\includegraphics[angle=90, origin=c,height=\textwidth]{MVC/Controller/Controller_part2.png}
+
+\subsubsection{FROST}
+
+\paragraph{DataProvider / FrostServer}\mbox{}\\
+
+\begin{Class}{DataProvider}
+    Die Fassade des FROST-Namespaces. Nur mit dieser Klasse wird nach außen kommuniziert.
+    Über die statischen Methoden können Anfragen an den FROST-Server gestellt werden ohne die Query oder Antwort offenzulegen.
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{<<static>> getLatestObservations(center : Position,
+        \\ radius: number, feature : Feature) : Observation[]}
+        \\Gibt alle Observations im spezifizierten Bereich zurück
+        \item \texttt{getLatestObservation(station : ObservationStation, feature : Feature) : Observation}
+        \\ Die letzte Beobachtung der \emph{station} für das Feature \emph{feature}.
+        Wenn \emph{station} \emph{feature} nicht unterstützt wird \emph{null} zurückgegeben.
+        \item \texttt{getObservations(station : ObservationStation,
+        \\ start : Date, end : Date, feature : Feature) : Observation[]}
+        \\ Die Beobachtungen der Station \emph{stations} für das Feature \emph{feature}
+        zwischen \emph{start} und \emph{end}.
+        \item \texttt{getObservations(station : ObservationStation,
+        \\ start : Date, end : Date, feature : Feature,
+        \\ frequency : Frequency) : Observation[]}
+        \\ Wie oben, doch gibt nur Ergebnisse im Abstand vom \emph{frequency} aus.
+        \item \texttt{getObservationStations(middle: Position,
+        \\ radius : number) : ObservationStation[]}
+        \\ Alle Messstationen die maximal \emph{radius} Grad Abstand von \emph{middle} haben.
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{FrostServer}
+    Ein FROST-Server an den mit \emph{FrostFactory}s Anfragen gestellt werden.
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{constructor()}
+        \\ Versucht die Konfigurationsdatei \emph{FrostUrl.json} zu laden und das Attribut 'url' zu lesen.
+        Bei einem Fehlschlag wird ein Fehler geworfen.
+        \item \texttt{getUrl() : string}
+        \\ Gibt die Url des Servers zurück.
+        \item \texttt{setUrl(url : string) : void}
+        \\ Setzt die Url des Servers auf \emph{url}.
+        \item \texttt{request(ff : FrostFactory, options : any) : FrostResult<any>}
+        \\ Stellt eine Anfrage die mit \emph{ff.getQueryBuilder().getQuery(options)} erstellt wurde an den Server.
+        Versucht die Antwort mit \emph{ff.getConverter().convert} in ein FrostResult<T> umzuwandeln und gibt dies zurück.
+        \item \texttt{async asyncRequest(ff : FrostFactory, options : any) : Promise<FrostResult<any>>}
+        \\ Wie request(ff, options) doch stellt die Anfrage asynchron.
+        Dies ermöglicht ein schnelles Anzeigen der Seite während Teile noch laden (insbes. Diagramme).
+    \end{itemize}
+\end{Class}
+
+\paragraph{FrostFactory}\mbox{}\\
+
+\begin{Class}{<<abstract>> FrostFactory}
+    Definiert das Erstellen einer Query und die anschließende Umwandlung der Serverantwort in Objekte des internen Models.
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{getConverter : ResultModelConverter<T>}
+        \\ Eine neue Instanz eines \emph{ResultModelConverter}.
+        \item \texttt{GetQueryBuilder : QueryBuilder}
+        \\ Eine neue Instanz eines \emph{QueryBuilder}.
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{<<abstract>> QueryBuilder}
+    Erstelle eine Query für einen FROST-Server mit bestimmten Optionen.
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{getQuery(options : any) : string}
+        \\ Eine Query für den FrostServer mit Einstellungen aus \emph{options}.
+        Angehängt an die URL des FROST-Servers + "v1.0" ergibt sich daraus die URL einer erfolgreichen Anfrage.
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{<<abstract>> ResultModelConverter<T>}
+    Wandelt eine Antwort des FROST-Servers auf eine bestimmte Query in ein Objekt vom Typ T um.
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{convert(json : string) : FrostResult<T>}
+        \\ Versucht \emph{json} in ein Objekt zu parsen und dieses Objekt in Typ T zu kopieren.
+        Bei einem Fehlschlag wird ein FrostResult mit success = flase ausgegeben, sonst eines mit success = true und dem Objekt vom Typ T als result.
+    \end{itemize}
+\end{Class}
+
+\paragraph{GetObservations}\mbox{}\\
+\begin{Class}{GetObservationsFactory implements FrostFactory}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{GetConverter() : GetObservationsConverter}
+        \\ Eine neue Instanz eines GetObservationsConverter.
+        \item \texttt{GetQueryBuilder() : GetObservationsBuilder}
+        \\ Eine neue Instanz eines GetObservationsBuilder.
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{GetObservationsBuilder implements QueryBuilder}
+
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{getQuery(options : GetObservationsOptions)}
+        \\ Erstellt eine FROST-Query mit folgendem Effekt:
+        \\ Hole alle Observations von \emph{station} im Zeitraum \emph{start - end}
+        für Feature \emph{feature}.
+        \\ Wenn \emph{frequency} nicht null ist gebe nur die Observations zurück 
+        die mindestens \emph{frequency} von einander entfernt sind.
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{GetObservationsConverter implements ResultModelConverter$\langle$Observation$\lbrack\rbrack\rangle$}
+
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{convert(json : string) : FrostResult<Observation[]>}
+        \\ \emph{json}: Eine Antwort vom FROST-Server auf ein Query aus \emph{GetObservationsBuilder}.
+        \\ Es wird versucht diese Antwort in \emph{Observation[]} umzuwandeln.
+        Die Rückgabe ist dann new FrostResult(\emph{output}, true)
+        \\ Schlägt dies fehl wird new FrostResult(null, false, \emph{errorMessage}) zurückgegeben.
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{<<interface>> GetObservationsOptions}
+\begin{itemize}
+    \item \texttt{station : ObservationStation}
+    \item \texttt{start : Date}
+    \item \texttt{end : Date}
+    \item \texttt{feature : Feature}
+    \item \texttt{frequency? : Frequency}
+\end{itemize}
+\end{Class}
+
+
+\paragraph{GetLatestObservations}\mbox{}\\
+\begin{Class}{GetLatestObservationsFactory implements FrostFactory}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{GetConverter() : GetLatestObservationsConverter<Observation[]>}
+        \\ Eine neue Instanz eines GetLatestObservationsConverter
+        \item \texttt{GetQueryBuilder() : GetLatestObservationsBuilder}
+        \\ Eine neue Instanz eines GetLatestObservationsBuilder
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{GetLatestObservationsBuilder implements QueryBuilder}
+
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{getQuery(options : GetLatestObservationsOptions)}
+        \\ Erstellt eine FROST-Query mit folgendem Effekt:
+        \\ Hole für alle Stationen mit Feature \emph{feature} und maximalem Abstand\emph{radius} von \emph{center}
+        jeweils die neuste Observation. 
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{GetLatestObservationsConverter implements ResultModelConverter$\langle$Observation$\lbrack\rbrack\rangle$}
+
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{convert(json : string) : FrostResult<Observation[]>}
+        \\ \emph{json}: Eine Antwort vom FROST-Server auf ein Query aus \emph{GetLatestObservationsBuilder}.
+        \\ Es wird versucht diese Antwort in \emph{Observation[]} umzuwandeln.
+        Die Rückgabe ist dann new FrostResult(\emph{output}, true)
+        \\ Schlägt dies fehl wird new FrostResult(null, false, \emph{errorMessage}) zurückgegeben.
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{<<interface>> GetLatestObservationsOptions}
+    \begin{itemize}
+        \item \texttt{center : Position}
+        \item \texttt{radius: number}
+        \item \texttt{feature : Feature}
+    \end{itemize}
+\end{Class}
+\paragraph{GetObservationStations}\mbox{}\\
+
+\begin{Class}{GetObservationStationsFactory implements FrostFactory}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{GetConverter() : GetObservationStationsConverter}
+        \\ Eine neue Instanz eines GetObservationStationsConverter
+        \item \texttt{GetQueryBuilder() : GetObservationStationsBuilder}
+        \\ Eine neue Instanz eines GetObservationStationsBuilder
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{GetObservationStationsBuilder implements QueryBuilder}
+
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{getQuery(options : GetObservationStationsOptions)}
+        \\ Erstellt eine FROST-Query mit folgendem Effekt:
+        \\ Hole alle Messstationen im Radius \emph{radius} von \emph{center}.
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{GetObservationStationsConverter implements ResultModelConverter$\langle$ObservationStation$\lbrack\rbrack\rangle$}
+
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{convert(json : string) : FrostResult<ObservationStation[]>}
+        \\ \emph{json}: Eine Antwort vom FROST-Server auf ein Query aus \emph{GetObservationStationsBuilder}.
+        \\ Es wird versucht diese Antwort in \emph{ObservationStation[]} umzuwandeln.
+        Die Rückgabe ist dann new FrostResult(\emph{output}, true)
+        \\ Schlägt dies fehl wird new FrostResult(null, false, \emph{errorMessage}) zurückgegeben.
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{<<interface>> GetObservationStationsOptions}
+    \begin{itemize}
+        \item \texttt{middle : Position}
+        \item \texttt{radius : number}
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{Converter implements ResultModelConverter}
+
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{convert(json : string) : FrostResult<Output>}
+        \\ \emph{json}: Eine Antwort vom FROST-Server auf ein Query aus \emph{Builder}.
+        \\ Es wird versucht diese Antwort in \emph{Output} umzuwandeln.
+        Die Rückgabe ist dann new FrostResult(\emph{output}, true)
+        \\ Schlägt dies fehl wird new FrostResult(null, false, \emph{errorMessage}) zurückgegeben.
+    \end{itemize}
+\end{Class}
+
 \subsubsection{FROST}
 
 \begin{Class}{FROSTQuery}
@@ -49,28 +276,7 @@
     \end{itemize}
 \end{Class}
 
-\begin{Class}{DataProvider}
-    \textbf{Methoden}
-    \begin{itemize}
-        \item \texttt{getLatestObservations(center : Position,
-        \\radius: number, feature : Feature) : Observation[]}
-        \\Gibt alle Observations im spezifizierten Bereich zurück
-        \item \texttt{getStationsIn(center: Position,
-        \\radius : int) : Station[]}
-        \\TODO: brauchen wir diese Methode? Gute Frage!
-        \item \texttt{getHistoricalObservations(
-            \\station : Station, start : Date, end : Date,
-            \\feature : Feature) : Observation[]}
-        \\Gibt Observations der gegebenen Station, zwischen start und end Zeitpunkt, des gegebenen Features zurück.
-        \item \texttt{getHistoricalObservationsFreq(
-            \\station : Station, start : Date, end : Date,
-            \\frequency : Frequency, feature : Feature
-            \\) : Observation[]}
-        \\Gibt Observations der gegebenen Station, zwischen start und end Zeitpunkt mit gegebener Frequenz, des gegebenen Features zurück.
-        \item \texttt{getStation(id : string) : Station}
-        \\Gibt die Station die zur gegebenen ID gehört zurück.
-    \end{itemize}
-\end{Class}
+
 
 \begin{Class}{Adapter}
     \textbf{Methoden}

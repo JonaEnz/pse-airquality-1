@@ -58,6 +58,9 @@ namespace View {
 
 
         namespace Layout {
+            Layout *-- PageMenu
+            PageMenu *-- LanguageMenu
+
             class MapPage
             class DetailPage {
                 Props.id: string

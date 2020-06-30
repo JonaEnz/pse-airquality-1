@@ -2,47 +2,94 @@
 
 namespace Controller {
     namespace Frost {
-        class FROSTServer {
-            + setUrl(url : string) : void
-            + getUrl() : string
-        }
-
-        class FROSTQuery {
-            + send() : QueryResult
-            + setTop(n : number) : void
-            + setSkip(n : number) : void
-            + enableCount(set : boolean) : void
-            + setOrderBy(orderBy : string) : void
-            + setSelect(select : string) : void
-            + setFilter(filter : string) : void
-            + setExpand(expand : string) : void
-            + setId(id : string) : void
-            + setType(type : string) : void
-            + setSubType(type : string) : void
-        }
-
-        interface QueryResult
- 
-        class Adapter {
-            + convertToLoc(data : QueryResult) : Location[]
-            + convertToObs(data : QueryResult, station ObservationStation) : Observations[]
-            + convertToSta(data : QueryResult) : ObservationStation[]
-            + getaAvaiableFeatures(data : QueryResult) : Features[]
-        }
-
         class DataProvider {
-            + getLatestObservations(center : Position, radius: number, feature : Feature) : Observation[]
-            + getLatestObservation(station : ObservationStation, feature : Feature) : Observation
-            + getObservations(station : ObservationStation, start : Date, end : Date, feature : Feature) : Observation[]
-            + getObservations(station : ObservationStation, start : Date, end : Date, feature : Feature, frequency : Frequency) : Observation[]
-            + getObservationStations(middle: Position, radius : number) : ObservationStation[]
-            + getObservationStation(id : string) : ObservationStation
+            + {static} getObservationStations(middle: Position, radius : number) : ObservationStation[]
         }
-        class FeatureProvider {
-            + getFeature(featureID : number) : Feature
-            + getFeature(featureName : string) : Feature
-            + getRegisteredFeatures() : Feature[]
+
+        note as N1
+            Fassade, nur diese Klasse ist nach außen sichtbar.
+        end note
+
+        DataProvider .. N1
+
+        DataProvider --> FrostFactory
+        DataProvider --> FrostServer
+
+        abstract QueryBuilder {
+            getQuery(options : any) : string
         }
+
+        FrostFactory --> ResultModelConverter
+
+        namespace GetObservationStation {
+            class GetObservationStationsBuilder implements Controller.Frost.QueryBuilder {
+                getQuery(options: GetObservationStationsOptions) : string
+            }
+
+            class GetObservationStationFactory implements Controller.Frost.FrostFactory{
+                GetQueryBuilder() : GetObservationStationsBuilder
+                GetConverter() : GetObservationStationsConverter
+            }
+
+            GetObservationStationsBuilder --> GetObservationStationsOptions
+            GetObservationStationFactory --> GetObservationStationsBuilder
+            GetObservationStationFactory --> GetObservationStationsConverter
+
+            interface GetObservationStationsOptions {
+                middle : Position
+                radius : number
+            }
+            
+            class GetObservationStationsConverter<ObservationStation[]> implements Controller.Frost.ResultModelConverter {
+                convert(json : string) : FrostResult<ObservationStation[]>
+            }
+
+            note as N3
+            GetObservationStation ist beispielhaft für alle Factorys
+            die für die Übersicht weggelassen wurden.
+            end note
+
+            GetObservationStationFactory .. N3
+        }
+
+
+        abstract ResultModelConverter<T> {
+            convert(json : string): FrostResult<T>
+        }
+
+
+        abstract FrostFactory {
+            GetConverter() : ResultModelConverter<T>
+            GetQueryBuilder() : QueryBuilder
+        }
+
+
+
+        FrostFactory --> QueryBuilder
+        FrostFactory --> FrostResult
+
+        class FrostResult<T> {
+            constructor(res : T, success : boolean, err? : string)
+            result : T
+            success : boolean
+            errorMessage : string
+        }
+
+        class FrostServer {
+            getUrl() : string
+            setUrl(url : string)
+
+            request(ff : FrostFactory, options : any) : FrostResult
+        }
+        note as N2
+        request(new GetObservationStationsFactory(), options : GetObservationStationsOptions) {
+            var query = ff.getQueryBuilder().getQuery(options)
+            var json = this.send(query)
+            var obs = ff.getConverter().convert(json)
+            return obs
+            }
+        end note
+        FrostServer .. N2
     }
     namespace Storage {
         class Language {

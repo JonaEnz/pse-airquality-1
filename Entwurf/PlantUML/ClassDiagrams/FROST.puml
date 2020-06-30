@@ -14,7 +14,7 @@ DataProvider --> FrostFactory
 DataProvider --> FrostServer
 
 abstract QueryBuilder {
-     getQuery(obj : any) : string
+     getQuery(options : any) : string
 }
 
 FrostFactory --> ResultModelConverter
@@ -45,7 +45,7 @@ package GetObservationStation {
 
 
 abstract ResultModelConverter<T> {
-    convert(json : string): T
+    convert(json : string): FrostResult<T>
 }
 
 
