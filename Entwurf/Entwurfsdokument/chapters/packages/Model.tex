@@ -94,8 +94,8 @@
         \textbf{Methoden}
         \begin{itemize}
             \item \texttt{constructor(id : string, nameId : string, descriptionId : string,\\
-             scale : Scale, relatedWeblink : string,
-            \\drawableDiagrams : DetailPage.Diagram[],
+             scale : Scale, relatedWeblinkId : string,
+            \\drawableDiagramsId : string[],
             \\limit: number, unitOfMeasurement: string)}
             \\ Erstellt ein Feature mit den angegebenen Attributen.
             Wirft einen Fehler wenn \emph{scale} keine Farbstufen hat.
@@ -107,8 +107,6 @@
             \\ Gibt die Einheit in der das Feature angegeben ist zurück.
             \item \texttt{getDescription() : string}
             \\  Die lokalisierte Beschreibung in der aktuellen Sprache.
-            \item \texttt{setScale(scale: Scale)}
-            \\ Setzt die Farbskala auf \emph{scale}.
             \item \texttt{getRelatedScale() : Scale}
             \\ Die Farbskala des Features.
             \item \texttt{getRelatedWeblink(): string}
