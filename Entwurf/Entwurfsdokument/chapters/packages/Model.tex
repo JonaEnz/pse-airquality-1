@@ -6,6 +6,7 @@
     \begin{Class}{FrostResult$\langle$T$\rangle$}
         FrostResult beinhaltet ein Objekt vom generischen Typ T und Metainformationen dazu.
         So können Fehler beim Erstellen des Objekts abgefangen und ggf. eine zweite Anfrage gestellt werden.
+        \bigskip\\
         \textbf{Attribute}
         \begin{itemize}
             \item \texttt{result : T}
@@ -29,6 +30,7 @@
 
     \begin{Class}{ObservationStation}
         Eine Messstation mit Metadaten, verfügbaren Features und Diagrammen.
+        \bigskip\\
         \textbf{Methoden}
         \begin{itemize}
             \item \texttt{constructor(id: string, name: string,
@@ -58,6 +60,7 @@
 
     \begin{Class}{Observation}
         Ein Messwert eines bestimmten Features an einer Messstation zu einem gewissen Zeitpunkt.
+        \bigskip\\
         \textbf{Methoden}
         \begin{itemize}
             \item \texttt{constructor(observationStation: ObservationStation, 
@@ -76,6 +79,7 @@
 
     \begin{Class}{Position}
         Eine Position auf der Welt in Koordinaten.
+        \bigskip\\
         \textbf{Methoden}
         \begin{itemize}
             \item \texttt{constructor(latitude: number, longitude: number)}
@@ -94,6 +98,7 @@
     \begin{Class}{Feature}
         Eine Umwelteigenschaft die von einer Messstation gemessen werden kann, Metadaten
         und mögliche Diagramme.
+        \bigskip\\
         \textbf{Methoden}
         \begin{itemize}
             \item \texttt{constructor(id : string, nameId : string, descriptionId : string,\\
@@ -123,6 +128,8 @@
     \end{Class}
 
     \begin{Class}{Color}
+        Eine Klasse um Farben darzustellen und bequem zwischen RGB und Hex-Codierung umzuwandeln.
+        \bigskip\\
         \textbf{Methoden}
         \begin{itemize}
             \item \texttt{constructor(r: number, g: number, b: number)}
@@ -138,6 +145,8 @@
     \end{Class}
 
     \begin{Class}{Scale}
+        Skala, die einem Wert einen Farbenwert zuordnet. Mit dem Parameter "linearTransition" des Konstruktors kann eingestellt werden, ob es sich um eine diskrete, oder um eine stetige Skala handelt, bei der dann zwischen den vorgegebenen Farbwerten linear interpoliert wird.
+        \bigskip\\
         \textbf{Methoden}
         \begin{itemize}
             \item \texttt{constructor(linearTransition: boolean,
@@ -151,6 +160,8 @@
     \end{Class}
 
     \begin{Class}{Polygon}
+        //Todo
+        \bigskip\\
         \textbf{Methoden}
         \begin{itemize}
             \item \texttt{constructor(color : Color, stations : ObservationStation[])}
@@ -165,6 +176,8 @@
     \end{Class}
 
     \begin{Class}{MapPin}
+        Ein Pin, der auf einer Karte eingezeichnet werden kann.
+        \bigskip\\
         \textbf{Methoden}
         \begin{itemize}
             \item \texttt{constructor(id: string, position: Position, vaule: number,\\
@@ -176,22 +189,18 @@
             \\ Liefert die Position des Pins
             \item \texttt{setPosition(position : Position) : void}
             \\ Setzt die Position des Pins
-
-            \bigskip
             \item \texttt{getValue() : number}
             \\ Liefert einen Wert zurück, der einem Pin zugewiesen werden kann.
-
-            \bigskip
             \item \texttt{getId() : string}
             \\ Liefert die Id des Pins.
-
-            \bigskip
             \item \texttt{getColor() : Color}
             \\ Liefert die Farbe des Pins.
         \end{itemize}
     \end{Class}
 
     \begin{Class}{Viewport}
+        Ausschnitt einer Karte.
+        \bigskip\\
         \textbf{Methoden}
         \begin{itemize}
             \item \texttt{constructor(center: Position, zoom: number)}
@@ -211,6 +220,7 @@
     \end{Class}
 
     \begin{Class}{<<enum>> Timespan}
+        Timespan definiert einen Zeitabschnitt.
         \begin{itemize}
             \item \texttt{LAST\_YEAR}
             \item \texttt{LAST\_3\_MONTHS}
