@@ -138,6 +138,15 @@ Sofern nicht anders angebeben sind alle Klassen in diesem
         \end{itemize}
     \end{Class}
 
+    \begin{Class}{FeatureInfo}
+        Popup, das weitere Informationen über das auf der \gls{Kartenansicht} gewählte Feature anzeigt.
+        \textbf{Attribute}
+        \begin{itemize}
+            \item \texttt{Props.feature: Feature}
+            \\Das gewählte Feature.
+        \end{itemize}
+    \end{Class}
+
 \subsubsection{DetailPage}
     \begin{Class}{<<abstract>> Diagram}
         Ein Diagramm, dass verschiedene Daten visualisiert. Ein Diagramm Hat eine Überschrift, eine Erklärung, und eine GoogleCharts Chart. Die Klasse fragt ihre dargestellten Daten selbstständig beim Rendern vom DataProvider an.
