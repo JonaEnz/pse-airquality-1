@@ -26,19 +26,16 @@ namespace Model {
     }
 
     class MapPin {
-        +constructor(position : Position)
+        +constructor(id: string, position: Position, vaule: number,color: Color)
 
         + getPosition() : Position
         + setPosition(position : Position) : void
 
         + getValue() : number
-        + setValue(value : number) : void
 
         + getStationId() : string
-        + setStationId(id : string) : void
 
         + getColor() : Color
-        + setColor(color : Color) : void
     }
 
     class Viewport {

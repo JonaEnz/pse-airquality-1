@@ -160,29 +160,27 @@
     \begin{Class}{MapPin}
         \textbf{Methoden}
         \begin{itemize}
+            \item \texttt{constructor(id: string, position: Position, vaule: number,\\
+            \\color: Color)}
+            \\Constructor von Pin
+
+            \bigskip
             \item \texttt{getPosition() : Position}
             \\ Liefert die Position des Pins
             \item \texttt{setPosition(position : Position) : void}
             \\ Setzt die Position des Pins
 
             \bigskip
-            \item \texttt{getValue() : float}
-            \\ Todo: Genaue Dokumentation für value.
-            \\ Liefert den Wert anhand dem die Färbung bestimmt wird.
-            \item \texttt{setValue(value : float) : void}
-            \\ Setzt den Wert des Pins.
+            \item \texttt{getValue() : number}
+            \\ Liefert einen Wert zurück, der einem Pin zugewiesen werden kann.
 
             \bigskip
-            \item \texttt{getStationId() : string}
-            \\ Liefert die interne Id der Station, die durch den Pin repräsentiert wird.
-            \item \texttt{setStationId(id : string) : void}
-            \\ Setzt die interne Id der Station, die durch den Pin repräsentiert wird.
+            \item \texttt{getId() : string}
+            \\ Liefert die Id des Pins.
 
             \bigskip
             \item \texttt{getColor() : Color}
             \\ Liefert die Farbe des Pins.
-            \item \texttt{setColor(color : Color) : void}
-            \\ Legt die Farbe des Pins fest.
         \end{itemize}
     \end{Class}
 
