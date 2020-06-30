@@ -36,7 +36,7 @@ MapView -> MapController ++ : getScale()
 MapController -> StationConfiguration ++ : getScale()
 return scale
 return scale
-MapView -> Legend ++ : open(scale)
+MapView -> Legend ++ : <<render, props(scale)>>
 
 'Nutzer zoomt'
 User -> Map ++ : zoom()
@@ -51,5 +51,7 @@ Map -> MapController ++ : handlePopup(pin)
 MapController -> DataProvider ++ : getStation(id)
 return station
 return station
+Map -> StationInfo ++ : <<render, props(scale)>>
+return
 return
 @enduml
