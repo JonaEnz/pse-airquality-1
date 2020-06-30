@@ -66,8 +66,7 @@ namespace Model {
         - position : Position
         - availableFeatures : Feature[]
 
-        + constructor(id: string, name: string, description: string, position: Position)
-        + setFeatures(features : Features[])
+        + constructor(id: string, name: string, description: string, position: Position, features : Feature[])
         + getId() : string
         + getName() : string
         + getDescription() : string
