@@ -1,5 +1,29 @@
 \subsection{Model}
 
+    \begin{Class}{FrostResult$\langle$T$\rangle$}
+        FrostResult beinhaltet ein Objekt vom generischen Typ T und Metainformationen dazu.
+        So können Fehler beim Erstellen des Objekts abgefangen und ggf. eine zweite Anfrage gestellt werden.
+        \textbf{Attribute}
+        \begin{itemize}
+            \item \texttt{result : T}
+            \\ Falls \emph{success} true : Ein Objekt vom generischen Typ T
+            \\ Falls \emph{success} false : nicht definiert.
+            \item \texttt{success : boolean}
+            \\ \emph{true} : Die Erzeugung von \emph{result} war erfolgreich.
+            \\ \emph{false} : Erstellung von \emph{result} fehlgeschlagen.
+            \item \texttt{errorMessage : string}
+            \\ Nicht definiert wenn \emph{success} wahr ist.
+            Sonst eine aussagekräftige Fehlermeldung über Probleme beim Erstellen von \emph{result}.
+        \end{itemize}
+
+        \textbf{Methoden}
+        \begin{itemize}
+            \item \texttt{constructor(result : T, success : boolean, err? : string)}
+            \\ Wenn \emph{success} true : Setzt this.success auf true,  this.result auf result und this.errorMessage auf das leere Wort.
+            \\ Sonst : Setzt this.result auf null, this.success auf false und this.errorMessage auf err.
+        \end{itemize}
+    \end{Class}
+
     \begin{Class}{ObservationStation}
         Eine Messstation mit Metadaten, verfügbaren Features und Diagrammen.
         \textbf{Methoden}
