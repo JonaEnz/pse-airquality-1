@@ -1,10 +1,10 @@
-\subsection{View}
-
-\includegraphics[angle=90, origin=c, height=\textwidth]{MVC/View/View.png}
 \newpage
-
+\subsection{View}
 Sofern nicht anders angebeben sind alle Klassen in diesem 
 \\Unterkapitel React-Komponenten.
+
+\includegraphics[angle=90, origin=c, height=\textwidth]{MVC/View/View.png}
+
 
 \subsubsection{Layout}
 \begin{Class}{Layout}
@@ -28,6 +28,7 @@ Sofern nicht anders angebeben sind alle Klassen in diesem
 \begin{Class}{ErrorPage}
     Wird bei einem kritischen Fehler aufgerufen.
     Zeigt eine Fehlermeldung an und enthält einen Button der auf die Kartenseite führt.
+    \bigskip\\
     \textbf{Attribute}
     \begin{itemize}
         \item \texttt{Props.errorCode}
@@ -43,6 +44,7 @@ Sofern nicht anders angebeben sind alle Klassen in diesem
     \end{Class}
     \begin{Class}{MapView}
         Eine Komponente die die Karte selbst und weitere Steuerelemente wie die Suche, Konfiguration und Legende beinhaltet.
+        \bigskip\\
         \textbf{Methoden}
         \begin{itemize}
             \item \texttt{selectStation(station : ObservationStation)}
@@ -61,6 +63,7 @@ Sofern nicht anders angebeben sind alle Klassen in diesem
 
     \begin{Class}{FeatureSelect}
         Eine Komponente für Einstellungen der Karte.
+        \bigskip\\
         \textbf{Methoden}
         \begin{itemize}
             \item \texttt{getSelectedFeature() : Feature}
@@ -74,6 +77,7 @@ Sofern nicht anders angebeben sind alle Klassen in diesem
 
     \begin{Class}{Search}
         Ein Suchfeld für Adressen und ein Button zur automatischen Positionserkennung.
+        \bigskip\\
         \textbf{Methoden}
         \begin{itemize}
             \item \texttt{onSearch(string searchTerm) : void}
@@ -93,6 +97,7 @@ Sofern nicht anders angebeben sind alle Klassen in diesem
     
     \begin{Class}{Map}
         Eine Leaflet-Karte mit anpassbaren Markern und Polygonen.
+        \bigskip\\
         \textbf{Methoden}
         \begin{itemize}
             \item \texttt{Props.onViewportChanged(viewport : Viewport)}
@@ -111,6 +116,7 @@ Sofern nicht anders angebeben sind alle Klassen in diesem
     
     \begin{Class}{Legend}
         Eine Legende für die Farben der aktuellen Ansicht.
+        \bigskip\\
         \textbf{Attribute}
         \begin{itemize}
             \item \texttt{Props.scale : Skala}
@@ -120,6 +126,7 @@ Sofern nicht anders angebeben sind alle Klassen in diesem
     
     \begin{Class}{StationInfo}
         Das Popup für eine bestimmte Messstation. Es beinhaltet Metadaten und einen Button zur Detailseite.
+        \bigskip\\
         \textbf{Attribute}
         \begin{itemize}
             \item \texttt{openDetails : MaterialUI.Button}
@@ -132,6 +139,7 @@ Sofern nicht anders angebeben sind alle Klassen in diesem
 \subsubsection{DetailPage}
     \begin{Class}{<<abstract>> Diagram}
         Ein Diagramm, dass verschiedene Daten visualisiert. Ein Diagramm Hat eine Überschrift, eine Erklärung, und eine GoogleCharts Chart. Die Klasse fragt ihre dargestellten Daten selbstständig beim Rendern vom DataProvider an.
+        \bigskip\\
         \textbf{Attribute}
         \begin{itemize}
             \item \texttt{Props.observationStation: ObservationStation}
@@ -148,6 +156,7 @@ Sofern nicht anders angebeben sind alle Klassen in diesem
 
     \begin{Class}{LocationMap}
         Eine Karte, die eine Position anzeigt.
+        \bigskip\\
         \textbf{Attribute}
         \begin{itemize}
             \item \texttt{Props.position: Position}
@@ -156,6 +165,7 @@ Sofern nicht anders angebeben sind alle Klassen in diesem
 
     \begin{Class}{ObservationStationProfile}
         Steckbrief einer ObservationStation, die den Namen, die Position, die Beschreibung und die letzten Messwerte einer ObservationStation anzeigt.
+        \bigskip\\
         \textbf{Attribute}
         \begin{itemize}
             \item \texttt{props.observationStation: ObservationStation}
