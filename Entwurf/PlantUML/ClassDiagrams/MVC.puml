@@ -168,7 +168,7 @@ namespace View {
             MapView *-- Map
             MapView *-- FeatureSelect
 
-            Map *-- Legend
+            MapView *-- Legend
 
             class FeatureSelect {
                 + getSelectedFeature() : Feature
