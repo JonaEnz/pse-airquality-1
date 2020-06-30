@@ -18,6 +18,13 @@ namespace Model {
 
     Scale --> Color
 
+    Polygon --> ObservationStation
+
+
+    class Polygon {
+        + stations : ObservationStation[]
+    }
+
     class MapPin {
         +constructor(position : Position)
 
