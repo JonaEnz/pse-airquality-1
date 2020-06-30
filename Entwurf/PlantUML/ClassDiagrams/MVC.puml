@@ -167,8 +167,9 @@ namespace View {
             
             MapView *-- Map
             MapView *-- FeatureSelect
+            MapView *-- FeatureInfo
 
-            Map *-- Legend
+            MapView *-- Legend
 
             class FeatureSelect {
                 + getSelectedFeature() : Feature
@@ -201,6 +202,10 @@ namespace View {
 
             class StationInfo {
                 + Props.station : ObservationStation
+            }
+
+            class FeatureInfo {
+                + Props.feature : Feature
             }
         }
         namespace DetailPage {
