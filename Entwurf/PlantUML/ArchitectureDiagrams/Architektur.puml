@@ -18,9 +18,4 @@ rectangle View {
     rectangle "DetailPage"
 }
 
-Controller -> View : Aktualisiert
-View -> Controller : Benachrichtigt
-
-Controller -> Model : Manipuliert
-
 @enduml
