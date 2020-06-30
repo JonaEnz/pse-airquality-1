@@ -19,10 +19,13 @@ User -> MapView ++ : open()
 MapView -> Map ++ : open()
 Map -> MapController ++ : getPins()
 MapController -> StationConfiguration ++ : getPins()
-StationConfiguration -> DataProvider ++ : getLatestObservations(center, radius, feature)
-return observations
-StationConfiguration -> DataProvider ++ : getStationsIn(center, radius)
+StationConfiguration -> DataProvider ++ : getObservationStations(center, radius)
 return stations
+loop for every station
+StationConfiguration -> DataProvider ++ : getLatestObservations(station, feature)
+return observations
+end
+
 return pins
 return pins
 Map -> MapController ++ : getPolygons()
