@@ -11,12 +11,14 @@
 \begin{Class}{DataProvider}
     Die Fassade des FROST-Namespaces. Nur mit dieser Klasse wird nach außen kommuniziert.
     Über die statischen Methoden können Anfragen an den FROST-Server gestellt werden ohne die Query oder Antwort offenzulegen.
+    \bigskip\\
     \textbf{Methoden}
     \begin{itemize}
         \item \texttt{<<static>> getLatestObservations(center : Position,
         \\ radius: number, feature : Feature) : Observation[]}
         \\Gibt alle Observations im spezifizierten Bereich zurück
-        \item \texttt{<<static>> getLatestObservation(station : ObservationStation, feature : Feature) : Observation}
+        \item \texttt{<<static>> getLatestObservation(station : ObservationStation,
+        \\feature : Feature) : Observation}
         \\ Die letzte Beobachtung der \emph{station} für das Feature \emph{feature}.
         Wenn \emph{station} \emph{feature} nicht unterstützt wird \emph{null} zurückgegeben.
         \item \texttt{<<static>> getObservations(station : ObservationStation,
@@ -37,6 +39,7 @@
 
 \begin{Class}{FrostServer}
     Ein FROST-Server an den mit \emph{FrostFactory}s Anfragen gestellt werden.
+    \bigskip\\
     \textbf{Methoden}
     \begin{itemize}
         \item \texttt{constructor()}
@@ -47,8 +50,9 @@
         \item \texttt{setUrl(url : string) : void}
         \\ Setzt die Url des Servers auf \emph{url}.
         \item \texttt{request(ff : FrostFactory, options : any) : FrostResult<any>}
-        \\ Stellt eine Anfrage die mit \emph{ff.getQueryBuilder().getQuery(options)} erstellt wurde an den Server.
-        Versucht die Antwort mit \emph{ff.getConverter().convert} in ein FrostResult<T> umzuwandeln und gibt dies zurück.
+        \\ Stellt eine Anfrage die mit \emph{ff.getQueryBuilder().getQuery(options)} erstellt
+        \\ wurde an den Server. Versucht die Antwort mit \emph{ff.getConverter().convert}
+        \\in ein FrostResult<T> umzuwandeln und gibt dies zurück.
         \item \texttt{async asyncRequest(ff : FrostFactory, options : any) : Promise<FrostResult<any>>}
         \\ Wie request(ff, options) doch stellt die Anfrage asynchron.
         Dies ermöglicht ein schnelles Anzeigen der Seite während Teile noch laden (insbes. Diagramme).
@@ -59,6 +63,7 @@
 
 \begin{Class}{<<abstract>> FrostFactory}
     Definiert das Erstellen einer Query und die anschließende Umwandlung der Serverantwort in Objekte des internen Models.
+    \bigskip\\
     \textbf{Methoden}
     \begin{itemize}
         \item \texttt{getConverter : ResultModelConverter<T>}
@@ -70,6 +75,7 @@
 
 \begin{Class}{<<abstract>> QueryBuilder}
     Erstelle eine Query für einen FROST-Server mit bestimmten Optionen.
+    \bigskip\\
     \textbf{Methoden}
     \begin{itemize}
         \item \texttt{getQuery(options : any) : string}
@@ -80,6 +86,7 @@
 
 \begin{Class}{<<abstract>> ResultModelConverter<T>}
     Wandelt eine Antwort des FROST-Servers auf eine bestimmte Query in ein Objekt vom Typ T um.
+    \bigskip\\
     \textbf{Methoden}
     \begin{itemize}
         \item \texttt{convert(json : string) : FrostResult<T>}
@@ -100,7 +107,6 @@
 \end{Class}
 
 \begin{Class}{GetObservationsBuilder implements QueryBuilder}
-
     \textbf{Methoden}
     \begin{itemize}
         \item \texttt{getQuery(options : GetObservationsOptions)}
@@ -414,6 +420,7 @@
 
 \begin{Class}{StationConfiguration extends MapConfiguration}
     Eine Konfiguration bei der die einzelnen Messstationen als Marker dargestellt werden.
+    \bigskip\\
     \textbf{Methoden}
     \begin{itemize}
         \item \texttt{getPins(port : Viewport) : MapPin[]}
