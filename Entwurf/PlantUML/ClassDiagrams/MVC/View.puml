@@ -34,9 +34,16 @@ namespace View {
                 + Props.pins : MapPin[]
                 + Props.polygons : Polygon[]
                 + Props.onViewportChange()
+                + Props.handlePopup(pin : MapPin)
             }
             class Legend {
                 + Props.scale : Scale
+            }
+
+            Map *-- StationInfo
+
+            class StationInfo {
+                + Props.station : ObservationStation
             }
         }
         namespace DetailPage {

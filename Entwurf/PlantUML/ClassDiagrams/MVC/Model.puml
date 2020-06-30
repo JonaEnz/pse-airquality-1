@@ -20,31 +20,41 @@ namespace Model {
 
     Polygon --> ObservationStation
 
+    class FrostResult<T> {
+            constructor(res : T, success : boolean, err? : string)
+            result : T
+            success : boolean
+            errorMessage : string
+        }
 
     class Polygon {
-        + stations : ObservationStation[]
+        + constructor(color : Color, stations : ObservationStation[])
+        ..
+        + getColor() : Color
+        + setColor(color : Color)
+        + getStations() : ObservationStation[]
     }
 
     class MapPin {
-        +constructor(position : Position)
-
+        +constructor(id: string, position: Position, vaule: number,color: Color)
+        ..
         + getPosition() : Position
         + setPosition(position : Position) : void
 
         + getValue() : number
-        + setValue(value : number) : void
 
         + getStationId() : string
-        + setStationId(id : string) : void
 
         + getColor() : Color
-        + setColor(color : Color) : void
     }
 
     class Viewport {
+        + constructor(center: Position, zoom: number)
+        ..
         + getCenter() : Position
         + getZoom() : number
         + getRadius() : number
+        ..
         + setCenter(position : Position) : void
         + setZoom(zoom : number) : void
     }
@@ -63,7 +73,7 @@ namespace Model {
         + getDescription() : string
         + getPosition() : Position
         + getFeatures() : Feature[]
-        + async getDiagrams() : Promise<DetailPage.Diagram[]>
+        + <<async>> getDiagrams() : Promise<DetailPage.Diagram[]>
         + hasFeature(feature : Feature) : Boolean
     }
 
@@ -117,7 +127,7 @@ namespace Model {
         + getDescription(): string
         + getRelatedScale(): Scale
         + getRelatedWeblink(): string
-        + async getDrawableDiagrams(observationStation: ObservationStation): Promise<DetailPage.Diagram[]>
+        + <<async>> getDrawableDiagrams(observationStation: ObservationStation): Promise<DetailPage.Diagram[]>
         + getLimit(): number
         + getUnitOfMeasurement(): string
         + isLimitExeeded(observation: Observation): boolean

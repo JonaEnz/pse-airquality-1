@@ -251,6 +251,7 @@ namespace Controller {
             + {static} getObservations(station : ObservationStation, start : Date, end : Date, 
               {static}  feature : Feature, freuqency? : Frequency) : Observation[]
             + {static} getObservationStations(middle : Position, radius : number) : ObservationStation[]
+            + {static} getStation(id : string) : ObservationStation
         }
 
         note as N1

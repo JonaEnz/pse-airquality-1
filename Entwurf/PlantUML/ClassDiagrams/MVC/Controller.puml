@@ -4,6 +4,11 @@ namespace Controller {
     namespace Frost {
         class DataProvider {
             + {static} getObservationStations(middle: Position, radius : number) : ObservationStation[]
+            + {static} getLatestObservation(station : ObservationStation, feature : Feature) : Observation
+            + {static} getObservations(station : ObservationStation, start : Date, end : Date, 
+              {static}  feature : Feature, freuqency? : Frequency) : Observation[]
+            + {static} getObservationStations(middle : Position, radius : number) : ObservationStation[]
+            + {static} getStation(id : string) : ObservationStation
         }
 
         note as N1
@@ -66,20 +71,13 @@ namespace Controller {
 
 
         FrostFactory --> QueryBuilder
-        FrostFactory --> FrostResult
-
-        class FrostResult<T> {
-            constructor(res : T, success : boolean, err? : string)
-            result : T
-            success : boolean
-            errorMessage : string
-        }
 
         class FrostServer {
             getUrl() : string
             setUrl(url : string)
 
             request(ff : FrostFactory, options : any) : FrostResult
+            <<async>> asyncRequest(ff : FrostFactory, options : any) : Promise<FrostResult>
         }
         note as N2
         request(new GetObservationStationsFactory(), options : GetObservationStationsOptions) {

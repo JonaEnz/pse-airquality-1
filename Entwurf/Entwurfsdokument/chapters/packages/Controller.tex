@@ -30,6 +30,8 @@
         \item \texttt{<<static>> getObservationStations(middle: Position,
         \\ radius : number) : ObservationStation[]}
         \\ Alle Messstationen die maximal \emph{radius} Grad Abstand von \emph{middle} haben.
+        \item \texttt{<<static>> getStation(id) : ObservationStation}
+        \\ Die Messstation mit Id \emph{id}.
     \end{itemize}
 \end{Class}
 
@@ -212,6 +214,58 @@
     \begin{itemize}
         \item \texttt{middle : Position}
         \item \texttt{radius : number}
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{Converter implements ResultModelConverter}
+
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{convert(json : string) : FrostResult<Output>}
+        \\ \emph{json}: Eine Antwort vom FROST-Server auf ein Query aus \emph{Builder}.
+        \\ Es wird versucht diese Antwort in \emph{Output} umzuwandeln.
+        Die Rückgabe ist dann new FrostResult(\emph{output}, true)
+        \\ Schlägt dies fehl wird new FrostResult(null, false, \emph{errorMessage}) zurückgegeben.
+    \end{itemize}
+\end{Class}
+
+\paragraph{GetStation}\mbox{}\\
+
+\begin{Class}{GetStationFactory implements FrostFactory}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{GetConverter() : GetStationConverter}
+        \\ Eine neue Instanz eines GetStationConverter
+        \item \texttt{GetQueryBuilder() : GetStationBuilder}
+        \\ Eine neue Instanz eines GetStationBuilder.
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{GetStationBuilder implements QueryBuilder}
+
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{getQuery(options : GetStationOptions)}
+        \\ Erstellt eine FROST-Query mit folgendem Effekt:
+        \\ Gibt die Messstation mit Id \emph{id} zurück.
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{GetStationConverter implements ResultModelConverter$\langle$ObservationStation$\rangle$}
+
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{convert(json : string) : FrostResult<ObservationStation>}
+        \\ \emph{json}: Eine Antwort vom FROST-Server auf ein Query aus \emph{GetStationBuilder}.
+        \\ Es wird versucht diese Antwort in \emph{ObservationStation} umzuwandeln.
+        Die Rückgabe ist dann new FrostResult(\emph{output}, true)
+        \\ Schlägt dies fehl wird new FrostResult(null, false, \emph{errorMessage}) zurückgegeben.
+    \end{itemize}
+\end{Class}
+
+\begin{Class}{<<interface>> GetStationOptions}
+    \begin{itemize}
+        \item \texttt{id : string}
     \end{itemize}
 \end{Class}
 
