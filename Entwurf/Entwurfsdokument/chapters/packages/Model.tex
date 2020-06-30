@@ -151,12 +151,16 @@
     \end{Class}
 
     \begin{Class}{Polygon}
-        \textbf{Attribute}
+        \textbf{Methoden}
         \begin{itemize}
-            \item \texttt{stations : ObservationStation[]}
-            \\ Stationen, die die Ecken des Polygons bilden.
-            \item \texttt{color : Color}
-            \\ Farbe des Polygons.
+            \item \texttt{constructor(color : Color, stations : ObservationStation[])}
+            \\ Erstellt ein Polygon mit den angegebenen Attributen.
+            \item \texttt{getColor() : Color}
+            \\ Die Farbe des Polygons
+            \item \texttt{setColor(color : Color)}
+            \\ Setzt die Farbe des Polygons auf \emph{color}
+            \item \texttt{getStations() : ObservationStation[]}
+            \\ Die Messstation die die Ecken des Polygons bilden.
         \end{itemize}
     \end{Class}
 

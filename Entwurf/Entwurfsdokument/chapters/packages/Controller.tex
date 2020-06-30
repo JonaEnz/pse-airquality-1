@@ -16,18 +16,18 @@
         \item \texttt{<<static>> getLatestObservations(center : Position,
         \\ radius: number, feature : Feature) : Observation[]}
         \\Gibt alle Observations im spezifizierten Bereich zurück
-        \item \texttt{getLatestObservation(station : ObservationStation, feature : Feature) : Observation}
+        \item \texttt{<<static>> getLatestObservation(station : ObservationStation, feature : Feature) : Observation}
         \\ Die letzte Beobachtung der \emph{station} für das Feature \emph{feature}.
         Wenn \emph{station} \emph{feature} nicht unterstützt wird \emph{null} zurückgegeben.
-        \item \texttt{getObservations(station : ObservationStation,
+        \item \texttt{<<static>> getObservations(station : ObservationStation,
         \\ start : Date, end : Date, feature : Feature) : Observation[]}
         \\ Die Beobachtungen der Station \emph{stations} für das Feature \emph{feature}
         zwischen \emph{start} und \emph{end}.
-        \item \texttt{getObservations(station : ObservationStation,
+        \item \texttt{<<static>> getObservations(station : ObservationStation,
         \\ start : Date, end : Date, feature : Feature,
         \\ frequency : Frequency) : Observation[]}
         \\ Wie oben, doch gibt nur Ergebnisse im Abstand vom \emph{frequency} aus.
-        \item \texttt{getObservationStations(middle: Position,
+        \item \texttt{<<static>> getObservationStations(middle: Position,
         \\ radius : number) : ObservationStation[]}
         \\ Alle Messstationen die maximal \emph{radius} Grad Abstand von \emph{middle} haben.
     \end{itemize}
@@ -227,6 +227,7 @@
     \end{itemize}
 \end{Class}
 
+\iffalse
 \subsubsection{FROST}
 
 \begin{Class}{FROSTQuery}
@@ -307,6 +308,8 @@
         \\Array aller bekannten Features
     \end{itemize}
 \end{Class}
+
+\fi
 
 \subsubsection{MapPage}
 \begin{Class}{MapController}
@@ -403,4 +406,33 @@
         \item \texttt{Radius}
         \\ Der Radius aus dem die Daten für die Skalierung geholt werden.
     \end{itemize}
+\end{Class}
+
+\subsubsection{Storage}
+
+\begin{Class}{Language}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{<<static>> getText(id : string) : string}
+        \\ Gibt den Text mit der Id \emph{id} in der gewählten Sprache zurück.
+        \item \texttt{<<static>> changeLanguage(lang : string)}
+        \\ Lädt die Sprache mit der Id \emph{lang} und wählt sie aus.
+        \item \texttt{<<static>> getSelectedLanguageId() : string}
+        \\ Die Id der aktuell gewählten Sprache.
+    \end{itemize}
+
+\end{Class}
+
+
+\begin{Class}{MapConfigurationMemory}
+    \textbf{Methoden}
+    \begin{itemize}
+        \item \texttt{save(MapConfiguration conf, viewport : Viewport)}
+        \\ Speichert die aktuelle MapConfiguration und Viewport im localStorage unter der ID 'mapConf'
+        \item \texttt{load() : (MapConfiguration, Viewport)}
+        \\ Lädt das Tupel aus localStorage mit Id 'mapConf' und gibt es zurück.
+        \\ Gibt eine neue MapConfiguration und Viewport mit Standardwerten zurück wenn 
+        dieser Eintrag nicht existiert.
+    \end{itemize}
+
 \end{Class}

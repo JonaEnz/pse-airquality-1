@@ -61,11 +61,12 @@ Dies ermöglicht das einfache Hinzufügen von weiteren Features und die freie Ko
 	\\ Eine Liste an Schlüsseln und der zugehörigen Zeichenkette in der Sprache.
 \end{itemize}
 
-\subsection{FrostUrl}
+\subsection{Configuration}
 
 \begin{lstlisting}[language=json, firstnumber=1]
 	{
-  		"url": string
+		  "url": string,
+		  "defaultLng" : string
 	}
 
 \end{lstlisting}
@@ -73,4 +74,6 @@ Dies ermöglicht das einfache Hinzufügen von weiteren Features und die freie Ko
 \begin{itemize}
 	\item \texttt{url}
 	\\ Die Url der API eines FROST-Servers, bspw. \url{https://api.smartaq.net/v1.0/}
+	\item \texttt{defaultLng}
+	\\ Die Id der Sprache die standardmäßig als erstes geladen wird.
 \end{itemize}

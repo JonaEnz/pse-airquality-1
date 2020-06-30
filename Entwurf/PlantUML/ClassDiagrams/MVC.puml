@@ -20,14 +20,24 @@ namespace Model {
 
     Polygon --> ObservationStation
 
+    class FrostResult<T> {
+            constructor(res : T, success : boolean, err? : string)
+            result : T
+            success : boolean
+            errorMessage : string
+        }
 
     class Polygon {
-        + stations : ObservationStation[]
+        + constructor(color : Color, stations : ObservationStation[])
+        ..
+        + getColor() : Color
+        + setColor(color : Color)
+        + getStations() : ObservationStation[]
     }
 
     class MapPin {
         +constructor(id: string, position: Position, vaule: number,color: Color)
-
+        ..
         + getPosition() : Position
         + setPosition(position : Position) : void
 
@@ -40,9 +50,11 @@ namespace Model {
 
     class Viewport {
         + constructor(center: Position, zoom: number)
+        ..
         + getCenter() : Position
         + getZoom() : number
         + getRadius() : number
+        ..
         + setCenter(position : Position) : void
         + setZoom(zoom : number) : void
     }
@@ -179,9 +191,16 @@ namespace View {
                 + Props.pins : MapPin[]
                 + Props.polygons : Polygon[]
                 + Props.onViewportChange()
+                + Props.handlePopup(pin : MapPin)
             }
             class Legend {
                 + Props.scale : Scale
+            }
+
+            Map *-- StationInfo
+
+            class StationInfo {
+                + Props.station : ObservationStation
             }
         }
         namespace DetailPage {
@@ -228,6 +247,10 @@ namespace Controller {
     namespace Frost {
         class DataProvider {
             + {static} getObservationStations(middle: Position, radius : number) : ObservationStation[]
+            + {static} getLatestObservation(station : ObservationStation, feature : Feature) : Observation
+            + {static} getObservations(station : ObservationStation, start : Date, end : Date, 
+              {static}  feature : Feature, freuqency? : Frequency) : Observation[]
+            + {static} getObservationStations(middle : Position, radius : number) : ObservationStation[]
         }
 
         note as N1
@@ -290,14 +313,6 @@ namespace Controller {
 
 
         FrostFactory --> QueryBuilder
-        FrostFactory --> FrostResult
-
-        class FrostResult<T> {
-            constructor(res : T, success : boolean, err? : string)
-            result : T
-            success : boolean
-            errorMessage : string
-        }
 
         class FrostServer {
             getUrl() : string
