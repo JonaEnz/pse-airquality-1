@@ -1,5 +1,9 @@
 \subsection{Controller}
 
+\includegraphics[angle=90, origin=c,height=\textwidth]{MVC/Controller/Controller_part1.png}
+\newpage
+\includegraphics[angle=90, origin=c,height=\textwidth]{MVC/Controller/Controller_part2.png}
+
 \subsubsection{FROST}
 
 \paragraph{DataProvider / FrostServer}\mbox{}\\
@@ -43,6 +47,9 @@
         \item \texttt{request(ff : FrostFactory, options : any) : FrostResult<any>}
         \\ Stellt eine Anfrage die mit \emph{ff.getQueryBuilder().getQuery(options)} erstellt wurde an den Server.
         Versucht die Antwort mit \emph{ff.getConverter().convert} in ein FrostResult<T> umzuwandeln und gibt dies zurück.
+        \item \texttt{async asyncRequest(ff : FrostFactory, options : any) : Promise<FrostResult<any>>}
+        \\ Wie request(ff, options) doch stellt die Anfrage asynchron.
+        Dies ermöglicht ein schnelles Anzeigen der Seite während Teile noch laden (insbes. Diagramme).
     \end{itemize}
 \end{Class}
 

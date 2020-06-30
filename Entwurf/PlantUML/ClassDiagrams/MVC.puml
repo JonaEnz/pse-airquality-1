@@ -63,7 +63,7 @@ namespace Model {
         + getDescription() : string
         + getPosition() : Position
         + getFeatures() : Feature[]
-        + async getDiagrams() : Promise<DetailPage.Diagram[]>
+        + <<async>> getDiagrams() : Promise<DetailPage.Diagram[]>
         + hasFeature(feature : Feature) : Boolean
     }
 
@@ -117,7 +117,7 @@ namespace Model {
         + getDescription(): string
         + getRelatedScale(): Scale
         + getRelatedWeblink(): string
-        + async getDrawableDiagrams(observationStation: ObservationStation): Promise<DetailPage.Diagram[]>
+        + <<async>> getDrawableDiagrams(observationStation: ObservationStation): Promise<DetailPage.Diagram[]>
         + getLimit(): number
         + getUnitOfMeasurement(): string
         + isLimitExeeded(observation: Observation): boolean
@@ -306,6 +306,7 @@ namespace Controller {
             setUrl(url : string)
 
             request(ff : FrostFactory, options : any) : FrostResult
+            <<async>> asyncRequest(ff : FrostFactory, options : any) : Promise<FrostResult>
         }
         note as N2
         request(new GetObservationStationsFactory(), options : GetObservationStationsOptions) {
