@@ -41,8 +41,7 @@ MapView -> Legend ++ : open(scale)
 'Nutzer zoomt'
 User -> Map ++ : zoom()
 Map -> MapController ++ : handleViewportChange(viewport)
-MapController -> StationConfiguration ++ : getPins, Polygons wie oben
-return pins, polygons
+note right: Map wird mit neu gerendert, ruft also nochmal getPins() usw auf.
 return 
 return
 
