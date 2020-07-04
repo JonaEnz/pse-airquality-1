@@ -1,5 +1,12 @@
 import React from "react";
-import { Viewport, TileLayer, Popup, Marker } from "react-leaflet";
+import {
+  Viewport,
+  TileLayer,
+  Popup,
+  Marker,
+  Circle,
+  LatLngBounds,
+} from "react-leaflet";
 import { MapPin } from "../Model/MapPin";
 import { Station } from "../Model/Station";
 import { Position } from "../Model/Position";
@@ -22,6 +29,7 @@ export default class Map extends React.Component<
     pins: MapPin[];
   }
 > {
+  mapBounds: LatLngBounds | null;
   constructor(props: {
     pins: MapPin[];
     polygons: Polygon[];
@@ -29,6 +37,7 @@ export default class Map extends React.Component<
     popup(mp: MapPin): Station;
   }) {
     super(props);
+    this.mapBounds = null;
     console.log(props);
     this.state = {
       position: new Position(49, 8.4),
@@ -54,12 +63,16 @@ export default class Map extends React.Component<
       this.state.position.lat,
       this.state.position.lng,
     ];
+
     return (
       <div>
         <LeafletMap
           center={position}
           zoom={this.state.zoom}
           onViewportChange={(v) => this.onViewChanged(v)}
+          ref={(ref) =>
+            (this.mapBounds = ref?.leafletElement.getBounds() as LatLngBounds)
+          }
         >
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -81,6 +94,7 @@ export default class Map extends React.Component<
               </Popup>
             </Marker>
           ))}
+          <Circle center={position} radius={10000 * this.state.zoom} />
         </LeafletMap>
         <Chart
           width={400}

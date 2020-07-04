@@ -1,0 +1,77 @@
+\documentclass[a4paper, parskip=full]{scrartcl}
+\usepackage[top=3cm, bottom=3.5cm, left=3cm, right=3cm]{geometry}
+\usepackage[utf8]{inputenc} % use utf8 file encoding for TeX sources
+\usepackage[LGR,T1]{fontenc}    % avoid garbled Unicode text in pdf
+\usepackage[german]{babel}  % german hyphenation, quotes, etc
+\usepackage{graphicx}       % provides commands for including figures
+\usepackage[export]{adjustbox}
+\usepackage{csquotes}       % provides \enquote{} macro for "quotes"
+\usepackage{hyperref}       % detailed hyperlink/pdf configuration
+\usepackage{color}
+\usepackage{pdflscape}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{tabu}			% provides tables
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage[nonumberlist]{glossaries}     % provides glossary commands
+\hypersetup{                % ‘texdoc hyperref‘ for options
+  pdftitle={Implementierung},
+  pdfauthor={Anna Csurkó, Jona Enzinger, Yannik Schmid, Jonas Zoll},
+}
+\graphicspath{{./figures/}} % Setting the graphicspath
+
+\newcounter{counter}[section]
+\setcounter{counter}{10}
+
+% new environment for listing requirements/product data/... with a counter
+%\newenvironment{Kriterien}[1]{
+%	\let\olditem\item \renewcommand\item[1][]{\olditem[/#1\thecounter /] \textbf{##1} \hfill \\
+%	\addtocounter{counter}{10}} \begin{description}}
+%	{\end{description}}
+
+
+\title{Implementierung}
+\author{Anna Csurkó, Jona Enzinger, Yannik Schmid, Jonas Zoll}
+\makeatletter
+
+\definecolor{mintgreen}{RGB}{50,161,137} % theme color of the Karlsruhe Institute of Technology (KIT)
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+\newenvironment{Change}[1]{
+      \subsection{#1}
+  }
+
+% header and footer
+\usepackage[automark,autooneside=false,headsepline=0.5pt,footsepline=0.5pt]{scrlayer-scrpage}
+\addtokomafont{headsepline}{\color{mintgreen}}
+\addtokomafont{footsepline}{\color{mintgreen}}
+\addtokomafont{pagehead}{\normalfont}
+
+% delete current settings for header and footer
+\clearpairofpagestyles
+
+% display document name on the left and current section on the right
+\ihead{\@title}
+\ohead{\rightmark}
+
+% load glossary entries
+%\makenoidxglossaries
+%\loadglsentries{./chapters/Glossareintraege}
+
+% center page number
+\cfoot*{\pagemark}
+
+\begin{document}
+% beginn content
+\include{./chapters/Titelseite}
+
+\tableofcontents
+\include{./chapters/Changes}
+
+
+% end content
+\end{document}
