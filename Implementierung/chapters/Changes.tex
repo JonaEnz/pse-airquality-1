@@ -60,3 +60,30 @@
     \end{itemize}
 
 \end{Change}
+
+\begin{Change}{Legend}
+    
+    Der Ausschnitt der von der Legende angezeigt wird soll flexibel sein.
+
+    \textbf{Hinzugefügt}
+    \begin{itemize}
+        \item \texttt{Props.min : number}
+        \\ Das untere Ende der Legende
+        \item \texttt{Props.max : number}
+        \\ Das obere Ende der Legende
+    \end{itemize}
+
+\end{Change}
+
+\begin{Change}{Map}
+    
+    Ursprünglich sollte der Viewport über die Mitte der Pins/Polygone bestimmt werden.
+    Um die Karte von Anfang an auf die letzte Position zu zentrieren wird der Viewport direkt übergeben.
+
+    \textbf{Hinzugefügt}
+    \begin{itemize}
+        \item \texttt{Props.viewport : Viewport}
+        \\ Viewport mit dem die Karte initialisiert wird.
+    \end{itemize}
+
+\end{Change}
