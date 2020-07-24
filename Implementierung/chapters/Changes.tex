@@ -3,8 +3,10 @@
     Die Funktionalität dieser Klasse sollte ursprünglich in 
     Controller.Frost.DataProvider enthalten sein und nach außen versteckt. 
     Da die Features aus den Konfigurationsdateien allerdings logisch nicht 
-    vom Server abhängen wurden die ausgelagert. Dies ermöglicht außerdem den 
+    vom Server abhängen wurden sie ausgelagert. Dies ermöglicht außerdem den 
     Zugriff auf die Features auch außerhalb des FROST-Pakets.
+    
+    \bigskip
     \textbf{Methoden}
     \begin{itemize}
         \item \texttt{static getInstance()}
@@ -23,6 +25,7 @@
     Skala und Viewport werden von außen lesbar gemacht.
     Damit muss MapPage keine eigene Kopie bereithalten.
 
+    \bigskip
     \textbf{Hinzugefügt}
     \begin{itemize}
         \item \texttt{getScale() : Scale}
@@ -33,29 +36,18 @@
 
 \end{Change}
 
-\begin{Change}{Search}
+\begin{Change}{OnSearch(string) für Suche}
     
     Die eigentliche Suche findet nun außerhalb der Komponente statt.
     Damit wird die Komponente leichter für verschiedene Anwendungen wiederverwendbar.
 
+    \bigskip
     \textbf{Hinzugefügt}
     \begin{itemize}
-        \item \texttt{Props.onSearch(term: string) : void}
+        \item \texttt{Search.Props.onSearch(term: string) : void}
         \\ Wird bei Klick auf den Such-Button oder Drücken von Enter aufgerufen.
         Enthält den aktuellen Inhalt der Suchbox. 
-    \end{itemize}
-
-\end{Change}
-
-
-\begin{Change}{MapView}
-    
-    Die neue Suchanfrage aus 1.3 wird an den Controller weitergegeben.
-    Außerdem kann die Komponente sich dadurch nach einer Suche selbst aktualisieren.
-
-    \textbf{Hinzugefügt}
-    \begin{itemize}
-        \item \texttt{onSearch(term: string) : void}
+        \item \texttt{MapView.onSearch(term: string) : void}
         \\ Ruft die Suche im MapController auf und aktualisiert die Seite.
     \end{itemize}
 
@@ -65,6 +57,7 @@
     
     Der Ausschnitt der von der Legende angezeigt wird soll flexibel sein.
 
+    \bigskip
     \textbf{Hinzugefügt}
     \begin{itemize}
         \item \texttt{Props.min : number}
@@ -79,11 +72,27 @@
     
     Ursprünglich sollte der Viewport über die Mitte der Pins/Polygone bestimmt werden.
     Um die Karte von Anfang an auf die letzte Position zu zentrieren wird der Viewport direkt übergeben.
-
+    
+    \bigskip
     \textbf{Hinzugefügt}
     \begin{itemize}
         \item \texttt{Props.viewport : Viewport}
         \\ Viewport mit dem die Karte initialisiert wird.
+    \end{itemize}
+
+\end{Change}
+
+\begin{Change}{FeatureSelectInit}
+    
+    Die FeatureSelect Auswahl benötigt die aktuellen Werte um sie standardmäßig auswählen zu können.
+    
+    \bigskip
+    \textbf{Hinzugefügt}
+    \begin{itemize}
+        \item \texttt{FeatureSelect.Props.startConf?: \{ conf: string; feature: string \}}
+        \\ Die Startwerte der Auswahlboxen. Optional.
+        \item \texttt{MapController.getFeatureSelectConf(): { conf: string; feature: string }}
+        \\ Gibt Werte für die Auswahlboxen basierend auf der Konfiguration aus.
     \end{itemize}
 
 \end{Change}
