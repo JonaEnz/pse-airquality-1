@@ -2,6 +2,9 @@ Pflichtenheft/chapters/__latexindent_temp.tex
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+#documents
+Implementierung.pdf
+
 # dependencies
 /node_modules
 /.pnp
