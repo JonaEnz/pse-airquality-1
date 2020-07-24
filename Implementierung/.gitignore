@@ -3,7 +3,7 @@
 *.fls
 *.log
 *.out
-Entwurf.pdf
+Implementierung.pdf
 *.gz
 *.toc
 .vscode/
