@@ -96,3 +96,18 @@
     \end{itemize}
 
 \end{Change}
+
+\begin{Change}{Diagramme der Detailansicht}
+    Im ursprünglichen Entwurf gab es eine abstrakte Diagrammklasse, die in unserer MVC-Architektur in der View zu verorten war. Unterschiedliche Diagramme sollten als unterschiedliche Klassen, die alle von der abstrakten Diagrammklasse erben, implementiert werden.
+    Mit diesem Entwurf sind wir nun auf Probleme gestoßen, da React empfielt keine Vererbung von Komponenten zu verwenden, wodurch wir gezwungen waren unsere Modellierung zu verändern.
+
+    Im Zuge dessen haben wir uns entschieden die Vererbung durch Komposition zu ersetzen. Nun gibt es weiterhin eine Diagrammklasse, die allerdings nun nicht abstrakt, sondern eine React Komponente ist, deren Aufgabe alleine im Anzeigen eines Diagramms besteht. Da wir zur Darstellung von Diagrammen "React Google Charts" verwenden dient die Diagrammklasse also nur als Adapter der Chart Komponente dieser Bibliothek.
+
+    Die Differenzierung unterscheidlicher Diagrammtypen wird durch Komposition unterschiedlicher DiagramController erzielt, die einer Diagramm Komponente in den props übergeben werden. Ein DiagramController implementiert eine entsprechende Schnittstelle. Seine Aufgaben bestehen im Anfordern der diagrammspezifischen Daten vom DataProvider, dem Formatieren der Daten in ein zur Darstellung geeignetes Format und dem Wechsel zwischen unterschiedlicher Konfigurationsoptionen.
+
+    Des Weiteren haben wir eine DiagramFactory Klasse mit einer statische Fabrikmethode ergänzt. Über diese ist es möglich mit einer typenId einen DiagrammController für ein bestimmtes Feature einer Messstation zu erzeugen. Diese Klasse hat im ursprünglichen Entwurf gefehlt, wodurch die Aufgabe im Model hätte erfolgen müssen, was allerding der MVC-Architektur widerspricht.
+
+    Insgesamt harmoniert dieser neue Entwurf sehr viel besser mit React und unserer MVC-Architektur und vereinfacht zusätzlich den Code innerhalb der Diagrammklasse. Des Weiteren ist die Kopplung zwischen Inhalt und Darstellung eines Diagramms im neuen Entwurf sehr viel loser, wudurch es einfacher ist die Applikation durch neue Diagrammtypen zu ergänzen oder bestehende Diagrammtypen abzuändern.
+    
+    Das Klassendiagramm des neuen Entwurfs sieht nun wie folgt aus:
+\end{Change}
