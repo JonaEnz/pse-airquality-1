@@ -1,0 +1,33 @@
+@startuml Diagrams
+
+namespace View #LightGreen {
+    class Diagram extends React.Component
+    class DetailPage extends React.Component
+}
+View.Diagram "1" *- "1" Controller.IDiagramController
+View.DetailPage "1" o-- "*" View.Diagram
+
+namespace Controller #LightSalmon {
+    interface IDiagramController{
+        getChartType(): ChartType
+        getGraphicsOptions(): {}
+        isConfigurable(): boolean
+        getConfigurationOptions(): string[]
+        getDefaultConfigurationOption(): string
+        getData(configurationOptionName: string): any[][]
+    }
+
+    enum ChartType
+
+    class FeatureHistoryLineChartController implements IDiagramController
+    class YearComparisonPieChartController implements IDiagramController
+    class ComparisonToLastYearLineChartController implements IDiagramController
+
+    class DiagramFactory{
+        {static} getDiagramController(id: string, observationStation: ObservationStation, feature: Feature): IDiagramController
+    }
+}
+Controller.IDiagramController "*" *- "1" Controller.ChartType
+Controller.DiagramFactory -> Controller.IDiagramController
+
+@enduml
