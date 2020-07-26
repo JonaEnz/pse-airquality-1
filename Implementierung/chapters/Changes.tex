@@ -111,3 +111,15 @@
     
     Das Klassendiagramm des neuen Entwurfs sieht nun wie folgt aus:
 \end{Change}
+
+\begin{Change}{IDs für MapConfiguration}
+    Ursprünglich sollte die Art der Konfiguration über das name Attribut bestimmt werden.
+    Das führt aber im build zu Problemen da Klassennamen komprimiert werden.
+
+    \textbf{Hinzufügen}
+    \begin{itemize}
+        \item \texttt{abstract getId() : string}
+        \\ Die ID der Karten-Konfiguration
+    \end{itemize}
+    
+\end{Change}
