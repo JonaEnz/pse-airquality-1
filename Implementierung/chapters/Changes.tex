@@ -170,3 +170,25 @@
 \begin{Change}{ObservationItem}
     Um den Code in der Klasse ObservationStationProfile zu vereinfachen haben wir eine Klasse ObservationItem ergänzt. Ein ObservationItem ist ein Punkt in der Liste der letzten gemessenen Werte. Als reine View Komponente zeigt ein ObservationItem also einen Messwert, das jeweilige Feature und ein featurespezifisches Icon an.
 \end{Change}
+
+\begin{Change}{Language}
+    Language ist nun Singleton und hat neue Methoden
+    \textbf{Methoden:}
+    \begin{itemize}
+        \item \texttt{<<static>> getInstance(): Language}
+        \\Gibt Singleton Instanz zurück.
+        \item \texttt{getText(id : string) : string}
+        \\ Gibt den Text mit der Id \emph{id} in der gewählten Sprache zurück.
+        \item \texttt{changeLanguage(lang : string)}
+        \\ Lädt die Sprache mit der Id \emph{lang} und wählt sie aus.
+        \item \texttt{getSelectedLanguageId() : string}
+        \\ Der Name der aktuell gewählten Sprache.
+        \item \texttt{getSelectedLanguageId(): string}
+        \\ Die ID der aktuell gewählten Sprache.
+        \item \texttt{getAvailableLanguages(): Map<string, string>}
+        \\ Alle verfügbaren Sprachen.
+        \item \texttt{getDateString(date: Date): string}
+        \\ Gibt das Datum im passenden regionalen Format.
+    \end{itemize}
+
+\end{Change}
