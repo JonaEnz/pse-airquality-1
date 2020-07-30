@@ -1,7 +1,7 @@
 \section{Änderungen}
 \begin{Change}{FeatureProvider}
     Die Funktionalität dieser Klasse sollte ursprünglich in 
-    Controller.Frost.DataProvider enthalten sein und nach außen versteckt.
+    Controller.Frost.DataProvider enthalten und nach außen versteckt sein.
     Dies ermöglicht außerdem den 
     Zugriff auf die Features auch außerhalb des FROST-Pakets.
     
@@ -13,8 +13,8 @@
         \item \texttt{constructor()}
         \\ Initialisiert den Feature-Speicher und lädt die Definitionen
         \item \texttt{getFeature(id : string) : Feature|undefined}
-        \\ Das gespeicherte Feature falls es existiert.
-        Schlägt dies fehl wird 'undefined' zurückgegeben.
+        \\ Das gespeicherte Feature, falls es existiert.
+        Schlägt dies fehl, wird 'undefined' zurückgegeben.
     \end{itemize}
 \end{Change}
 
@@ -69,7 +69,7 @@
 \begin{Change}{Map}
     
     Ursprünglich sollte der Viewport über die Mitte der Pins/Polygone bestimmt werden.
-    Um die Karte von Anfang an auf die letzte Position zu zentrieren wird der Viewport direkt übergeben.
+    Um die Karte von Anfang an auf die letzte Position zu zentrieren, wird der Viewport direkt übergeben.
     
     \bigskip
     \textbf{Hinzugefügt}
@@ -82,7 +82,7 @@
 
 \begin{Change}{FeatureSelectInit}
     
-    Die FeatureSelect Auswahl benötigt die aktuellen Werte um sie standardmäßig auswählen zu können.
+    Die FeatureSelect Auswahl benötigt die aktuellen Werte, um sie standardmäßig auswählen zu können.
     
     \bigskip
     \textbf{Hinzugefügt}
@@ -99,7 +99,7 @@
     Im ursprünglichen Entwurf gab es eine abstrakte Diagrammklasse, die in unserer MVC-Architektur in der View zu verorten war. Unterschiedliche Diagramme sollten als unterschiedliche Klassen, die alle von der abstrakten Diagrammklasse erben, implementiert werden.
     Mit diesem Entwurf sind wir nun auf Probleme gestoßen, da React empfiehlt keine Vererbung von Komponenten zu verwenden, wodurch wir gezwungen waren unsere Modellierung zu verändern.
 
-    Im Zuge dessen haben wir uns entschieden die Vererbung durch Komposition zu ersetzen. Nun gibt es weiterhin eine Diagrammklasse, die allerdings nun nicht abstrakt, sondern eine React Komponente ist, deren Aufgabe alleine im Anzeigen eines Diagramms besteht. Da wir zur Darstellung von Diagrammen "React Google Charts" verwenden dient die Diagrammklasse also nur als Adapter der Chart Komponente dieser Bibliothek.
+    Im Zuge dessen, haben wir uns entschieden die Vererbung durch Komposition zu ersetzen. Nun gibt es weiterhin eine Diagrammklasse, die allerdings nun nicht abstrakt, sondern eine React Komponente ist, deren Aufgabe alleine im Anzeigen eines Diagramms besteht. Da wir zur Darstellung von Diagrammen "React Google Charts" verwenden dient die Diagrammklasse also nur als Adapter der Chart Komponente dieser Bibliothek.
 
     Die Differenzierung unterscheidlicher Diagrammtypen wird durch Komposition unterschiedlicher DiagramController erzielt, die einer Diagramm Komponente in den props übergeben werden. Ein DiagramController implementiert eine entsprechende Schnittstelle. Seine Aufgaben bestehen im Anfordern der diagrammspezifischen Daten vom DataProvider, dem Formatieren der Daten in ein zur Darstellung geeignetes Format und dem Wechsel zwischen unterschiedlicher Konfigurationsoptionen.
 
@@ -160,7 +160,7 @@
 
 \begin{Change}{IDs für MapConfiguration}
     Um die verschiedenen Konfigurationen ohne fehleranfällige typeof Abfragen unterscheiden
-    zu können wurden IDs hinzugefügt die i.d.R. als Konstante gespeichert sind.
+    zu können, wurden IDs hinzugefügt die i.d.R. als Konstante gespeichert sind.
     \begin{itemize}
         \item \textbf{MapConfiguration.getID() : string}
         \\ Eine eindeutige Kennung der MapConfiguration nach Typ.
@@ -168,5 +168,5 @@
 \end{Change}
 
 \begin{Change}{ObservationItem}
-    Um den Code in der Klasse ObservationStationProfile zu vereinfachen haben wir eine Klasse ObservationItem ergänzt. Ein ObservationItem ist ein Punkt in der Liste der letzten gemessenen Werte. Als reine View Komponente zeigt ein ObservationItem also einen Messwert, das jeweilige Feature und ein featurespezifisches Icon an.
+    Um den Code in der Klasse ObservationStationProfile zu vereinfachen, haben wir eine Klasse ObservationItem ergänzt. Ein ObservationItem ist ein Punkt in der Liste der letzten gemessenen Werte. Als reine View Komponente zeigt ein ObservationItem also einen Messwert, das jeweilige Feature und ein featurespezifisches Icon an.
 \end{Change}
