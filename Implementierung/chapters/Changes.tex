@@ -1,9 +1,8 @@
 \section{Änderungen}
 \begin{Change}{FeatureProvider}
     Die Funktionalität dieser Klasse sollte ursprünglich in 
-    Controller.Frost.DataProvider enthalten sein und nach außen versteckt. 
-    Da die Features aus den Konfigurationsdateien allerdings logisch nicht 
-    vom Server abhängen wurden sie ausgelagert. Dies ermöglicht außerdem den 
+    Controller.Frost.DataProvider enthalten sein und nach außen versteckt.
+    Dies ermöglicht außerdem den 
     Zugriff auf die Features auch außerhalb des FROST-Pakets.
     
     \bigskip
@@ -12,10 +11,9 @@
         \item \texttt{static getInstance()}
         \\ Liefert die Singleton-Instanz zurück oder erstellt sie.
         \item \texttt{constructor()}
-        \\ Initialisiert den Feature-Speicher
+        \\ Initialisiert den Feature-Speicher und lädt die Definitionen
         \item \texttt{getFeature(id : string) : Feature|undefined}
-        \\ Das gespeicherte Feature falls es bereits geladen wurde.
-        Sonst wird zunächst das Feature aus der Konfigurationsdatei geladen.
+        \\ Das gespeicherte Feature falls es existiert.
         Schlägt dies fehl wird 'undefined' zurückgegeben.
     \end{itemize}
 \end{Change}
@@ -99,7 +97,7 @@
 
 \begin{Change}{Diagramme der Detailansicht}
     Im ursprünglichen Entwurf gab es eine abstrakte Diagrammklasse, die in unserer MVC-Architektur in der View zu verorten war. Unterschiedliche Diagramme sollten als unterschiedliche Klassen, die alle von der abstrakten Diagrammklasse erben, implementiert werden.
-    Mit diesem Entwurf sind wir nun auf Probleme gestoßen, da React empfielt keine Vererbung von Komponenten zu verwenden, wodurch wir gezwungen waren unsere Modellierung zu verändern.
+    Mit diesem Entwurf sind wir nun auf Probleme gestoßen, da React empfiehlt keine Vererbung von Komponenten zu verwenden, wodurch wir gezwungen waren unsere Modellierung zu verändern.
 
     Im Zuge dessen haben wir uns entschieden die Vererbung durch Komposition zu ersetzen. Nun gibt es weiterhin eine Diagrammklasse, die allerdings nun nicht abstrakt, sondern eine React Komponente ist, deren Aufgabe alleine im Anzeigen eines Diagramms besteht. Da wir zur Darstellung von Diagrammen "React Google Charts" verwenden dient die Diagrammklasse also nur als Adapter der Chart Komponente dieser Bibliothek.
 
@@ -125,20 +123,43 @@
 
 \begin{Change}{Featurespezifische Icons}
     Jedes Feature besitzt nun eine eigenes Icon. Das Icon wird über den Konstruktor übergeben.
-\end{Change}
 
     \textbf{Hinzufügen}
-    \begin{itemize}
+    \begin{itemize} 
         \item \texttt{abstract getId() : string}
         \\ Die ID der Karten-Konfiguration
     \end{itemize}
     
 \end{Change}
 
-\begin{Change}{Featurespezifische Icons}
-    Jedes Feature besitzt nun eine eigenes Icon. Das Icon wird über den Konstruktor übergeben.
-\end{Change}
-
 \begin{Change}{ObservationItem}
     Um den Code in der Klasse ObservationStationProfile zu vereinfachen haben wir eine Klasse ObservationItem ergänzt. Ein ObservationItem ist ein Punkt in der Liste der letzten gemessenen Werte. Als reine View Komponente zeigt ein ObservationItem also einen Messwert, das jeweilige Feature und ein featurespezifisches Icon an.
+\end{Change}
+
+\begin{Change}{App Configuration}
+    Es wurde eine eigene Klasse für die Anwendungskonfiguration erstellt (Singleton)
+    um eventuelle neue Einstellungen möglichst einfach hinzufügen zu können.
+    In einer config.json befindet sich ein Objekt des Typs IConfig
+    \textbf{Hinzugefügt}
+    \begin{itemize}
+        \item \texttt{Configuration.getInstance()}
+        \\ Lädt die Konfigurationsdatei in das Singleton-Objekt
+        \item \texttt{Configuration.getLanguage()}
+        \\ Die Standard 
+        \item \texttt{Configuration.getFrostUrl()}
+        \\ Das Top-Level der FROST-REST-API
+        \item \texttt{interface IConfig}
+        \\ frostUrl: string;
+        \\ language: string;
+        \\ supportedFeatures: string[];
+    \end{itemize}
+\end{Change}
+
+\begin{Change}{IDs für MapConfiguration}
+    Um die verschiedenen Konfigurationen ohne fehleranfällige typeof Abfragen unterscheiden
+    zu können wurden IDs hinzugefügt die i.d.R. als Konstante gespeichert sind.
+    \begin{itemize}
+        \item \textbf{MapConfiguration.getID() : string}
+        \\ Eine eindeutige Kennung der MapConfiguration nach Typ.
+    \end{itemize}
 \end{Change}

@@ -1,0 +1,24 @@
+\section{Herausforderungen}
+
+\subsection{MapConfigurationMemory}
+
+Diese Klasse erfüllt die Aufgabe die aktuell gewählte Konfiguration und Viewport in den 
+Local Storage zu schreiben und später wieder zu laden. Bei der testweisen Implementierung während
+der Entwurfsphase gab es hierbei keine Probleme. Da dort aber lediglich mit Interfaces als Speicherdaten
+gearbeitet wurde und nun Klassen vorhanden sind ergaben sich neue Schwierigkeiten.
+So können die Objekte nun nicht mehr nur mit der JSON Klasse de-/serialisiert werden sondern müssen
+vom Programm erstellt werden und mit einzelnen Werten aus dem \texttt{Local Storage} befüllt werden.
+Da dies leichte Anpassungen im \texttt{MapController} erforderte verzögerte sich hier der Zeitplan 
+geringfügig.
+
+\subsection{FeatureProvider}
+
+Hier führte eine Eigenheit von React / Webpack zu erheblichen Verzögerungen: 
+require('...') kann nur mit festen Zeichenketten problemlos funktionieren sofern die benötigten
+Dateien nicht im selben Ordner liegen. Nach einiger Recherche werden die Definitionen nun mit 
+require.context(...) geladen, was allerdings einen großen Nachteil mit sich bringt.
+Jest unterstützt diesen Befehl nicht was dazu führt dass alle Tests abstürzen die irgendein Feature
+benutzen wollen.
+Da das gerade mit Hinblick auf die Qualitätssicherungs-Phase nicht tragbar ist wurden letztendlich
+alle Features in einer feature.json als Liste gespeichert und beim Anwendungsstart geladen.
+So wird nur wenig Flexibilität eingebüßt.
