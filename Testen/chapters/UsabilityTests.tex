@@ -9,6 +9,23 @@
 
 \subsection{Bugs and Fixes}
 
+\subsubsection{Konfigurationsnamen}
+\paragraph{Problem}
+Bei der Auswahl der Konfiguration wird nur der interne Name angezeigt (z.B. PolygonConfiguration),
+was wenig aussagekräftig ist. Zudem sind diese Namen nicht lokalisiert.
 
+\paragraph{Lösung}
+Die IDs der Konfigurationen bekommen einen Eintrag in der Sprachdatei um leicht verständliche
+Namen in der gewählen Sprache anzuzeigen.
 
+\subsubsection{Diagramme auf Mobilgeräten}
+\paragraph{Symptom}
+Auf Mobilgeräten werden in der Detailansicht wie auf dem Desktop jeweils zwei Diagramme nebeneinander angezeigt.
+Das macht sie jedoch kaum lesbar.
 
+\paragraph{Grund}
+Die Anzeige orientiert sich an einem Grid-Element das keine automatische Anpassung auf 
+die Bildschirmgröße bereitstellt.
+
+\paragraph{Lösung}
+!TODO
