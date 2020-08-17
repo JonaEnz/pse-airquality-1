@@ -1,5 +1,41 @@
-\section{Usability-Tests}
-\subsection{Zielgruppe}
-\subsection{System Usability Scale}
-\subsection{Hallway Tests}
-\subsection{Responsiveness}
+\section{Usability tests}
+
+Bei den Usability Tests wird das fertige Produkt an echten Testpersonen getestet, deren  Meinungen und Reaktionen erfasst und analysiert werden. Dadurch wird die Benutzerfreundlichkeit und intuitive Bedienenug des Produktes gemessen. Diese Test sind essenziell, da das Entwicklerteam, das schon von anfang an an das Projekt arbeitet die Funktionalität des Programms vollständig kennt und deshalb die Intuitivität (Bedienung ohne jegliche Kenntnis des Programms) nicht beurteilen kann.
+
+\subsection{Testsubjekte}
+
+Die Testgsubjekte sind - o wie die Zielgruppe der Umfrage im Pflichtenheft- eher älter, wobei keine genaue untere Grenze gesetzt ist und die Meinungen der Subjekte außerhalb der Zielgruppe uns gleich wertvoll ist. Es ist wichtig, dass die Testsubjekte über wenig bis gar kein Wissen über Feinstaubindex bzw. Luftqualität verfügen, da die Applikation insbesondere für solche Menschen entwickelt wurde. Personen, die wenig über Softwareentwicklung wissen, werden bevorzugt. Die Testsubjekte sind entweder Bekannten der Mitglieder des Entwicklerteams- sie werden persönlich getestet- oder Fremde -für diesen Fall verstellen wir eine Online-Umfrage. 
+
+\subsection{Testmethoden} \subsubsection{Zielgruppe}
+\subsubsection{System Usability Scale}
+\subsubsection{Hallway Tests}
+\subsubsection{Responsiveness}
+
+\begin{itemize}
+  \item Die Anforderungen, die zu Wunschkriterien gehören, werden mit * gekennzeichnet.
+\end{itemize}
+
+\setcounter{counter}{10}
+
+\subsection{Bugs and Fixes}
+
+\subsubsection{Konfigurationsnamen}
+\paragraph{Problem}
+Bei der Auswahl der Konfiguration wird nur der interne Name angezeigt (z.B. PolygonConfiguration),
+was wenig aussagekräftig ist. Zudem sind diese Namen nicht lokalisiert.
+
+\paragraph{Lösung}
+Die IDs der Konfigurationen bekommen einen Eintrag in der Sprachdatei um leicht verständliche
+Namen in der gewählen Sprache anzuzeigen.
+
+\subsubsection{Diagramme auf Mobilgeräten}
+\paragraph{Symptom}
+Auf Mobilgeräten werden in der Detailansicht wie auf dem Desktop jeweils zwei Diagramme nebeneinander angezeigt.
+Das macht sie jedoch kaum lesbar.
+
+\paragraph{Grund}
+Die Anzeige orientiert sich an einem Grid-Element das keine automatische Anpassung auf 
+die Bildschirmgröße bereitstellt.
+
+\paragraph{Lösung}
+!TODO
