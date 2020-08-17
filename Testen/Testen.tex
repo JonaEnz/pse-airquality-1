@@ -14,24 +14,15 @@
 \usepackage{tabu}			% provides tables
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{colortbl}
 \usepackage[nonumberlist]{glossaries}     % provides glossary commands
 \hypersetup{                % ‘texdoc hyperref‘ for options
-  pdftitle={Implementierung},
+  pdftitle={Qualitätssicherung},
   pdfauthor={Anna Csurkó, Jona Enzinger, Yannik Schmid, Jonas Zoll},
 }
 \graphicspath{{./figures/}} % Setting the graphicspath
 
-\newcounter{counter}[section]
-\setcounter{counter}{10}
-
-% new environment for listing requirements/product data/... with a counter
-%\newenvironment{Kriterien}[1]{
-%	\let\olditem\item \renewcommand\item[1][]{\olditem[/#1\thecounter /] \textbf{##1} \hfill \\
-%	\addtocounter{counter}{10}} \begin{description}}
-%	{\end{description}}
-
-
-\title{Testen}
+\title{Implementierung}
 \author{Anna Csurkó, Jona Enzinger, Yannik Schmid, Jonas Zoll}
 \makeatletter
 
@@ -41,12 +32,14 @@
 \definecolor{delim}{RGB}{20,105,176}
 \colorlet{numb}{magenta!60!black}
 
+%environments
 \newenvironment{Change}[1]{
   \subsection{#1}
   \begin{tcolorbox}[title=#1,colbacktitle=mintgreen,colframe=mintgreen,colback=white]
     }{
   \end{tcolorbox}
-  }
+  }   
+
 
 % header and footer
 \usepackage[automark,autooneside=false,headsepline=0.5pt,footsepline=0.5pt]{scrlayer-scrpage}
@@ -62,8 +55,8 @@
 \ohead{\rightmark}
 
 % load glossary entries
-%\makenoidxglossaries
-%\loadglsentries{./chapters/Glossareintraege}
+\makenoidxglossaries
+\loadglsentries{./chapters/Glossareintraege}
 
 % center page number
 \cfoot*{\pagemark}
@@ -74,10 +67,12 @@
 
 \tableofcontents
 \include{./chapters/Einleitung}
+\include{./chapters/Regressionstests}
 \include{./chapters/Testfaelle}
 \include{./chapters/UnitTests}
 \include{./chapters/UsabilityTests }
 \include{./chapters/Statistiken}
+\include{./chapters/Glossar}
 
 
 % end content
