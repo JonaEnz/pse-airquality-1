@@ -4,9 +4,10 @@ Bei den Usability Tests wird das fertige Produkt an echten Testpersonen getestet
 
 \subsection{Testsubjekte}
 
-Die Testgsubjekte sind - o wie die Zielgruppe der Umfrage im Pflichtenheft- eher älter, wobei keine genaue untere Grenze gesetzt ist und die Meinungen der Subjekte außerhalb der Zielgruppe uns gleich wertvoll ist. Es ist wichtig, dass die Testsubjekte über wenig bis gar kein Wissen über Feinstaubindex bzw. Luftqualität verfügen, da die Applikation insbesondere für solche Menschen entwickelt wurde. Personen, die wenig über Softwareentwicklung wissen, werden bevorzugt. Die Testsubjekte sind entweder Bekannten der Mitglieder des Entwicklerteams- sie werden persönlich getestet- oder Fremde -für diesen Fall verstellen wir eine Online-Umfrage. 
+Die Testsubjekte sind - o wie die Zielgruppe der Umfrage im Pflichtenheft- eher älter, wobei keine genaue untere Grenze gesetzt ist und die Meinungen der Subjekte außerhalb der Zielgruppe uns gleich wertvoll ist. Es ist wichtig, dass die Testsubjekte über wenig bis gar kein Wissen über Feinstaubindex bzw. Luftqualität verfügen, da die Applikation insbesondere für solche Menschen entwickelt wurde. Personen, die wenig über Softwareentwicklung wissen, werden bevorzugt. Die Testsubjekte sind entweder Bekannten der Mitglieder des Entwicklerteams- sie werden persönlich getestet- oder Fremde -für diesen Fall verstellen wir eine Online-Umfrage. 
 
-\subsection{Testmethoden} \subsubsection{Zielgruppe}
+\subsection{Testmethoden} 
+\subsubsection{Zielgruppe}
 \subsubsection{System Usability Scale}
 \subsubsection{Hallway Tests}
 \subsubsection{Responsiveness}
@@ -14,8 +15,6 @@ Die Testgsubjekte sind - o wie die Zielgruppe der Umfrage im Pflichtenheft- eher
 \begin{itemize}
   \item Die Anforderungen, die zu Wunschkriterien gehören, werden mit * gekennzeichnet.
 \end{itemize}
-
-\setcounter{counter}{10}
 
 \subsection{Bugs and Fixes}
 
@@ -39,3 +38,30 @@ die Bildschirmgröße bereitstellt.
 
 \paragraph{Lösung}
 !TODO
+
+\subsubsection{Datenmenge für Diagramme}
+\paragraph{Symptom}
+Durch den Entwurf der Anwendung als SPA die komplett beim Nutzer läuft müssen für die Diagramme teils große
+Datenmengen angefragt werden. So benötigt eine normale Detailseite bis zu 60 MB an Mess- und Seitendaten um
+angezeigt zu werden. Gerade dür die Nutzung auf getakteten Mobilfunkverbindungen ist das für den Nutzer
+unerwartet und inakzeptabel
+
+\paragraph{Grund}
+Viele Sensoren messen alle 5 Minuten was in einem Jahr schon ~100.000 Messwerte sind.
+Somit erhöhen vor allem Diagramme die längerfristige Trends betrachten die Datenmenge enorm.
+
+\paragraph{Lösung}
+Es gibt grundsätzlich 3 verschiedene Ansätze das Problem abzuschwächen:
+\begin{itemize}
+  \item Erstellung eines API-Servers der Vorberechnungen durchführt
+  \item Optimierung der Anfragen sodass weniger Daten angefragt werden
+  \item Laden der Diagramme erst nach Klick darauf
+\end{itemize}
+
+Da die erste Option an diesem Punkt zu viel Aufwand und die dritte weder effektiv noch
+nutzerfreundlich ist wurde die zweite Option gewählt.\\
+Dafür wurde die Klasse \emph{RequestReducer eingeführt}.
+Sie stellt Methoden bereit die Anfragen über ein Jahr auf 4 Tage im Monat und Tage auf Stichproben
+um 0, 8 und 16 Uhr mit Mittelwerten auf 15 Minuten reduziert. Das hat keinen merklichen Einfluss
+auf die Aussagekraft des Diagramms aber reduziert die Datenmenge bis zu 70\% 
+(~70 MB -> ~20 MB)

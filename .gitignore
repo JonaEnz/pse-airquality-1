@@ -5,6 +5,15 @@ Pflichtenheft/chapters/__latexindent_temp.tex
 #documents
 Implementierung.pdf
 
+#latex
+*.aux
+*.log
+*.toc
+*.synctex.gz
+*.fls
+*.out
+*.fdb_latexmk
+
 # dependencies
 /node_modules
 /.pnp
