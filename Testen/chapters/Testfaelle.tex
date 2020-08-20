@@ -57,33 +57,50 @@
         \hline
          /TF230/ & Polygon & \cellcolor{green!25}OK \\
         \hline
+         /TF240/ & Position der Karte merken 1 & \cellcolor{green!25}OK \\
+        \hline
+          /TF250/ & Position der Karte merken 2 & \cellcolor{green!25}OK \\
+        \hline
 
     \end{tabular}
 \end{center}
 
 \subsection{Stabilitättests}
+  \begin{center}
+      \begin{tabular}[h]{|c|l|c|}
+       /TF260/ & Weit auszoomen & \cellcolor{red!25}FAILED \\
+        \hline
+          /TF270/ & Schnelles anfordern von Daten & \cellcolor{green!25}OK \\
+        \hline
+      \end{tabular}
+  \end{center}
 
 \subsection{Modifizierte Testfälle}
 
 \begin{center}
    	\item[/TF70/ Färbungsskala anzeigen]  Kartenansicht ist offen. \\ \textbf{Erwartetes Ergebnis:} Links unten ist eine Färbungsskala zu sehen. Die Skala ändert sich beim Wechseln der Feature, aber nicht beim Zoomen.
 \textbf{Änderung:} Die Skala ist immer in der rechten unteren Ecke, Anklicken ist nicht nötig und bewirkt nichts.
-\end{center}
 
    	\item[/TF230/ Polygon] Der Nutzer wählt beim FeatureSelect Polygonkonfiguration aus. \\ \textbf{Erwartetes Ergebnis:} Die Pins verschwinden und die Messstaionen werden mit Linien verbunden. Die Verbindungen haben Dreieckform.
 \textbf{Änderung:} Der Nutzer zieht nicht selber die Polygonen.
-\end{center}
 
-
+\item[/TF260/ Weit auszoomen] Der Nutzer zoomt so weit aus wie möglich.\\ \textbf{Erwartetes Ergebnis:} Die Karte zoomt aus und stoppt da. Beim weiten Auszoomen verschwinden die Pins, die beim Einzoomen auf ein Land/eine Ort wieder erscheinen. Keine fehlermeldung oder Absturz.
+\textbf{Änderung:} Keine Polygonen sollen erscheinen. Es werden nicht mehr Daten geladen als im eingezoomten Zustand, deswegen wurde der Test umbenannt.
 
 \subsection{Gelöschte Testfälle}
 
 \begin{center}
    	\item[/TF210/ Durchschnitt] \textbf{Grund der Löschung:} Durch die riesige Menge an Messwerten, die die berechnung zum absturz bringen, und durch die lange Wartezeit beim Laden der Daten, die zu Timeout führt, war es nicht mehr sinnvoll dises Diagramm in die Applikation einzubauen. So gibt es bei deisem Test nichts zum Testen. 
+
 \end{center} 
 
 
 \subsection{Erweiterte Testfälle}
+
+Keine Testfälle wurden hinzugefügt.
+
+	
+
 
 
 
