@@ -57,7 +57,6 @@
         \hline
          /TF230/ & Polygon & \cellcolor{green!25}OK \\
         \hline
- 
 
     \end{tabular}
 \end{center}
@@ -67,18 +66,20 @@
 \subsection{Modifizierte Testfälle}
 
 \begin{center}
-   	\item[/TF70/ Färbungsskala anzeigen] \textbf{Änderung:} Kartenansicht ist offen. \\ \textbf{Erwartetes Ergebnis:} Links unten ist eine Färbungsskala zu sehen. Die Skala ändert sich beim Wechseln der Feature, aber nicht beim Zoomen.
+   	\item[/TF70/ Färbungsskala anzeigen]  Kartenansicht ist offen. \\ \textbf{Erwartetes Ergebnis:} Links unten ist eine Färbungsskala zu sehen. Die Skala ändert sich beim Wechseln der Feature, aber nicht beim Zoomen.
+\textbf{Änderung:} Die Skala ist immer in der rechten unteren Ecke, Anklicken ist nicht nötig und bewirkt nichts.
 \end{center}
 
-\begin{center}
-   	\item[/TF210/ Durchschnitt] \textbf{Grund der Löschung:} Durch die riesige Menge an Messwerten, die die berechnung zum absturz bringen, und durch die lange Wartezeit beim Laden der Daten, die zu Timeout führt, war es nicht mehr sinnvoll dises Diagramm in die Applikation einzubauen. So gibt es bei deisem Test nichts zum Testen. 
-\end{center} 
+   	\item[/TF230/ Polygon] Der Nutzer wählt beim FeatureSelect Polygonkonfiguration aus. \\ \textbf{Erwartetes Ergebnis:} Die Pins verschwinden und die Messstaionen werden mit Linien verbunden. Die Verbindungen haben Dreieckform.
+\textbf{Änderung:} Der Nutzer zieht nicht selber die Polygonen.
+\end{center}
+
+
 
 \subsection{Gelöschte Testfälle}
 
 \begin{center}
-   	\item[/TF210/ Sensorinformationen] \textbf{Änderung:} Das Klicken leitet den Nutzer auf Wikipedia weiter, direkt auf die Seite der entsprechenden Messwerten.
-
+   	\item[/TF210/ Durchschnitt] \textbf{Grund der Löschung:} Durch die riesige Menge an Messwerten, die die berechnung zum absturz bringen, und durch die lange Wartezeit beim Laden der Daten, die zu Timeout führt, war es nicht mehr sinnvoll dises Diagramm in die Applikation einzubauen. So gibt es bei deisem Test nichts zum Testen. 
 \end{center} 
 
 
