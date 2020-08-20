@@ -7,30 +7,37 @@
         \hline
         /TF10/ & Webanwendung öffnen & \cellcolor{green!25}OK \\
         \hline
-    \end{tabular}
-
-\begin{tabular}[h]{|c|l|c|}
-        \hline
-        \textbf{TF} & \textbf{Bezeichnung} & \textbf{Bestanden} \\
-        \hline
         /TF20/ & Karte bewegen & \cellcolor{green!25}OK \\
         \hline
-    \end{tabular}
-
-\begin{tabular}[h]{|c|l|c|}
-        \hline
-        \textbf{TF} & \textbf{Bezeichnung} & \textbf{Bestanden} \\
-        \hline
-        /TF30/ & Handylayout & \cellcolor{red!25}FAIL \\
-        \hline
-    \end{tabular}
-
-\begin{tabular}[h]{|c|l|c|}
-        \hline
-        \textbf{TF} & \textbf{Bezeichnung} & \textbf{Bestanden} \\
+        /TF30/ & Handylayout & \cellcolor{red!25}FAILED \\
         \hline
         /TF40/ & Zoomen & \cellcolor{green!25}OK \\
         \hline
+         /TF50/ & Einen Pin einer Messtation anklicken & \cellcolor{green!25}OK \\
+        \hline
+        /TF60/ & Karte auswählen & \cellcolor{green!25}OK \\
+        \hline
+        /TF70/ & Färbungsskala anzeigen & \cellcolor{green!25}OK \\
+        \hline
+         /TF80/ & Ort suchen & \cellcolor{green!25}OK \\
+        \hline
+         /TF90/ & Fehlermeldung bei der Suche & \cellcolor{red!25}FAILED \\
+        \hline
+        /TF100/ & Zum jetzigen Standort springen & \cellcolor{green!25}OK \\
+        \hline
+        /TF110/ & Scrollen & \cellcolor{green!25}OK \\
+        \hline
+         /TF120/ & Zeitrahmen einstellen & \cellcolor{green!25}OK \\
+        \hline
+         /TF130/ & Vergleich mit letztem Jahr & \cellcolor{green!25}OK \\
+        \hline
+         /TF140/ & Grenzwertüberschreitung & \cellcolor{red!25}FAILED \\
+        \hline
+        /TF150/ & Zur Karte zurückkehren & \cellcolor{green!25}OK \\
+        \hline
+         /TF160/ & Webanwendung schließen & \cellcolor{green!25}OK \\
+        \hline
+
     \end{tabular}
 \end{center}
 
@@ -38,6 +45,11 @@
 \subsection{Stabilitättests}
 
 \subsection{Modifizierte Testfälle}
+
+\begin{center}
+   	\item[/TF70/ Färbungsskala anzeigen] \textbf{Änderung:} Kartenansicht ist offen. \\ \textbf{Erwartetes Ergebnis:} Links unten ist eine Färbungsskala zu sehen. Die Skala ändert sich beim Wechseln der Feature, aber nicht beim Zoomen.
+
+\end{center}
 
 \subsection{Gelöschte Testfälle}
 
