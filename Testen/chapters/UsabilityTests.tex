@@ -24,7 +24,7 @@ Die Testsubjekte sind - o wie die Zielgruppe der Umfrage im Pflichtenheft- eher 
 \item Wo in Augsburg hat es gerade die höchste Temperatur? Wie warm ist es dort?
 \item Öffnen Sie das Popup einer beliebigen Station. Was erwarten Sie, passiert, wenn \item Sie auf ‘weitere Informationen’ klicken?
 \item Klicken Sie auf ‘weitere Informationen’. Was wird ihnen angezeigt?
-\item Wann war die Temparatur an dieser Messstation in den letzten 31 Tagen am niedrigsten?
+\item Wann war die Temperatur an dieser Messstation in den letzten 31 Tagen am niedrigsten?
 
 \end{enumerate}
 \paragraph{Fragebogen}
@@ -92,7 +92,8 @@ Die Pins bedecken den Stadtnamen. Er ist bei vielen Pins nicht mehr lesbar.
 Ortbeschriftungen befinden sich auf der Ebene unter den Pins. 
 
 \paragraph{Lösung}
-!TODO
+Die Ortsnamen sind direkt in die Kachelbilder eingetragen was es unmöglich macht sie 
+auf eine andere Ebene zu verschieben. Eine Option wäre Reverse Geocoding.
 
 \subsubsection{Skala}
 \paragraph{Symptom}
@@ -118,7 +119,7 @@ Kürzerer Platzhaltertext. Die Größe des Feldes ist für normaler Städtenamen
 \subsubsection{Vergleich mit letztem Jahr}
 \paragraph{Symptom}
 
-Diagramm enthält überheupt keine Information, was es zeigen will. Der Nutzer kann das Diagramm ohne Erklärung der Entwickler nicht verstehen.
+Diagramm enthält überhaupt keine Information, was es zeigen will. Der Nutzer kann das Diagramm ohne Erklärung der Entwickler nicht verstehen.
 
 
 \paragraph{Grund}
@@ -137,4 +138,5 @@ Man sieht zwar die Färbung der Polygonen, aber man kann ihnen keinen Wert zuord
 Durchschnittswert der Polygonen wird nirgendwo angezeigt.
 
 \paragraph{Lösung}
-!TODO Beim Anklicken eines Polygons soll der Durchschnittswert angezeigt werden.
+Der Durchschnittswert wird in einem Tooltip angezeigt. Dafür musste die Polygonklasse geringfügig
+angepasst werden. Sie verwendet nun Observations statt Stations, was eine sinnvolle Erweiterung für die Zukunft ist.
