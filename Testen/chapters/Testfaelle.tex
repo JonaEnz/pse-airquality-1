@@ -31,8 +31,6 @@
         \hline
          /TF130/ & Vergleich mit letztem Jahr & \cellcolor{green!25}OK \\
         \hline
-         /TF140/ & Grenzwertüberschreitung & \cellcolor{red!25}FAILED \\
-        \hline
         /TF150/ & Zur Karte zurückkehren & \cellcolor{green!25}OK \\
         \hline
          /TF160/ & Webanwendung schließen & \cellcolor{green!25}OK \\
@@ -95,8 +93,12 @@
 \end{description}
 
 \subsection{Gelöschte Testfälle}
+
 \begin{description}
-   	\item[/TF210/ Durchschnitt] \hfill \\ \textbf{Grund der Löschung:} Durch die riesige Menge an Messwerten, die die berechnung zum absturz bringen, und durch die lange Wartezeit beim Laden der Daten, die zu Timeout führt, war es nicht mehr sinnvoll dises Diagramm in die Applikation einzubauen. So gibt es bei deisem Test nichts zum Testen. 
+  \item[/TF140/ Grenzwertüberschreitung] \hfill \\ 
+  \textbf{Grund der Löschung:} Dieses Feature wurde nicht implementiert, da viele Grenzwerte sehr komplex sind und eine Grenzwertüberschreitung nicht aus einem einzelnen Messwert resultiert. Eine Warnung wäre missverständlich. Dieser Testfall entfällt.
+
+  \item[/TF210/ Durchschnitt] \hfill \\ \textbf{Grund der Löschung:} Durch die riesige Menge an Messwerten, die die berechnung zum absturz bringen, und durch die lange Wartezeit beim Laden der Daten, die zu Timeout führt, war es nicht mehr sinnvoll dises Diagramm in die Applikation einzubauen. So gibt es bei deisem Test nichts zum Testen. 
 
 \end{description}
 
