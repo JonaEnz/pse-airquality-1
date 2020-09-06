@@ -1,0 +1,24 @@
+\section{CI/CD}
+
+\subsection{Vorteile}
+Die verwendeten Services stellen sicher dass die Tests und Builds immer unter genau definierten Bedingungen
+ablaufen und nicht von der speziellen Konfiguration des Rechenes abhängen auf dem entwickelt wird.
+Fehlerhafte Commits werden automatisch markiert und die Fehlermeldung ist ersichtlich ohne den Code selbst
+auszuführen.
+
+\subsection{Automatisiertes Testen}
+
+Mithilfe von Azure Pipelines werden nach jedem Commit auf den master-Zweig die 
+Unit-Tests ausgeführt 
+und der Autor des Commits per Mail benachrichtigt. Zudem wird die Code-Abdeckung geprüft und eine Übersicht
+aus der Cobertura Datei erstellt. Dadurch kann der zeitliche Verlauf der Abdeckung zurückverfolgt und Lücken
+schnell identifiziert werden. \\
+Die Ergebnisse des letzten Runs werden zudem direkt auf GitHub angezigt.\\
+\url{https://jonaenzinger.visualstudio.com/pse-airquality-react/_build?definitionId=5}
+
+\subsection{Automatisierte Auslieferung}
+
+Nach jeder akzeptierten Pull-Request oder Commit auf den master-Zweig wird versucht einen Build der Seite
+zu erstellen. Ist dies erfolgreich und schlagen keine Unit-Tests fehl wird das Ergebnis des Build
+automatisch auf GitHub Pages veröffentlicht. So muss der Auslieferungsvorgang nicht für jeden Recher
+einzeln konfiguriert werden sondern kann zentral mit Bedingungen wie auf dem Webserver durchgeführt werden.

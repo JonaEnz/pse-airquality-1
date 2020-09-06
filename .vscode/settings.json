@@ -44,5 +44,6 @@
         "**/yarn-debug.log*": true,
         "**/yarn-error.log*": true,
         "out": true
-    }
+    },
+    "cSpell.enabled": false
 }
