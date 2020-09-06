@@ -55,118 +55,120 @@ Bei den Usability Tests wird das fertige Produkt an echten Testpersonen getestet
         Der Punkt, in dem sich die meisten Tester einig waren, war der, das die Erklärungen der Fachbegriffe (vor allem PM10 und PM2.5) nur schwer in der Webapp zu finden seien. Diese Hilfe-Funktion solle auffallender in der Webapp positioniert werden.
 
   \subsection{Gelöste Probleme}
-    \subsubsection*{Konfigurationsnamen}
-      \paragraph{Problem}
+
+    \begin{Bug}{Konfigurationsnamen}
+      \textbf{Problem}\\
       Bei der Auswahl der Konfiguration wird nur der interne Name angezeigt (z.B. PolygonConfiguration),
-      was wenig aussagekräftig ist. Zudem sind diese Namen nicht lokalisiert.
-
-      \paragraph{Lösung}
+      was wenig aussagekräftig ist. Zudem sind diese Namen nicht lokalisiert.\\
+      \linebreak
+      \textbf{Lösung}\\
       Die IDs der Konfigurationen bekommen einen Eintrag in der Sprachdatei um leicht verständliche
-      Namen in der gewählen Sprache anzuzeigen.
+      Namen in der gewählen Sprache anzuzeigen.\\
+    \end{Bug}
 
-    \subsubsection*{Weitere Optimierung der Detailseite für Mobilgeräte}
-      \paragraph{Symptom}
-        Auf Mobilgeräten mit besonders kleinen Bildschirmgrößen sind die Diagramme der Detailseite zu klein um Details zu erkennen.
-
-      \paragraph{Grund}
-      Bislang gab es noch kein optimiertes Design dieser Seite für kleine Mobilgeräte.
-
-      \paragraph{Lösung}
-      Die Breakpoints des Grid Layouts wurden angepasst, sodass die Diagramm auf Mobilgeräten nun untereinander, anstatt in Zweierreihen angezeigt werden.
-
-    \subsubsection*{FeautureSelect-Button}
-      \paragraph{Symptom}
-      Das FeatureSelect-Button ist für Personen, die die Webanwendung zum ersten Mal benutzen, schwer zu finden.  
-
-      \paragraph{Grund}
-      Das Button ist zu klein, lässt sich schwer vom Hintergrund unterscheiden. Man hat auch keine Information was es macht bis man draufklickt.
-
-      \paragraph{Lösung}
-      Das FeatureSelect-Menü ist bei Laden der Seite geöffnet und somit für Benutzer leicht zu finden.
-
-    \subsubsection*{Skala}
-      \paragraph{Symptom}
-      Größter Wert der Skala ist unrealistisch groß und damit ist die ganze Skala nutzlos.
-
-      \paragraph{Grund}
-      Die Skala ist auf den extremen Messwerten aller Messstation festgelegt. Da eine Messstation falsche Werte sendet, wird die Skala falsch eingestellt.
-
-      \paragraph{Lösung}
-      Entsprechende Station aus den Anfragen entfernen.
-
-    \subsubsection*{Suche}
-      \paragraph{Symptom}
-      Der Platzhaltersatz bei der Suche ist nicht vollständig lesbar.
-
-      \paragraph{Grund}
-      Feld  ist zu kurz.
-
-      \paragraph{Lösung}
-      Kürzerer Platzhaltertext. Die Größe des Feldes ist für normaler Städtenamen mehr als ausreichend.
-
-    \subsubsection*{Vergleich mit letztem Jahr}
-      \paragraph{Symptom}
-
-      Diagramm enthält überhaupt keine Information, was es zeigen will. Der Nutzer kann das Diagramm ohne Erklärung der Entwickler nicht verstehen.
-
-
-      \paragraph{Grund}
-      Überschrift und Beschriftung der Achsen fehlen.
-
-      \paragraph{Lösung}
-      Überschrift für Diagramme hinzugefügt.
-
-    \subsubsection*{Polygon}
-      \paragraph{Symptom}
-
-      Man sieht zwar die Färbung der Polygonen, aber man kann ihnen keinen Wert zuordnen.
-
-
-      \paragraph{Grund}
-      Durchschnittswert der Polygonen wird nirgendwo angezeigt.
-
-      \paragraph{Lösung}
-      Der Durchschnittswert wird in einem Tooltip angezeigt. Dafür musste die Polygonklasse geringfügig
-      angepasst werden. Sie verwendet nun Observations statt Stations, was eine sinnvolle Erweiterung für die Zukunft ist.
-
-
-    \subsubsection*{Namen der Stationen}
-      \paragraph{Symptom}
-
-      Namen und Koordinaten der Stationen sind für die Meisten uninteressant und nichtssagend.
+    \begin{Bug}{Weitere Optimierung der Detailseite für Mobilgeräte}
+      \textbf{Symptom}\\
+      Auf Mobilgeräten mit besonders kleinen Bildschirmgrößen sind die Diagramme der Detailseite zu klein um Details zu erkennen.\\
+      \linebreak
+      \textbf{Grund}\\
+      Bislang gab es noch kein optimiertes Design dieser Seite für kleine Mobilgeräte.\\
+      \linebreak
+      \textbf{Lösung}\\
+      Die Breakpoints des Grid Layouts wurden angepasst, sodass die Diagramm auf Mobilgeräten nun untereinander, anstatt in Zweierreihen angezeigt werden.\\
+    \end{Bug}
       
+    \begin{Bug}{FeautureSelect-Button}
+      \textbf{Symptom}\\
+      Das FeatureSelect-Button ist für Personen, die die Webanwendung zum ersten Mal benutzen, schwer zu finden.\\
+      \linebreak
+      \textbf{Grund}\\
+      Das Button ist zu klein, lässt sich schwer vom Hintergrund unterscheiden. Man hat auch keine Information was es macht bis man draufklickt.\\
+      \linebreak
+      \textbf{Lösung}\\
+      Das FeatureSelect-Menü ist bei Laden der Seite geöffnet und somit für Benutzer leicht zu finden.\\
+    \end{Bug}
 
-      \paragraph{Lösung}
-      Zusätzlich zu den Koordinaten und dem Stationnamen haben wurde auch noch die Straße hinzugefügt.
+    \begin{Bug}{Skala}
+      \textbf{Symptom}\\
+      Größter Wert der Skala ist unrealistisch groß und damit ist die ganze Skala nutzlos.\\
+      \linebreak
+      \textbf{Grund}\\
+      Die Skala ist auf den extremen Messwerten aller Messstation festgelegt. Da eine Messstation falsche Werte sendet, wird die Skala falsch eingestellt.\\
+      \linebreak
+      \textbf{Lösung}\\
+      Entsprechende Station aus den Anfragen entfernen.\\
+    \end{Bug}
+      
+    \begin{Bug}{Suche}
+      \textbf{Symptom}\\
+      Der Platzhaltersatz bei der Suche ist nicht vollständig lesbar.\\
+      \linebreak
+      \textbf{Grund}\\
+      Feld  ist zu kurz.\\
+      \linebreak
+      \textbf{Lösung}\\
+      Kürzerer Platzhaltertext. Die Größe des Feldes ist für normaler Städtenamen mehr als ausreichend.\\
+    \end{Bug}
+      
+    \begin{Bug}{Vergleich mit letztem Jahr}
+      \textbf{Symptom}\\
+      Diagramm enthält überhaupt keine Information, was es zeigen will. Der Nutzer kann das Diagramm ohne Erklärung der Entwickler nicht verstehen.\\
+      \linebreak
+      \textbf{Grund}\\
+      Überschrift und Beschriftung der Achsen fehlen.\\
+      \linebreak
+      \textbf{Lösung}\\
+      Überschrift für Diagramme hinzugefügt.\\
+    \end{Bug}
 
-    \subsubsection*{Fragezeichen nur auf in der Kartenansicht}
-      \paragraph{Symptom}
-      Bei den Stationen-PopUps gibt es ein Fragezeichen-Button, die auf eine Webseite mit mehr Informationen über die ausgewählten Features weiterführt. Es wäre praktisch, diesr Fragezeichen auch auf der detailseite zu haben, insbesondere weil dort alle Features nebeneinander stehen und so man sich alle nacheinender anschauen kann.
+    \begin{Bug}{Polygon}
+      \textbf{Symptom}\\
+      Man sieht zwar die Färbung der Polygonen, aber man kann ihnen keinen Wert zuordnen.\\
+      \linebreak
+      \textbf{Grund}\\
+      Durchschnittswert der Polygonen wird nirgendwo angezeigt.\\
+      \linebreak
+      \textbf{Lösung}\\
+      Der Durchschnittswert wird in einem Tooltip angezeigt. Dafür musste die Polygonklasse geringfügig
+      angepasst werden. Sie verwendet nun Observations statt Stations, was eine sinnvolle Erweiterung für die Zukunft ist.\\
+    \end{Bug}
 
-      \paragraph{Lösung}
-      Fragezeichen-Button mit gleicher Funktion zu jedem angezeigten Feature auf der Detailseite wurde hinzugefügt.
+    \begin{Bug}{Namen der Stationen}
+      \textbf{Symptom}\\
+      Namen und Koordinaten der Stationen sind für die Meisten uninteressant und nichtssagend.\\
+      \linebreak
+      \textbf{Lösung}\\
+      Zusätzlich zu den Koordinaten und dem Stationnamen haben wurde auch noch die Straße hinzugefügt.\\
+    \end{Bug}
 
-    \subsubsection*{Weitere Informationen - Größe und Stelle der Fragezeichen}
+    \begin{Bug}{Fragezeichen nur auf in der Kartenansicht}
+      \textbf{Symptom}\\
+      Bei den Stationen-PopUps gibt es ein Fragezeichen-Button, die auf eine Webseite mit mehr Informationen über die ausgewählten Features weiterführt. Es wäre praktisch, diesr Fragezeichen auch auf der detailseite zu haben, insbesondere weil dort alle Features nebeneinander stehen und so man sich alle nacheinender anschauen kann.\\
+      \linebreak
+      \textbf{Lösung}\\
+      Fragezeichen-Button mit gleicher Funktion zu jedem angezeigten Feature auf der Detailseite wurde hinzugefügt.\\
+    \end{Bug}
+    
+    \begin{Bug}{Weitere Informationen - Größe und Stelle der Fragezeichen}
+      \textbf{Symptom}\\
+      Einige Testsubjekte fanden das Fragezeichen einfach zu übersehen und dessen Stelle unpraktisch. Nach mehr Testdurchläufen mit neuen Testsubjekten haben wir festgestellt, dass nur ein kleiner Teil der Testsubjekten das Fragezeichen problematisch gefunden hat. Einige wurden sogar extra von uns darauf angesprochen, ihre Meinung zum Fragezeichen-Button uns mitzuteilen. Sie hatten entweder keine Meinung dazu oder fanden es sogar gut.\\
+      \linebreak
+      \textbf{Lösung}\\
+      Wir haben eine Anleitung zur Webseite hinzugefügt, und deren Button an eine auffällige Stelle platziert. In der Anleitung gibt es auch einen Kapitel über das Fragezeichen-Button mit Illustration. \\
+    \end{Bug}
 
-      \paragraph{Symptom}
-      Einige Testsubjekte fanden das Fragezeichen einfach zu übersehen und dessen Stelle unpraktisch. Nach mehr Testdurchläufen mit neuen Testsubjekten haben wir festgestellt, dass nur ein kleiner Teil der Testsubjekten das Fragezeichen problematisch gefunden hat. Einige wurden sogar extra von uns darauf angesprochen, ihre Meinung zum Fragezeichen-Button uns mitzuteilen. Sie hatten entweder keine Meinung dazu oder fanden es sogar gut.
-
-      \paragraph{Lösung}
-      Wir haben eine Anleitung zur Webseite hinzugefügt, und deren Button an eine auffällige Stelle platziert. In der Anleitung gibt es auch einen Kapitel über das Fragezeichen-Button mit Illustration. 
-
-
-    \subsection*{Unwichtige\textbackslash Unlösbare Probleme}
+    \subsection{Unwichtige\textbackslash Unlösbare Probleme}
 
       In diesem Kapitel listen wir die Probleme auf, die wie versucht haben zu lösen, aber die Lösung wäre entweder zu aufwendig gewesen oder hätte nicht in unseren Zeitplan gepasst.
 
-
-    \subsubsection*{Sichtbarkeit der Stadtname}
-      \paragraph{Symptom}
-      Die Pins bedecken den Stadtnamen. Er ist bei vielen Pins nicht mehr lesbar.
-
-      \paragraph{Grund}
-      Ortbeschriftungen befinden sich auf der Ebene unter den Pins. 
-
-      \paragraph{Lösung}
+    \begin{Bug}{Sichtbarkeit der Stadtname}
+      \textbf{Symptom}\\
+      Die Pins bedecken den Stadtnamen. Er ist bei vielen Pins nicht mehr lesbar.\\
+      \linebreak
+      \textbf{Grund}\\
+      Ortbeschriftungen befinden sich auf der Ebene unter den Pins.\\
+      \linebreak
+      \textbf{Lösung}\\
       Die Ortsnamen sind direkt in die Kachelbilder eingetragen was es unmöglich macht sie 
-      auf eine andere Ebene zu verschieben. Eine Option wäre Reverse Geocoding.
+      auf eine andere Ebene zu verschieben. Eine Option wäre Reverse Geocoding.\\
+    \end{Bug}
