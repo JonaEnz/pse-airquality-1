@@ -75,17 +75,15 @@ was wenig aussagekräftig ist. Zudem sind diese Namen nicht lokalisiert.
 Die IDs der Konfigurationen bekommen einen Eintrag in der Sprachdatei um leicht verständliche
 Namen in der gewählen Sprache anzuzeigen.
 
-\subsubsection{Diagramme auf Mobilgeräten}
+\subsubsection{Weitere Optimierung der Detailseite für Mobilgeräte}
 \paragraph{Symptom}
-Auf Mobilgeräten werden in der Detailansicht wie auf dem Desktop jeweils zwei Diagramme nebeneinander angezeigt.
-Das macht sie jedoch kaum lesbar.
+Auf Mobilgeräten mit besonders kleinen Bildschirmgrößen sind die Diagramme der Detailseite zu klein um Details zu erkennen.
 
 \paragraph{Grund}
-Die Anzeige orientiert sich an einem Grid-Element das keine automatische Anpassung auf 
-die Bildschirmgröße bereitstellt.
+Bislang gab es noch kein optimiertes Design dieser Seite für kleine Mobilgeräte.
 
 \paragraph{Lösung}
-!TODO
+Die Breakpoints des Grid Layouts wurden angepasst, sodass die Diagramm auf Mobilgeräten nun untereinander, anstatt in Zweierreihen angezeigt werden.
 
 \subsubsection{FeautureSelect-Button}
 \paragraph{Symptom}
