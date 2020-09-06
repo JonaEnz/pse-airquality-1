@@ -1,7 +1,7 @@
 \documentclass[a4paper, parskip=full]{scrartcl}
 \usepackage[top=3cm, bottom=3.5cm, left=3cm, right=3cm]{geometry}
 \usepackage[utf8]{inputenc} % use utf8 file encoding for TeX sources
-\usepackage[LGR,T1]{fontenc}    % avoid garbled Unicode text in pdf
+\usepackage[T1]{fontenc}    % avoid garbled Unicode text in pdf
 \usepackage[german]{babel}  % german hyphenation, quotes, etc
 \usepackage{graphicx}       % provides commands for including figures
 \usepackage[export]{adjustbox}
@@ -15,6 +15,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{colortbl}
+\usepackage{pdfpages} % to insert pdf files
 \usepackage[nonumberlist]{glossaries}     % provides glossary commands
 \hypersetup{                % ‘texdoc hyperref‘ for options
   pdftitle={Qualitätssicherung},
@@ -73,6 +74,7 @@
 \include{./chapters/UnitTests}
 \include{./chapters/UsabilityTests }
 \include{./chapters/Statistiken}
+\include{./chapters/Anhang}
 \include{./chapters/Glossar}
 
 
